@@ -1,0 +1,130 @@
+type Blog @model {
+  id: ID!
+  name: String!
+  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+}
+
+type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+  id: ID!
+  title: String!
+  blogID: ID!
+  blog: Blog @connection(fields: ["blogID"])
+  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+}
+
+type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+  id: ID!
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+  content: String!
+}
+
+type LineDrafts @model {
+  id: ID!
+  parentId: String
+  complete3LevelPluscode: String
+  startingCoordinates: Coordinates @connection
+  finishCoordinates: Coordinates @connection
+  midLineCoordinates: Coordinates @connection
+  creatorName: String
+  description: String
+  title: String
+  hashtags: [String]
+  dificultyLevel: String
+  verified: Boolean
+  lineCompleted: Boolean
+  elevationPoints: [Float]
+  latitudeDeltaFit: Float
+  longitudeDeltaFit: Float
+  distance: Float
+}
+
+type PlusCodeLevel1
+  @model
+  @key(
+    name: "pluscodeByDigits"
+    fields: ["digits"]
+    queryField: "pluscodeByDigits"
+  ) {
+  id: ID!
+  digits: String
+  middleCoord: Coordinates @connection
+  level2List: [PlusCodeLevel2] @connection(name: "level1Tolevel2")
+  numberOfLines: Int
+}
+
+type PlusCodeLevel2
+  @model
+  @key(
+    name: "pluscode2ByDigitsAndParent"
+    fields: ["parentIdWithDigits"]
+    queryField: "pluscode2ByDigitsAndParent"
+  )
+  @key(
+    name: "pluscode2ByCompletePluscode"
+    fields: ["completePluscode"]
+    queryField: "pluscode2ByCompletePluscode"
+  ) {
+  id: ID!
+  completePluscode: String
+  parentIdWithDigits: String
+  pluscodeParent: PlusCodeLevel1 @connection(name: "level1Tolevel2")
+  digits: String
+  middleCoord: Coordinates @connection
+  level3List: [PlusCodeLevel3] @connection(name: "level2Tolevel3")
+  numberOfLines: Int
+}
+
+type PlusCodeLevel3
+  @model
+  @key(
+    name: "pluscode3ByDigitsAndParent"
+    fields: ["parentIdWithDigits"]
+    queryField: "pluscode3ByDigitsAndParent"
+  )
+  @key(
+    name: "pluscode3ByCompletePluscode"
+    fields: ["completePluscode"]
+    queryField: "pluscode3ByCompletePluscode"
+  ) {
+  id: ID!
+  completePluscode: String
+  parentIdWithDigits: String
+  pluscodeParent: PlusCodeLevel2 @connection(name: "level2Tolevel3")
+  digits: String
+  middleCoord: Coordinates @connection
+  numberOfLines: Int
+  listOfLines: [Lines] @connection(name: "level3ToLine")
+}
+
+type Lines
+  @model
+  @key(
+    name: "lineByCompletePluscodes"
+    fields: ["complete3LevelPluscode"]
+    queryField: "lineByCompletePluscodes"
+  ) {
+  id: ID!
+  parentId: String
+  pluscodeParent: PlusCodeLevel3 @connection(name: "level3ToLine")
+  complete3LevelPluscode: String
+  startingCoordinates: Coordinates @connection
+  finishCoordinates: Coordinates @connection
+  creatorName: String
+  description: String
+  title: String
+  hashtags: [String]
+  dificultyLevel: String
+  verified: Boolean
+  lineCompleted: Boolean
+  elevationPoints: [Float]
+  latitudeDeltaFit: Float
+  longitudeDeltaFit: Float
+  distance: Float
+}
+
+type Coordinates @model {
+  id: ID!
+  lat: Float
+  lng: Float
+}
