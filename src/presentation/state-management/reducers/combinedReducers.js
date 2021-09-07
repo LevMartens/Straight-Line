@@ -36,20 +36,3 @@ export default combineReducers({
   watchDirection,
   aSingleCurrentPosition,
 });
-
-//TODO test if the shorthand version works on combined reducers
-// headingWatcherHandler: headingWatcherHandler,
-// positionWatcherHandler: positionWatcherHandler,
-// pathHandler: pathHandler,
-// lineTitleHandler: lineTitleHandler,
-// selectedLineDraftHandler: selectedLineDraftHandler,
-// selectedMarkerHandler: selectedMarkerHandler,
-// bannerHandler: bannerHandler,
-// lineMarkersHandler: lineMarkersHandler,
-// createLineStateHandler: createLineStateHandler,
-// startMarkerHandler: startMarkerHandler,
-// endMarkerHandler: endMarkerHandler,
-// mapPressHandlerThirdPin: mapPressHandlerThirdPin,
-// watchCurrentPosition: watchCurrentPosition,
-// watchDirection: watchDirection,
-// aSingleCurrentPosition: aSingleCurrentPosition,
