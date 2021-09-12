@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import MapView, { Polyline, Marker, Circle } from "react-native-maps";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { watchHeading } from "../../../domain/resources/environment/watch-heading";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { followUserPosition } from "../../../domain/use_cases/follow-user-position";
 import { getPositionOnce } from "../../../domain/resources/environment/get-position-once";
+import UserSvgComponent from "../svg-components/user-svg";
+import PinSvgComponent from "../svg-components/map-pin-svg";
 
 //TODO create button to start directions
 //TODO screen doesn't follow curser
@@ -17,6 +19,9 @@ export default function MapViewGPSLive() {
     getPositionOnce(); //TODO this function bypasses use_cases
     watchHeading(); //TODO this function bypasses use_cases
   }, []);
+
+  const { mapStyle } = styles();
+
   const path = useSelector((state) => state.pathHandler);
 
   const {
@@ -47,7 +52,9 @@ export default function MapViewGPSLive() {
   return (
     <MapView
       onPress={(e) => {}}
-      style={styles.map}
+      style={mapStyle}
+      mapType={"mutedStandard"}
+      liteMode={true}
       initialRegion={{
         latitude: aSingleCurrentPositionLatitude,
         longitude: aSingleCurrentPositionLongitude,
@@ -56,35 +63,37 @@ export default function MapViewGPSLive() {
       }}
     >
       <Marker
-        key={uuidv4()}
+        key={90342}
         coordinate={pointB}
-        title={"Second Pin"}
-        description={"End Point"}
-      />
+        title={"End point"}
+        centerOffset={{ x: 0.5, y: -17 }}
+      >
+        <PinSvgComponent></PinSvgComponent>
+      </Marker>
       <Marker
-        key={uuidv4()}
+        key={647573}
         flat={true}
+        tracksViewChanges={false}
+        tracksInfoWindowChanges={false}
         coordinate={liveCurrentPosition}
         title={"You"}
       >
-        <Image
-          source={require("../../../../assets/cursor4.png")}
+        <View
           style={{
-            width: 50,
-            height: 50,
             transform: [
               {
                 rotate: `${liveDirection}deg`,
               },
             ],
           }}
-          resizeMode="contain"
-        />
+        >
+          <UserSvgComponent></UserSvgComponent>
+        </View>
       </Marker>
       <Circle
         zIndex={0}
         strokeWidth={0.00001}
-        fillColor={"rgba(102, 178, 102, 0.3)"}
+        fillColor={"rgba(144, 202, 249, 0.2)"}
         center={liveCurrentPosition}
         radius={25}
       ></Circle>
@@ -94,9 +103,9 @@ export default function MapViewGPSLive() {
           position: "absolute",
           zIndex: 5,
         }}
-        strokeWidth={4}
+        strokeWidth={3}
         coordinates={[pointA, pointB]}
-        strokeColor={"#323232"}
+        strokeColor={"white"}
       />
 
       {path.map((x) => {
@@ -114,56 +123,22 @@ export default function MapViewGPSLive() {
           />
         );
       })}
-
       <Marker
-        key={uuidv4()}
-        flat={true}
+        key={9034232}
         coordinate={pointA}
         title={"Starting point"}
+        centerOffset={{ x: 0.5, y: -16 }}
       >
-        <Image
-          source={require("../../../../assets/start3.png")}
-          style={{
-            width: 30,
-            height: 30,
-          }}
-          resizeMode="contain"
-        />
+        <PinSvgComponent></PinSvgComponent>
       </Marker>
     </MapView>
   );
 }
 
-const styles = StyleSheet.create({
-  textView: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "#0A1D37",
-    flex: 1,
-    flexDirection: "column",
-    height: "100%",
-  },
-
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "#d8b384",
-    flex: 1,
-    flexDirection: "column",
-    height: "100%",
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  button: {
-    justifyContent: "center",
-    alignSelf: "center",
-    marginTop: 50,
-    backgroundColor: "#c84b31",
-    width: 200,
-    height: 50,
-    position: "absolute",
-  },
-  text: {
-    color: "#fff5eb",
-    textAlign: "center",
-  },
-});
+const styles = () => {
+  return StyleSheet.create({
+    mapStyle: {
+      ...StyleSheet.absoluteFillObject,
+    },
+  });
+};

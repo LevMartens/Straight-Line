@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { SCREEN_WIDTH } from "../../../domain/resources/environment/dimensions";
 import { useSelector } from "react-redux";
 import { getTheme } from "../../theme/themes";
@@ -13,13 +13,14 @@ import { createLineDraft } from "../../../domain/use_cases/create-line-draft";
 import { showAddLineTitleAlert } from "../../../domain/resources/environment/alerts";
 
 export default function PinSetButton({ navigation }) {
-  const themedStyles = styles();
+  const { buttonStyle, textStyle } = styles();
 
   const pinState = useSelector((state) => state.createLineStateHandler);
 
   const title = useSelector((state) => state.lineTitleHandler);
 
   const firstPinCoordinates = useSelector((state) => state.startMarkerHandler);
+
   const secondPinCoordinates = useSelector((state) => state.endMarkerHandler);
 
   const pinButtonPressed = async () => {
@@ -41,10 +42,12 @@ export default function PinSetButton({ navigation }) {
 
   return (
     <TouchableOpacity
-      style={themedStyles.button}
-      onPress={() => pinButtonPressed()}
+      style={buttonStyle}
+      onPress={() => {
+        pinButtonPressed();
+      }}
     >
-      <Text style={themedStyles.text}>{pinState}</Text>
+      <Text style={textStyle}>{pinState}</Text>
     </TouchableOpacity>
   );
 }
@@ -52,21 +55,22 @@ export default function PinSetButton({ navigation }) {
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
-    button: {
+    buttonStyle: {
+      paddingTop: 12,
+      position: "absolute",
+      top: 40,
+      flexDirection: "row",
       justifyContent: "center",
       alignSelf: "center",
-      marginTop: 50,
       backgroundColor: theme.buttonColor,
-      width: SCREEN_WIDTH,
-      bottom: 0,
-      height: 100,
-      position: "absolute",
+      width: SCREEN_WIDTH - 55,
+      height: 50,
+      borderRadius: 16,
     },
-    text: {
-      paddingBottom: 20,
+    textStyle: {
+      fontSize: 20,
       color: theme.textColor,
       textAlign: "center",
-      fontSize: 25,
       fontFamily: theme.fontFamily,
     },
   });

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import MapView, { Marker } from "react-native-maps";
 import { getTheme } from "../../theme/themes";
 import { ActivityIndicator } from "react-native-paper";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { getPositionOnce } from "../../../domain/resources/environment/get-position-once";
 import { getLineMarkers } from "../../../domain/use_cases/get-line-markers";
 import { useSelector } from "react-redux";
@@ -11,7 +11,6 @@ import {
   resetMarker,
 } from "../../state-management/actions/actions";
 import store from "../../state-management/store/store";
-import Modal from "react-native-modalbox";
 import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
@@ -40,7 +39,6 @@ export default function MapViewExplore() {
   };
 
   let mapView;
-  const sheetRef = useRef();
 
   const positionHasChanged = async function (currentRegion) {
     getLineMarkers(currentRegion);
@@ -88,23 +86,6 @@ export default function MapViewExplore() {
           );
         }
       })}
-      <Modal
-        style={themedStyles.modal}
-        animationDuration={500}
-        swipeThreshold={50}
-        ref={sheetRef}
-        isOpen={markerCurrentlySelected.isLoaded}
-        backdrop={false}
-        swipeToClose={true}
-        onClosingState={() => {
-          store.dispatch(resetMarker());
-        }}
-      >
-        {/* <View>
-        //TODO make up the model when there are public lines
-          <Image source={markerCurrentlySelected.rawLineData.images[0]}></Image>
-        </View> */}
-      </Modal>
     </MapView>
   ) : (
     <View style={themedStyles.activityIndicatorView}>
@@ -128,6 +109,7 @@ const styles = () => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
+      backgroundColor: theme.primaryColor,
     },
     lineMarkerImageLayout: {
       width: 40,
@@ -135,15 +117,6 @@ const styles = () => {
     },
     mapView: {
       ...StyleSheet.absoluteFillObject,
-    },
-    modal: {
-      marginTop: 250,
-      borderRadius: 10,
-      height: 250,
-      backgroundColor: theme.tertiaryColor,
-      opacity: 0.8,
-      justifyContent: "center",
-      alignItems: "center",
     },
   });
 };

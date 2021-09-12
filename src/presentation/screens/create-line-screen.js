@@ -12,7 +12,8 @@ import {
 //TODO give aSingleCurrentPosition an "isLoaded" and render MapViewCreateLine conditionally
 
 export default function CreateLineScreen({ navigation }) {
-  const themedStyles = styles();
+  const { containerStyle } = styles();
+
   const { latitude, longitude } = useSelector(
     (state) => state.aSingleCurrentPosition
   );
@@ -25,8 +26,13 @@ export default function CreateLineScreen({ navigation }) {
   };
 
   return (
-    <View style={themedStyles.container}>
-      <MapViewCreateLine initialRegion={initialRegion}> </MapViewCreateLine>
+    <View style={containerStyle}>
+      <MapViewCreateLine
+        initialRegion={initialRegion}
+        mapType={"mutedStandard"}
+      >
+        {" "}
+      </MapViewCreateLine>
       <PinSetButton navigation={navigation}> </PinSetButton>
     </View>
   );
@@ -34,7 +40,7 @@ export default function CreateLineScreen({ navigation }) {
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
-    container: {
+    containerStyle: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: theme.containerBackgroundColor,
       flex: 1,

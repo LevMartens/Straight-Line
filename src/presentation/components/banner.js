@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, Image, Animated } from "react-native";
+import { StyleSheet, Text, Animated } from "react-native";
 import { getTheme } from "../theme/themes";
-import infinityActivityIndicator from "../../../assets/inf2.gif";
 import { openBanner } from "../state-management/actions/actions";
 import store from "../state-management/store/store";
 import { throttle } from "lodash";
 import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import LottieView from "lottie-react-native";
+import loadingLottie from "../../../assets/loading.json";
 
 let throttleTime = 3010;
 
@@ -36,11 +37,10 @@ export const showBanner = throttle(function ({
 throttleTime);
 
 export default function Banner(props) {
-  const themedStyle = styles();
+  const { lottieStyle, bannerTextStyle, bannerViewStyle } = styles();
+  const { bannerText, visible } = props;
 
-  const animated = props.visible
-    ? new Animated.Value(0)
-    : new Animated.Value(1);
+  const animated = visible ? new Animated.Value(0) : new Animated.Value(1);
 
   useEffect(() => {
     Animated.timing(animated, {
@@ -50,28 +50,21 @@ export default function Banner(props) {
     }).start();
   }, [props.visible]);
 
-  return (
-    <Animated.View
-      style={[
-        themedStyle.animatedView,
-        {
-          transform: [
-            {
-              scaleY: animated.interpolate({
-                inputRange: [0, 25, 50, 75, 100],
-                outputRange: [0, 25, 50, 75, 100],
-              }),
-            },
-          ],
-        },
-      ]}
-    >
-      <Image
-        source={infinityActivityIndicator}
-        style={themedStyle.bannerImage}
-      />
+  const animatedStyle = {
+    transform: [
+      {
+        scaleY: animated.interpolate({
+          inputRange: [0, 25, 50, 75, 100],
+          outputRange: [0, 25, 50, 75, 100],
+        }),
+      },
+    ],
+  };
 
-      <Text style={themedStyle.bannerText}>{props.bannerText}</Text>
+  return (
+    <Animated.View style={[bannerViewStyle, animatedStyle]}>
+      <LottieView style={lottieStyle} source={loadingLottie} autoPlay loop />
+      <Text style={bannerTextStyle}>{bannerText}</Text>
     </Animated.View>
   );
 }
@@ -79,7 +72,12 @@ export default function Banner(props) {
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
-    animatedView: {
+    lottieStyle: {
+      marginTop: 37,
+      width: 30,
+      height: 30,
+    },
+    bannerViewStyle: {
       position: "absolute",
       top: -100,
       backgroundColor: theme.bannerBackgroundColor,
@@ -88,14 +86,14 @@ const styles = () => {
       width: SCREEN_WIDTH,
       flexDirection: "row",
     },
-    bannerText: {
-      fontSize: 14,
+    bannerTextStyle: {
+      fontSize: 17,
       fontFamily: theme.fontFamily,
       marginTop: 115,
-      marginLeft: 20,
+      marginLeft: 95,
       color: theme.bannerTextColor,
     },
-    bannerImage: {
+    bannerImageStyle: {
       marginLeft: 15,
       marginTop: 118,
       width: 30,

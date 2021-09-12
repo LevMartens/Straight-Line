@@ -2,16 +2,16 @@ import React from "react";
 import MapView, { Polyline, Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   mapPressedForFirstPin,
   mapPressedForSecondPin,
 } from "../../state-management/actions/actions";
-import { getTheme } from "../../theme/themes";
 import store from "../../state-management/store/store";
+import MarkerSvgComponent from "../svg-components/marker-svg";
 
-export default function MapViewCreateLine({ initialRegion }) {
-  const themedStyles = styles();
+export default function MapViewCreateLine({ initialRegion, mapType }) {
+  const { mapStyle, markerCenterOffset } = styles();
 
   const pinState = useSelector((state) => state.createLineStateHandler);
   const firstPinCoordinates = useSelector((state) => state.startMarkerHandler);
@@ -30,52 +30,37 @@ export default function MapViewCreateLine({ initialRegion }) {
   return (
     <MapView
       onPress={(e) => mapPressed(e.nativeEvent.coordinate)}
-      style={themedStyles.map}
+      mapType={mapType}
+      style={mapStyle}
       initialRegion={initialRegion}
     >
       <Marker
         draggable
         key={finishMarkerID}
         zIndex={1000}
-        centerOffset={themedStyles.markerCenterOffset}
+        centerOffset={markerCenterOffset}
         coordinate={secondPinCoordinates}
         title={"Finish"}
         description={"The end point of your straight line"}
       >
-        <Image
-          source={
-            pinState == "Set end point"
-              ? themedStyles.finishPinBeforeSet
-              : themedStyles.finishPinAfterSet
-          }
-          style={themedStyles.pinLayout}
-          resizeMode="contain"
-        />
+        <MarkerSvgComponent></MarkerSvgComponent>
       </Marker>
 
       <Marker
         draggable
         key={startMarkerID}
-        centerOffset={themedStyles.markerCenterOffset}
+        centerOffset={markerCenterOffset}
         zIndex={10000}
         coordinate={firstPinCoordinates}
         title={"Start"}
         description={"The starting point of your straight line"}
       >
-        <Image
-          source={
-            pinState == "Set starting point"
-              ? themedStyles.startPinBeforeSet
-              : themedStyles.startPinAfterSet
-          }
-          style={themedStyles.pinLayout}
-          resizeMode="contain"
-        />
+        <MarkerSvgComponent></MarkerSvgComponent>
       </Marker>
 
       <Polyline
-        strokeColor={themedStyles.lineColor}
-        strokeWidth={3}
+        strokeColor={"white"}
+        strokeWidth={2}
         coordinates={[firstPinCoordinates, secondPinCoordinates]}
       />
     </MapView>
@@ -83,21 +68,10 @@ export default function MapViewCreateLine({ initialRegion }) {
 }
 
 const styles = () => {
-  const theme = getTheme();
   return {
-    finishPinBeforeSet: theme.finishPinBeforeSet,
-    finishPinAfterSet: theme.finishPinAfterSet,
-    startPinBeforeSet: theme.startPinBeforeSet,
-    startPinAfterSet: theme.startPinAfterSet,
-    lineColor: theme.polylineColor,
-    pinLayout: {
-      zIndex: 1000,
-      width: 60,
-      height: 60,
-    },
-    map: {
+    mapStyle: {
       ...StyleSheet.absoluteFillObject,
     },
-    markerCenterOffset: { x: 0, y: -12 },
+    markerCenterOffset: { x: 0.5, y: -12 },
   };
 };

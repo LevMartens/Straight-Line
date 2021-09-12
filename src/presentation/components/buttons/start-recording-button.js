@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { startProducingPath } from "../../../domain/use_cases/start-producing-path";
 import { useSelector } from "react-redux";
+import { SCREEN_WIDTH } from "../../../domain/resources/environment/dimensions";
 
 export default function StartRecordingButton() {
   const {
@@ -52,9 +53,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     marginTop: 50,
-    backgroundColor: "#c84b31",
+    backgroundColor: "#fb8c04",
     bottom: 0,
-    width: 400,
+    width: SCREEN_WIDTH,
     height: 100,
     position: "absolute",
   },

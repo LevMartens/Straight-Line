@@ -1,16 +1,4 @@
 import { useColorScheme } from "react-native";
-import exploreImageFocusedLight from "../../../assets/map-outline3.png";
-import exploreImageUNFocusedLight from "../../../assets/map-outline1.png";
-import createLineFocusedLight from "../../../assets/map-marker-distance10.png";
-import createLineUNFocusedLight from "../../../assets/map-marker-distance5.png";
-import backArrowIconLight from "../../../assets/backArrowNar.png";
-import straightLineLogoLight from "../../../assets/StraightLineLogoT.png";
-import finishPinBeforeSetLight from "../../../assets/marker7.png";
-import finishPinAfterSetLight from "../../../assets/marker6.png";
-import startPinBeforeSetLight from "../../../assets/marker8.png";
-import startPinAfterSetLight from "../../../assets/marker5.png";
-
-// colors to try #64834c green #1f1f1f black #313131 lightblack
 
 export function getTheme() {
   const themeMode = useColorScheme();
@@ -18,53 +6,35 @@ export function getTheme() {
 }
 
 export const lightTheme = {
-  primaryColor: "#3A6351",
-  buttonColor: "#c84b31",
-  tertiaryColor: "black",
-  secondaryColor: "#284538",
+  primaryColor: "#1f1f1f", //"#284538",
+  buttonColor: "#fc9c04", //"#fb8c04", //"#c84b31",
+  secondaryColor: "#313131", //"#284538",
   backgroundColor: "#284538",
+  tertiaryColor: "#64834c", //"#323232",
+  polylineColor: "#fff5eb",
   textColor: "#fff5eb",
-  polylineColor: "#B61919",
-  fontFamily: "Evolventa",
+  fontFamily: "Urbanist-SemiBold",
+  secFontFamily: "Urbanist-Light",
   bannerTextColor: "#ffffff",
-  bannerBackgroundColor: "black",
-  containerBackgroundColor: "#808893",
-  bottomTabBarExploreIconFocused: exploreImageFocusedLight,
-  bottomTabBarExploreIconUNFocused: exploreImageUNFocusedLight,
-  bottomTabBarCreateLineIconFocused: createLineFocusedLight,
-  bottomTabBarCreateLineIconUNFocused: createLineUNFocusedLight,
-  bottomTabBarTextColorFocused: "white",
-  bottomTabBarTextColorUnFocused: "black",
-  backArrowIcon: backArrowIconLight,
-  straightLineLogo: straightLineLogoLight,
-  finishPinBeforeSet: finishPinBeforeSetLight,
-  finishPinAfterSet: finishPinAfterSetLight,
-  startPinBeforeSet: startPinBeforeSetLight,
-  startPinAfterSet: startPinAfterSetLight,
+  bannerBackgroundColor: "#1f1f1f", //"black",
+  containerBackgroundColor: "#2C394B",
+  colorFocused: "#fb8c04", //"white",
+  colorUnFocused: "white",
 };
 
 export const darkTheme = {
-  primaryColor: "#284538",
-  buttonColor: "#c84b31",
-  secondaryColor: "#284538",
+  primaryColor: "#1f1f1f", //"#284538",
+  buttonColor: "#fc9c04", //"#fb8c04", //"#c84b31",
+  secondaryColor: "#313131", //"#284538",
   backgroundColor: "#284538",
-  tertiaryColor: "#323232",
-  polylineColor: "#B61919",
+  tertiaryColor: "#64834c", //"#323232",
+  polylineColor: "#fff5eb",
   textColor: "#fff5eb",
-  fontFamily: "Evolventa",
+  fontFamily: "Urbanist-SemiBold",
+  secFontFamily: "Urbanist-Light",
   bannerTextColor: "#ffffff",
-  bannerBackgroundColor: "black",
+  bannerBackgroundColor: "#1f1f1f", //"black",
   containerBackgroundColor: "#2C394B",
-  bottomTabBarExploreIconFocused: exploreImageFocusedLight,
-  bottomTabBarExploreIconUNFocused: exploreImageUNFocusedLight,
-  bottomTabBarCreateLineIconFocused: createLineFocusedLight,
-  bottomTabBarCreateLineIconUNFocused: createLineUNFocusedLight,
-  bottomTabBarTextColorFocused: "white",
-  bottomTabBarTextColorUnFocused: "black",
-  backArrowIcon: backArrowIconLight,
-  straightLineLogo: straightLineLogoLight,
-  finishPinBeforeSet: finishPinBeforeSetLight,
-  finishPinAfterSet: finishPinAfterSetLight,
-  startPinBeforeSet: startPinBeforeSetLight,
-  startPinAfterSet: startPinAfterSetLight,
+  colorFocused: "#fb8c04", //"white",
+  colorUnFocused: "white",
 };
