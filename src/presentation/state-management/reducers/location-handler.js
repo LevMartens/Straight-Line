@@ -64,3 +64,12 @@ export const headingWatcherHandler = (
       return state;
   }
 };
+
+export const userCloseEnoughToStartHandler = (state = false, action) => {
+  switch (action.type) {
+    case "UPDATEUSERTOSTART":
+      return action.event;
+    default:
+      return state;
+  }
+};

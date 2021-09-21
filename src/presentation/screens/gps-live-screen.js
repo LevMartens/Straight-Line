@@ -1,7 +1,6 @@
 import React from "react";
 import MapViewGPSLive from "../components/mapviews/map-view-gps-live";
 import { StyleSheet, View } from "react-native";
-import StartRecordingButton from "../components/buttons/start-recording-button";
 import { getTheme } from "../theme/themes";
 import SwipeModalNoBanner from "../components/swipe-modal-no-banner";
 

@@ -10,6 +10,7 @@ import {
   aSingleCurrentPosition,
   positionWatcherHandler,
   headingWatcherHandler,
+  userCloseEnoughToStartHandler,
 } from "./location-handler";
 import {
   lineMarkersHandler,
@@ -18,9 +19,14 @@ import {
   selectedLineDraftHandler,
   lineTitleHandler,
 } from "./line-data-handlers";
-import { pathHandler } from "./live-line-recording-handler";
+import {
+  liveTrackingOnHandler,
+  pathHandler,
+} from "./live-line-recording-handler";
 
 export default combineReducers({
+  liveTrackingOnHandler,
+  userCloseEnoughToStartHandler,
   headingWatcherHandler,
   positionWatcherHandler,
   pathHandler,

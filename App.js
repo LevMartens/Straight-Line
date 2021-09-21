@@ -30,6 +30,7 @@ import "react-native-gesture-handler";
 //TODO linechart comes out of view, this can give proplems with the layout of phones that are not iphone 12 or 11
 //TODO change images in weather widget to svg's
 //TODO swipemodel doesnt activate on the first touch (swipe)
+//TODO implement pause button in <LiveDataModalComponent>
 
 Amplify.configure(awsconfig);
 

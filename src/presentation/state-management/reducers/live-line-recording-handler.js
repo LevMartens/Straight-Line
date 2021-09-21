@@ -6,3 +6,12 @@ export const pathHandler = (state = [], action) => {
       return state;
   }
 };
+
+export const liveTrackingOnHandler = (state = false, action) => {
+  switch (action.type) {
+    case "LIVEON":
+      return action.event;
+    default:
+      return state;
+  }
+};

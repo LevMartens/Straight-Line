@@ -7,7 +7,7 @@ export const watchPosition = async (callback) => {
 
   if (status !== "granted") {
     console.log(
-      "Foreground location permission denied, see: watch-position.js"
+      "WARNING: Foreground location permission denied, see: watch-position.js"
     );
   }
 

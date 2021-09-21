@@ -58,6 +58,7 @@ const styles = () => {
       height: 100,
     },
     chartStyle: {
+      fontFamily: theme.fontFamily,
       justifyContent: "center",
       alignItems: "center",
       marginTop: 12,

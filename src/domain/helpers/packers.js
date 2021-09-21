@@ -27,8 +27,6 @@ export async function packLineData(rawData) {
     longitudeDeltaFit,
   } = data;
 
-  console.log("TEST: rcr " + JSON.stringify(data) + " " + startingCoordinates);
-
   const { lat: startingLatitude, lng: startingLongitude } = startingCoordinates;
   const { lat: midLineLatitude, lng: midLineLongitude } = midLineCoordinates;
 

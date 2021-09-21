@@ -14,12 +14,6 @@ import PinSvgComponent from "../svg-components/map-pin-svg";
 //TODO show something that indicates recording is going on
 
 export default function MapViewGPSLive() {
-  useEffect(() => {
-    followUserPosition();
-    getPositionOnce(); //TODO this function bypasses use_cases
-    watchHeading(); //TODO this function bypasses use_cases
-  }, []);
-
   const { mapStyle } = styles();
 
   const path = useSelector((state) => state.pathHandler);
@@ -48,6 +42,12 @@ export default function MapViewGPSLive() {
     latitude: aSingleCurrentPositionLatitude,
     longitude: aSingleCurrentPositionLongitude,
   } = useSelector((state) => state.aSingleCurrentPosition);
+
+  useEffect(() => {
+    followUserPosition(pointA);
+    getPositionOnce(); //TODO this function bypasses use_cases
+    watchHeading(); //TODO this function bypasses use_cases
+  }, []);
 
   return (
     <MapView

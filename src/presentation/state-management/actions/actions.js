@@ -120,3 +120,17 @@ export const setHeadingWatcher = (event) => {
     type: "SETHEADINGWATCHER",
   };
 };
+
+export const userCloseEnoughToStartUpdate = (event) => {
+  return {
+    event: event,
+    type: "UPDATEUSERTOSTART",
+  };
+};
+
+export const liveTrackingUpdate = (event) => {
+  return {
+    event: event,
+    type: "LIVEON",
+  };
+};

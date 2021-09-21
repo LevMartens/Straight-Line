@@ -11,9 +11,6 @@ import store from "../../presentation/state-management/store/store";
 import { getCoordinatesBetween } from "../generators/coordinates-generator";
 
 export async function createLineDraft(pointA, pointB, lineTitle) {
-  console.log(
-    "TEST: kkfkf " + JSON.stringify(pointA) + " " + JSON.stringify(pointB)
-  );
   const startingPoint = pointA;
 
   const endPoint = pointB;
@@ -86,8 +83,6 @@ export async function createLineDraft(pointA, pointB, lineTitle) {
     title: title,
     verified: verified,
   };
-
-  console.log("TEST: rceeer " + JSON.stringify(input));
 
   const line = await saveLineDraft(input);
 

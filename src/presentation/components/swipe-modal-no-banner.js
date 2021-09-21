@@ -1,23 +1,21 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  StyleSheet,
-  Text,
-  Animated,
-  View,
-  TouchableOpacity,
-  PanResponder,
-} from "react-native";
+import { StyleSheet, Animated, View, PanResponder } from "react-native";
+import { useSelector } from "react-redux";
 import { getTheme } from "../theme/themes";
+import { ActivityIndicator } from "react-native-paper";
 import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import GetDirectionsModalComponent from "./modal-components/get-directions";
+import ReadyToStartModalComponent from "./modal-components/ready-to-start";
+import LiveDataModalComponent from "./modal-components/live-data";
 
 export default function SwipeModalNoBanner() {
-  const {
-    boxStyle,
-    horizontalLineStyle,
-    textStyle,
-    buttonStyle,
-    buttonTextStyle,
-  } = styles();
+  const { boxStyle, horizontalLineStyle } = styles();
+
+  const userCloseEnoughToBegin = useSelector(
+    (state) => state.userCloseEnoughToStartHandler
+  );
+
+  const liveTrackingOn = useSelector((state) => state.liveTrackingOnHandler);
 
   const pan = useRef(new Animated.ValueXY({ x: 0, y: 600 })).current;
 
@@ -59,10 +57,19 @@ export default function SwipeModalNoBanner() {
       style={[animatedStyle, boxStyle]}
     >
       <View style={horizontalLineStyle}></View>
-      <Text style={textStyle}>Please move closer to the starting point or</Text>
-      <TouchableOpacity style={buttonStyle} onPress={() => {}}>
-        <Text style={buttonTextStyle}>{"Get directions"}</Text>
-      </TouchableOpacity>
+      {userCloseEnoughToBegin ? (
+        <ReadyToStartModalComponent></ReadyToStartModalComponent>
+      ) : userCloseEnoughToBegin === false ? (
+        <GetDirectionsModalComponent></GetDirectionsModalComponent>
+      ) : liveTrackingOn ? (
+        <LiveDataModalComponent></LiveDataModalComponent>
+      ) : (
+        <ActivityIndicator
+          animating={true}
+          color={{ color: "white" }}
+          size={"large"}
+        />
+      )}
     </Animated.View>
   );
 }

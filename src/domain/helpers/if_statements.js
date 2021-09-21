@@ -30,3 +30,12 @@ export async function getZoomLevelRules(zoomLevel) {
     };
   }
 }
+
+export async function userCloseEnoughToBegin(distance) {
+  if (distance < 5) {
+    return true;
+  }
+  if (distance >= 5) {
+    return false;
+  }
+}

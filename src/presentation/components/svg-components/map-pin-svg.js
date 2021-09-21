@@ -3,33 +3,6 @@ import Svg, { Path } from "react-native-svg";
 
 function PinSvgComponent(props) {
   return (
-    // <Svg
-    //   xmlns="http://www.w3.org/2000/svg"
-    //   viewBox="0 0 48 48"
-    //   width={60}
-    //   height={60}
-    //   {...props}
-    // >
-    //   <Path fill="#c5cae9" d="M26 41l-2 5-2-5V14h4v27z" />
-    //   <Path
-    //     fill="#ff5722"
-    //     d="M32 10c0 4.4-3.6 8-8 8s-8-3.6-8-8 3.6-8 8-8 8 3.6 8 8z"
-    //   />
-    //   <Path
-    //     fill="#ffab91"
-    //     d="M19 11c-.6 0-1-.4-1-1 0-3.3 2.7-6 6-6 .6 0 1 .4 1 1s-.4 1-1 1c-2.2 0-4 1.8-4 4 0 .6-.4 1-1 1z"
-    //   />
-    // </Svg>
-    // <Svg width={48} height={48} xmlns="http://www.w3.org/2000/svg" {...props}>
-    //   <Path
-    //     d="M31.75 24.5c0 4.4-3.6 8-8 8s-8-3.6-8-8 3.6-8 8-8 8 3.6 8 8z"
-    //     fill="#ff5722"
-    //   />
-    //   <Path
-    //     d="M18.625 25.375c-.6 0-1-.4-1-1 0-3.3 2.7-6 6-6 .6 0 1 .4 1 1s-.4 1-1 1c-2.2 0-4 1.8-4 4 0 .6-.4 1-1 1z"
-    //     fill="#ffab91"
-    //   />
-    // </Svg>
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       width={40}
