@@ -14,7 +14,7 @@ export const watchPosition = async (callback) => {
   const positionWatcher = await Location.watchPositionAsync(
     {
       accuracy: Location.Accuracy.BestForNavigation,
-      distanceInterval: 10,
+      distanceInterval: 1,
     },
     async (loc) => callback(loc)
   );

@@ -57,7 +57,7 @@ export default function SwipeModalNoBanner() {
       style={[animatedStyle, boxStyle]}
     >
       <View style={horizontalLineStyle}></View>
-      {userCloseEnoughToBegin ? (
+      {(userCloseEnoughToBegin === true) & (liveTrackingOn === false) ? (
         <ReadyToStartModalComponent></ReadyToStartModalComponent>
       ) : userCloseEnoughToBegin === false ? (
         <GetDirectionsModalComponent></GetDirectionsModalComponent>
@@ -70,6 +70,7 @@ export default function SwipeModalNoBanner() {
           size={"large"}
         />
       )}
+      {/* <LiveDataModalComponent></LiveDataModalComponent> */}
     </Animated.View>
   );
 }

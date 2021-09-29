@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MapViewCreateLine from "../components/mapviews/map-view-create-line";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text } from "react-native";
@@ -14,6 +14,8 @@ export default function DetailScreen({ navigation }) {
   const {
     textStyle,
     subTextStyle,
+    textStyle1,
+    textStyle2,
     containerStyle,
     activityIndicatorStyle,
     widgetContainerStyle,
@@ -27,7 +29,7 @@ export default function DetailScreen({ navigation }) {
 
   return (
     <View style={containerStyle}>
-      <Text style={textStyle}> {"Line Review"} </Text>
+      <Text style={textStyle}> {"Line Draft"} </Text>
       {isLoaded == true ? (
         <Text style={subTextStyle}> {title} </Text>
       ) : (
@@ -37,7 +39,8 @@ export default function DetailScreen({ navigation }) {
           size={"large"}
         />
       )}
-
+      <Text style={textStyle1}> {"Distance"} </Text>
+      <Text style={textStyle2}> {`${distance}m`} </Text>
       {isLoaded == true ? (
         <ElevationChart
           distance={distance}
@@ -56,7 +59,7 @@ export default function DetailScreen({ navigation }) {
           {isLoaded == true ? (
             <MapViewCreateLine
               initialRegion={markerRegionZoomedIn}
-              mapType={"mutedStandard"}
+              mapType={"satellite"}
             >
               {" "}
             </MapViewCreateLine>
@@ -70,9 +73,26 @@ export default function DetailScreen({ navigation }) {
         </View>
         <WeatherWidget></WeatherWidget>
       </View>
-
-      <StartButton navigation={navigation}> </StartButton>
-      <WalkAnotherTimeButton navigation={navigation}></WalkAnotherTimeButton>
+      {/* <View
+        style={{
+          marginTop: 20,
+          alignSelf: "center",
+          backgroundColor: "#313131",
+          height: 2,
+          width: SCREEN_WIDTH - 50,
+          borderRadius: 16,
+        }}
+      ></View> */}
+      <View
+        style={{
+          //alignItems: "flex-start",
+          flex: 1.5,
+          //backgroundColor: "purple",
+        }}
+      >
+        <StartButton navigation={navigation}> </StartButton>
+        <WalkAnotherTimeButton navigation={navigation}></WalkAnotherTimeButton>
+      </View>
     </View>
   );
 }
@@ -83,7 +103,7 @@ const styles = () => {
       color: theme.buttonColor,
     },
     mapViewStyle: {
-      marginLeft: 13,
+      //marginLeft: 13,
       flexDirection: "row",
       alignSelf: "center",
       width: SCREEN_WIDTH - 242,
@@ -100,11 +120,13 @@ const styles = () => {
       height: "100%",
     },
     widgetContainerStyle: {
-      marginTop: 35,
+      //backgroundColor: "red",
+      //marginTop: 35,
+      paddingBottom: 5,
       justifyContent: "space-evenly",
       alignSelf: "center",
       width: SCREEN_WIDTH,
-      flex: 2,
+      flex: 2.0, //2.4
       flexDirection: "row",
       height: 100,
     },
@@ -117,9 +139,26 @@ const styles = () => {
       textAlign: "left",
       fontFamily: theme.fontFamily,
     },
+    textStyle1: {
+      marginTop: 30, //50,
+      marginLeft: 20,
+      fontSize: 17,
+      color: theme.textColor,
+      textAlign: "left",
+      fontFamily: theme.fontFamily,
+    },
+    textStyle2: {
+      //marginTop: 20,
+      marginBottom: 3, //10,
+      marginLeft: 15,
+      fontSize: 40,
+      color: theme.textColor,
+      textAlign: "left",
+      fontFamily: theme.fontFamily,
+    },
     subTextStyle: {
       marginTop: 5,
-      marginBottom: 10,
+      //marginBottom: 10,
       marginLeft: 23,
       fontSize: 17,
       color: theme.textColor,

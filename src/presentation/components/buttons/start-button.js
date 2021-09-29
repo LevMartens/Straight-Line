@@ -23,9 +23,10 @@ const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
     containerStyle: {
-      marginTop: 30,
-      flex: 1,
-      justifyContent: "center",
+      //marginTop: 30,
+      //flex: 1,
+      marginBottom: 20,
+      justifyContent: "flex-start",
     },
     buttonStyle: {
       paddingTop: 10,

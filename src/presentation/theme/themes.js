@@ -24,7 +24,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   primaryColor: "#1f1f1f", //"#284538",
-  buttonColor: "#fc9c04", //"#fb8c04", //"#c84b31",
+  buttonColor: "#fc9c04", //"#fb8c04", //"#fc9c04", //"#fb8c04", //"#c84b31",//"#548c33",
   secondaryColor: "#313131", //"#284538",
   backgroundColor: "#284538",
   tertiaryColor: "#64834c", //"#323232",
@@ -35,6 +35,6 @@ export const darkTheme = {
   bannerTextColor: "#ffffff",
   bannerBackgroundColor: "#1f1f1f", //"black",
   containerBackgroundColor: "#2C394B",
-  colorFocused: "#fb8c04", //"white",
+  colorFocused: "#fc9c04", //"#fb8c04", //"white", //"#548c33",
   colorUnFocused: "white",
 };

@@ -27,10 +27,7 @@ export default function CreateLineScreen({ navigation }) {
 
   return (
     <View style={containerStyle}>
-      <MapViewCreateLine
-        initialRegion={initialRegion}
-        mapType={"mutedStandard"}
-      >
+      <MapViewCreateLine initialRegion={initialRegion} mapType={"satellite"}>
         {" "}
       </MapViewCreateLine>
       <PinSetButton navigation={navigation}> </PinSetButton>

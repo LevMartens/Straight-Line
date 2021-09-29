@@ -72,7 +72,7 @@ const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
     weatherStyle: {
-      marginRight: 13,
+      //marginRight: 13,
       justifyContent: "center",
       flexDirection: "column",
       alignSelf: "center",

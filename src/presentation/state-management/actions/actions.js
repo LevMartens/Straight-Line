@@ -134,3 +134,10 @@ export const liveTrackingUpdate = (event) => {
     type: "LIVEON",
   };
 };
+
+export const finishLineUpdate = (event) => {
+  return {
+    event: event,
+    type: "FINISHEDLINE",
+  };
+};

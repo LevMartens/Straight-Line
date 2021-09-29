@@ -11,6 +11,7 @@ export default function LiveDataModalComponent() {
     textStyle2,
     textStyle1,
     buttonStyle,
+    buttonStyle1,
     buttonTextStyle,
     chartContainerStyle,
     chartStyle,
@@ -48,7 +49,52 @@ export default function LiveDataModalComponent() {
 
   return (
     <View>
-      <View style={chartContainerStyle}>
+      <View
+        style={{
+          //width: SCREEN_WIDTH - 57,
+          marginTop: 40,
+          marginLeft: 30,
+          flex: 1,
+          flexDirection: "row",
+        }}
+      >
+        <Text style={textStyle2}>Distance travelled</Text>
+        <Text style={textStyle1}>2345m / 5000m</Text>
+      </View>
+      <View
+        style={{
+          marginLeft: 30,
+          //width: SCREEN_WIDTH - 57,
+          flex: 1,
+          flexDirection: "row",
+        }}
+      >
+        <Text style={textStyle2}>Accuracy </Text>
+        <Text style={textStyle1}>93%</Text>
+      </View>
+      <View
+        style={{
+          marginLeft: 30,
+          //width: SCREEN_WIDTH - 57,
+          flex: 1,
+          flexDirection: "row",
+        }}
+      >
+        <Text style={textStyle2}>Largest deviation </Text>
+        <Text style={textStyle1}>11m</Text>
+      </View>
+      <View
+        style={{
+          marginLeft: 30,
+          //width: SCREEN_WIDTH - 57,
+          flex: 1,
+          flexDirection: "row",
+        }}
+      >
+        <Text style={textStyle2}>Current band </Text>
+        <Text style={textStyle1}>Gold</Text>
+      </View>
+      {/* <View style={chartContainerStyle}>
         <LineChart
           data={{
             datasets: [
@@ -75,9 +121,6 @@ export default function LiveDataModalComponent() {
             }
           }}
           getDotProps={(value, index) => {
-            console.log(
-              "TEST: index getDotsProps " + index + " value " + value
-            );
             if (index === 1) {
               return {
                 r: "6",
@@ -86,28 +129,42 @@ export default function LiveDataModalComponent() {
               };
             }
           }}
-          width={SCREEN_WIDTH - 57}
-          height={100}
+          width={SCREEN_WIDTH - 157}
+          height={80}
           chartConfig={chartConfig}
           bezier
           style={chartStyle}
         />
-      </View>
-      <View style={{ marginTop: 20, flex: 1, flexDirection: "row" }}>
-        <Text style={textStyle2}>Distance travelled</Text>
-        <Text style={textStyle1}>2345m / 5000m</Text>
-      </View>
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <Text style={textStyle2}>Accuracy </Text>
-        <Text style={textStyle1}>93%</Text>
-      </View>
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <Text style={textStyle2}>Current band </Text>
-        <Text style={textStyle1}>Gold</Text>
-      </View>
+      </View> */}
       <View
         style={{
-          marginBottom: 50,
+          alignSelf: "center",
+          width: SCREEN_WIDTH,
+          // position: "absolute",
+          // top: 40,
+          //height: 80,
+          marginBottom: 20,
+          flex: 1,
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <TouchableOpacity style={buttonStyle} onPress={() => {}}>
+          <Text style={buttonTextStyle}>{"Elevation map"}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={buttonStyle1} onPress={() => {}}>
+          <Text style={buttonTextStyle}>{"Switch map"}</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View
+        style={{
+          justifyContent: "center",
+          alignSelf: "center",
+          width: SCREEN_WIDTH,
+          // position: "absolute",
+          // top: 40,
+          marginBottom: 60,
           flex: 1,
           flexDirection: "row",
           justifyContent: "center",
@@ -115,6 +172,9 @@ export default function LiveDataModalComponent() {
       >
         <TouchableOpacity style={buttonStyle} onPress={() => {}}>
           <Text style={buttonTextStyle}>{"Stop Recording"}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={buttonStyle1} onPress={() => {}}>
+          <Text style={buttonTextStyle}>{"Switch ring"}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -125,7 +185,24 @@ const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
     buttonStyle: {
-      marginTop: 20,
+      position: "absolute",
+      top: 10,
+      left: 20,
+      //marginTop: 20,
+      paddingTop: 10,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignSelf: "center",
+      backgroundColor: theme.buttonColor,
+      width: SCREEN_WIDTH - 250,
+      height: 40,
+      borderRadius: 16,
+    },
+    buttonStyle1: {
+      position: "absolute",
+      top: 10,
+      right: 20,
+      //marginTop: 20,
       paddingTop: 10,
       flexDirection: "row",
       justifyContent: "center",
@@ -164,8 +241,9 @@ const styles = () => {
       fontFamily: theme.fontFamily,
     },
     chartContainerStyle: {
+      width: SCREEN_WIDTH - 57,
       flex: 2,
-      marginTop: 40,
+      //marginTop: 10,
       marginBottom: 30,
     },
     chartStyle: {

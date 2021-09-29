@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import MapViewExplore from "../components/mapviews/map-view-explore";
 import { useSelector } from "react-redux";

@@ -5,6 +5,7 @@ import { SCREEN_WIDTH } from "../../../domain/resources/environment/dimensions";
 import { useSelector } from "react-redux";
 import { startProducingPath } from "../../../domain/use_cases/start-producing-path";
 import store from "../../state-management/store/store";
+import { liveTrackingUpdate } from "../../state-management/actions/actions";
 
 export default function ReadyToStartModalComponent() {
   const { textStyle, buttonStyle, buttonTextStyle } = styles();

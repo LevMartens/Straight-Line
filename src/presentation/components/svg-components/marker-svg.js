@@ -5,8 +5,8 @@ function MarkerSvgComponent(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={30}
-      height={30}
+      width={30} //{30}
+      height={30} //{30}
       viewBox="0 0 400 400"
       {...props}
     >
@@ -41,97 +41,6 @@ function MarkerSvgComponent(props) {
         className="prefix__coloracb474 prefix__svgShape"
       />
     </Svg>
-
-    // <Svg
-    //   xmlns="http://www.w3.org/2000/svg"
-    //   width={25}
-    //   height={25}
-    //   viewBox="0 0 48 48"
-    //   {...props}
-    // >
-    //   <Path
-    //     fill="#fb8c00"
-    //     d="M24 4c-7.732 0-14 6.269-14 14 0 7.732 14 26 14 26s14-18.268 14-26c0-7.731-6.268-14-14-14z"
-    //     className="prefix__colorff3d00 prefix__svgShape"
-    //   />
-    // </Svg>
-
-    // <Svg
-    //   xmlns="http://www.w3.org/2000/svg"
-    //   width={20}
-    //   height={20}
-    //   viewBox="0 0 48 48"
-    //   {...props}
-    // >
-    //   <Path
-    //     fill="#c84b31"
-    //     d="M24 4c-7.732 0-14 6.269-14 14 0 7.732 14 26 14 26s14-18.268 14-26c0-7.731-6.268-14-14-14z"
-    //     className="prefix__colorff3d00 prefix__svgShape"
-    //   />
-    // </Svg>
-
-    // <Svg
-    //   xmlns="http://www.w3.org/2000/svg"
-    //   width={20}
-    //   height={20}
-    //   viewBox="0 0 48 48"
-    //   {...props}
-    // >
-    //   <Path
-    //     fill="#fff"
-    //     d="M24 4c-7.732 0-14 6.269-14 14 0 7.732 14 26 14 26s14-18.268 14-26c0-7.731-6.268-14-14-14z"
-    //     className="prefix__colorff3d00 prefix__svgShape"
-    //   />
-    // </Svg>
-
-    // <Svg
-    //   xmlns="http://www.w3.org/2000/svg"
-    //   width={20}
-    //   height={20}
-    //   viewBox="0 0 24 24"
-    //   {...props}
-    // >
-    //   <Path
-    //     d="M18 9c0 3.314-6 11-6 11S6 12.314 6 9a6 6 0 1112 0z"
-    //     opacity={0.3}
-    //     fill="#c84b31"
-    //     className="prefix__color000 prefix__svgShape"
-    //   />
-    //   <Path
-    //     d="M12 11.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"
-    //     fill="#c84b31"
-    //     className="prefix__color000 prefix__svgShape"
-    //   />
-    //   <Path
-    //     d="M12 2.01a7 7 0 00-6.993 6.993c0 4.483 5.968 11.767 6.222 12.074l.771.935.771-.935c.254-.308 6.222-7.591 6.222-12.074A7 7 0 0012 2.01zm0 16.817c-1.878-2.463-4.993-7.115-4.993-9.824C7.007 6.25 9.247 4.01 12 4.01s4.993 2.24 4.993 4.993c0 2.705-3.115 7.359-4.993 9.824z"
-    //     fill="#c84b31"
-    //     className="prefix__color000 prefix__svgShape"
-    //   />
-    // </Svg>
-    // <Svg
-    //   xmlns="http://www.w3.org/2000/svg"
-    //   width={20}
-    //   height={20}
-    //   viewBox="0 0 24 24"
-    //   {...props}
-    // >
-    //   <Path
-    //     d="M18 9c0 3.314-6 11-6 11S6 12.314 6 9a6 6 0 1112 0z"
-    //     opacity={0.3}
-    //     fill="#fff"
-    //     className="prefix__color000 prefix__svgShape"
-    //   />
-    //   <Path
-    //     d="M12 11.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"
-    //     fill="#fff"
-    //     className="prefix__color000 prefix__svgShape"
-    //   />
-    //   <Path
-    //     d="M12 2.01a7 7 0 00-6.993 6.993c0 4.483 5.968 11.767 6.222 12.074l.771.935.771-.935c.254-.308 6.222-7.591 6.222-12.074A7 7 0 0012 2.01zm0 16.817c-1.878-2.463-4.993-7.115-4.993-9.824C7.007 6.25 9.247 4.01 12 4.01s4.993 2.24 4.993 4.993c0 2.705-3.115 7.359-4.993 9.824z"
-    //     fill="#fff"
-    //     className="prefix__color000 prefix__svgShape"
-    //   />
-    // </Svg>
   );
 }
 

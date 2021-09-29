@@ -15,6 +15,9 @@ web-build/
 # api-key
 api-key.js
 
+# todos
+todos.js
+
 #amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*

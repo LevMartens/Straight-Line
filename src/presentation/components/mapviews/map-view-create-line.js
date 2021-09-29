@@ -1,5 +1,5 @@
 import React from "react";
-import MapView, { Polyline, Marker } from "react-native-maps";
+import MapView, { Polyline, Marker, Circle } from "react-native-maps";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { StyleSheet } from "react-native";
@@ -34,6 +34,22 @@ export default function MapViewCreateLine({ initialRegion, mapType }) {
       style={mapStyle}
       initialRegion={initialRegion}
     >
+      {/* <Circle
+        //zIndex={1000}
+        strokeWidth={3} //2
+        strokeColor={"#fb8c04"} //{"#fc3e08"} //{"#2494f4"} //{"#fc3e08"} //{"#fb8c04"} //{"#313131"}
+        fillColor={"#fff"} //{"#313131"} //{"#2494f4"} //{"#fff"} //{"#fc3c04"} //rgba(144, 202, 249, 0.2)rgba(252, 156, 4, 0.2)
+        center={firstPinCoordinates}
+        radius={240}
+      ></Circle>
+      <Circle
+        //zIndex={1000}
+        strokeWidth={3} //2
+        strokeColor={"#fb8c04"} //{"#2494f4"} //{"#fc3e08"} //{"#fb8c04"} //"#313131"}
+        fillColor={"#fff"} //{"#313131"} //{"#2494f4"} //{"#fff"} //{"#fc3c04"} //rgba(144, 202, 249, 0.2)rgba(252, 156, 4, 0.2)
+        center={secondPinCoordinates}
+        radius={240}
+      ></Circle> */}
       <Marker
         draggable
         key={finishMarkerID}
@@ -72,6 +88,6 @@ const styles = () => {
     mapStyle: {
       ...StyleSheet.absoluteFillObject,
     },
-    markerCenterOffset: { x: 0.5, y: -12 },
+    markerCenterOffset: { x: 0.2, y: -11 }, //{ x: 0.5, y: -12 },
   };
 };

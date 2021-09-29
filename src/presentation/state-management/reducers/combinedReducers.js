@@ -20,11 +20,13 @@ import {
   lineTitleHandler,
 } from "./line-data-handlers";
 import {
+  finishedLineHandler,
   liveTrackingOnHandler,
   pathHandler,
 } from "./live-line-recording-handler";
 
 export default combineReducers({
+  finishedLineHandler,
   liveTrackingOnHandler,
   userCloseEnoughToStartHandler,
   headingWatcherHandler,

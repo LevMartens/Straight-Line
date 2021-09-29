@@ -15,3 +15,12 @@ export const liveTrackingOnHandler = (state = false, action) => {
       return state;
   }
 };
+
+export const finishedLineHandler = (state = false, action) => {
+  switch (action.type) {
+    case "FINISHEDLINE":
+      return action.event;
+    default:
+      return state;
+  }
+};
