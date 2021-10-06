@@ -1,17 +1,32 @@
 import { createLineDraft } from "../create-line-draft";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { deleteLineDrafts } from "../../../mutations";
-import awsconfig from "../../../aws-exports";
+
+import awsconfig from "../../../../aws-exports";
+
 import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
 } from "../../resources/environment/dimensions";
+import { deleteLineDrafts } from "../../../../graphql/mutations";
+import { Auth } from "aws-amplify";
 
 Amplify.configure(awsconfig);
 
 jest.useFakeTimers();
+jest.setTimeout(30000);
 
-test("line draft not created correctly", async () => {
+async function signIn() {
+  try {
+    const user = await Auth.signIn("Kalli-Morton", "kallimorton123");
+    return user;
+  } catch (error) {
+    console.log("error signing in", error);
+  }
+}
+
+test("create line draft", async () => {
+  const user = await signIn();
+
   const Melbourne = {
     latitude: -37.840935,
     longitude: 144.946457,
@@ -45,7 +60,7 @@ test("line draft not created correctly", async () => {
     description,
     title,
     hashtags,
-    dificultyLevel,
+    difficultyLevel,
     verified,
     lineCompleted,
     elevationPoints,
@@ -74,7 +89,7 @@ test("line draft not created correctly", async () => {
   expect(description).toEqual(expect.anything());
   expect(title).toEqual("Test Title");
   expect(Array.isArray(hashtags)).toBeTruthy();
-  expect(dificultyLevel).toEqual(expect.anything());
+  expect(difficultyLevel).toEqual(expect.anything());
   expect(verified).toEqual(expect.anything());
   expect(lineCompleted).toBeFalsy();
   expect(Array.isArray(elevationPoints)).toBeTruthy();

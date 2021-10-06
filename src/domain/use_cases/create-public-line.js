@@ -18,16 +18,26 @@ import { mapElevationPoints, packLineData } from "../helpers/packers";
 import { showAlert } from "../resources/environment/alerts";
 import { saveLineDraft } from "../resources/backend/save-line-draft";
 import { selectLineDraft } from "../../presentation/state-management/actions/actions";
+import Amplify, { Auth, Hub } from "aws-amplify";
+import { createFinishedMission } from "./create-finished-mission";
 
-export async function createPublicLine(lineDraft) {
+export async function createPublicLine(
+  lineDraft,
+  path,
+  time,
+  difficulty,
+  largestDeviation,
+  score,
+  band
+) {
   const {
     rawLineData: {
       complete3LevelPluscode,
-      lineDraftsStartingCoordinatesId,
-      lineDraftsFinishCoordinatesId,
+      startingCoordinates,
+      finishCoordinates,
       creatorName,
       description,
-      dificultyLevel,
+      difficultyLevel,
       distance,
       elevationPoints,
       hashTags,
@@ -147,11 +157,11 @@ export async function createPublicLine(lineDraft) {
     parentId: pluscodeLevel3ID,
     linesPluscodeParentId: pluscodeLevel3ID,
     complete3LevelPluscode: complete3LevelPluscode,
-    linesStartingCoordinatesId: lineDraftsStartingCoordinatesId,
-    linesFinishCoordinatesId: lineDraftsFinishCoordinatesId,
+    linesStartingCoordinatesId: startingCoordinates.id,
+    linesFinishCoordinatesId: finishCoordinates.id,
     creatorName: creatorName,
     description: description,
-    dificultyLevel: dificultyLevel,
+    difficultyLevel: difficulty,
     distance: distance,
     elevationPoints: elevationPoints,
     hashTags: hashTags,
@@ -167,12 +177,30 @@ export async function createPublicLine(lineDraft) {
   if (line.isNOTSaved) {
     showAlert("Lines didn't save, Lev sucks");
     console.log(
-      "Line didn't save, data back: " +
+      "ERROR: Line didn't save, data back: " +
         JSON.stringify(line.data) +
         " source: create-line.js 184"
     );
     return;
   }
 
+  const finishedMission = await createFinishedMission(
+    path,
+    time,
+    largestDeviation,
+    score,
+    band,
+    line.id
+  );
+
   return line; // Return for testing
+}
+
+async function getUserName() {
+  try {
+    const userData = await Auth.currentAuthenticatedUser();
+    return userData.username;
+  } catch (e) {
+    return console.log("WARNING: User not signed in");
+  }
 }

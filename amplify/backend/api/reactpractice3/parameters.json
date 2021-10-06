@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "reactpractice3",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authreactpractice33c36127d",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

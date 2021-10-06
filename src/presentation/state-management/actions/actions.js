@@ -141,3 +141,10 @@ export const finishLineUpdate = (event) => {
     type: "FINISHEDLINE",
   };
 };
+
+export const difficultyUpdate = (event) => {
+  return {
+    event: event,
+    type: "DIFFICULTY",
+  };
+};

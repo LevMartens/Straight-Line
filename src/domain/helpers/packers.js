@@ -17,6 +17,7 @@ export async function mapElevationPoints(rawData) {
 }
 
 export async function packLineData(rawData) {
+  console.log("TEST: data.id error ", JSON.stringify(rawData));
   const { data } = rawData;
 
   const {
@@ -54,6 +55,55 @@ export async function packLineData(rawData) {
     id: id,
     isLoaded: true,
     rawLineData: data,
+    imageSelected: imageSelected,
+    image: image,
+    markerCoordinates: markerCoordinates,
+    markerRegion: markerRegion,
+    markerRegionZoomedIn: markerRegionZoomedIn,
+  };
+
+  return lineData;
+}
+
+export async function packPublicLineData(rawData) {
+  console.log("TEST: data.id error ", JSON.stringify(rawData));
+  //const { data } = rawData;
+
+  const {
+    id,
+    startingCoordinates,
+    midLineCoordinates,
+    latitudeDeltaFit,
+    longitudeDeltaFit,
+  } = rawData;
+
+  const { lat: startingLatitude, lng: startingLongitude } = startingCoordinates;
+  //const { lat: midLineLatitude, lng: midLineLongitude } = midLineCoordinates;
+
+  const markerCoordinates = {
+    latitude: startingLatitude,
+    longitude: startingLongitude,
+  };
+  const { latitude, longitude } = markerCoordinates;
+
+  const markerRegion = {
+    latitude: latitude,
+    longitude: longitude,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
+  };
+
+  const markerRegionZoomedIn = {
+    latitude: startingLatitude, //midLineLatitude,
+    longitude: startingLongitude, //midLineLongitude,
+    latitudeDelta: latitudeDeltaFit,
+    longitudeDelta: longitudeDeltaFit,
+  };
+
+  const lineData = {
+    id: id,
+    isLoaded: true,
+    rawLineData: rawData, //data,
     imageSelected: imageSelected,
     image: image,
     markerCoordinates: markerCoordinates,

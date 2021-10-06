@@ -5,8 +5,8 @@ function MarkerSvgComponent(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={30} //{30}
-      height={30} //{30}
+      //width={30} //{30}
+      //height={30} //{30}
       viewBox="0 0 400 400"
       {...props}
     >

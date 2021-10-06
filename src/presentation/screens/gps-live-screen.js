@@ -22,20 +22,21 @@ export default function GPSLiveScreen({ navigation }) {
     buttonStyleB,
   } = styles();
 
-  const lineFinished = useSelector((state) => state.finishedLineHandler);
+  const { userFinished } = useSelector((state) => state.finishedLineHandler);
 
   const positionWatcher = useSelector((state) => state.positionWatcherHandler);
 
   useEffect(() => {
-    if (lineFinished) {
+    if (userFinished) {
       console.log("TEST: Line finished");
+
       positionWatcher.remove();
     }
-  }, [lineFinished]);
+  }, [userFinished]);
 
   return (
     <View style={containerStyle}>
-      {lineFinished && (
+      {userFinished && (
         <FinishedLineAlert navigation={navigation}></FinishedLineAlert>
       )}
       <MapViewGPSLive navigation={navigation}></MapViewGPSLive>

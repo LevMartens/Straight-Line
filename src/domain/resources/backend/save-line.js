@@ -18,6 +18,7 @@ export async function saveLine(input) {
       ? {
           isNOTSaved: false,
           data: createLines,
+          id: id,
         }
       : {
           isNOTSaved: true,

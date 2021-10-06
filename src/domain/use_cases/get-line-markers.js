@@ -6,7 +6,7 @@ import { sendLineMarkers } from "../../presentation/state-management/actions/act
 import { getAllLvl3UnderLvl2 } from "../resources/backend/get-all-lvl-3-under-lvl-2";
 import { getZoomLevelRules } from "../helpers/if_statements";
 import { showBanner } from "../../presentation/components/banner";
-import { packLineData } from "../helpers/packers";
+import { packLineData, packPublicLineData } from "../helpers/packers";
 
 //TODO:
 /**
@@ -52,6 +52,8 @@ export async function getLineMarkers(currentRegion) {
 
   // Finding all lvl 3 pluscodes that have this pluscodeLvl2 as parent in dynamoDB
   const pluscodeLvl2 = pluscode.substring(0, 4);
+
+  console.log("TEST: pluscodelvl2 ", pluscodeLvl2);
 
   let listOflvl3Objects = await getAllLvl3UnderLvl2({
     withThisLvl2Pluscode: pluscodeLvl2,
@@ -100,7 +102,7 @@ export async function getLineMarkers(currentRegion) {
   // Prepping line marker data to send to MapView
   const lineMarkers = await Promise.all(
     lineObjects.map(async (rawData) => {
-      const lineMarkerData = await packLineData(rawData);
+      const lineMarkerData = await packPublicLineData(rawData);
       return lineMarkerData;
     })
   );

@@ -13,6 +13,8 @@ import { useFonts } from "expo-font";
 import awsconfig from "./aws-exports";
 import { RootSiblingParent } from "react-native-root-siblings";
 import "react-native-gesture-handler";
+import * as Network from "expo-network";
+import * as AuthSession from "expo-auth-session";
 
 //Amplify.configure(awsconfig);
 
@@ -27,8 +29,11 @@ async function urlOpener(url, redirectUrl) {
     return Linking.openURL(newUrl);
   }
 }
-// let redirectUrl = Linking.createURL();
-// console.log("TEST: redURL " + redirectUrl);
+let redirectUrl = Linking.createURL();
+console.log("TEST: redURL " + redirectUrl);
+
+const url = AuthSession.makeRedirectUri();
+console.log("TEST: authsessions " + url);
 
 // awsconfig.oauth.redirectSignIn = redirectUrl + "/";
 // awsconfig.oauth.redirectSignOut = redirectUrl + "/";
@@ -41,6 +46,11 @@ Amplify.configure({
   },
 });
 
+async function getIP() {
+  const ip = await Network.getIpAddressAsync();
+  console.log("TEST: IP ADDRESS ", ip);
+}
+
 export default function App() {
   let [fontsLoaded] = useFonts({
     Evolventa: require("./assets/fonts/Evolventa-Regular.otf"),
@@ -49,7 +59,11 @@ export default function App() {
     "Urbanist-Light": require("./assets/fonts/Urbanist-Light.ttf"),
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    //confirmSignUp();
+    //signUp();
+    getIP();
+  }, []);
 
   if (!fontsLoaded) {
     return (
@@ -71,3 +85,25 @@ export default function App() {
     );
   }
 }
+// async function confirmSignUp() {
+//   try {
+//     await Auth.confirmSignUp("Kalli-Morton", "796693");
+//   } catch (error) {
+//     console.log("error confirming sign up", error);
+//   }
+// }
+
+// async function signUp() {
+//   try {
+//     const { user } = await Auth.signUp({
+//       username: "Kalli-Morton",
+//       password: "kallimorton123",
+//       attributes: {
+//         email: "kallimorton@hotmail.com", // optional
+//       },
+//     });
+//     console.log(user);
+//   } catch (error) {
+//     console.log("error signing up:", error);
+//   }
+// }

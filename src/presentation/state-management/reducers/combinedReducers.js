@@ -20,12 +20,14 @@ import {
   lineTitleHandler,
 } from "./line-data-handlers";
 import {
+  difficultyHandler,
   finishedLineHandler,
   liveTrackingOnHandler,
   pathHandler,
 } from "./live-line-recording-handler";
 
 export default combineReducers({
+  difficultyHandler,
   finishedLineHandler,
   liveTrackingOnHandler,
   userCloseEnoughToStartHandler,

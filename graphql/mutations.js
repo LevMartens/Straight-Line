@@ -293,7 +293,7 @@ export const createLineDrafts = /* GraphQL */ `
       description
       title
       hashtags
-      dificultyLevel
+      difficultyLevel
       verified
       lineCompleted
       elevationPoints
@@ -339,7 +339,7 @@ export const updateLineDrafts = /* GraphQL */ `
       description
       title
       hashtags
-      dificultyLevel
+      difficultyLevel
       verified
       lineCompleted
       elevationPoints
@@ -385,7 +385,7 @@ export const deleteLineDrafts = /* GraphQL */ `
       description
       title
       hashtags
-      dificultyLevel
+      difficultyLevel
       verified
       lineCompleted
       elevationPoints
@@ -705,7 +705,7 @@ export const createPlusCodeLevel3 = /* GraphQL */ `
           description
           title
           hashtags
-          dificultyLevel
+          difficultyLevel
           verified
           lineCompleted
           elevationPoints
@@ -775,7 +775,7 @@ export const updatePlusCodeLevel3 = /* GraphQL */ `
           description
           title
           hashtags
-          dificultyLevel
+          difficultyLevel
           verified
           lineCompleted
           elevationPoints
@@ -845,7 +845,7 @@ export const deletePlusCodeLevel3 = /* GraphQL */ `
           description
           title
           hashtags
-          dificultyLevel
+          difficultyLevel
           verified
           lineCompleted
           elevationPoints
@@ -917,7 +917,7 @@ export const createLines = /* GraphQL */ `
       description
       title
       hashtags
-      dificultyLevel
+      difficultyLevel
       verified
       lineCompleted
       elevationPoints
@@ -984,7 +984,7 @@ export const updateLines = /* GraphQL */ `
       description
       title
       hashtags
-      dificultyLevel
+      difficultyLevel
       verified
       lineCompleted
       elevationPoints
@@ -1051,7 +1051,7 @@ export const deleteLines = /* GraphQL */ `
       description
       title
       hashtags
-      dificultyLevel
+      difficultyLevel
       verified
       lineCompleted
       elevationPoints
@@ -1100,6 +1100,136 @@ export const deleteCoordinates = /* GraphQL */ `
       id
       lat
       lng
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const createPath = /* GraphQL */ `
+  mutation CreatePath(
+    $input: CreatePathInput!
+    $condition: ModelPathConditionInput
+  ) {
+    createPath(input: $input, condition: $condition) {
+      id
+      pointA {
+        id
+        lat
+        lng
+        createdAt
+        updatedAt
+      }
+      pointB {
+        id
+        lat
+        lng
+        createdAt
+        updatedAt
+      }
+      pathColor
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const createFinishedMission = /* GraphQL */ `
+  mutation CreateFinishedMission(
+    $input: CreateFinishedMissionInput!
+    $condition: ModelFinishedMissionConditionInput
+  ) {
+    createFinishedMission(input: $input, condition: $condition) {
+      id
+      line {
+        id
+        parentId
+        pluscodeParent {
+          id
+          completePluscode
+          parentIdWithDigits
+          pluscodeParent {
+            id
+            completePluscode
+            parentIdWithDigits
+            digits
+            numberOfLines
+            createdAt
+            updatedAt
+          }
+          digits
+          middleCoord {
+            id
+            lat
+            lng
+            createdAt
+            updatedAt
+          }
+          numberOfLines
+          listOfLines {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        complete3LevelPluscode
+        startingCoordinates {
+          id
+          lat
+          lng
+          createdAt
+          updatedAt
+        }
+        finishCoordinates {
+          id
+          lat
+          lng
+          createdAt
+          updatedAt
+        }
+        creatorName
+        description
+        title
+        hashtags
+        difficultyLevel
+        verified
+        lineCompleted
+        elevationPoints
+        latitudeDeltaFit
+        longitudeDeltaFit
+        distance
+        createdAt
+        updatedAt
+      }
+      user
+      path {
+        items {
+          id
+          pointA {
+            id
+            lat
+            lng
+            createdAt
+            updatedAt
+          }
+          pointB {
+            id
+            lat
+            lng
+            createdAt
+            updatedAt
+          }
+          pathColor
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+
+      time
+      largestDeviation
+      score
+      band
       createdAt
       updatedAt
     }

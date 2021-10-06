@@ -9,8 +9,13 @@ import {
 import { getDistanceBetween } from "../generators/distance-generator";
 import { meterFractionGenerator } from "../generators/meter-fraction-generator";
 import { getCoordinatesBetween } from "../generators/coordinates-generator";
+import { millisecondsToTime } from "../generators/milliseconds-to-time-generator";
+import { calculateScore } from "../generators/score-generator";
 
 export async function startProducingPath(startingPoint, endPoint, distance) {
+  const startingTime = performance.now();
+  let totalTime = 0;
+  let allUserDistanceToLine = [];
   const pointA = startingPoint;
   const pointB = endPoint;
   const totalDistance = distance;
@@ -62,29 +67,8 @@ export async function startProducingPath(startingPoint, endPoint, distance) {
         measurePoint,
         currentPosition
       );
-      //console.log("TEST: array before push " + JSON.stringify(array));
+
       array.push(distanceBetweenMeasurePointAndCursor);
-      //console.log("TEST: array after push " + JSON.stringify(array));
-
-      // if (distanceBetweenMeasurePointAndCursor <= 25) {
-      //   isPlatinum = true;
-      // }
-
-      // if (distanceBetweenMeasurePointAndCursor > 25 && distanceBetweenMeasurePointAndCursor <= 50) {
-      //   isGold = true;
-      // }
-
-      // if (distanceBetweenMeasurePointAndCursor > 50 && distanceBetweenMeasurePointAndCursor <= 75) {
-      //   isSilver = true;
-      // }
-
-      // if (distanceBetweenMeasurePointAndCursor > 75 && distanceBetweenMeasurePointAndCursor <= 100) {
-      //   isBronze = true;
-      // }
-
-      // if (distanceBetweenMeasurePointAndCursor > 100) {
-      //   isGameOver = true;
-      // }
     }
     var xd = performance.now();
     console.log(`TIME: forloop took ${xd - xc} milliseconds`);
@@ -93,47 +77,80 @@ export async function startProducingPath(startingPoint, endPoint, distance) {
 
     console.log("TEST: userdistanceToLine " + userDistanceToLine);
 
+    allUserDistanceToLine.push(userDistanceToLine);
+
+    console.log("TEST: ALLuserdistanceToLine " + allUserDistanceToLine);
+
     let pathColor = "FFFFFF";
+    let band = "Platinum";
 
     if (distanceToEndPoint <= 10) {
+      const endTime = performance.now();
+      totalTimeInMs = endTime - startingTime;
+      const totalTime = await millisecondsToTime(totalTimeInMs);
+      const largestDeviation = Math.max(...allUserDistanceToLine);
+      const score = await calculateScore(allUserDistanceToLine, distance);
       isFinished = true;
-      console.log("TEST: user finished ");
-      store.dispatch(finishLineUpdate(true));
+      console.log(
+        "LOG: user finished, totalTime: " +
+          totalTime +
+          ", largestDeviation: " +
+          largestDeviation +
+          ", score: " +
+          JSON.stringify(score) +
+          ", band: " +
+          band
+      );
+      const userFinishedData = {
+        userFinished: true,
+        score: score,
+        largestDeviation: largestDeviation,
+        time: totalTime,
+        band: band,
+      };
+      store.dispatch(finishLineUpdate(userFinishedData));
       pathColor = "#90caf9";
     }
 
     if (userDistanceToLine <= 25) {
-      isPlatinum = true;
+      //isPlatinum = true;
       pathColor = "#90caf9";
     }
 
     if (userDistanceToLine > 25 && userDistanceToLine <= 50) {
-      isGold = true;
+      //isGold = true;
+      if (band === "Platinum") {
+        band = "Gold";
+      }
       pathColor = "#fc9c04";
     }
 
     if (userDistanceToLine > 50 && userDistanceToLine <= 75) {
-      isSilver = true;
+      //isSilver = true;
+      if (band === "Gold") {
+        band = "Silver";
+      }
       pathColor = "#d3d3d3";
     }
 
     if (userDistanceToLine > 75 && userDistanceToLine <= 100) {
-      isBronze = true;
+      //isBronze = true;
+      if (band === "Silver") {
+        band = "Bronze";
+      }
       pathColor = "#cd8032";
     }
 
     if (userDistanceToLine > 100) {
-      isGameOver = true;
+      const endTime = performance.now();
+      totalTime = endTime - startingTime;
+      //isGameOver = true;
+      if (band === "Bronze") {
+        band = "Out of bounce";
+      }
       pathColor = "#BE0000";
     }
 
-    // if (isPlatinum === true) {
-    //   pathColor = "#BE0000"; // Red
-    // }
-
-    // if (isWithin20m === true) {
-    //   pathColor = "#29BB89"; // Green
-    // }
     let pathArray = [];
 
     pathArray = persistentPathArray.slice();

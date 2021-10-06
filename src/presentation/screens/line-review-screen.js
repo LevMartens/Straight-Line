@@ -13,6 +13,7 @@ import MapViewLineReview from "../components/mapviews/map-view-line-review";
 import DeviationSvgComponent from "../components/svg-components/deviation";
 import TimeSvgComponent from "../components/svg-components/time";
 import DifficultySvgComponent from "../components/svg-components/difficulty";
+import { createPublicLine } from "../../domain/use_cases/create-public-line";
 
 export default function LineReviewScreen({ navigation }) {
   const {
@@ -32,149 +33,193 @@ export default function LineReviewScreen({ navigation }) {
     mapViewStyle,
   } = styles();
 
-  const { markerRegionZoomedIn, isLoaded, rawLineData } = useSelector(
-    (state) => state.selectedLineDraftHandler
+  const lineDraft = useSelector((state) => state.selectedLineDraftHandler);
+
+  const { markerRegionZoomedIn, isLoaded, rawLineData } = lineDraft;
+  const path = useSelector((state) => state.pathHandler);
+  const { userFinished, score, largestDeviation, time, band } = useSelector(
+    (state) => state.finishedLineHandler
   );
+  const { hasDifficulty, difficulty } = useSelector(
+    (state) => state.difficultyHandler
+  );
+  //Totaltime/difficultylvl/largestdeviation/score/bandhandler
 
   const { distance, elevationPoints, title } = rawLineData;
 
   return (
     <View style={containerStyle}>
-      <Text style={textStyle}> {"Line Review"} </Text>
-      <Text style={textStyle1}> {"Score"} </Text>
-      <View style={{ flexDirection: "row" }}>
-        <Text style={textStyle2}> {"97"} </Text>
-        <View
-          style={{
-            position: "absolute",
-            right: 20,
-            backgroundColor: "#90caf9",
-            borderRadius: 16,
-            justifyContent: "center",
-            height: 30,
-            width: 115,
-          }}
-        >
-          <Text style={textStyle3}> {"Platinum"} </Text>
+      {userFinished && (
+        <View>
+          <Text style={textStyle}> {"Line Review"} </Text>
+          <Text style={textStyle1}> {"Score"} </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={textStyle2}> {`${score}`} </Text>
+            <View
+              style={{
+                position: "absolute",
+                right: 20,
+                backgroundColor: "#90caf9",
+                borderRadius: 16,
+                justifyContent: "center",
+                height: 30,
+                width: 115,
+              }}
+            >
+              <Text style={textStyle3}> {`${band}`} </Text>
+            </View>
+          </View>
+
+          <View style={mapViewStyle}>
+            <MapViewLineReview
+              initialRegion={markerRegionZoomedIn}
+            ></MapViewLineReview>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              //justifyContent: "center",
+              marginTop: 20,
+              alignSelf: "center",
+              backgroundColor: "#313131",
+              height: 60,
+              width: 360,
+              borderRadius: 16,
+            }}
+          >
+            <View
+              style={{
+                marginLeft: 20,
+              }}
+            >
+              <DeviationSvgComponent></DeviationSvgComponent>
+            </View>
+
+            <Text style={textStyle4}>Largest deviation</Text>
+            <Text style={textStyle5}>{`${largestDeviation}m`}</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              //justifyContent: "center",
+              marginTop: 20,
+              alignSelf: "center",
+              backgroundColor: "#313131",
+              height: 60,
+              width: 360,
+              borderRadius: 16,
+            }}
+          >
+            <View
+              style={{
+                marginLeft: 20,
+              }}
+            >
+              <TimeSvgComponent></TimeSvgComponent>
+            </View>
+
+            <Text style={textStyle4}>Total time</Text>
+            <Text style={textStyle5}>{time}</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              //justifyContent: "center",
+              marginTop: 20,
+              alignSelf: "center",
+              backgroundColor: "#313131",
+              height: 60,
+              width: 360,
+              borderRadius: 16,
+            }}
+          >
+            <View
+              style={{
+                marginLeft: 20,
+              }}
+            >
+              <DifficultySvgComponent></DifficultySvgComponent>
+            </View>
+
+            <Text style={textStyle4}>Difficulty level</Text>
+
+            {hasDifficulty ? (
+              <View>
+                <TouchableOpacity
+                  style={{
+                    //   position: "relative",
+                    //   bottom: 0,
+                    //flex: 1,
+                    //marginTop: 40,
+                    alignSelf: "center",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#1f1f1f", //"#fc9c04",
+                    height: 20,
+                    //textAlign: "center",
+                    width: 50,
+                    borderRadius: 16,
+                  }}
+                >
+                  <Text style={textStyle7}> {"change"} </Text>
+                </TouchableOpacity>
+                <Text style={textStyle5}>6b</Text>
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={{
+                  //   position: "relative",
+                  //   bottom: 0,
+                  //flex: 1,
+                  //marginTop: 40,
+                  alignSelf: "center",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#1f1f1f", //"#fc9c04",
+                  height: 20,
+                  //textAlign: "center",
+                  width: 50,
+                  borderRadius: 16,
+                }}
+              >
+                <Text style={textStyle7}> {"Add"} </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+          <TouchableOpacity
+            style={{
+              marginTop: 20,
+              alignSelf: "center",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#fc9c04",
+              height: 60,
+              width: 360,
+              borderRadius: 16,
+            }}
+            onPress={() => {
+              // save line to public lines
+              createPublicLine(
+                lineDraft,
+                path,
+                time,
+                difficulty,
+                largestDeviation,
+                score,
+                band
+              );
+              //Reset current line draft
+              navigation.navigate("Explore");
+            }}
+          >
+            <Text style={textStyle6}> {"Save"} </Text>
+          </TouchableOpacity>
         </View>
-      </View>
-
-      <View style={mapViewStyle}>
-        <MapViewLineReview
-          initialRegion={markerRegionZoomedIn}
-        ></MapViewLineReview>
-      </View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          //justifyContent: "center",
-          marginTop: 20,
-          alignSelf: "center",
-          backgroundColor: "#313131",
-          height: 60,
-          width: 360,
-          borderRadius: 16,
-        }}
-      >
-        <View
-          style={{
-            marginLeft: 20,
-          }}
-        >
-          <DeviationSvgComponent></DeviationSvgComponent>
-        </View>
-
-        <Text style={textStyle4}>Largest deviation</Text>
-        <Text style={textStyle5}>11m</Text>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          //justifyContent: "center",
-          marginTop: 20,
-          alignSelf: "center",
-          backgroundColor: "#313131",
-          height: 60,
-          width: 360,
-          borderRadius: 16,
-        }}
-      >
-        <View
-          style={{
-            marginLeft: 20,
-          }}
-        >
-          <TimeSvgComponent></TimeSvgComponent>
-        </View>
-
-        <Text style={textStyle4}>Total time</Text>
-        <Text style={textStyle5}>2:52</Text>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          //justifyContent: "center",
-          marginTop: 20,
-          alignSelf: "center",
-          backgroundColor: "#313131",
-          height: 60,
-          width: 360,
-          borderRadius: 16,
-        }}
-      >
-        <View
-          style={{
-            marginLeft: 20,
-          }}
-        >
-          <DifficultySvgComponent></DifficultySvgComponent>
-        </View>
-
-        <Text style={textStyle4}>Difficulty level</Text>
-
-        <TouchableOpacity
-          style={{
-            //   position: "relative",
-            //   bottom: 0,
-            //flex: 1,
-            //marginTop: 40,
-            alignSelf: "center",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#1f1f1f", //"#fc9c04",
-            height: 20,
-            //textAlign: "center",
-            width: 50,
-            borderRadius: 16,
-          }}
-        >
-          <Text style={textStyle7}> {"change"} </Text>
-        </TouchableOpacity>
-        <Text style={textStyle5}>6b</Text>
-      </View>
-      <TouchableOpacity
-        style={{
-          marginTop: 20,
-          alignSelf: "center",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#fc9c04",
-          height: 60,
-          width: 360,
-          borderRadius: 16,
-        }}
-        onPress={() => {
-          // save line to public lines
-          //Reset current line draft
-          navigation.navigate("Explore");
-        }}
-      >
-        <Text style={textStyle6}> {"Save"} </Text>
-      </TouchableOpacity>
+      )}
     </View>
   );
 }

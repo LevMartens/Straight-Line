@@ -29,7 +29,7 @@ export default function PinSetButton({ navigation }) {
     }
     if (pinState == "Set end point") {
       store.dispatch(setPinEndPoint());
-      showAddLineTitleAlert();
+      showAddLineTitleAlert(); //!bypasses usecases
     }
 
     if (pinState == "Done!") {

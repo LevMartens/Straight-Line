@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Banner from "../components/banner";
 import { getTheme } from "../theme/themes";
 import SwipeModal from "../components/swipe-modal";
+import AddDifficultyAlert from "../components/add-difficulty-alert";
 
 export default function Explore({ navigation }) {
   const { visible, message } = useSelector((state) => state.bannerHandler);
@@ -12,6 +13,7 @@ export default function Explore({ navigation }) {
 
   return (
     <View style={containerStyle}>
+      {/* <AddDifficultyAlert></AddDifficultyAlert> */}
       <SwipeModal></SwipeModal>
       <MapViewExplore></MapViewExplore>
       <Banner visible={visible} bannerText={message}></Banner>

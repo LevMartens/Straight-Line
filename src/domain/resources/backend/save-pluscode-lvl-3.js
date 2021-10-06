@@ -22,7 +22,11 @@ export async function savePluscodeLevel3(
       })
     );
 
-    const {data:{createPlusCodeLevel3:{id}}}
+    const {
+      data: {
+        createPlusCodeLevel3: { id },
+      },
+    } = response;
     return id;
   } catch (err) {
     console.log("ERROR: Error creating pluscodelevel3:", err);

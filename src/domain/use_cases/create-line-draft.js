@@ -41,7 +41,7 @@ export async function createLineDraft(pointA, pointB, lineTitle) {
 
   const verified = false; // Can be set/amended by an authorised person
 
-  const dificultyLevel = "N/A"; // Can be set by the user after completion
+  const difficultyLevel = "0"; // Can be set by the user after completion
 
   const hashtags = []; // Can be set by the user after completion
 
@@ -73,7 +73,7 @@ export async function createLineDraft(pointA, pointB, lineTitle) {
     lineDraftsMidLineCoordinatesId: midPointCoordinatesTypeID,
     creatorName: creatorName,
     description: description,
-    dificultyLevel: dificultyLevel,
+    difficultyLevel: difficultyLevel,
     distance: distance,
     elevationPoints: elevationPoints,
     hashtags: hashtags,

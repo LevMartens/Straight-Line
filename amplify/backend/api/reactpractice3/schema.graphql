@@ -19,7 +19,7 @@ type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
   content: String!
 }
 
-type LineDrafts @model {
+type LineDrafts @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   parentId: String
   complete3LevelPluscode: String
@@ -30,7 +30,7 @@ type LineDrafts @model {
   description: String
   title: String
   hashtags: [String]
-  dificultyLevel: String
+  difficultyLevel: String
   verified: Boolean
   lineCompleted: Boolean
   elevationPoints: [Float]
@@ -103,7 +103,8 @@ type Lines
     name: "lineByCompletePluscodes"
     fields: ["complete3LevelPluscode"]
     queryField: "lineByCompletePluscodes"
-  ) {
+  )
+  @auth(rules: [{ allow: owner, operations: [create, delete, update] }]) {
   id: ID!
   parentId: String
   pluscodeParent: PlusCodeLevel3 @connection(name: "level3ToLine")
@@ -114,13 +115,32 @@ type Lines
   description: String
   title: String
   hashtags: [String]
-  dificultyLevel: String
+  difficultyLevel: String
   verified: Boolean
   lineCompleted: Boolean
   elevationPoints: [Float]
   latitudeDeltaFit: Float
   longitudeDeltaFit: Float
   distance: Float
+  finishedMissions: [FinishedMission] @connection(name: "lineToFinishedMission")
+}
+
+type FinishedMission @model {
+  id: ID!
+  line: Lines @connection(name: "lineToFinishedMission")
+  user: String
+  path: [Path] @connection
+  time: String
+  largestDeviation: Float
+  score: Float
+  band: String
+}
+
+type Path @model {
+  id: ID!
+  pointA: Coordinates @connection
+  pointB: Coordinates @connection
+  pathColor: String
 }
 
 type Coordinates @model {

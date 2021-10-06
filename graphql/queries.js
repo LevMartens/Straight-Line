@@ -181,7 +181,7 @@ export const getLineDrafts = /* GraphQL */ `
       description
       title
       hashtags
-      dificultyLevel
+      difficultyLevel
       verified
       lineCompleted
       elevationPoints
@@ -225,11 +225,12 @@ export const listLineDrafts = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        owner
         creatorName
         description
         title
         hashtags
-        dificultyLevel
+        difficultyLevel
         verified
         lineCompleted
         elevationPoints
@@ -437,7 +438,7 @@ export const getPlusCodeLevel3 = /* GraphQL */ `
           description
           title
           hashtags
-          dificultyLevel
+          difficultyLevel
           verified
           lineCompleted
           elevationPoints
@@ -496,64 +497,72 @@ export const listPlusCodeLevel3s = /* GraphQL */ `
 export const getLines = /* GraphQL */ `
   query GetLines($id: ID!) {
     getLines(id: $id) {
+      finishedMissions {
+        items {
+          band
+          createdAt
+          id
+          largestDeviation
+          path {
+            items {
+              createdAt
+              id
+              pathColor
+              updatedAt
+              pointA {
+                createdAt
+                id
+                updatedAt
+                lng
+                lat
+              }
+              pointB {
+                createdAt
+                id
+                lat
+                lng
+                updatedAt
+              }
+            }
+            nextToken
+          }
+          user
+          updatedAt
+          time
+          score
+          line {
+            id
+          }
+        }
+        nextToken
+      }
+      hashtags
       id
+      latitudeDeltaFit
+      lineCompleted
+      longitudeDeltaFit
+      owner
+      elevationPoints
+      distance
+      difficultyLevel
+      description
+      creatorName
+      createdAt
+      complete3LevelPluscode
       parentId
+      title
+      updatedAt
+      verified
+      startingCoordinates {
+        updatedAt
+        createdAt
+        id
+        lat
+        lng
+      }
       pluscodeParent {
         id
-        completePluscode
-        parentIdWithDigits
-        pluscodeParent {
-          id
-          completePluscode
-          parentIdWithDigits
-          digits
-          numberOfLines
-          createdAt
-          updatedAt
-        }
-        digits
-        middleCoord {
-          id
-          lat
-          lng
-          createdAt
-          updatedAt
-        }
-        numberOfLines
-        listOfLines {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
-      complete3LevelPluscode
-      startingCoordinates {
-        id
-        lat
-        lng
-        createdAt
-        updatedAt
-      }
-      finishCoordinates {
-        id
-        lat
-        lng
-        createdAt
-        updatedAt
-      }
-      creatorName
-      description
-      title
-      hashtags
-      dificultyLevel
-      verified
-      lineCompleted
-      elevationPoints
-      latitudeDeltaFit
-      longitudeDeltaFit
-      distance
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -595,7 +604,7 @@ export const listLines = /* GraphQL */ `
         description
         title
         hashtags
-        dificultyLevel
+        difficultyLevel
         verified
         lineCompleted
         elevationPoints
@@ -754,6 +763,92 @@ export const pluscode2ByCompletePluscode = /* GraphQL */ `
           updatedAt
         }
         level3List {
+          items {
+            id
+            digits
+            completePluscode
+            createdAt
+            numberOfLines
+            parentIdWithDigits
+            updatedAt
+            listOfLines {
+              nextToken
+              items {
+                complete3LevelPluscode
+                createdAt
+                creatorName
+                description
+                difficultyLevel
+                distance
+                elevationPoints
+                finishCoordinates {
+                  createdAt
+                  id
+                  lat
+                  lng
+                  updatedAt
+                }
+                finishedMissions {
+                  items {
+                    band
+                    createdAt
+                    id
+                    largestDeviation
+                    path {
+                      nextToken
+                      items {
+                        createdAt
+                        id
+                        pathColor
+                        updatedAt
+                        pointA {
+                          createdAt
+                          id
+                          lat
+                          lng
+                          updatedAt
+                        }
+                        pointB {
+                          updatedAt
+                          lng
+                          lat
+                          id
+                          createdAt
+                        }
+                      }
+                    }
+                    score
+                    time
+                    updatedAt
+                    user
+                  }
+                  nextToken
+                }
+                owner
+                longitudeDeltaFit
+                lineCompleted
+                latitudeDeltaFit
+                id
+                hashtags
+                parentId
+                title
+                updatedAt
+                verified
+                startingCoordinates {
+                  createdAt
+                  id
+                  lat
+                  lng
+                  updatedAt
+                }
+                pluscodeParent {
+                  completePluscode
+                  digits
+                  id
+                }
+              }
+            }
+          }
           nextToken
         }
         numberOfLines
@@ -904,7 +999,7 @@ export const lineByCompletePluscodes = /* GraphQL */ `
         description
         title
         hashtags
-        dificultyLevel
+        difficultyLevel
         verified
         lineCompleted
         elevationPoints

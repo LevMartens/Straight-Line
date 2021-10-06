@@ -15,6 +15,7 @@ import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
 } from "../../../domain/resources/environment/dimensions";
+import MarkerSvgComponent from "../svg-components/marker-svg";
 
 export default function MapViewExplore() {
   useEffect(() => {
@@ -75,13 +76,10 @@ export default function MapViewExplore() {
                 store.dispatch(selectMarker(marker));
               }}
             >
-              <Image
-                source={
-                  id === markerCurrentlySelected.id ? imageSelected : image
-                }
-                style={themedStyles.lineMarkerImageLayout}
-                resizeMode="contain"
-              />
+              <MarkerSvgComponent
+                height={id === markerCurrentlySelected.id ? 40 : 30}
+                width={id === markerCurrentlySelected.id ? 40 : 30}
+              ></MarkerSvgComponent>
             </Marker>
           );
         }

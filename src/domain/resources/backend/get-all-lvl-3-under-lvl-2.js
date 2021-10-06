@@ -11,28 +11,20 @@ export async function getAllLvl3UnderLvl2(param) {
       })
     );
 
-    //response.data.pluscode2ByCompletePluscode.items[0].level3List.items;
-    const {
-      data: {
-        pluscode2ByCompletePluscode: {
-          items: [
-            {
-              level3List: { items },
-            },
-          ],
-        },
-      },
-    } = response;
+    const items =
+      response.data.pluscode2ByCompletePluscode.items[0].level3List.items;
 
     console.log(
-      "TEST: DD destructering items " +
-        items +
+      "TEST: DD ITEMS " +
+        JSON.stringify(items) +
+        "                RESPONSE:            " +
+        JSON.stringify(response) +
         " source: get-all-lvl-3-under-lvl-2.js"
     );
 
-    return items === undefined ? [] : items;
+    return items; //=== undefined ? [] : items;
   } catch (err) {
-    console.log("WARNING: No lvl 3 under lvl 2 ");
+    console.log("WARNING: No lvl 3 under lvl 2 ", err.message);
     return [];
   }
 }
