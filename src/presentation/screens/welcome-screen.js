@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import {
   Button,
+  Modal,
   Linking,
   Platform,
   Text,
@@ -19,6 +20,9 @@ import GoogleSvgComponent from "../components/svg-components/google-svg";
 import { Video, AVPlaybackStatus } from "expo-av";
 import LogoSvgComponent from "../components/svg-components/logo-white-svg";
 import LogoDarkSvgComponent from "../components/svg-components/logo-dark-svg";
+import * as WebBrowser from "expo-web-browser";
+import TermsOfUse from "../components/terms-of-use";
+import PrivacyPolicy from "../components/privacy-policy";
 
 export let owner = "";
 
@@ -43,9 +47,16 @@ export default function WelcomeScreen({ navigation }) {
     textStyleTerms4,
     buttonStyleTerm1,
     buttonStyleTerm2,
+    container1,
+    textStyleTOFHeader,
+    textStyleTOF,
+    buttonStyleClose,
   } = styles();
 
   const video = useRef(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [termsVisible, setTermsVisible] = useState(false);
+  const [privacyVisible, setPrivacyVisible] = useState(false);
 
   const [user, setUser] = useState(null);
   const [status, setStatus] = React.useState({});
@@ -196,15 +207,56 @@ export default function WelcomeScreen({ navigation }) {
           bottom: 0,
         }}
       >
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={modalVisible}
+          onRequestClose={() => {
+            //   Alert.alert('Modal has been closed.');
+          }}
+        >
+          <TouchableOpacity
+            style={buttonStyleClose}
+            onPress={() => {
+              setModalVisible(false);
+              setTermsVisible(false);
+            }}
+          >
+            <Text style={textStyle}>{"Close"}</Text>
+          </TouchableOpacity>
+          {termsVisible ? (
+            <TermsOfUse></TermsOfUse>
+          ) : (
+            <PrivacyPolicy></PrivacyPolicy>
+          )}
+        </Modal>
+
         <Text style={textStyleTerms1}>
           By continuing to use Straigth Line Mission, you agree to our{" "}
         </Text>
         <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity style={buttonStyleTerm1} onPress={() => {}}>
+          <TouchableOpacity
+            style={buttonStyleTerm1}
+            onPress={() => {
+              setModalVisible(true);
+              setTermsVisible(true);
+            }}
+          >
             <Text style={textStyleTerms2}>{"Terms of Service"}</Text>
           </TouchableOpacity>
           <Text style={textStyleTerms3}> and </Text>
-          <TouchableOpacity style={buttonStyleTerm2} onPress={() => {}}>
+          <TouchableOpacity
+            style={buttonStyleTerm2}
+            onPress={() => {
+              setModalVisible(true);
+              //   Linking.openURL(
+              //     "https://www.termsfeed.com/live/cc7dc876-cdb1-4316-87e5-733a5666c257"
+              //   );
+              //   WebBrowser.openBrowserAsync(
+              //     "https://www.termsfeed.com/live/cc7dc876-cdb1-4316-87e5-733a5666c257"
+              //   );
+            }}
+          >
             <Text style={textStyleTerms4}>{"Privacy Policy."}</Text>
           </TouchableOpacity>
         </View>
@@ -216,6 +268,25 @@ const styles = () => {
   const theme = getTheme();
 
   return StyleSheet.create({
+    textStyleTOFHeader: {
+      //position: "absolute",
+      //top: 280,
+      //marginTop: 200,
+
+      //marginLeft: 40,
+      //width: 200,
+      fontSize: 30,
+      color: theme.textColor,
+      textAlign: "left",
+      fontFamily: theme.fontFamily,
+    },
+    container1: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: theme.containerBackgroundColor,
+      flex: 1,
+      flexDirection: "column",
+      height: "100%",
+    },
     backgroundVideo: {
       height: SCREEN_HEIGHT,
       position: "absolute",
@@ -246,6 +317,18 @@ const styles = () => {
       backgroundColor: "#fff",
       width: SCREEN_WIDTH - 80,
       height: 50,
+      borderRadius: 16,
+    },
+    buttonStyleClose: {
+      zIndex: 9999,
+      marginTop: 50,
+      paddingTop: 6,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignSelf: "center",
+      backgroundColor: theme.buttonColor,
+      width: SCREEN_WIDTH - 320,
+      height: 35,
       borderRadius: 16,
     },
     buttonStyle2: {
