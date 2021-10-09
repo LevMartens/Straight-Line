@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -8,9 +8,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import { signInUser } from "../../domain/use_cases/user-login";
+import { resendVerificationCode } from "../../domain/use_cases/user-resend-verification";
 import { getTheme } from "../theme/themes";
 import PasswordRecoveryForm from "./password-recovery-form";
 import LogoSvgComponent from "./svg-components/logo-white-svg";
+import VerificationForm from "./verification-form";
 
 export default function LoginForm({
   setCreateAccountVisible,
@@ -31,9 +34,16 @@ export default function LoginForm({
     textStyleTerms2,
     textStyleTerms3,
     textStyleTerms4,
+    textStyleError,
+    textInputStyle,
   } = styles();
   const [value, onChangeText] = React.useState();
   const [recoveryVisible, setRecoveryVisible] = React.useState(false);
+  const [usernameError, setUsernameError] = useState("no error");
+  const [passwordError, setPasswordError] = useState("no error");
+  const [username, onChangeUsername] = useState();
+  const [password, onChangePassword] = useState();
+  const [verificationVisible, setVerificationVisible] = useState(false);
   return (
     <View style={container1}>
       {recoveryVisible ? (
@@ -41,6 +51,13 @@ export default function LoginForm({
           setModalVisible={setModalVisible}
           setCreateAccountVisible={setCreateAccountVisible}
         ></PasswordRecoveryForm>
+      ) : verificationVisible ? (
+        <VerificationForm
+          username={username}
+          setModalVisible={setModalVisible}
+          setCreateAccountVisible={setCreateAccountVisible}
+          navigation={navigation}
+        ></VerificationForm>
       ) : (
         <View>
           <LogoSvgComponent
@@ -49,41 +66,62 @@ export default function LoginForm({
           ></LogoSvgComponent>
           <Text style={textStyle1}> {""} </Text>
           <Text style={textStyle2}> {"Log in"} </Text>
-          <Text style={textStyle3}> {"Email"} </Text>
+          <Text style={textStyle3}> {"Username"} </Text>
           <TextInput
             style={{
-              width: SCREEN_WIDTH - 65,
-              marginLeft: 30,
-              marginTop: 5,
-              //marginheight: 40,
-              height: 50,
-              borderRadius: 10,
-              borderColor: "gray",
-              borderWidth: 1,
+              ...textInputStyle,
+              borderColor: usernameError === "no error" ? "gray" : "red",
             }}
-            onChangeText={(text) => onChangeText(text)}
-            value={value}
+            onChangeText={(text) => onChangeUsername(text)}
+            value={username}
           />
+          <Text style={textStyleError}>
+            {usernameError === "no error" ? "" : `* ${usernameError}`}
+          </Text>
           <Text style={textStyle3}> {"Password"} </Text>
           <TextInput
             style={{
-              width: SCREEN_WIDTH - 65,
-              marginLeft: 30,
-              marginTop: 5,
-              //marginheight: 40,
-              height: 50,
-              borderRadius: 10,
-              borderColor: "gray",
-              borderWidth: 1,
+              ...textInputStyle,
+              borderColor: passwordError === "no error" ? "gray" : "red",
             }}
-            onChangeText={(text) => onChangeText(text)}
-            value={value}
+            secureTextEntry={true}
+            onChangeText={(text) => onChangePassword(text)}
+            value={password}
           />
+          <Text style={textStyleError}>
+            {passwordError === "no error" ? "" : `* ${passwordError}`}
+          </Text>
           <TouchableOpacity
             style={buttonStyle}
-            onPress={() => {
-              setModalVisible(false);
-              setCreateAccountVisible(false);
+            onPress={async () => {
+              const { status, type, message } = await signInUser(
+                username,
+                password
+              );
+
+              if (status === "successful") {
+                navigation.navigate("Tab");
+                setModalVisible(false);
+              }
+
+              if (status === "not confirmed") {
+                await resendVerificationCode(username);
+                setVerificationVisible(true);
+              }
+
+              if (status === "error") {
+                switch (type) {
+                  case "username":
+                    setUsernameError(message);
+                    break;
+                  case "password":
+                    setPasswordError(message);
+                    break;
+                  case "general":
+                    setUsernameError(message);
+                    break;
+                }
+              }
             }}
           >
             <Text style={textStyle4}>{"Log in"}</Text>
@@ -112,7 +150,7 @@ export default function LoginForm({
           </View>
           <View
             style={{
-              marginTop: 200,
+              marginTop: 220,
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -151,6 +189,27 @@ export default function LoginForm({
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
+    textInputStyle: {
+      width: SCREEN_WIDTH - 65,
+      paddingLeft: 8,
+      marginLeft: 30,
+      marginTop: 5,
+      //marginheight: 40,
+      height: 50,
+      borderRadius: 10,
+      borderColor: "gray",
+      borderWidth: 1,
+      fontSize: 18,
+      color: theme.textColor,
+      fontFamily: theme.fontFamily,
+    },
+    textStyleError: {
+      marginLeft: 30,
+      fontSize: 12,
+      color: theme.textColorError,
+      textAlign: "left",
+      fontFamily: theme.fontFamily,
+    },
     textStyleTerms1: {
       //textDecorationLine: 'underline',
       //marginTop: 20,
@@ -205,13 +264,14 @@ const styles = () => {
     textStyle2: {
       //marginTop: 120,
       marginLeft: 15,
+      marginBottom: 10,
       fontSize: 40,
       color: theme.textColor,
       textAlign: "left",
       fontFamily: theme.fontFamily,
     },
     textStyle3: {
-      marginTop: 30,
+      marginTop: 10, //30,
       marginLeft: 25,
       fontSize: 17,
       color: theme.textColor,
@@ -220,7 +280,7 @@ const styles = () => {
     },
     buttonStyle: {
       //flex: 1,
-      marginTop: 50,
+      marginTop: 30,
       marginLeft: 30,
       paddingTop: 14,
       flexDirection: "row",

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import { resendVerificationCode } from "../../domain/use_cases/user-resend-verification";
 import { signUpUser } from "../../domain/use_cases/user-sign-up";
 import { verifyUser } from "../../domain/use_cases/user-verification";
 import { getTheme } from "../theme/themes";
@@ -43,13 +44,15 @@ export default function VerificationForm({
   const [verificationError, setVerificationError] = useState("no error");
   const [emailError, setEmailError] = useState("no error");
   const [passwordError, setPasswordError] = useState("no error");
-  const [loginVisible, setLoginVisible] = React.useState(false);
+  const [loginVisible, setLoginVisible] = useState(false);
+  const [isResent, setIsResent] = useState(false);
   return (
     <View style={container1}>
       {loginVisible ? (
         <LoginForm
           setModalVisible={setModalVisible}
           setCreateAccountVisible={setCreateAccountVisible}
+          navigation={navigation}
         ></LoginForm>
       ) : (
         <View>
@@ -74,9 +77,11 @@ export default function VerificationForm({
               color: verificationError === "no error" ? "white" : "red",
             }}
           >
-            {verificationError === "no error"
+            {verificationError !== "no error"
+              ? `* ${verificationError}`
+              : isResent
               ? "* Check your email"
-              : `* ${verificationError}`}
+              : ""}
           </Text>
 
           <TouchableOpacity
@@ -84,9 +89,7 @@ export default function VerificationForm({
             onPress={async () => {
               const { status, message } = await verifyUser(username, code);
               if (status === "successful") {
-                navigation.navigate("Tab");
-                setModalVisible(false);
-                setCreateAccountVisible(false);
+                setLoginVisible(true);
               } else {
                 setVerificationError(message);
               }
@@ -95,33 +98,31 @@ export default function VerificationForm({
             <Text style={textStyle4}>{"Verify"}</Text>
           </TouchableOpacity>
 
-          {/* <View
-            style={{
-              marginTop: 20,
-              //backgroundColor: "red",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignSelf: "center",
-              alignItems: "center",
-              width: 250,
-            }}
-          >
-            <Text style={textStyle6}>Already have an account?</Text>
+          {isResent ? (
+            <View style={{ height: 90 }}></View>
+          ) : (
             <TouchableOpacity
-              style={{ alignSelf: "center", justifyContent: "center" }}
-              onPress={() => {
-                //setModalVisible(false);
-                //setCreateAccountVisible(false);
-                setLoginVisible(true);
-                //setModalVisible(true);
+              style={buttonStyle}
+              onPress={async () => {
+                const { error, successful, message } =
+                  await resendVerificationCode(username);
+
+                if (successful) {
+                  setIsResent(true);
+                }
+
+                if (error) {
+                  setVerificationError(message);
+                }
               }}
             >
-              <Text style={textStyle5}>{"Log in"}</Text>
+              <Text style={textStyle4}>{"Re-send code"}</Text>
             </TouchableOpacity>
-          </View> */}
+          )}
+
           <View
             style={{
-              marginTop: 330,
+              marginTop: 270,
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -239,7 +240,7 @@ const styles = () => {
       fontFamily: theme.fontFamily,
     },
     textStyle3: {
-      marginTop: 50, //30,
+      marginTop: 30, //30,
       marginLeft: 25,
       fontSize: 17,
       color: theme.textColor,

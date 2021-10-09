@@ -77,16 +77,21 @@ export default function WelcomeScreen({ navigation }) {
         case "signUp":
           // navigation.navigate("Tab");
           console.log("user signed up");
+          getUser().then((userData) => {
+            console.log("TEST: user data ", JSON.stringify(userData));
+          });
+
           break;
         case "signIn":
-          navigation.navigate("Tab");
-          //   getUser().then((userData) => {
-          //     console.log("TEST: welcome ");
+          //navigation.navigate("Tab");
+          getUser().then((userData) => {
+            console.log("TEST: sign in user data ", JSON.stringify(userData));
 
-          //     //setUser(userData);
-          //   });
+            //setUser(userData);
+          });
           break;
         case "signOut":
+          console.log("TEST: user signed out");
           //setUser(null);
           break;
         case "signIn_failure":
@@ -103,14 +108,14 @@ export default function WelcomeScreen({ navigation }) {
     // });
   }, []);
 
-  //   async function getUser() {
-  //     try {
-  //       const userData = await Auth.currentAuthenticatedUser();
-  //       return userData;
-  //     } catch (e) {
-  //       return console.log("Not signed in");
-  //     }
-  //   }
+  async function getUser() {
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      return userData;
+    } catch (e) {
+      return console.log("Not signed in");
+    }
+  }
 
   return (
     <View style={container}>

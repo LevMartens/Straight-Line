@@ -73,7 +73,13 @@ export default function Profile({ navigation }) {
         User: {user ? JSON.stringify(user) : "None"}
       </Text>
       {user ? (
-        <Button title="Sign Out" onPress={() => Auth.signOut()} />
+        <Button
+          title="Sign Out"
+          onPress={() => {
+            Auth.signOut();
+            navigation.navigate("Welcome");
+          }}
+        />
       ) : (
         <View>
           <TouchableOpacity

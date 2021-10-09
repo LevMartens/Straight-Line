@@ -130,8 +130,6 @@ export default function CreateAccountForm({
                     break;
                   case "general":
                     setUsernameError(message);
-                    setEmailError(message);
-                    setPasswordError(message);
                     break;
                 }
               }
@@ -216,8 +214,10 @@ const styles = () => {
       width: SCREEN_WIDTH - 65,
       marginLeft: 30,
       marginTop: 5,
+      paddingLeft: 8,
       //marginheight: 40,
       height: 50,
+      fontSize: 18,
       borderRadius: 10,
       borderColor: "gray",
       borderWidth: 1,
