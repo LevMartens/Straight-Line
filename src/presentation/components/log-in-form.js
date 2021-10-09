@@ -14,6 +14,9 @@ import { getTheme } from "../theme/themes";
 import PasswordRecoveryForm from "./password-recovery-form";
 import LogoSvgComponent from "./svg-components/logo-white-svg";
 import VerificationForm from "./verification-form";
+import PrivacyPolicy from "./privacy-policy";
+import TermsOfUse from "./terms-of-use";
+import ActivityIndicatorOnTransparentView from "./activity-indicator-transparent-view.js";
 
 export default function LoginForm({
   setCreateAccountVisible,
@@ -44,11 +47,22 @@ export default function LoginForm({
   const [username, onChangeUsername] = useState();
   const [password, onChangePassword] = useState();
   const [verificationVisible, setVerificationVisible] = useState(false);
+  const [privacyVisible, setPrivacyVisible] = useState(false);
+  const [termsVisible, setTermsVisible] = useState(false);
+  const [loadingVisible, setLoadingVisible] = useState(false);
   return (
     <View style={container1}>
-      {recoveryVisible ? (
+      {loadingVisible && (
+        <ActivityIndicatorOnTransparentView></ActivityIndicatorOnTransparentView>
+      )}
+      {termsVisible ? (
+        <TermsOfUse></TermsOfUse>
+      ) : privacyVisible ? (
+        <PrivacyPolicy></PrivacyPolicy>
+      ) : recoveryVisible ? (
         <PasswordRecoveryForm
           setModalVisible={setModalVisible}
+          navigation={navigation}
           setCreateAccountVisible={setCreateAccountVisible}
         ></PasswordRecoveryForm>
       ) : verificationVisible ? (
@@ -94,22 +108,26 @@ export default function LoginForm({
           <TouchableOpacity
             style={buttonStyle}
             onPress={async () => {
+              setLoadingVisible(true);
               const { status, type, message } = await signInUser(
                 username,
                 password
               );
 
               if (status === "successful") {
+                setLoadingVisible(false);
                 navigation.navigate("Tab");
                 setModalVisible(false);
               }
 
               if (status === "not confirmed") {
                 await resendVerificationCode(username);
+                setLoadingVisible(false);
                 setVerificationVisible(true);
               }
 
               if (status === "error") {
+                setLoadingVisible(false);
                 switch (type) {
                   case "username":
                     setUsernameError(message);
@@ -162,7 +180,7 @@ export default function LoginForm({
               <TouchableOpacity
                 style={{ justifyContent: "center", alignSelf: "center" }}
                 onPress={() => {
-                  setModalVisible(true);
+                  //setModalVisible(true);
                   setTermsVisible(true);
                 }}
               >
@@ -172,7 +190,7 @@ export default function LoginForm({
               <TouchableOpacity
                 style={{ justifyContent: "center", alignSelf: "center" }}
                 onPress={() => {
-                  setModalVisible(true);
+                  //setModalVisible(true);
                   setPrivacyVisible(true);
                 }}
               >

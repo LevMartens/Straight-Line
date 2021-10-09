@@ -60,12 +60,13 @@ export default function WelcomeScreen({ navigation }) {
 
   const video = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [termsVisible, setTermsVisible] = useState(false);
+
   const [loginVisible, setLoginVisible] = useState(false);
   const [createAccountVisible, setCreateAccountVisible] = useState(false);
   //const [privacyVisible, setPrivacyVisible] = useState(false);
   const [loadingVisible, setloadingVisible] = useState(false);
   const [privacyVisible, setPrivacyVisible] = useState(false);
+  const [termsVisible, setTermsVisible] = useState(false);
 
   const [user, setUser] = useState(null);
   const [status, setStatus] = React.useState({});
@@ -368,6 +369,7 @@ const styles = () => {
       //flex: 1,
       marginTop: 20,
       paddingTop: 14,
+
       flexDirection: "row",
       justifyContent: "center",
       alignSelf: "center",
@@ -418,6 +420,7 @@ const styles = () => {
       // marginTop: 20,
       // paddingTop: 12,
       // flexDirection: "row",
+
       justifyContent: "center",
       alignSelf: "center",
       //backgroundColor: theme.buttonColor,

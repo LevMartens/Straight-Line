@@ -14,6 +14,9 @@ import { verifyUser } from "../../domain/use_cases/user-verification";
 import { getTheme } from "../theme/themes";
 import LoginForm from "./log-in-form";
 import LogoSvgComponent from "./svg-components/logo-white-svg";
+import PrivacyPolicy from "./privacy-policy";
+import TermsOfUse from "./terms-of-use";
+import ActivityIndicatorOnTransparentView from "./activity-indicator-transparent-view.js";
 
 export default function VerificationForm({
   username,
@@ -46,9 +49,19 @@ export default function VerificationForm({
   const [passwordError, setPasswordError] = useState("no error");
   const [loginVisible, setLoginVisible] = useState(false);
   const [isResent, setIsResent] = useState(false);
+  const [privacyVisible, setPrivacyVisible] = useState(false);
+  const [termsVisible, setTermsVisible] = useState(false);
+  const [loadingVisible, setLoadingVisible] = useState(false);
   return (
     <View style={container1}>
-      {loginVisible ? (
+      {loadingVisible && (
+        <ActivityIndicatorOnTransparentView></ActivityIndicatorOnTransparentView>
+      )}
+      {termsVisible ? (
+        <TermsOfUse></TermsOfUse>
+      ) : privacyVisible ? (
+        <PrivacyPolicy></PrivacyPolicy>
+      ) : loginVisible ? (
         <LoginForm
           setModalVisible={setModalVisible}
           setCreateAccountVisible={setCreateAccountVisible}
@@ -87,10 +100,13 @@ export default function VerificationForm({
           <TouchableOpacity
             style={buttonStyle}
             onPress={async () => {
+              setLoadingVisible(true);
               const { status, message } = await verifyUser(username, code);
               if (status === "successful") {
+                setLoadingVisible(false);
                 setLoginVisible(true);
               } else {
+                setLoadingVisible(false);
                 setVerificationError(message);
               }
             }}
@@ -134,7 +150,7 @@ export default function VerificationForm({
               <TouchableOpacity
                 style={{ justifyContent: "center", alignSelf: "center" }}
                 onPress={() => {
-                  setModalVisible(true);
+                  //setModalVisible(true);
                   setTermsVisible(true);
                 }}
               >
@@ -144,7 +160,7 @@ export default function VerificationForm({
               <TouchableOpacity
                 style={{ justifyContent: "center", alignSelf: "center" }}
                 onPress={() => {
-                  setModalVisible(true);
+                  //setModalVisible(true);
                   setPrivacyVisible(true);
                 }}
               >
@@ -172,6 +188,8 @@ const styles = () => {
       width: SCREEN_WIDTH - 65,
       marginLeft: 30,
       marginTop: 5,
+      paddingLeft: 8,
+      fontSize: 18,
       //marginheight: 40,
       height: 50,
       borderRadius: 10,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -8,12 +8,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import { sendForgotPasswordCode } from "../../domain/use_cases/user-forgot-password-code";
 import { getTheme } from "../theme/themes";
+import PasswordRecoverySubmitForm from "./password-recovery-submit-form";
 import LogoSvgComponent from "./svg-components/logo-white-svg";
+import PrivacyPolicy from "./privacy-policy";
+import TermsOfUse from "./terms-of-use";
+import ActivityIndicatorOnTransparentView from "./activity-indicator-transparent-view.js";
 
 export default function PasswordRecoveryForm({
   setCreateAccountVisible,
   setModalVisible,
+  navigation,
   setLoginVisible,
 }) {
   const {
@@ -29,162 +35,107 @@ export default function PasswordRecoveryForm({
     textStyleTerms2,
     textStyleTerms3,
     textStyleTerms4,
+    textStyleError,
+    textInputStyle,
   } = styles();
-  const [value, onChangeText] = React.useState();
-  const [codeSent, setCodeSent] = React.useState(false);
+  const [usernameError, setUsernameError] = useState("no error");
+  const [username, onChangeUsername] = useState();
+  const [passwordRecoverySubmitVisible, setPasswordRecoverySubmitVisible] =
+    useState(false);
+  const [privacyVisible, setPrivacyVisible] = useState(false);
+  const [termsVisible, setTermsVisible] = useState(false);
+  const [loadingVisible, setLoadingVisible] = useState(false);
+
   return (
     <View style={container1}>
-      <LogoSvgComponent
-        //style={{ position: "absolute", left: SCREEN_WIDTH - 260, top: 40 }}
-        style={{ position: "absolute", left: SCREEN_WIDTH - 285, top: 10 }}
-      ></LogoSvgComponent>
-      <Text style={textStyle1}> {"Password"} </Text>
-      <Text style={textStyle2}> {"Recovery"} </Text>
-      {/* <Text style={textStyle3}> {"Username"} </Text>
-      <TextInput
-        style={{
-          width: SCREEN_WIDTH - 65,
-          marginLeft: 30,
-          marginTop: 5,
-          //marginheight: 40,
-          height: 50,
-          borderRadius: 10,
-          borderColor: "gray",
-          borderWidth: 1,
-        }}
-        onChangeText={(text) => onChangeText(text)}
-        value={value}
-      /> */}
-      <Text style={textStyle3}> {"Email"} </Text>
-      <TextInput
-        style={{
-          width: SCREEN_WIDTH - 65,
-          marginLeft: 30,
-          marginTop: 5,
-          //marginheight: 40,
-          height: 50,
-          borderRadius: 10,
-          borderColor: "gray",
-          borderWidth: 1,
-        }}
-        onChangeText={(text) => onChangeText(text)}
-        value={value}
-      />
-      {codeSent && (
+      {loadingVisible && (
+        <ActivityIndicatorOnTransparentView></ActivityIndicatorOnTransparentView>
+      )}
+      {termsVisible ? (
+        <TermsOfUse></TermsOfUse>
+      ) : privacyVisible ? (
+        <PrivacyPolicy></PrivacyPolicy>
+      ) : passwordRecoverySubmitVisible ? (
+        <PasswordRecoverySubmitForm
+          setModalVisible={setModalVisible}
+          navigation={navigation}
+        ></PasswordRecoverySubmitForm>
+      ) : (
         <View>
-          <Text style={textStyle3}> {"Verification code"} </Text>
+          <LogoSvgComponent
+            style={{ position: "absolute", left: SCREEN_WIDTH - 285, top: 10 }}
+          ></LogoSvgComponent>
+          <Text style={textStyle1}> {"Password"} </Text>
+          <Text style={textStyle2}> {"Recovery"} </Text>
+
+          <Text style={textStyle3}> {"Username"} </Text>
           <TextInput
             style={{
-              width: SCREEN_WIDTH - 65,
-              marginLeft: 30,
-              marginTop: 5,
-              //marginheight: 40,
-              height: 50,
-              borderRadius: 10,
-              borderColor: "gray",
-              borderWidth: 1,
+              ...textInputStyle,
+              borderColor: usernameError === "no error" ? "gray" : "red",
             }}
-            onChangeText={(text) => onChangeText(text)}
-            value={value}
+            onChangeText={(text) => onChangeUsername(text)}
+            value={username}
           />
-          <Text style={textStyle3}> {"New password"} </Text>
-          <TextInput
+          <Text style={textStyleError}>
+            {usernameError === "no error" ? "" : `* ${usernameError}`}
+          </Text>
+
+          <TouchableOpacity
+            style={buttonStyle}
+            onPress={async () => {
+              setLoadingVisible(true);
+              const { status, message } = await sendForgotPasswordCode(
+                username
+              );
+
+              if (status === "successful") {
+                setLoadingVisible(false);
+                setPasswordRecoverySubmitVisible(true);
+              }
+              if (status === "error") {
+                setLoadingVisible(false);
+                setUsernameError(message);
+              }
+            }}
+          >
+            <Text style={textStyle4}>{"Send code"}</Text>
+          </TouchableOpacity>
+
+          <View
             style={{
-              width: SCREEN_WIDTH - 65,
-              marginLeft: 30,
-              marginTop: 5,
-              //marginheight: 40,
-              height: 50,
-              borderRadius: 10,
-              borderColor: "gray",
-              borderWidth: 1,
+              marginTop: 350,
+              justifyContent: "center",
+              alignItems: "center",
             }}
-            onChangeText={(text) => onChangeText(text)}
-            value={value}
-          />
+          >
+            <Text style={textStyleTerms1}>
+              By continuing to use Straigth Line Mission, you agree to our{" "}
+            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity
+                style={{ justifyContent: "center", alignSelf: "center" }}
+                onPress={() => {
+                  //setModalVisible(true);
+                  setTermsVisible(true);
+                }}
+              >
+                <Text style={textStyleTerms2}>{"Terms of Service"}</Text>
+              </TouchableOpacity>
+              <Text style={textStyleTerms3}> and </Text>
+              <TouchableOpacity
+                style={{ justifyContent: "center", alignSelf: "center" }}
+                onPress={() => {
+                  //setModalVisible(true);
+                  setPrivacyVisible(true);
+                }}
+              >
+                <Text style={textStyleTerms4}>{"Privacy Policy."}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       )}
-      {/* <Text style={textStyle3}> {"Password"} </Text>
-      <TextInput
-        style={{
-          width: SCREEN_WIDTH - 65,
-          marginLeft: 30,
-          marginTop: 5,
-          //marginheight: 40,
-          height: 50,
-          borderRadius: 10,
-          borderColor: "gray",
-          borderWidth: 1,
-        }}
-        onChangeText={(text) => onChangeText(text)}
-        value={value}
-      /> */}
-      <TouchableOpacity
-        style={buttonStyle}
-        onPress={() => {
-          setCodeSent(true);
-          if (codeSent) {
-            setModalVisible(false);
-            setCreateAccountVisible(false);
-          }
-        }}
-      >
-        <Text style={textStyle4}>{codeSent ? "Submit" : "Send code"}</Text>
-      </TouchableOpacity>
-
-      <View
-        style={{
-          marginTop: 20,
-          //backgroundColor: "red",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignSelf: "center",
-          alignItems: "center",
-          width: 250,
-        }}
-      >
-        {/* <Text style={textStyle6}>Already have an account?</Text> */}
-        <TouchableOpacity
-          style={{ alignSelf: "center", justifyContent: "center" }}
-          onPress={() => {
-            setCreateAccountVisible(false);
-          }}
-        >
-          {/* <Text style={textStyle5}>{"Forgot your password?"}</Text> */}
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          marginTop: codeSent ? 120 : 330,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text style={textStyleTerms1}>
-          By continuing to use Straigth Line Mission, you agree to our{" "}
-        </Text>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity
-            style={{ justifyContent: "center", alignSelf: "center" }}
-            onPress={() => {
-              setModalVisible(true);
-              setTermsVisible(true);
-            }}
-          >
-            <Text style={textStyleTerms2}>{"Terms of Service"}</Text>
-          </TouchableOpacity>
-          <Text style={textStyleTerms3}> and </Text>
-          <TouchableOpacity
-            style={{ justifyContent: "center", alignSelf: "center" }}
-            onPress={() => {
-              setModalVisible(true);
-              setPrivacyVisible(true);
-            }}
-          >
-            <Text style={textStyleTerms4}>{"Privacy Policy."}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     </View>
   );
 }
@@ -192,6 +143,27 @@ export default function PasswordRecoveryForm({
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
+    textInputStyle: {
+      width: SCREEN_WIDTH - 65,
+      paddingLeft: 8,
+      marginLeft: 30,
+      marginTop: 5,
+      //marginheight: 40,
+      height: 50,
+      borderRadius: 10,
+      borderColor: "gray",
+      borderWidth: 1,
+      fontSize: 18,
+      color: theme.textColor,
+      fontFamily: theme.fontFamily,
+    },
+    textStyleError: {
+      marginLeft: 30,
+      fontSize: 12,
+      color: theme.textColorError,
+      textAlign: "left",
+      fontFamily: theme.fontFamily,
+    },
     textStyleTerms1: {
       //textDecorationLine: 'underline',
       //marginTop: 20,
@@ -261,7 +233,7 @@ const styles = () => {
     },
     buttonStyle: {
       //flex: 1,
-      marginTop: 50,
+      marginTop: 30,
       marginLeft: 30,
       paddingTop: 14,
       flexDirection: "row",

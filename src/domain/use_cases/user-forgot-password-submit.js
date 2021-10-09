@@ -1,30 +1,31 @@
+import { forgotPasswordSubmit } from "../resources/backend/auth/forgot-password-submit";
 import { signIn } from "../resources/backend/auth/sign-in";
 
-export async function signInUser(username, password) {
-  const { error, successful, message, code } = await signIn(username, password);
+export async function submitNewPassword(username, code, new_password) {
+  const { error, successful, message } = await forgotPasswordSubmit(
+    username,
+    code,
+    new_password
+  );
 
   if (successful) {
     return { status: "successful" };
   }
 
-  if (code === "UserNotConfirmedException") {
-    return { status: "not confirmed" };
-  }
-
   if (error) {
     const messageLowerCase = message.toLowerCase();
     const usernameType = messageLowerCase.includes("username");
-    const userType = messageLowerCase.includes("user");
     const passwordType = messageLowerCase.includes("password");
+    const codeType = messageLowerCase.includes("code");
 
     return {
       status: "error",
-      type: userType
-        ? "username"
-        : usernameType
+      type: usernameType
         ? "username"
         : passwordType
         ? "password"
+        : codeType
+        ? "code"
         : "general",
       message: message,
     };

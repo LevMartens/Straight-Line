@@ -8,20 +8,19 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
-import { signUpUser } from "../../domain/use_cases/user-sign-up";
+import { submitNewPassword } from "../../domain/use_cases/user-forgot-password-submit";
 import { getTheme } from "../theme/themes";
 import LoginForm from "./log-in-form";
+import LogoSvgComponent from "./svg-components/logo-white-svg";
 import PrivacyPolicy from "./privacy-policy";
 import TermsOfUse from "./terms-of-use";
-import VerificationForm from "./verification-form";
-import LogoSvgComponent from "./svg-components/logo-white-svg";
 import ActivityIndicatorOnTransparentView from "./activity-indicator-transparent-view.js";
 
-export default function CreateAccountForm({
+export default function PasswordRecoverySubmitForm({
   setCreateAccountVisible,
   setModalVisible,
-  //setLoginVisible,
   navigation,
+  //setLoginVisible,
 }) {
   const {
     container1,
@@ -39,14 +38,18 @@ export default function CreateAccountForm({
     textInputStyle,
     textStyleError,
   } = styles();
-  const [username, onChangeUsername] = useState();
-  const [email, onChangeEmail] = useState();
-  const [password, onChangePassword] = useState();
+  const [value, onChangeText] = React.useState();
+  const [loginVisible, setLoginVisible] = useState(false);
+
   const [usernameError, setUsernameError] = useState("no error");
-  const [emailError, setEmailError] = useState("no error");
-  const [passwordError, setPasswordError] = useState("no error");
-  const [loginVisible, setLoginVisible] = React.useState(false);
-  const [verificationVisible, setVerificationVisible] = React.useState(false);
+  const [username, onChangeUsername] = useState();
+
+  const [codeError, setCodeError] = useState("no error");
+  const [code, onChangeCode] = useState();
+
+  const [newPasswordError, setNewPasswordError] = useState("no error");
+  const [newPassword, onChangeNewPassword] = useState();
+
   const [privacyVisible, setPrivacyVisible] = useState(false);
   const [termsVisible, setTermsVisible] = useState(false);
   const [loadingVisible, setLoadingVisible] = useState(false);
@@ -55,31 +58,23 @@ export default function CreateAccountForm({
       {loadingVisible && (
         <ActivityIndicatorOnTransparentView></ActivityIndicatorOnTransparentView>
       )}
-      {loginVisible ? (
-        <LoginForm
-          setModalVisible={setModalVisible}
-          setCreateAccountVisible={setCreateAccountVisible}
-          navigation={navigation}
-        ></LoginForm>
-      ) : termsVisible ? (
+      {termsVisible ? (
         <TermsOfUse></TermsOfUse>
       ) : privacyVisible ? (
         <PrivacyPolicy></PrivacyPolicy>
-      ) : verificationVisible ? (
-        <VerificationForm
-          username={username}
+      ) : loginVisible ? (
+        <LoginForm
           setModalVisible={setModalVisible}
-          setCreateAccountVisible={setCreateAccountVisible}
           navigation={navigation}
-        ></VerificationForm>
+        ></LoginForm>
       ) : (
         <View>
           <LogoSvgComponent
-            //style={{ position: "absolute", left: SCREEN_WIDTH - 260, top: 40 }}
             style={{ position: "absolute", left: SCREEN_WIDTH - 285, top: 10 }}
           ></LogoSvgComponent>
-          <Text style={textStyle1}> {"Create"} </Text>
-          <Text style={textStyle2}> {"Account"} </Text>
+          <Text style={textStyle1}> {"Password"} </Text>
+          <Text style={textStyle2}> {"Recovery"} </Text>
+
           <Text style={textStyle3}> {"Username"} </Text>
           <TextInput
             style={{
@@ -92,57 +87,59 @@ export default function CreateAccountForm({
           <Text style={textStyleError}>
             {usernameError === "no error" ? "" : `* ${usernameError}`}
           </Text>
-          <Text style={textStyle3}> {"Email"} </Text>
+
+          <Text style={textStyle3}> {"Verification code"} </Text>
           <TextInput
             style={{
               ...textInputStyle,
-              borderColor: emailError === "no error" ? "gray" : "red",
+              borderColor: codeError === "no error" ? "gray" : "red",
             }}
-            onChangeText={(text) => onChangeEmail(text)}
-            value={email}
+            onChangeText={(text) => onChangeCode(text)}
+            value={code}
           />
           <Text style={textStyleError}>
-            {emailError === "no error" ? "" : `* ${emailError}`}
+            {codeError === "no error" ? "" : `* ${codeError}`}
           </Text>
-          <Text style={textStyle3}> {"Password"} </Text>
+          <Text style={textStyle3}> {"New password"} </Text>
           <TextInput
             style={{
               ...textInputStyle,
-              borderColor: passwordError === "no error" ? "gray" : "red",
+              borderColor: newPasswordError === "no error" ? "gray" : "red",
             }}
             secureTextEntry={true}
-            onChangeText={(text) => onChangePassword(text)}
-            value={password}
+            onChangeText={(text) => onChangeNewPassword(text)}
+            value={newPassword}
           />
           <Text style={textStyleError}>
-            {passwordError === "no error" ? "" : `* ${passwordError}`}
+            {newPasswordError === "no error" ? "" : `* ${newPasswordError}`}
           </Text>
+
           <TouchableOpacity
             style={buttonStyle}
             onPress={async () => {
               setLoadingVisible(true);
-              const { status, type, message } = await signUpUser(
+              const { status, type, message } = await submitNewPassword(
                 username,
-                email,
-                password
+                code,
+                newPassword
               );
 
               if (status === "successful") {
                 setLoadingVisible(false);
-                setVerificationVisible(true);
-                // setModalVisible(false);
-                // setCreateAccountVisible(false);
-              } else {
+                setLoginVisible(true);
+              }
+
+              if (status === "error") {
                 setLoadingVisible(false);
                 switch (type) {
                   case "username":
                     setUsernameError(message);
                     break;
-                  case "email":
-                    setEmailError(message);
-                    break;
                   case "password":
-                    setPasswordError(message);
+                    setNewPasswordError(message);
+                    break;
+                  case "code":
+                    setCodeError(message);
                     break;
                   case "general":
                     setUsernameError(message);
@@ -151,36 +148,12 @@ export default function CreateAccountForm({
               }
             }}
           >
-            <Text style={textStyle4}>{"Create account"}</Text>
+            <Text style={textStyle4}>{"Submit"}</Text>
           </TouchableOpacity>
 
           <View
             style={{
-              marginTop: 20,
-              //backgroundColor: "red",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignSelf: "center",
-              alignItems: "center",
-              width: 250,
-            }}
-          >
-            <Text style={textStyle6}>Already have an account?</Text>
-            <TouchableOpacity
-              style={{ alignSelf: "center", justifyContent: "center" }}
-              onPress={() => {
-                //setModalVisible(false);
-                //setCreateAccountVisible(false);
-                setLoginVisible(true);
-                //setModalVisible(true);
-              }}
-            >
-              <Text style={textStyle5}>{"Log in"}</Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{
-              marginTop: 120,
+              marginTop: 170,
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -219,25 +192,25 @@ export default function CreateAccountForm({
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
+    textInputStyle: {
+      width: SCREEN_WIDTH - 65,
+      paddingLeft: 8,
+      marginLeft: 30,
+      marginTop: 5,
+      //marginheight: 40,
+      height: 50,
+      borderRadius: 10,
+      borderColor: "gray",
+      borderWidth: 1,
+      fontSize: 18,
+      color: theme.textColor,
+      fontFamily: theme.fontFamily,
+    },
     textStyleError: {
       marginLeft: 30,
       fontSize: 12,
       color: theme.textColorError,
       textAlign: "left",
-      fontFamily: theme.fontFamily,
-    },
-    textInputStyle: {
-      width: SCREEN_WIDTH - 65,
-      marginLeft: 30,
-      marginTop: 5,
-      paddingLeft: 8,
-      //marginheight: 40,
-      height: 50,
-      fontSize: 18,
-      borderRadius: 10,
-      borderColor: "gray",
-      borderWidth: 1,
-      color: theme.textColor,
       fontFamily: theme.fontFamily,
     },
     textStyleTerms1: {
@@ -293,6 +266,7 @@ const styles = () => {
     },
     textStyle2: {
       //marginTop: 120,
+      marginBottom: 10,
       marginLeft: 15,
       fontSize: 40,
       color: theme.textColor,
@@ -300,7 +274,7 @@ const styles = () => {
       fontFamily: theme.fontFamily,
     },
     textStyle3: {
-      marginTop: 10, //30,
+      marginTop: 10,
       marginLeft: 25,
       fontSize: 17,
       color: theme.textColor,
@@ -309,7 +283,7 @@ const styles = () => {
     },
     buttonStyle: {
       //flex: 1,
-      marginTop: 50,
+      marginTop: 30,
       marginLeft: 30,
       paddingTop: 14,
       flexDirection: "row",
@@ -328,8 +302,8 @@ const styles = () => {
       fontFamily: theme.fontFamily,
     },
     textStyle5: {
-      textDecorationLine: "underline",
-      marginLeft: 3,
+      //textDecorationLine: "underline",
+      //marginLeft: 3,
       //marginHorizontal: 20,
       fontSize: 15,
       color: theme.textColor,
