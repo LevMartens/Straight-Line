@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import store from "./src/presentation/state-management/store/store";
 import { Button, Platform, Text, View } from "react-native";
@@ -29,14 +29,9 @@ async function urlOpener(url, redirectUrl) {
     return Linking.openURL(newUrl);
   }
 }
-let redirectUrl = Linking.createURL();
-console.log("TEST: redURL " + redirectUrl);
 
 const url = AuthSession.makeRedirectUri();
-console.log("TEST: authsessions " + url);
-
-// awsconfig.oauth.redirectSignIn = redirectUrl + "/";
-// awsconfig.oauth.redirectSignOut = redirectUrl + "/";
+console.log("TEST: redirectUrl " + url + "/");
 
 Amplify.configure({
   ...awsconfig,
@@ -46,11 +41,6 @@ Amplify.configure({
   },
 });
 
-async function getIP() {
-  const ip = await Network.getIpAddressAsync();
-  console.log("TEST: IP ADDRESS ", ip);
-}
-
 export default function App() {
   let [fontsLoaded] = useFonts({
     Evolventa: require("./assets/fonts/Evolventa-Regular.otf"),
@@ -58,12 +48,57 @@ export default function App() {
     "Urbanist-SemiBold": require("./assets/fonts/Urbanist-SemiBold.ttf"),
     "Urbanist-Light": require("./assets/fonts/Urbanist-Light.ttf"),
   });
+  const [user, setUser] = useState(null);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   useEffect(() => {
     //confirmSignUp();
     //signUp();
-    getIP();
+    Hub.listen("auth", ({ payload: { event, data } }) => {
+      switch (event) {
+        case "signIn":
+          getUser().then((userData) => {
+            console.log("TEST: user: ", userData);
+            setUser(userData);
+            setUserLoggedIn(true);
+          });
+          break;
+        case "signOut":
+          setUser(null);
+          setUserLoggedIn(false);
+          break;
+        case "signIn_failure":
+        case "cognitoHostedUI_failure":
+          console.log("Sign in failure", data);
+          break;
+      }
+    });
+
+    getUser().then((userData) => {
+      owner = userData.username;
+      setUser(userData);
+      if (userData !== "undefined") {
+        console.log("TEST: hereeeeeeee");
+        setUserLoggedIn(true);
+      }
+      console.log(
+        "TEST: userlogged in " +
+          userLoggedIn +
+          " userdata " +
+          JSON.stringify(userData)
+      );
+    });
   }, []);
+
+  async function getUser() {
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      return userData;
+    } catch (e) {
+      setUserLoggedIn(false);
+      return console.log("LOG: user not signed in");
+    }
+  }
 
   if (!fontsLoaded) {
     return (
@@ -77,7 +112,7 @@ export default function App() {
         <RootSiblingParent>
           <PaperProvider>
             <NavigationContainer>
-              <RootStack> </RootStack>
+              <RootStack userLoggedIn={userLoggedIn}> </RootStack>
             </NavigationContainer>
           </PaperProvider>
         </RootSiblingParent>

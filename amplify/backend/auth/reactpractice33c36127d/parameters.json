@@ -61,9 +61,10 @@
     "permissions": [],
     "hostedUIDomainName": "straight-line-mission",
     "authProvidersUserPool": [
-        "Facebook"
+        "Facebook",
+        "Google"
     ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}}]",
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
     "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://192.168.15.98:19000/\"],\"LogoutURLs\":[\"exp://192.168.15.98:19000/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://192.168.15.98:19000/\",\"exp://192.168.15.98:19001/\",\"exp://192.168.15.98:19005/\",\"exp://192.168.15.98:19007/\"],\"LogoutURLs\":[\"exp://192.168.15.98:19000/\",\"exp://192.168.15.98:19001/\",\"exp://192.168.15.98:19005/\",\"exp://192.168.15.98:19007/\"]}"
 }

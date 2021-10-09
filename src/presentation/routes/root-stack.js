@@ -7,10 +7,11 @@ import WelcomeScreen from "../screens/welcome-screen";
 
 const Stack = createStackNavigator();
 
-export function RootStack() {
+export function RootStack({ userLoggedIn }) {
+  console.log("TEST: userloggedin rootstack ", userLoggedIn);
   return (
     <Stack.Navigator
-      initialRouteName="Welcome"
+      initialRouteName={userLoggedIn ? "Tab" : "Welcome"}
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />

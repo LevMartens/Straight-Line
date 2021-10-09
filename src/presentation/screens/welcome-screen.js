@@ -23,6 +23,11 @@ import LogoDarkSvgComponent from "../components/svg-components/logo-dark-svg";
 import * as WebBrowser from "expo-web-browser";
 import TermsOfUse from "../components/terms-of-use";
 import PrivacyPolicy from "../components/privacy-policy";
+import ActivityIndicatorOnTransparentView from "../components/activity-indicator-transparent-view.js";
+import CreateAccountForm from "../components/create-account-form";
+import BackHeaderButton from "../components/buttons/back-button";
+import BackSvgComponent from "../components/svg-components/back-svg";
+import LoginForm from "../components/log-in-form";
 
 export let owner = "";
 
@@ -56,6 +61,10 @@ export default function WelcomeScreen({ navigation }) {
   const video = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [termsVisible, setTermsVisible] = useState(false);
+  const [loginVisible, setLoginVisible] = useState(false);
+  const [createAccountVisible, setCreateAccountVisible] = useState(false);
+  //const [privacyVisible, setPrivacyVisible] = useState(false);
+  const [loadingVisible, setloadingVisible] = useState(false);
   const [privacyVisible, setPrivacyVisible] = useState(false);
 
   const [user, setUser] = useState(null);
@@ -65,14 +74,20 @@ export default function WelcomeScreen({ navigation }) {
     video.current.playAsync();
     Hub.listen("auth", ({ payload: { event, data } }) => {
       switch (event) {
+        case "signUp":
+          // navigation.navigate("Tab");
+          console.log("user signed up");
+          break;
         case "signIn":
-          getUser().then((userData) => {
-            console.log("TEST: user: ", userData);
-            setUser(userData);
-          });
+          navigation.navigate("Tab");
+          //   getUser().then((userData) => {
+          //     console.log("TEST: welcome ");
+
+          //     //setUser(userData);
+          //   });
           break;
         case "signOut":
-          setUser(null);
+          //setUser(null);
           break;
         case "signIn_failure":
         case "cognitoHostedUI_failure":
@@ -81,21 +96,21 @@ export default function WelcomeScreen({ navigation }) {
       }
     });
 
-    getUser().then((userData) => {
-      console.log("TEST: userdata " + JSON.stringify(userData));
-      owner = userData.username;
-      setUser(userData);
-    });
+    // getUser().then((userData) => {
+    //   console.log("TEST: userdata " + JSON.stringify(userData));
+    //   owner = userData.username;
+    //   setUser(userData);
+    // });
   }, []);
 
-  async function getUser() {
-    try {
-      const userData = await Auth.currentAuthenticatedUser();
-      return userData;
-    } catch (e) {
-      return console.log("Not signed in");
-    }
-  }
+  //   async function getUser() {
+  //     try {
+  //       const userData = await Auth.currentAuthenticatedUser();
+  //       return userData;
+  //     } catch (e) {
+  //       return console.log("Not signed in");
+  //     }
+  //   }
 
   return (
     <View style={container}>
@@ -110,11 +125,14 @@ export default function WelcomeScreen({ navigation }) {
         isLooping={true}
         //onPlaybackStatusUpdate={status => setStatus(() => status)}
       />
-      <View style={{ position: "absolute", top: 40, zindex: 999 }}>
+      {loadingVisible && (
+        <ActivityIndicatorOnTransparentView></ActivityIndicatorOnTransparentView>
+      )}
+      <View style={{ position: "absolute", top: 10, zindex: 999 }}>
         {/* <LogoDarkSvgComponent></LogoDarkSvgComponent> */}
         <LogoSvgComponent></LogoSvgComponent>
       </View>
-      <Text style={textStyleLogo}>{"Straight Line Mission"}</Text>
+      {/* <Text style={textStyleLogo}>{"Straight Line Mission"}</Text> */}
       <View
         style={{
           width: SCREEN_WIDTH,
@@ -134,7 +152,10 @@ export default function WelcomeScreen({ navigation }) {
         <View style={{ marginTop: 20 }}>
           <TouchableOpacity
             style={buttonStyle}
-            onPress={() => Auth.federatedSignIn({ provider: "Facebook" })}
+            onPress={() => {
+              setloadingVisible(true);
+              Auth.federatedSignIn({ provider: "Facebook" });
+            }}
           >
             <FacebookSvgComponent
               position={"absolute"}
@@ -145,7 +166,10 @@ export default function WelcomeScreen({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={buttonStyle1}
-            onPress={() => Auth.federatedSignIn({ provider: "Google" })}
+            onPress={() => {
+              setloadingVisible(true);
+              Auth.federatedSignIn({ provider: "Google" });
+            }}
           >
             <GoogleSvgComponent
               position={"absolute"}
@@ -171,7 +195,13 @@ export default function WelcomeScreen({ navigation }) {
             ></View>
           </View>
 
-          <TouchableOpacity style={buttonStyle2} onPress={() => {}}>
+          <TouchableOpacity
+            style={buttonStyle2}
+            onPress={() => {
+              setModalVisible(true);
+              setCreateAccountVisible(true);
+            }}
+          >
             <Text style={textStyle}>{"Create a free account"}</Text>
           </TouchableOpacity>
           <View
@@ -186,7 +216,13 @@ export default function WelcomeScreen({ navigation }) {
             }}
           >
             <Text style={textStyle3}>Already have an account?</Text>
-            <TouchableOpacity style={buttonStyle4} onPress={() => {}}>
+            <TouchableOpacity
+              style={buttonStyle4}
+              onPress={() => {
+                setModalVisible(true);
+                setLoginVisible(true);
+              }}
+            >
               <Text style={textStyle2}>{"Log in"}</Text>
             </TouchableOpacity>
           </View>
@@ -211,23 +247,44 @@ export default function WelcomeScreen({ navigation }) {
           animationType="slide"
           transparent={false}
           visible={modalVisible}
-          onRequestClose={() => {
-            //   Alert.alert('Modal has been closed.');
-          }}
+          style={{ backgroundColor: "black" }}
+          onRequestClose={() => {}}
         >
           <TouchableOpacity
             style={buttonStyleClose}
             onPress={() => {
               setModalVisible(false);
               setTermsVisible(false);
+              setLoginVisible(false);
+              setPrivacyVisible(false);
+              setCreateAccountVisible(false);
             }}
           >
-            <Text style={textStyle}>{"Close"}</Text>
+            <BackSvgComponent color={"white"}></BackSvgComponent>
+            {/* <BackHeaderButton
+              navigation={navigation}
+              to={"Welcome"}
+            ></BackHeaderButton> */}
+            {/* <Text style={textStyle}>{"Close"}</Text> */}
           </TouchableOpacity>
-          {termsVisible ? (
-            <TermsOfUse></TermsOfUse>
-          ) : (
-            <PrivacyPolicy></PrivacyPolicy>
+
+          {termsVisible && <TermsOfUse></TermsOfUse>}
+          {privacyVisible && <PrivacyPolicy></PrivacyPolicy>}
+          {createAccountVisible && (
+            <CreateAccountForm
+              setModalVisible={setModalVisible}
+              setCreateAccountVisible={setCreateAccountVisible}
+              //setLoginVisible={setLoginVisible}
+              navigation={navigation}
+            ></CreateAccountForm>
+          )}
+          {loginVisible && (
+            <LoginForm
+              setModalVisible={setModalVisible}
+              setCreateAccountVisible={setCreateAccountVisible}
+              setLoginVisible={setLoginVisible}
+              navigation={navigation}
+            ></LoginForm>
           )}
         </Modal>
 
@@ -249,12 +306,7 @@ export default function WelcomeScreen({ navigation }) {
             style={buttonStyleTerm2}
             onPress={() => {
               setModalVisible(true);
-              //   Linking.openURL(
-              //     "https://www.termsfeed.com/live/cc7dc876-cdb1-4316-87e5-733a5666c257"
-              //   );
-              //   WebBrowser.openBrowserAsync(
-              //     "https://www.termsfeed.com/live/cc7dc876-cdb1-4316-87e5-733a5666c257"
-              //   );
+              setPrivacyVisible(true);
             }}
           >
             <Text style={textStyleTerms4}>{"Privacy Policy."}</Text>
@@ -321,14 +373,15 @@ const styles = () => {
     },
     buttonStyleClose: {
       zIndex: 9999,
-      marginTop: 50,
+      marginTop: 60,
+      marginLeft: 5,
       paddingTop: 6,
       flexDirection: "row",
       justifyContent: "center",
-      alignSelf: "center",
-      backgroundColor: theme.buttonColor,
-      width: SCREEN_WIDTH - 320,
-      height: 35,
+      //alignSelf: "center",
+      //backgroundColor: theme.buttonColor,
+      width: 60,
+      height: 50,
       borderRadius: 16,
     },
     buttonStyle2: {
@@ -381,7 +434,7 @@ const styles = () => {
     },
     textStyleLogo: {
       position: "absolute",
-      top: 110,
+      top: 140, //110,
       //marginLeft: 5,
       fontSize: 23,
       color: theme.textColor,
