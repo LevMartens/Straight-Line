@@ -51,11 +51,11 @@ export default function Profile({ navigation }) {
       }
     });
 
-    getUser().then((userData) => {
-      console.log("TEST: userdata " + JSON.stringify(userData));
-      owner = userData.username;
-      setUser(userData);
-    });
+    // getUser().then((userData) => {
+    //   console.log("TEST: userdata " + JSON.stringify(userData));
+    //   owner = userData.username;
+    //   setUser(userData);
+    // });
   }, []);
 
   async function getUser() {

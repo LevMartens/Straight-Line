@@ -9,7 +9,9 @@ export default function ActivityIndicatorOnTransparentView() {
   const { textStyle, lottieStyle, textStyleB, buttonStyle, containerStyle } =
     styles();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("TEST: Loading render");
+  }, []);
 
   return (
     <View style={containerStyle}>

@@ -52,11 +52,14 @@ export default function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   useEffect(() => {
-    //confirmSignUp();
-    //signUp();
     Hub.listen("auth", ({ payload: { event, data } }) => {
       switch (event) {
+        case "signUp":
+          console.log("LOG: User signed up");
+
+          break;
         case "signIn":
+          console.log("LOG: User signed in");
           getUser().then((userData) => {
             console.log("TEST: user: ", userData);
             setUser(userData);
@@ -68,26 +71,27 @@ export default function App() {
           setUserLoggedIn(false);
           break;
         case "signIn_failure":
+          console.log("LOG: Sign in failure");
         case "cognitoHostedUI_failure":
-          console.log("Sign in failure", data);
+          console.log("LOG: Sign in failure", data);
           break;
       }
     });
 
-    getUser().then((userData) => {
-      owner = userData.username;
-      setUser(userData);
-      if (userData !== "undefined") {
-        console.log("TEST: hereeeeeeee");
-        setUserLoggedIn(true);
-      }
-      console.log(
-        "TEST: userlogged in " +
-          userLoggedIn +
-          " userdata " +
-          JSON.stringify(userData)
-      );
-    });
+    // getUser().then((userData) => {
+    //   owner = userData.username;
+    //   setUser(userData);
+    //   if (userData !== "undefined") {
+    //     console.log("TEST: hereeeeeeee");
+    //     setUserLoggedIn(true);
+    //   }
+    //   console.log(
+    //     "TEST: userlogged in " +
+    //       userLoggedIn +
+    //       " userdata " +
+    //       JSON.stringify(userData)
+    //   );
+    // });
   }, []);
 
   async function getUser() {

@@ -8,7 +8,6 @@ import WelcomeScreen from "../screens/welcome-screen";
 const Stack = createStackNavigator();
 
 export function RootStack({ userLoggedIn }) {
-  console.log("TEST: userloggedin rootstack ", userLoggedIn);
   return (
     <Stack.Navigator
       initialRouteName={userLoggedIn ? "Tab" : "Welcome"}

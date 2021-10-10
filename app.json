@@ -2,6 +2,7 @@
   "expo": {
     "name": "react-practice-4",
     "slug": "react-practice-4",
+    "scheme": "straight-line-mission",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/wind.png",
