@@ -34,6 +34,11 @@ export const selectedMarkerHandler = (
   state = {
     id: 0,
     isLoaded: false,
+    rawLineData: {
+      title: "loading",
+      difficultyLevel: "loading",
+      distance: "loading",
+    },
   },
 
   action

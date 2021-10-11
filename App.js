@@ -47,6 +47,8 @@ export default function App() {
     "Urbanist-Medium": require("./assets/fonts/Urbanist-Medium.ttf"),
     "Urbanist-SemiBold": require("./assets/fonts/Urbanist-SemiBold.ttf"),
     "Urbanist-Light": require("./assets/fonts/Urbanist-Light.ttf"),
+    "Urbanist-Bold": require("./assets/fonts/Urbanist-Bold.ttf"),
+    "Urbanist-Black": require("./assets/fonts/Urbanist-Black.ttf"),
   });
   const [user, setUser] = useState(null);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -78,20 +80,19 @@ export default function App() {
       }
     });
 
-    // getUser().then((userData) => {
-    //   owner = userData.username;
-    //   setUser(userData);
-    //   if (userData !== "undefined") {
-    //     console.log("TEST: hereeeeeeee");
-    //     setUserLoggedIn(true);
-    //   }
-    //   console.log(
-    //     "TEST: userlogged in " +
-    //       userLoggedIn +
-    //       " userdata " +
-    //       JSON.stringify(userData)
-    //   );
-    // });
+    getUser().then((userData) => {
+      //owner = userData.username;
+      setUser(userData);
+      if (userData != "undefined") {
+        setUserLoggedIn(true);
+      }
+      console.log(
+        "TEST: userlogged in " +
+          userLoggedIn +
+          " userdata " +
+          JSON.stringify(userData)
+      );
+    });
   }, []);
 
   async function getUser() {

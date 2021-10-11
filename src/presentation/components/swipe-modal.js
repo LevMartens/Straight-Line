@@ -11,9 +11,9 @@ import {
 import { getTheme } from "../theme/themes";
 import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
 
-export default function SwipeModal() {
+export default function SwipeModal({ children }) {
   const { box, horizontalLine } = styles();
-  const pan = useRef(new Animated.ValueXY({ x: 0, y: 450 })).current;
+  const pan = useRef(new Animated.ValueXY({ x: 0, y: 450 })).current; //450
 
   const [offset, setOffset] = useState(0);
 
@@ -50,6 +50,7 @@ export default function SwipeModal() {
   return (
     <Animated.View {...panResponder.panHandlers} style={[animatedStyle, box]}>
       <View style={horizontalLine}></View>
+      {children}
     </Animated.View>
   );
 }
@@ -59,9 +60,9 @@ const styles = () => {
   return StyleSheet.create({
     horizontalLine: {
       position: "absolute",
-      top: 15,
-      width: 200,
-      height: 5,
+      top: 8,
+      width: 70,
+      height: 3,
       backgroundColor: theme.buttonColor,
       borderRadius: 10,
     },
@@ -74,10 +75,10 @@ const styles = () => {
       zIndex: 999,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: theme.secondaryColor,
+      backgroundColor: theme.primaryColor, //theme.secondaryColor,
       width: SCREEN_WIDTH,
       height: 300,
-      borderRadius: 16,
+      borderRadius: 10,
     },
   });
 };

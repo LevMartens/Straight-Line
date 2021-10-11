@@ -2,7 +2,10 @@ import { getZoomLevel } from "../generators/zoom-level-generator";
 import { pluscodeGeneratorLevel3 } from "../generators/pluscode-lvl-3-generator";
 import { getPluscodeFromCoordinates } from "../resources/api/get-pluscode";
 import store from "../../presentation/state-management/store/store";
-import { sendLineMarkers } from "../../presentation/state-management/actions/actions";
+import {
+  sendLineMarkers,
+  selectMarker,
+} from "../../presentation/state-management/actions/actions";
 import { getAllLvl3UnderLvl2 } from "../resources/backend/get-all-lvl-3-under-lvl-2";
 import { getZoomLevelRules } from "../helpers/if_statements";
 import { showBanner } from "../../presentation/components/banner";
@@ -108,6 +111,7 @@ export async function getLineMarkers(currentRegion) {
   );
 
   store.dispatch(sendLineMarkers(lineMarkers));
+  store.dispatch(selectMarker(lineMarkers[0]));
 
   return lineMarkers; // Return for testing
 }

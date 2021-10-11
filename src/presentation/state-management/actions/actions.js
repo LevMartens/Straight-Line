@@ -148,3 +148,10 @@ export const difficultyUpdate = (event) => {
     type: "DIFFICULTY",
   };
 };
+
+export const searchVisibleUpdate = (event) => {
+  return {
+    event: event,
+    type: "SEARCH",
+  };
+};

@@ -129,6 +129,8 @@ export default function LoginForm({ setModalVisible, navigation }) {
               style={{ alignSelf: "center", justifyContent: "center" }}
               onPress={() => {
                 setRecoveryVisible(true);
+                setPasswordError(false);
+                setUsernameError(false);
               }}
             >
               <Text style={textStyle5}>{"Forgot your password?"}</Text>

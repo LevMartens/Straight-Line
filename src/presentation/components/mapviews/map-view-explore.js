@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Polyline } from "react-native-maps";
 import { getTheme } from "../../theme/themes";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Image } from "react-native";
@@ -71,6 +71,11 @@ export default function MapViewExplore() {
             <Marker
               key={id}
               coordinate={markerCoordinates}
+              centerOffset={
+                id === markerCurrentlySelected.id
+                  ? { x: 0.2, y: -15 }
+                  : { x: 0, y: 0 }
+              }
               onPress={() => {
                 mapView.animateToRegion(markerRegion, 1000);
                 store.dispatch(selectMarker(marker));
@@ -84,6 +89,24 @@ export default function MapViewExplore() {
           );
         }
       })}
+      {markerCurrentlySelected.isLoaded && (
+        <Polyline
+          strokeColor={"white"}
+          strokeWidth={4}
+          coordinates={[
+            {
+              latitude:
+                markerCurrentlySelected.rawLineData.startingCoordinates.lat,
+              longitude:
+                markerCurrentlySelected.rawLineData.startingCoordinates.lng,
+            },
+            {
+              latitude: -37.840935,
+              longitude: 144.946457,
+            },
+          ]}
+        />
+      )}
     </MapView>
   ) : (
     <View style={themedStyles.activityIndicatorView}>

@@ -6,7 +6,7 @@ import store from "../state-management/store/store";
 import { throttle } from "lodash";
 import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
 import LottieView from "lottie-react-native";
-import loadingLottie from "../../../assets/loading.json";
+import loadingLottie from "../../../assets/loading-dots.json";
 
 let throttleTime = 3010;
 
@@ -73,9 +73,12 @@ const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
     lottieStyle: {
-      marginTop: 37,
-      width: 30,
-      height: 30,
+      position: "absolute",
+      left: -20,
+      top: 9,
+      //marginTop: 28, //37
+      width: 200, //30
+      height: 200, //30
     },
     bannerViewStyle: {
       position: "absolute",
@@ -90,11 +93,11 @@ const styles = () => {
       fontSize: 17,
       fontFamily: theme.fontFamily,
       marginTop: 115,
-      marginLeft: 95,
+      marginLeft: 90, //95,
       color: theme.bannerTextColor,
     },
     bannerImageStyle: {
-      marginLeft: 15,
+      marginLeft: 10,
       marginTop: 118,
       width: 30,
       height: 15,
