@@ -25,9 +25,19 @@ import {
   liveTrackingOnHandler,
   pathHandler,
 } from "./live-line-recording-handler";
-import { searchVisibleHandler } from "./ui-handler";
+import {
+  mapViewRefHandler,
+  recentSearchesHandler,
+  searchResultsHandler,
+  searchVisibleHandler,
+  timeDelayHandler,
+} from "./ui-handler";
 
 export default combineReducers({
+  recentSearchesHandler,
+  mapViewRefHandler,
+  searchResultsHandler,
+  timeDelayHandler,
   searchVisibleHandler,
   difficultyHandler,
   finishedLineHandler,

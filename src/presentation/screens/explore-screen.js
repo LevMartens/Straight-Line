@@ -10,6 +10,7 @@ import DifficultySvgComponent from "../components/svg-components/difficulty";
 import modelphoto from "../../../assets/modelphoto.jpg";
 import StarSvgComponent from "../components/svg-components/rating-star-svg";
 import SizedBox from "../components/re-usables/sized-box";
+import SearchView from "../components/search-view";
 
 export default function Explore({ navigation }) {
   const { visible, message } = useSelector((state) => state.bannerHandler);
@@ -82,6 +83,7 @@ export default function Explore({ navigation }) {
         )}
       </SwipeModal>
       <MapViewExplore></MapViewExplore>
+      {searchVisible && <SearchView searchVisible={searchVisible}></SearchView>}
       <Banner visible={visible} bannerText={message}></Banner>
     </View>
   );

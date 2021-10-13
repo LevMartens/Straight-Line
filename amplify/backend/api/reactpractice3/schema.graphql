@@ -99,6 +99,7 @@ type PlusCodeLevel3
 
 type Lines
   @model
+  @searchable
   @key(
     name: "lineByCompletePluscodes"
     fields: ["complete3LevelPluscode"]

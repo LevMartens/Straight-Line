@@ -15,8 +15,26 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import "react-native-gesture-handler";
 import * as Network from "expo-network";
 import * as AuthSession from "expo-auth-session";
+import { createLineDraft } from "./src/domain/use_cases/create-line-draft";
+import { createPublicLine } from "./src/domain/use_cases/create-public-line";
 
-//Amplify.configure(awsconfig);
+// const testLineDraft = {
+//   complete3LevelPluscode: "4RJ67R",
+//   startingCoordinates: { lat: -37.724208, lng: 144.80278 },
+//   finishCoordinates: { lat: -37.498637, lng: 144.716364 },
+//   creatorName: "Lev Martens",
+//   description:
+//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit mi in lectus bibendum pellentesque. Morbi feugiat pulvinar orci, vehicula sollicitudin dolor euismod eget.",
+//   difficultyLevel: "0",
+//   distance: "5678",
+//   elevationPoints: [12, 23, 34, 45, 56, 67, 78, 89],
+//   hashTags: "",
+//   latitudeDeltaFit,
+//   longitudeDeltaFit,
+//   lineCompleted,
+//   title,
+//   verified,
+// };
 
 async function urlOpener(url, redirectUrl) {
   const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(
@@ -86,14 +104,33 @@ export default function App() {
       if (userData != "undefined") {
         setUserLoggedIn(true);
       }
-      console.log(
-        "TEST: userlogged in " +
-          userLoggedIn +
-          " userdata " +
-          JSON.stringify(userData)
-      );
+      // console.log(
+      //   "TEST: userlogged in " +
+      //     userLoggedIn +
+      //     " userdata " +
+      //     JSON.stringify(userData)
+      // );
     });
+
+    //createTestLine();
   }, []);
+
+  async function createTestLine() {
+    const lineDraft = await createLineDraft(
+      { latitude: -37.717976, longitude: 144.925495 },
+      { latitude: -37.706905, longitude: 144.975437 },
+      "Panda"
+    );
+    const publicLine = await createPublicLine(
+      lineDraft,
+      [],
+      "00:05:56",
+      "5B",
+      14,
+      97.54,
+      "Gold"
+    );
+  }
 
   async function getUser() {
     try {

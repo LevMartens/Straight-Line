@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import {
   selectMarker,
   resetMarker,
+  mapViewRefUpdate,
 } from "../../state-management/actions/actions";
 import store from "../../state-management/store/store";
 import {
@@ -20,6 +21,7 @@ import MarkerSvgComponent from "../svg-components/marker-svg";
 export default function MapViewExplore() {
   useEffect(() => {
     store.dispatch(resetMarker());
+
     getPositionOnce(); //TODO this function bypasses use_cases
   }, []);
 
@@ -47,7 +49,11 @@ export default function MapViewExplore() {
 
   return aSingleCurrentPosition.isLoaded === true ? (
     <MapView
-      ref={(ref) => (mapView = ref)}
+      ref={(ref) => {
+        mapView = ref;
+
+        store.dispatch(mapViewRefUpdate(mapView));
+      }}
       showsUserLocation={true}
       liteMode={true}
       style={themedStyles.mapView}
@@ -101,8 +107,10 @@ export default function MapViewExplore() {
                 markerCurrentlySelected.rawLineData.startingCoordinates.lng,
             },
             {
-              latitude: -37.840935,
-              longitude: 144.946457,
+              latitude:
+                markerCurrentlySelected.rawLineData.finishCoordinates.lat,
+              longitude:
+                markerCurrentlySelected.rawLineData.finishCoordinates.lng,
             },
           ]}
         />

@@ -56,7 +56,7 @@ export async function getLineMarkers(currentRegion) {
   // Finding all lvl 3 pluscodes that have this pluscodeLvl2 as parent in dynamoDB
   const pluscodeLvl2 = pluscode.substring(0, 4);
 
-  console.log("TEST: pluscodelvl2 ", pluscodeLvl2);
+  //TO REMOVE console.log("TEST: pluscodelvl2 ", pluscodeLvl2);
 
   let listOflvl3Objects = await getAllLvl3UnderLvl2({
     withThisLvl2Pluscode: pluscodeLvl2,

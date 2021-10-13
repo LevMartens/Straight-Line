@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { StyleSheet, Text, Animated } from "react-native";
 import { getTheme } from "../theme/themes";
 import { openBanner } from "../state-management/actions/actions";
@@ -40,7 +40,9 @@ export default function Banner(props) {
   const { lottieStyle, bannerTextStyle, bannerViewStyle } = styles();
   const { bannerText, visible } = props;
 
-  const animated = visible ? new Animated.Value(0) : new Animated.Value(1);
+  const animated = visible
+    ? useRef(new Animated.Value(0)).current
+    : useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     Animated.timing(animated, {

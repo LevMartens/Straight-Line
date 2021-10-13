@@ -6,11 +6,17 @@ import {
   View,
   Text,
   Animated,
+  Keyboard,
 } from "react-native";
 import { getTheme } from "../../theme/themes";
 import MenuSvgComponent from "../svg-components/menu-svg";
-import { searchVisibleUpdate } from "../../state-management/actions/actions";
+import {
+  searchOnChangeUpdate,
+  searchVisibleUpdate,
+  timeDelayUpdate,
+} from "../../state-management/actions/actions";
 import store from "../../state-management/store/store";
+import { getSearchResults } from "../../../domain/use_cases/get-search-results";
 
 export default function MenuHeaderRightButton({ navigation }) {
   const { colorUnFocused } = getTheme();
@@ -52,6 +58,9 @@ export default function MenuHeaderRightButton({ navigation }) {
             }}
             onPress={() => {
               store.dispatch(searchVisibleUpdate(false));
+              store.dispatch(timeDelayUpdate(false));
+
+              Keyboard.dismiss();
             }}
           >
             <Text style={textStyle1}>Cancel</Text>

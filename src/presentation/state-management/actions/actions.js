@@ -155,3 +155,31 @@ export const searchVisibleUpdate = (event) => {
     type: "SEARCH",
   };
 };
+
+export const timeDelayUpdate = (event) => {
+  return {
+    event: event,
+    type: "DELAY",
+  };
+};
+
+export const searchResultsUpdate = (event) => {
+  return {
+    event: event,
+    type: "SEARCHRESULTS",
+  };
+};
+
+export const mapViewRefUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPREF",
+  };
+};
+
+export const recentSearchesUpdate = (event) => {
+  return {
+    event: event,
+    type: "RECENTSEARCH",
+  };
+};

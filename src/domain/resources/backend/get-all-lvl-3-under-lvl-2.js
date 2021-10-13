@@ -14,13 +14,14 @@ export async function getAllLvl3UnderLvl2(param) {
     const items =
       response.data.pluscode2ByCompletePluscode.items[0].level3List.items;
 
-    console.log(
-      "TEST: DD ITEMS " +
-        JSON.stringify(items) +
-        "                RESPONSE:            " +
-        JSON.stringify(response) +
-        " source: get-all-lvl-3-under-lvl-2.js"
-    );
+    //TO REMOVE
+    //  console.log(
+    //   "TEST: DD ITEMS " +
+    //     JSON.stringify(items) +
+    //     "                RESPONSE:            " +
+    //     JSON.stringify(response) +
+    //     " source: get-all-lvl-3-under-lvl-2.js"
+    // );
 
     return items; //=== undefined ? [] : items;
   } catch (err) {

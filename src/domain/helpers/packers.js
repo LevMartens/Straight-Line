@@ -17,7 +17,7 @@ export async function mapElevationPoints(rawData) {
 }
 
 export async function packLineData(rawData) {
-  console.log("TEST: data.id error ", JSON.stringify(rawData));
+  // TO REMOVE console.log("TEST: data.id error ", JSON.stringify(rawData));
   const { data } = rawData;
 
   const {
@@ -66,7 +66,7 @@ export async function packLineData(rawData) {
 }
 
 export async function packPublicLineData(rawData) {
-  console.log("TEST: data.id error ", JSON.stringify(rawData));
+  //TO REMOVE console.log("TEST: data.id error ", JSON.stringify(rawData));
   //const { data } = rawData;
 
   const {

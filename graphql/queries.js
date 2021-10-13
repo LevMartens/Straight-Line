@@ -618,6 +618,45 @@ export const listLines = /* GraphQL */ `
     }
   }
 `;
+
+export const searchLines = /* GraphQL */ `
+  query SearchLines(
+    $filter: SearchableLinesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    searchLines(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        owner
+        startingCoordinates {
+          id
+          lat
+          lng
+        }
+        finishCoordinates {
+          id
+          lat
+          lng
+        }
+        creatorName
+        description
+        title
+        hashtags
+        difficultyLevel
+        verified
+        lineCompleted
+        elevationPoints
+        latitudeDeltaFit
+        longitudeDeltaFit
+        distance
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getCoordinates = /* GraphQL */ `
   query GetCoordinates($id: ID!) {
     getCoordinates(id: $id) {
