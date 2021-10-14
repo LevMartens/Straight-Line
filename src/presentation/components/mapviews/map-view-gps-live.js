@@ -55,6 +55,7 @@ export default function MapViewGPSLive({ navigation }) {
     <MapView
       onPress={(e) => {}}
       style={mapStyle}
+      followsUserLocation={true}
       mapType={"mutedStandard"}
       liteMode={true}
       initialRegion={{

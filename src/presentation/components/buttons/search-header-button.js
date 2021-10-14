@@ -14,6 +14,8 @@ import {
   searchVisibleUpdate,
   timeDelayUpdate,
   searchOnChangeUpdate,
+  menuVisibleUpdate,
+  showHeadingOnUpdate,
 } from "../../state-management/actions/actions";
 import { getTheme } from "../../theme/themes";
 import SearchSvgComponent from "../svg-components/search-svg";
@@ -28,6 +30,12 @@ export default function SearchHeaderButton() {
   //const [textInputVisible, setTextInputVisible] = useState(false);
   const textInputVisible = useSelector((state) => state.searchVisibleHandler);
   const timeIsPassed = useSelector((state) => state.timeDelayHandler);
+  const showHeadingOn = useSelector((state) => state.showHeadingOnHandler);
+  const mapViewRef = useSelector((state) => state.mapViewRefHandler);
+  const headingWatcher = useSelector((state) => state.headingWatcherHandler);
+  const aSingleCurrentPosition = useSelector(
+    (state) => state.aSingleCurrentPosition
+  );
 
   const [searchInput, onChangeSearchInput] = useState();
 
@@ -82,6 +90,21 @@ export default function SearchHeaderButton() {
         onPress={() => {
           if (!textInputVisible) {
             store.dispatch(searchVisibleUpdate(true));
+            if (showHeadingOn) {
+              headingWatcher.remove();
+              mapViewRef.animateCamera(
+                {
+                  center: aSingleCurrentPosition,
+                  pitch: 2,
+                  heading: 0.0,
+                  altitude: 200000,
+                  zoom: 40,
+                },
+                500
+              );
+              store.dispatch(showHeadingOnUpdate(false));
+            }
+            store.dispatch(menuVisibleUpdate(false));
             startDelay();
             //setTextInputVisible(false);
           } else {
@@ -112,6 +135,21 @@ export default function SearchHeaderButton() {
           value={textInputVisible ? searchInput : ""}
           onFocus={() => {
             store.dispatch(searchVisibleUpdate(true));
+            if (showHeadingOn) {
+              headingWatcher.remove();
+              mapViewRef.animateCamera(
+                {
+                  center: aSingleCurrentPosition,
+                  pitch: 2,
+                  heading: 0.0,
+                  altitude: 200000,
+                  zoom: 40,
+                },
+                500
+              );
+              store.dispatch(showHeadingOnUpdate(false));
+            }
+            store.dispatch(menuVisibleUpdate(false));
             startDelay();
           }}
           placeholder={
@@ -127,6 +165,8 @@ export default function SearchHeaderButton() {
             position: "absolute",
             left: SCREEN_WIDTH - 100,
             top: 6,
+            paddingTop: 4,
+            paddingLeft: 10,
             //backgroundColor: "red",
           }}
           onPress={() => {

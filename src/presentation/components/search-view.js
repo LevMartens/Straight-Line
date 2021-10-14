@@ -21,6 +21,7 @@ import {
   timeDelayUpdate,
 } from "../state-management/actions/actions";
 import MarkerSvgComponent from "./svg-components/marker-svg";
+import { watchHeading } from "../../domain/resources/environment/watch-heading";
 
 export default function SearchView({ searchVisible }) {
   const { textStyle, lottieStyle, textStyleB, buttonStyle, containerStyle } =
@@ -32,6 +33,7 @@ export default function SearchView({ searchVisible }) {
   );
   const mapViewRef = useSelector((state) => state.mapViewRefHandler);
   const recentSearches = useSelector((state) => state.recentSearchesHandler);
+  const liveDirection = useSelector((state) => state.watchDirection);
 
   useEffect(() => {
     Animated.timing(fadeAnim, {

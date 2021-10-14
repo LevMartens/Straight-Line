@@ -41,11 +41,24 @@ export default function MapViewExplore() {
     longitudeDelta: LONGITUDE_DELTA,
   };
 
+  const initialCamera = {
+    center: aSingleCurrentPosition,
+    pitch: 2,
+    heading: 0.0,
+    altitude: 200000,
+    zoom: 40,
+  };
+
   let mapView;
 
   const positionHasChanged = async function (currentRegion) {
     getLineMarkers(currentRegion);
   };
+  const melbourne = {
+    latitude: -37.840935,
+    longitude: 144.946457,
+  };
+  const mapType = useSelector((state) => state.mapTypeHandler);
 
   return aSingleCurrentPosition.isLoaded === true ? (
     <MapView
@@ -55,12 +68,15 @@ export default function MapViewExplore() {
         store.dispatch(mapViewRefUpdate(mapView));
       }}
       showsUserLocation={true}
+      mapType={mapType}
       liteMode={true}
+      showsCompass={false}
       style={themedStyles.mapView}
       onRegionChangeComplete={(region) => {
         positionHasChanged(region);
       }}
-      initialRegion={initialRegion}
+      //initialRegion={initialRegion}
+      initialCamera={initialCamera}
     >
       {lineMarkers.map((marker) => {
         const {

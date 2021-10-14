@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Text, Image, Modal } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 import MapViewExplore from "../components/mapviews/map-view-explore";
 import { useSelector } from "react-redux";
 import Banner from "../components/banner";
@@ -11,6 +18,11 @@ import modelphoto from "../../../assets/modelphoto.jpg";
 import StarSvgComponent from "../components/svg-components/rating-star-svg";
 import SizedBox from "../components/re-usables/sized-box";
 import SearchView from "../components/search-view";
+import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import CompassSvgComponent from "../components/svg-components/compass";
+import NearbySvgComponent from "../components/svg-components/nearby-svg";
+import { watchHeading } from "../../domain/resources/environment/watch-heading";
+import ExploreMapMenu from "../components/explore-map-menu";
 
 export default function Explore({ navigation }) {
   const { visible, message } = useSelector((state) => state.bannerHandler);
@@ -23,6 +35,7 @@ export default function Explore({ navigation }) {
     difficultyBand,
   } = styles();
   const searchVisible = useSelector((state) => state.searchVisibleHandler);
+  const menuVisible = useSelector((state) => state.menuVisibleHandler);
   const {
     isLoaded,
     rawLineData: { title, difficultyLevel, distance },
@@ -82,12 +95,14 @@ export default function Explore({ navigation }) {
           </View>
         )}
       </SwipeModal>
+      {menuVisible && <ExploreMapMenu></ExploreMapMenu>}
       <MapViewExplore></MapViewExplore>
       {searchVisible && <SearchView searchVisible={searchVisible}></SearchView>}
       <Banner visible={visible} bannerText={message}></Banner>
     </View>
   );
 }
+
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({

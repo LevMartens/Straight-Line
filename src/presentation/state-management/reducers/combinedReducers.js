@@ -26,14 +26,20 @@ import {
   pathHandler,
 } from "./live-line-recording-handler";
 import {
+  mapTypeHandler,
   mapViewRefHandler,
+  menuVisibleHandler,
   recentSearchesHandler,
   searchResultsHandler,
   searchVisibleHandler,
+  showHeadingOnHandler,
   timeDelayHandler,
 } from "./ui-handler";
 
 export default combineReducers({
+  showHeadingOnHandler,
+  menuVisibleHandler,
+  mapTypeHandler,
   recentSearchesHandler,
   mapViewRefHandler,
   searchResultsHandler,

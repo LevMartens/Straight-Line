@@ -56,3 +56,30 @@ export const recentSearchesHandler = (state = [], action) => {
       return state;
   }
 };
+
+export const mapTypeHandler = (state = "standard", action) => {
+  switch (action.type) {
+    case "MAPTYPE":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
+export const menuVisibleHandler = (state = false, action) => {
+  switch (action.type) {
+    case "MENUVISIBLE":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
+export const showHeadingOnHandler = (state = false, action) => {
+  switch (action.type) {
+    case "SHOWHEADINGON":
+      return action.event;
+    default:
+      return state;
+  }
+};

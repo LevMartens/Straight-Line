@@ -15,7 +15,7 @@ export default function SwipeModal({ children }) {
   const { box, horizontalLine } = styles();
   const pan = useRef(new Animated.ValueXY({ x: 0, y: 450 })).current; //450
 
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(450);
 
   const maxVal = 650;
   const minVal = 450;
@@ -72,7 +72,7 @@ const styles = () => {
       alignItems: "center",
     },
     box: {
-      zIndex: 999,
+      zIndex: 9999999999,
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: theme.primaryColor, //theme.secondaryColor,

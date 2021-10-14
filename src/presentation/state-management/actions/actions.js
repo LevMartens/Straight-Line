@@ -183,3 +183,24 @@ export const recentSearchesUpdate = (event) => {
     type: "RECENTSEARCH",
   };
 };
+
+export const mapTypeUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPTYPE",
+  };
+};
+
+export const menuVisibleUpdate = (event) => {
+  return {
+    event: event,
+    type: "MENUVISIBLE",
+  };
+};
+
+export const showHeadingOnUpdate = (event) => {
+  return {
+    event: event,
+    type: "SHOWHEADINGON",
+  };
+};
