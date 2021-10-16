@@ -1,21 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import store from "../../state_management/store/store";
-import {
-  StyleSheet,
-  Text,
-  Image,
-  Animated,
-  View,
-  TouchableOpacity,
-  PanResponder,
-} from "react-native";
+import { StyleSheet, Animated, View, PanResponder } from "react-native";
 import { getTheme } from "../../theme/themes";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 
 export default function SwipeModal({ children }) {
   const { box, horizontalLine } = styles();
-  const pan = useRef(new Animated.ValueXY({ x: 0, y: 450 })).current; //450
+
+  const pan = useRef(new Animated.ValueXY({ x: 0, y: 450 })).current;
+
   const mapIsLoaded = useSelector((state) => state.mapIsLoadedHandler);
 
   const [offset, setOffset] = useState(450);
@@ -69,16 +62,11 @@ const styles = () => {
       backgroundColor: theme.buttonColor,
       borderRadius: 10,
     },
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    },
     box: {
       zIndex: 9999999999,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: theme.primaryColor, //theme.secondaryColor,
+      backgroundColor: theme.primaryColor,
       width: SCREEN_WIDTH,
       height: 300,
       borderRadius: 10,

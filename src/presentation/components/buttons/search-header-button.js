@@ -7,13 +7,11 @@ import {
   TextInput,
   View,
   Animated,
-  Keyboard,
 } from "react-native";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import {
   searchVisibleUpdate,
   timeDelayUpdate,
-  searchOnChangeUpdate,
   menuVisibleUpdate,
   showHeadingOnUpdate,
 } from "../../state_management/actions/actions";
@@ -21,13 +19,11 @@ import { getTheme } from "../../theme/themes";
 import SearchSvgComponent from "../svg_components/search-svg";
 import EraseSvgComponent from "../svg_components/erase-svg";
 import { getSearchResults } from "../../../domain/use_cases/get-search-results";
-import { recentSearches } from "../explore_screen_components/es-search-view";
 
 export default function SearchHeaderButton() {
   const { colorUnFocused } = getTheme();
-  const { buttonStyle, textInputStyle, placeHolderStyle } = styles();
+  const { buttonStyle, textInputStyle, selection, eraseStyle } = styles();
 
-  //const [textInputVisible, setTextInputVisible] = useState(false);
   const textInputVisible = useSelector((state) => state.searchVisibleHandler);
   const timeIsPassed = useSelector((state) => state.timeDelayHandler);
   const showHeadingOn = useSelector((state) => state.showHeadingOnHandler);
@@ -39,40 +35,34 @@ export default function SearchHeaderButton() {
 
   const [searchInput, onChangeSearchInput] = useState();
 
+  const cameraPosition = {
+    center: aSingleCurrentPosition,
+    pitch: 2,
+    heading: 0.0,
+    altitude: 200000,
+    zoom: 40,
+  };
+
   function startDelay() {
     setTimeout(function () {
       store.dispatch(timeDelayUpdate(true));
-    }, 350); //500
+    }, 350);
   }
 
   const animated = textInputVisible
-    ? useRef(new Animated.Value(0.8)).current //0.8
+    ? useRef(new Animated.Value(0.8)).current
     : useRef(new Animated.Value(1)).current;
-
-  // const animated = new Animated.Value(0);
-
-  const animated1 = textInputVisible
-    ? new Animated.Value(0)
-    : new Animated.Value(150); //150
 
   useEffect(() => {
     Animated.timing(animated, {
-      toValue: textInputVisible ? 1 : 0.8, //0.8
-      duration: 300, //500,
-      useNativeDriver: true,
-    }).start();
-    // store.dispatch(searchVisibleUpdate(true));
-    // store.dispatch(searchVisibleUpdate(false));
-    Animated.timing(animated1, {
-      toValue: textInputVisible ? 150 : 0,
-      duration: 500,
+      toValue: textInputVisible ? 1 : 0.8,
+      duration: 300,
       useNativeDriver: true,
     }).start();
   }, [textInputVisible]);
 
   const animatedStyle = {
     height: 30,
-
     transform: [
       {
         scaleX: animated.interpolate({
@@ -92,24 +82,11 @@ export default function SearchHeaderButton() {
             store.dispatch(searchVisibleUpdate(true));
             if (showHeadingOn) {
               headingWatcher.remove();
-              mapViewRef.animateCamera(
-                {
-                  center: aSingleCurrentPosition,
-                  pitch: 2,
-                  heading: 0.0,
-                  altitude: 200000,
-                  zoom: 40,
-                },
-                500
-              );
+              mapViewRef.animateCamera(cameraPosition, 500);
               store.dispatch(showHeadingOnUpdate(false));
             }
             store.dispatch(menuVisibleUpdate(false));
             startDelay();
-            //setTextInputVisible(false);
-          } else {
-            //store.dispatch(searchVisibleUpdate(true));
-            //setTextInputVisible(true);
           }
         }}
       >
@@ -121,13 +98,11 @@ export default function SearchHeaderButton() {
           {
             width: 600,
             left: -250,
-
-            //backgroundColor: "green"
           },
         ]}
       >
         <TextInput
-          style={{ ...textInputStyle }}
+          style={textInputStyle}
           onChangeText={(text) => {
             onChangeSearchInput(text);
             getSearchResults(text);
@@ -137,16 +112,7 @@ export default function SearchHeaderButton() {
             store.dispatch(searchVisibleUpdate(true));
             if (showHeadingOn) {
               headingWatcher.remove();
-              mapViewRef.animateCamera(
-                {
-                  center: aSingleCurrentPosition,
-                  pitch: 2,
-                  heading: 0.0,
-                  altitude: 200000,
-                  zoom: 40,
-                },
-                500
-              );
+              mapViewRef.animateCamera(cameraPosition, 500);
               store.dispatch(showHeadingOnUpdate(false));
             }
             store.dispatch(menuVisibleUpdate(false));
@@ -155,20 +121,12 @@ export default function SearchHeaderButton() {
           placeholder={
             textInputVisible && timeIsPassed ? "Enter location or trail" : ""
           }
-          //placeholderTextColor={"#313131"}
-          selectionColor={"#fc9c04"}
+          selectionColor={selection.color}
         />
       </Animated.View>
       {textInputVisible && timeIsPassed && (
         <TouchableOpacity
-          style={{
-            position: "absolute",
-            left: SCREEN_WIDTH - 100,
-            top: 6,
-            paddingTop: 4,
-            paddingLeft: 10,
-            //backgroundColor: "red",
-          }}
+          style={eraseStyle}
           onPress={() => {
             onChangeSearchInput("");
             getSearchResults("");
@@ -185,6 +143,14 @@ const styles = () => {
   const theme = getTheme();
 
   return StyleSheet.create({
+    eraseStyle: {
+      position: "absolute",
+      left: SCREEN_WIDTH - 100,
+      top: 6,
+      paddingTop: 4,
+      paddingLeft: 10,
+    },
+    selection: { color: theme.buttonColor },
     textInputStyle: {
       width: 298,
       backgroundColor: theme.secondaryColor,
@@ -193,23 +159,7 @@ const styles = () => {
       marginTop: 3,
       height: 30,
       borderRadius: 10,
-      borderColor: theme.secondaryColor, //"gray",
-      borderWidth: 1,
-      fontSize: 15,
-      color: theme.textColor,
-      fontFamily: theme.fontThin,
-      position: "absolute",
-      right: 3,
-    },
-    placeHolderStyle: {
-      width: 298,
-      backgroundColor: theme.secondaryColor,
-      paddingLeft: 8,
-      marginLeft: 60,
-      marginTop: 3,
-      height: 30,
-      borderRadius: 8,
-      borderColor: theme.secondaryColor, //"gray",
+      borderColor: theme.secondaryColor,
       borderWidth: 1,
       fontSize: 15,
       color: theme.textColor,
@@ -218,7 +168,6 @@ const styles = () => {
       right: 3,
     },
     buttonStyle: {
-      //backgroundColor: "red",
       width: 50,
       height: 50,
       zIndex: 100,
@@ -226,7 +175,6 @@ const styles = () => {
       paddingTop: 16,
       paddingLeft: 20,
       marginLeft: 0,
-      //height: 50,
       top: -10,
       position: "absolute",
     },

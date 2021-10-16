@@ -12,18 +12,16 @@ import { getTheme } from "../../theme/themes";
 import MenuSvgComponent from "../svg_components/menu-svg";
 import {
   menuVisibleUpdate,
-  searchOnChangeUpdate,
   searchVisibleUpdate,
   showHeadingOnUpdate,
   timeDelayUpdate,
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
-import { getSearchResults } from "../../../domain/use_cases/get-search-results";
-import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
 
 export default function MenuHeaderRightButton({ navigation }) {
   const { colorUnFocused } = getTheme();
-  const { buttonStyle, textStyle1 } = styles();
+  const { buttonStyle, textStyle1, cancelStyle, containerStyle } = styles();
+
   const searchVisible = useSelector((state) => state.searchVisibleHandler);
   const menuVisible = useSelector((state) => state.menuVisibleHandler);
   const showHeadingOn = useSelector((state) => state.showHeadingOnHandler);
@@ -32,7 +30,15 @@ export default function MenuHeaderRightButton({ navigation }) {
   const aSingleCurrentPosition = useSelector(
     (state) => state.aSingleCurrentPosition
   );
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  const cameraPosition = {
+    center: aSingleCurrentPosition,
+    pitch: 2,
+    heading: 0.0,
+    altitude: 200000,
+    zoom: 40,
+  };
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -43,33 +49,14 @@ export default function MenuHeaderRightButton({ navigation }) {
   }, [searchVisible]);
 
   return (
-    <View
-      style={{
-        //opacity: fadeAnim,
-        marginRight: 20,
-        height: 50,
-        position: "absolute",
-      }}
-    >
-      {/* <TouchableOpacity style={buttonStyle}>
-        <MenuSvgComponent color={colorUnFocused}></MenuSvgComponent>
-      </TouchableOpacity> */}
+    <View style={containerStyle}>
       {searchVisible ? (
         <Animated.View style={{ opacity: fadeAnim }}>
           <TouchableOpacity
-            style={{
-              width: 50,
-              height: 20,
-              //backgroundColor: "maroon",
-              marginRight: 7,
-              marginTop: 19,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={cancelStyle}
             onPress={() => {
               store.dispatch(searchVisibleUpdate(false));
               store.dispatch(timeDelayUpdate(false));
-
               Keyboard.dismiss();
             }}
           >
@@ -78,20 +65,11 @@ export default function MenuHeaderRightButton({ navigation }) {
         </Animated.View>
       ) : (
         <TouchableOpacity
-          style={{ ...buttonStyle }}
+          style={buttonStyle}
           onPress={() => {
             if (showHeadingOn) {
               headingWatcher.remove();
-              mapViewRef.animateCamera(
-                {
-                  center: aSingleCurrentPosition,
-                  pitch: 2,
-                  heading: 0.0,
-                  altitude: 200000,
-                  zoom: 40,
-                },
-                500
-              );
+              mapViewRef.animateCamera(cameraPosition, 500);
               store.dispatch(showHeadingOnUpdate(false));
             }
             if (menuVisible) {
@@ -112,20 +90,28 @@ export default function MenuHeaderRightButton({ navigation }) {
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
+    containerStyle: {
+      marginRight: 20,
+      height: 50,
+      position: "absolute",
+    },
+    cancelStyle: {
+      width: 50,
+      height: 20,
+      marginRight: 7,
+      marginTop: 19,
+      justifyContent: "center",
+      alignItems: "center",
+    },
     textStyle1: {
-      //marginTop: 3,
-      //marginLeft: 20,
       fontSize: 13,
-      color: "gray", //theme.textColor,
+      color: "gray",
       textAlign: "left",
       fontFamily: theme.fontThin,
     },
     buttonStyle: {
       paddingRight: 22,
       paddingTop: 16,
-      // marginRight: 20,
-      // height: 50,
-      // position: "absolute",
     },
   });
 };

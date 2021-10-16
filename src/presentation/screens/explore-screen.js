@@ -31,13 +31,7 @@ export default function Explore({ navigation }) {
           <SwipeModalLoading></SwipeModalLoading>
         )}
       </SwipeModal>
-      {menuVisible && (
-        <ExploreMapMenu
-          compassOnPress={() => {}}
-          layersOnPress={() => {}}
-          myLocationOnPress={() => {}}
-        ></ExploreMapMenu>
-      )}
+      {menuVisible && <ExploreMapMenu></ExploreMapMenu>}
       <MapViewExplore></MapViewExplore>
       {searchVisible && <SearchView searchVisible={searchVisible}></SearchView>}
       <Banner visible={visible} bannerText={message}></Banner>

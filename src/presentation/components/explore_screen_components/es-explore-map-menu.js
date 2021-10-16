@@ -12,13 +12,10 @@ import {
   showHeadingOnUpdate,
 } from "../../state_management/actions/actions";
 
-export default function ExploreMapMenu({
-  compassOnPress,
-  layersOnPress,
-  myLocationOnPress,
-}) {
+export default function ExploreMapMenu() {
   const { compassStyle, layersStyle, containerStyle } = styles();
 
+  const showHeadingOn = useSelector((state) => state.showHeadingOnHandler);
   const liveDirection = useSelector((state) => state.watchDirection);
   const mapViewRef = useSelector((state) => state.mapViewRefHandler);
   const headingWatcher = useSelector((state) => state.headingWatcherHandler);
@@ -26,7 +23,6 @@ export default function ExploreMapMenu({
   const aSingleCurrentPosition = useSelector(
     (state) => state.aSingleCurrentPosition
   );
-  const showHeadingOn = useSelector((state) => state.showHeadingOnHandler);
 
   const [threeDOn, setThreeDOn] = useState(false);
 

@@ -21,7 +21,6 @@ export const showBanner = throttle(function ({
   if (time !== throttleTime - 10 && typeof time !== "undefined") {
     throttleTime = time + 10;
   }
-
   if (manual && visible) {
     store.dispatch(openBanner({ visible: true, message: message }));
   }
@@ -83,9 +82,8 @@ const styles = () => {
       position: "absolute",
       left: -20,
       top: 9,
-      //marginTop: 28, //37
-      width: 200, //30
-      height: 200, //30
+      width: 200,
+      height: 200,
     },
     bannerViewStyle: {
       position: "absolute",
@@ -101,7 +99,7 @@ const styles = () => {
       fontSize: 17,
       fontFamily: theme.fontFamily,
       marginTop: 115,
-      marginLeft: 90, //95,
+      marginLeft: 90,
       color: theme.bannerTextColor,
     },
     bannerImageStyle: {

@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import { getTheme } from "../../theme/themes";
 import { ActivityIndicator } from "react-native-paper";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { getPositionOnce } from "../../../domain/resources/operating_system/get-position-once";
 import { getLineMarkers } from "../../../domain/use_cases/get-line-markers";
 import { useSelector } from "react-redux";
@@ -13,34 +13,24 @@ import {
   mapIsLoadedUpdate,
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
-import {
-  LATITUDE_DELTA,
-  LONGITUDE_DELTA,
-} from "../../../domain/resources/operating_system/dimensions";
 import MarkerSvgComponent from "../svg_components/marker-svg";
 
 export default function MapViewExplore() {
+  const { mapView, activityIndicator, activityIndicatorView } = styles();
+
   useEffect(() => {
     store.dispatch(resetMarker());
-
     getPositionOnce(); //TODO this function bypasses use_cases
   }, []);
 
-  const markerCurrentlySelected = useSelector(
-    (state) => state.selectedMarkerHandler
-  );
-
+  const mapType = useSelector((state) => state.mapTypeHandler);
   const lineMarkers = useSelector((state) => state.lineMarkersHandler);
   const aSingleCurrentPosition = useSelector(
     (state) => state.aSingleCurrentPosition
   );
-  const themedStyles = styles();
-  const initialRegion = {
-    latitude: aSingleCurrentPosition.latitude,
-    longitude: aSingleCurrentPosition.longitude,
-    latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA,
-  };
+  const markerCurrentlySelected = useSelector(
+    (state) => state.selectedMarkerHandler
+  );
 
   const initialCamera = {
     center: aSingleCurrentPosition,
@@ -55,18 +45,11 @@ export default function MapViewExplore() {
   const positionHasChanged = async function (currentRegion) {
     getLineMarkers(currentRegion);
   };
-  const melbourne = {
-    latitude: -37.840935,
-    longitude: 144.946457,
-  };
-  const mapType = useSelector((state) => state.mapTypeHandler);
-  const mapIsLoaded = useSelector((state) => state.mapIsLoadedHandler);
 
   return aSingleCurrentPosition.isLoaded === true ? (
     <MapView
       ref={(ref) => {
         mapView = ref;
-
         store.dispatch(mapViewRefUpdate(mapView));
       }}
       showsUserLocation={true}
@@ -76,22 +59,14 @@ export default function MapViewExplore() {
       mapType={mapType}
       liteMode={true}
       showsCompass={false}
-      style={themedStyles.mapView}
+      style={mapView}
       onRegionChangeComplete={(region) => {
         positionHasChanged(region);
       }}
-      //initialRegion={initialRegion}
       initialCamera={initialCamera}
     >
       {lineMarkers.map((marker) => {
-        const {
-          id,
-          isLoaded,
-          markerCoordinates,
-          markerRegion,
-          image,
-          imageSelected,
-        } = marker;
+        const { id, isLoaded, markerCoordinates, markerRegion } = marker;
 
         if (isLoaded === true) {
           return (
@@ -138,10 +113,10 @@ export default function MapViewExplore() {
       )}
     </MapView>
   ) : (
-    <View style={themedStyles.activityIndicatorView}>
+    <View style={activityIndicatorView}>
       <ActivityIndicator
         animating={true}
-        color={themedStyles.activityIndicator}
+        color={activityIndicator}
         size={"large"}
       />
     </View>
@@ -160,10 +135,6 @@ const styles = () => {
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: theme.primaryColor,
-    },
-    lineMarkerImageLayout: {
-      width: 40,
-      height: 40,
     },
     mapView: {
       zIndex: 3,
