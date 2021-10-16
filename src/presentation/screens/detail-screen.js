@@ -4,7 +4,7 @@ import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text } from "react-native";
 import StartButton from "../components/buttons/start-button";
 import { useSelector } from "react-redux";
-import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../theme/themes";
 import ElevationChart from "../components/elevation-chart";
 import WeatherWidget from "../components/weather-widget";

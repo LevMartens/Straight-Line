@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import MapView, { Polyline, Marker, Circle } from "react-native-maps";
 import { StyleSheet, View } from "react-native";
-import { watchHeading } from "../../../domain/resources/environment/watch-heading";
+import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { followUserPosition } from "../../../domain/use_cases/follow-user-position";
-import { getPositionOnce } from "../../../domain/resources/environment/get-position-once";
-import UserSvgComponent from "../svg-components/user-svg";
-import PinSvgComponent from "../svg-components/map-pin-svg";
+import { getPositionOnce } from "../../../domain/resources/operating_system/get-position-once";
+import UserSvgComponent from "../svg_components/user-svg";
+import PinSvgComponent from "../svg_components/map-pin-svg";
 
 export default function MapViewLineReview({ initialRegion }) {
   const { mapStyle } = styles();

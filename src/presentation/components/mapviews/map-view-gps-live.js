@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import MapView, { Polyline, Marker, Circle } from "react-native-maps";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import { watchHeading } from "../../../domain/resources/environment/watch-heading";
+import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { followUserPosition } from "../../../domain/use_cases/follow-user-position";
-import { getPositionOnce } from "../../../domain/resources/environment/get-position-once";
-import UserSvgComponent from "../svg-components/user-svg";
-import PinSvgComponent from "../svg-components/map-pin-svg";
+import { getPositionOnce } from "../../../domain/resources/operating_system/get-position-once";
+import UserSvgComponent from "../svg_components/user-svg";
+import PinSvgComponent from "../svg_components/map-pin-svg";
 import { getTheme } from "../../theme/themes";
-import { SCREEN_WIDTH } from "../../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 
 //TODO create button to start directions
 //TODO screen doesn't follow curser

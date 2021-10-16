@@ -1,13 +1,13 @@
-import { createGraphQLCoordinateType } from "../resources/backend/create-graphql-coordinates-type";
-import { getPluscodeFromCoordinates } from "../resources/api/get-pluscode";
+import { createGraphQLCoordinateType } from "../resources/aws/dynamo_db/create-graphql-coordinates-type";
+import { getPluscodeFromCoordinates } from "../resources/rest_api/get-pluscode";
 import { getDistanceBetween } from "../generators/distance-generator";
 import { mapElevationPoints, packLineData } from "../helpers/packers";
-import { showAlert } from "../resources/environment/alerts";
-import { saveLineDraft } from "../resources/backend/save-line-draft";
-import { selectLineDraft } from "../../presentation/state-management/actions/actions";
+import { showAlert } from "../resources/operating_system/alerts";
+import { saveLineDraft } from "../resources/aws/dynamo_db/save-line-draft";
+import { selectLineDraft } from "../../presentation/state_management/actions/actions";
 import { getLatLongDeltaBasedOn } from "../generators/lat-long-delta-generator";
-import { getElevation } from "../resources/api/get-elevation";
-import store from "../../presentation/state-management/store/store";
+import { getElevation } from "../resources/rest_api/get-elevation";
+import store from "../../presentation/state_management/store/store";
 import { getCoordinatesBetween } from "../generators/coordinates-generator";
 
 export async function createLineDraft(pointA, pointB, lineTitle) {

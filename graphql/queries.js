@@ -816,8 +816,10 @@ export const pluscode2ByCompletePluscode = /* GraphQL */ `
                 complete3LevelPluscode
                 createdAt
                 creatorName
+                place
                 description
                 difficultyLevel
+                difficultyBand
                 distance
                 elevationPoints
                 finishCoordinates {
@@ -832,6 +834,7 @@ export const pluscode2ByCompletePluscode = /* GraphQL */ `
                     band
                     createdAt
                     id
+                    images
                     largestDeviation
                     path {
                       nextToken

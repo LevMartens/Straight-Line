@@ -1,4 +1,4 @@
-import { SCREEN_WIDTH } from "../resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../resources/operating_system/dimensions";
 
 export async function getZoomLevel(regionObject) {
   const { longitudeDelta } = regionObject;

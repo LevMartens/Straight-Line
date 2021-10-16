@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { getTheme } from "../../theme/themes";
-import ProfileSvgComponent from "../svg-components/profile-svg";
+import ProfileSvgComponent from "../svg_components/profile-svg";
 
 export default function ProfileIcon({ focused }) {
   const { colorFocused, colorUnFocused } = getTheme();

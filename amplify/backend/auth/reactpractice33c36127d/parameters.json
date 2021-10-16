@@ -1,6 +1,6 @@
 {
     "identityPoolName": "reactpractice33c36127d_identitypool_3c36127d",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "reactp3c36127d",
     "userPoolName": "reactpractice33c36127d_userpool_3c36127d",
     "autoVerifiedAttributes": [

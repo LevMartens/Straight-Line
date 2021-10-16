@@ -7,11 +7,11 @@ import {
   TextInput,
 } from "react-native";
 import { getTheme } from "../theme/themes";
-import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import LottieView from "lottie-react-native";
 import confetti from "../../../assets/confetti.json";
-import DifficultySvgComponent from "./svg-components/difficulty";
-import HelpSvgComponent from "./svg-components/help-svg";
+import DifficultySvgComponent from "./svg_components/difficulty";
+import HelpSvgComponent from "./svg_components/help-svg";
 
 export default function AddDifficultyAlert({ navigation }) {
   const {

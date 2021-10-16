@@ -1,5 +1,5 @@
-import { forgotPasswordSubmit } from "../resources/backend/auth/forgot-password-submit";
-import { signIn } from "../resources/backend/auth/sign-in";
+import { forgotPasswordSubmit } from "../resources/aws/auth/forgot-password-submit";
+import { signIn } from "../resources/aws/auth/sign-in";
 
 export async function submitNewPassword(username, code, new_password) {
   const { error, successful, message } = await forgotPasswordSubmit(

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
-import store from "./src/presentation/state-management/store/store";
+import store from "./src/presentation/state_management/store/store";
+import { Storage, API } from "aws-amplify";
 import { Button, Platform, Text, View } from "react-native";
 import * as Linking from "expo-linking";
 import * as WebBrowser from "expo-web-browser";
@@ -17,24 +18,6 @@ import * as Network from "expo-network";
 import * as AuthSession from "expo-auth-session";
 import { createLineDraft } from "./src/domain/use_cases/create-line-draft";
 import { createPublicLine } from "./src/domain/use_cases/create-public-line";
-
-// const testLineDraft = {
-//   complete3LevelPluscode: "4RJ67R",
-//   startingCoordinates: { lat: -37.724208, lng: 144.80278 },
-//   finishCoordinates: { lat: -37.498637, lng: 144.716364 },
-//   creatorName: "Lev Martens",
-//   description:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit mi in lectus bibendum pellentesque. Morbi feugiat pulvinar orci, vehicula sollicitudin dolor euismod eget.",
-//   difficultyLevel: "0",
-//   distance: "5678",
-//   elevationPoints: [12, 23, 34, 45, 56, 67, 78, 89],
-//   hashTags: "",
-//   latitudeDeltaFit,
-//   longitudeDeltaFit,
-//   lineCompleted,
-//   title,
-//   verified,
-// };
 
 async function urlOpener(url, redirectUrl) {
   const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(
@@ -111,7 +94,7 @@ export default function App() {
       //     JSON.stringify(userData)
       // );
     });
-
+    //saveProduct();
     //createTestLine();
   }, []);
 

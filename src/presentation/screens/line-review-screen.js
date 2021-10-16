@@ -4,15 +4,15 @@ import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import StartButton from "../components/buttons/start-button";
 import { useSelector } from "react-redux";
-import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../theme/themes";
 import ElevationChart from "../components/elevation-chart";
 import WeatherWidget from "../components/weather-widget";
 import WalkAnotherTimeButton from "../components/buttons/walk-another-time-button";
 import MapViewLineReview from "../components/mapviews/map-view-line-review";
-import DeviationSvgComponent from "../components/svg-components/deviation";
-import TimeSvgComponent from "../components/svg-components/time";
-import DifficultySvgComponent from "../components/svg-components/difficulty";
+import DeviationSvgComponent from "../components/svg_components/deviation";
+import TimeSvgComponent from "../components/svg_components/time";
+import DifficultySvgComponent from "../components/svg_components/difficulty";
 import { createPublicLine } from "../../domain/use_cases/create-public-line";
 
 export default function LineReviewScreen({ navigation }) {

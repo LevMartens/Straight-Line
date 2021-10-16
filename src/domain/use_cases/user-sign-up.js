@@ -1,4 +1,4 @@
-import { signUp } from "../resources/backend/auth/sign-up";
+import { signUp } from "../resources/aws/auth/sign-up";
 
 export async function signUpUser(username, email, password) {
   const { error, message } = await signUp(username, email, password);

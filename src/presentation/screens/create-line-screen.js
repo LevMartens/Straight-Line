@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
-} from "../../domain/resources/environment/dimensions";
+} from "../../domain/resources/operating_system/dimensions";
 
 //TODO give aSingleCurrentPosition an "isLoaded" and render MapViewCreateLine conditionally
 

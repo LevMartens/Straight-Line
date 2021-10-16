@@ -1,11 +1,11 @@
-import { watchPosition } from "../resources/environment/watch-position";
+import { watchPosition } from "../resources/operating_system/watch-position";
 import { v4 as uuidv4 } from "uuid";
-import store from "../../presentation/state-management/store/store";
+import store from "../../presentation/state_management/store/store";
 import {
   currentPositionUpdate,
   finishLineUpdate,
   updatePath,
-} from "../../presentation/state-management/actions/actions";
+} from "../../presentation/state_management/actions/actions";
 import { getDistanceBetween } from "../generators/distance-generator";
 import { meterFractionGenerator } from "../generators/meter-fraction-generator";
 import { getCoordinatesBetween } from "../generators/coordinates-generator";

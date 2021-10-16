@@ -1,16 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { SCREEN_WIDTH } from "../../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import { useSelector } from "react-redux";
 import { getTheme } from "../../theme/themes";
 import {
   setPinStartingPoint,
   setPinEndPoint,
   resetPin,
-} from "../../state-management/actions/actions";
-import store from "../../state-management/store/store";
+} from "../../state_management/actions/actions";
+import store from "../../state_management/store/store";
 import { createLineDraft } from "../../../domain/use_cases/create-line-draft";
-import { showAddLineTitleAlert } from "../../../domain/resources/environment/alerts";
+import { showAddLineTitleAlert } from "../../../domain/resources/operating_system/alerts";
 
 export default function PinSetButton({ navigation }) {
   const { buttonStyle, textStyle } = styles();

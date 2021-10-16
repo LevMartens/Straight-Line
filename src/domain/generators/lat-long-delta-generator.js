@@ -1,4 +1,4 @@
-import { ASPECT_RATIO } from "../resources/environment/dimensions";
+import { ASPECT_RATIO } from "../resources/operating_system/dimensions";
 
 export async function getLatLongDeltaBasedOn(distance) {
   const a = distance / 1000;

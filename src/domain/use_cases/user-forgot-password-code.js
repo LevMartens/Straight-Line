@@ -1,4 +1,4 @@
-import { forgotPasswordCode } from "../resources/backend/auth/forgot-password-code";
+import { forgotPasswordCode } from "../resources/aws/auth/forgot-password-code";
 
 export async function sendForgotPasswordCode(username) {
   const { error, successful, message } = await forgotPasswordCode(username);

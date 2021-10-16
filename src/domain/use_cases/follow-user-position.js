@@ -1,10 +1,10 @@
-import { watchPosition } from "../resources/environment/watch-position";
-import store from "../../presentation/state-management/store/store";
+import { watchPosition } from "../resources/operating_system/watch-position";
+import store from "../../presentation/state_management/store/store";
 import {
   currentPositionUpdate,
   userCloseEnoughToStartUpdate,
   getWatcherReference,
-} from "../../presentation/state-management/actions/actions";
+} from "../../presentation/state_management/actions/actions";
 import { getDistanceBetween } from "../generators/distance-generator";
 import { userCloseEnoughToBegin } from "../helpers/if_statements";
 

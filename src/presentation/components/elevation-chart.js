@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
-import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../theme/themes";
 
 export default function ElevationChart({ elevationPoints, distance }) {

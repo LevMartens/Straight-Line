@@ -3,7 +3,7 @@ import imageSelected from "../../../assets/lineMarkerSelected.png";
 import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
-} from "../resources/environment/dimensions";
+} from "../resources/operating_system/dimensions";
 
 //* Functions in packers.js unpack data (objects) and put them back together in a way the presentation layer can use it
 

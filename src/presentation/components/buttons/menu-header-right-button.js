@@ -9,17 +9,17 @@ import {
   Keyboard,
 } from "react-native";
 import { getTheme } from "../../theme/themes";
-import MenuSvgComponent from "../svg-components/menu-svg";
+import MenuSvgComponent from "../svg_components/menu-svg";
 import {
   menuVisibleUpdate,
   searchOnChangeUpdate,
   searchVisibleUpdate,
   showHeadingOnUpdate,
   timeDelayUpdate,
-} from "../../state-management/actions/actions";
-import store from "../../state-management/store/store";
+} from "../../state_management/actions/actions";
+import store from "../../state_management/store/store";
 import { getSearchResults } from "../../../domain/use_cases/get-search-results";
-import { watchHeading } from "../../../domain/resources/environment/watch-heading";
+import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
 
 export default function MenuHeaderRightButton({ navigation }) {
   const { colorUnFocused } = getTheme();

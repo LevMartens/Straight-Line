@@ -1,10 +1,10 @@
 import {
   recentSearchesUpdate,
   searchResultsUpdate,
-} from "../../presentation/state-management/actions/actions";
-import store from "../../presentation/state-management/store/store";
+} from "../../presentation/state_management/actions/actions";
+import store from "../../presentation/state_management/store/store";
 import { packPublicLineData } from "../helpers/packers";
-import { getSearchResultsGraphql } from "../resources/backend/get-search-results-graphql";
+import { getSearchResultsGraphql } from "../resources/aws/dynamo_db/get-search-results-graphql";
 
 export async function getSearchResults(text) {
   console.log("TEST: text: " + text);

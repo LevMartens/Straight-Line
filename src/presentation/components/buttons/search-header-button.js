@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import store from "../../state-management/store/store";
+import store from "../../state_management/store/store";
 import { useSelector } from "react-redux";
 import {
   StyleSheet,
@@ -9,19 +9,19 @@ import {
   Animated,
   Keyboard,
 } from "react-native";
-import { SCREEN_WIDTH } from "../../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import {
   searchVisibleUpdate,
   timeDelayUpdate,
   searchOnChangeUpdate,
   menuVisibleUpdate,
   showHeadingOnUpdate,
-} from "../../state-management/actions/actions";
+} from "../../state_management/actions/actions";
 import { getTheme } from "../../theme/themes";
-import SearchSvgComponent from "../svg-components/search-svg";
-import EraseSvgComponent from "../svg-components/erase-svg";
+import SearchSvgComponent from "../svg_components/search-svg";
+import EraseSvgComponent from "../svg_components/erase-svg";
 import { getSearchResults } from "../../../domain/use_cases/get-search-results";
-import { recentSearches } from "../search-view";
+import { recentSearches } from "../explore_screen_components/es-search-view";
 
 export default function SearchHeaderButton() {
   const { colorUnFocused } = getTheme();

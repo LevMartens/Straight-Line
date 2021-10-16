@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { getLineDraftsFor } from "../../domain/resources/backend/get-line-drafts";
+import { getLineDraftsFor } from "../../domain/resources/aws/dynamo_db/get-line-drafts";
 import { getTheme } from "../theme/themes";
 import { owner } from "./profile-screen";
 

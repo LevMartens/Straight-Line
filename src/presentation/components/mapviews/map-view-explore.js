@@ -3,20 +3,21 @@ import MapView, { Marker, Polyline } from "react-native-maps";
 import { getTheme } from "../../theme/themes";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Image } from "react-native";
-import { getPositionOnce } from "../../../domain/resources/environment/get-position-once";
+import { getPositionOnce } from "../../../domain/resources/operating_system/get-position-once";
 import { getLineMarkers } from "../../../domain/use_cases/get-line-markers";
 import { useSelector } from "react-redux";
 import {
   selectMarker,
   resetMarker,
   mapViewRefUpdate,
-} from "../../state-management/actions/actions";
-import store from "../../state-management/store/store";
+  mapIsLoadedUpdate,
+} from "../../state_management/actions/actions";
+import store from "../../state_management/store/store";
 import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
-} from "../../../domain/resources/environment/dimensions";
-import MarkerSvgComponent from "../svg-components/marker-svg";
+} from "../../../domain/resources/operating_system/dimensions";
+import MarkerSvgComponent from "../svg_components/marker-svg";
 
 export default function MapViewExplore() {
   useEffect(() => {
@@ -59,6 +60,7 @@ export default function MapViewExplore() {
     longitude: 144.946457,
   };
   const mapType = useSelector((state) => state.mapTypeHandler);
+  const mapIsLoaded = useSelector((state) => state.mapIsLoadedHandler);
 
   return aSingleCurrentPosition.isLoaded === true ? (
     <MapView
@@ -68,6 +70,9 @@ export default function MapViewExplore() {
         store.dispatch(mapViewRefUpdate(mapView));
       }}
       showsUserLocation={true}
+      onMapReady={() => {
+        store.dispatch(mapIsLoadedUpdate(true));
+      }}
       mapType={mapType}
       liteMode={true}
       showsCompass={false}
@@ -161,6 +166,7 @@ const styles = () => {
       height: 40,
     },
     mapView: {
+      zIndex: 3,
       ...StyleSheet.absoluteFillObject,
     },
   });

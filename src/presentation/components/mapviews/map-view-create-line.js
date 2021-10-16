@@ -6,9 +6,9 @@ import { StyleSheet } from "react-native";
 import {
   mapPressedForFirstPin,
   mapPressedForSecondPin,
-} from "../../state-management/actions/actions";
-import store from "../../state-management/store/store";
-import MarkerSvgComponent from "../svg-components/marker-svg";
+} from "../../state_management/actions/actions";
+import store from "../../state_management/store/store";
+import MarkerSvgComponent from "../svg_components/marker-svg";
 
 export default function MapViewCreateLine({ initialRegion, mapType }) {
   const { mapStyle, markerCenterOffset } = styles();

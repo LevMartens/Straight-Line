@@ -1,15 +1,17 @@
 import { getZoomLevel } from "../generators/zoom-level-generator";
 import { pluscodeGeneratorLevel3 } from "../generators/pluscode-lvl-3-generator";
-import { getPluscodeFromCoordinates } from "../resources/api/get-pluscode";
-import store from "../../presentation/state-management/store/store";
+import { getPluscodeFromCoordinates } from "../resources/rest_api/get-pluscode";
+import store from "../../presentation/state_management/store/store";
 import {
   sendLineMarkers,
   selectMarker,
-} from "../../presentation/state-management/actions/actions";
-import { getAllLvl3UnderLvl2 } from "../resources/backend/get-all-lvl-3-under-lvl-2";
+} from "../../presentation/state_management/actions/actions";
+import { getAllLvl3UnderLvl2 } from "../resources/aws/dynamo_db/get-all-lvl-3-under-lvl-2";
 import { getZoomLevelRules } from "../helpers/if_statements";
-import { showBanner } from "../../presentation/components/banner";
+import { showBanner } from "../../presentation/components/explore_screen_components/es-banner";
 import { packLineData, packPublicLineData } from "../helpers/packers";
+
+import { downloadImage } from "../resources/aws/s3_bucket/download-image";
 
 //TODO:
 /**
@@ -95,16 +97,29 @@ export async function getLineMarkers(currentRegion) {
     return;
   }
 
-  // Extracting line objects from lvl 3 objects
+  // Getting line objects from lvl 3 objects
   let lineObjects = [];
 
   listOflvl3Objects.map((object) => {
     lineObjects = lineObjects.concat(object.listOfLines.items);
   });
 
+  // Adding image
+  let lineObjectsWithImage = [];
+
+  await Promise.all(
+    lineObjects.map(async (line) => {
+      const uri = line.finishedMissions.items[0].images[0];
+
+      line.frontImage = uri ? await downloadImage(uri) : "";
+
+      lineObjectsWithImage = lineObjectsWithImage.concat(line);
+    })
+  );
+
   // Prepping line marker data to send to MapView
   const lineMarkers = await Promise.all(
-    lineObjects.map(async (rawData) => {
+    lineObjectsWithImage.map(async (rawData) => {
       const lineMarkerData = await packPublicLineData(rawData);
       return lineMarkerData;
     })

@@ -4,7 +4,7 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { getTheme } from "../theme/themes";
 import { useSelector } from "react-redux";
 import SwipeModalNoBanner from "../components/swipe-modal-no-banner";
-import { SCREEN_WIDTH } from "../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import LottieView from "lottie-react-native";
 import confetti from "../../../assets/confetti.json";
 import confetti1 from "../../../assets/confetti1.json";

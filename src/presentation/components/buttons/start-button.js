@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SCREEN_WIDTH } from "../../../domain/resources/environment/dimensions";
+import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../../theme/themes";
 
 export default function StartButton({ navigation }) {
