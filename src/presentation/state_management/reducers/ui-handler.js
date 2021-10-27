@@ -33,6 +33,14 @@ export const searchResultsHandler = (
   }
 };
 
+export const onScreenHandler = (state = "no screen", action) => {
+  switch (action.type) {
+    case "ONSCREEN":
+      return action.event;
+    default:
+      return state;
+  }
+};
 export const mapViewRefHandler = (
   state = {
     noMapViewRef: true,
@@ -48,6 +56,63 @@ export const mapViewRefHandler = (
   }
 };
 
+export const exploreMapViewRefHandler = (
+  state = {
+    noMapViewRef: true,
+    ref: null,
+  },
+  action
+) => {
+  switch (action.type) {
+    case "MAPREFEXPLORE":
+      return action.event;
+    default:
+      return state;
+  }
+};
+export const createLineMapViewRefHandler = (
+  state = {
+    noMapViewRef: true,
+    ref: null,
+  },
+  action
+) => {
+  switch (action.type) {
+    case "MAPREFCREATELINE":
+      return action.event;
+    default:
+      return state;
+  }
+};
+export const gpsLiveMapViewRefHandler = (
+  state = {
+    noMapViewRef: true,
+    ref: null,
+  },
+  action
+) => {
+  switch (action.type) {
+    case "MAPREFGPSLIVE":
+      return action.event;
+    default:
+      return state;
+  }
+};
+export const lineReviewMapViewRefHandler = (
+  state = {
+    noMapViewRef: true,
+    ref: null,
+  },
+  action
+) => {
+  switch (action.type) {
+    case "MAPREFLINEREVIEW":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
 export const recentSearchesHandler = (state = [], action) => {
   switch (action.type) {
     case "RECENTSEARCH":
@@ -57,16 +122,24 @@ export const recentSearchesHandler = (state = [], action) => {
   }
 };
 
-export const mapTypeHandler = (state = "standard", action) => {
+export const exploreMapTypeHandler = (state = "standard", action) => {
   switch (action.type) {
-    case "MAPTYPE":
+    case "MAPTYPEEXPLORE":
+      return action.event;
+    default:
+      return state;
+  }
+};
+export const createLineMapTypeHandler = (state = "satellite", action) => {
+  switch (action.type) {
+    case "MAPTYPECREATE":
       return action.event;
     default:
       return state;
   }
 };
 
-export const menuVisibleHandler = (state = false, action) => {
+export const menuVisibleHandler = (state = true, action) => {
   switch (action.type) {
     case "MENUVISIBLE":
       return action.event;
@@ -96,6 +169,41 @@ export const mapIsLoadedHandler = (state = false, action) => {
 export const imagesHandler = (state = [], action) => {
   switch (action.type) {
     case "IMAGES":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
+export const toolbarVisibleHandler = (state = true, action) => {
+  switch (action.type) {
+    case "TOOLBAR":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
+export const exploreMapHeadingHandler = (state = 0.0, action) => {
+  switch (action.type) {
+    case "MAPHEADINGEXPLORE":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
+export const createMapHeadingHandler = (state = 0.0, action) => {
+  switch (action.type) {
+    case "MAPHEADINGCREATE":
+      return action.event;
+    default:
+      return state;
+  }
+};
+export const loadingVisibleHandler = (state = false, action) => {
+  switch (action.type) {
+    case "LOADINGVISIBLE":
       return action.event;
     default:
       return state;

@@ -5,9 +5,9 @@ import {
 import store from "../../presentation/state_management/store/store";
 import { packPublicLineData } from "../helpers/packers";
 import { getSearchResultsGraphql } from "../resources/aws/dynamo_db/get-search-results-graphql";
+import { getPlace } from "../resources/rest_api/get-place";
 
-export async function getSearchResults(text) {
-  console.log("TEST: text: " + text);
+export async function getSearchResults(text, locationOnly = false) {
   if (text === "") {
     const searchResults = {
       noTextInput: true,
@@ -16,6 +16,11 @@ export async function getSearchResults(text) {
       data: [],
     };
     store.dispatch(searchResultsUpdate(searchResults));
+    return;
+  }
+
+  if (locationOnly) {
+    const response = await getPlace(text);
     return;
   }
 

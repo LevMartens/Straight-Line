@@ -56,14 +56,15 @@ const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
     buttonStyle: {
-      paddingTop: 12,
+      paddingTop: 13,
       position: "absolute",
-      top: 40,
+      //marginLeft: 20,
+      top: 10, //40,
       flexDirection: "row",
       justifyContent: "center",
       alignSelf: "center",
       backgroundColor: theme.buttonColor,
-      width: SCREEN_WIDTH - 55,
+      width: SCREEN_WIDTH - 155,
       height: 50,
       borderRadius: 16,
     },

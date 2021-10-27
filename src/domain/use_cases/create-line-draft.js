@@ -3,12 +3,13 @@ import { getPluscodeFromCoordinates } from "../resources/rest_api/get-pluscode";
 import { getDistanceBetween } from "../generators/distance-generator";
 import { mapElevationPoints, packLineData } from "../helpers/packers";
 import { showAlert } from "../resources/operating_system/alerts";
-import { saveLineDraft } from "../resources/aws/dynamo_db/save-line-draft";
+import { saveLineDraftToDB } from "../resources/aws/dynamo_db/save-line-draft";
 import { selectLineDraft } from "../../presentation/state_management/actions/actions";
 import { getLatLongDeltaBasedOn } from "../generators/lat-long-delta-generator";
 import { getElevation } from "../resources/rest_api/get-elevation";
 import store from "../../presentation/state_management/store/store";
 import { getCoordinatesBetween } from "../generators/coordinates-generator";
+import { v4 as uuidv4 } from "uuid";
 
 export async function createLineDraft(pointA, pointB, lineTitle) {
   const startingPoint = pointA;
@@ -51,52 +52,77 @@ export async function createLineDraft(pointA, pointB, lineTitle) {
 
   const { latitude: endLatitude, longitude: endLongitude } = endPoint;
   const { latitude: midLatitude, longitude: midLongitude } = midPoint;
+  // const startingPointCoordinatesTypeID = await createGraphQLCoordinateType(
+  //   startLatitude,
+  //   startLongitude
+  // );
+  // const endPointCoordinatesTypeID = await createGraphQLCoordinateType(
+  //   endLatitude,
+  //   endLongitude
+  // );
 
-  const startingPointCoordinatesTypeID = await createGraphQLCoordinateType(
-    startLatitude,
-    startLongitude
-  );
-  const endPointCoordinatesTypeID = await createGraphQLCoordinateType(
-    endLatitude,
-    endLongitude
-  );
+  // const midPointCoordinatesTypeID = await createGraphQLCoordinateType(
+  //   midLatitude,
+  //   midLongitude
+  // );
 
-  const midPointCoordinatesTypeID = await createGraphQLCoordinateType(
-    midLatitude,
-    midLongitude
-  );
+  const id = uuidv4();
+
+  // const input = {
+  //   id: id,
+  //   parentId: "NOPARENTID",
+  //   complete3LevelPluscode: completePluscode,
+  //   lineDraftsStartingCoordinatesId: startingPointCoordinatesTypeID,
+  //   lineDraftsFinishCoordinatesId: endPointCoordinatesTypeID,
+  //   lineDraftsMidLineCoordinatesId: midPointCoordinatesTypeID,
+  //   creatorName: creatorName,
+  //   description: description,
+  //   difficultyLevel: difficultyLevel,
+  //   distance: distance,
+  //   elevationPoints: elevationPoints,
+  //   hashtags: hashtags,
+  //   latitudeDeltaFit: latitudeDelta,
+  //   longitudeDeltaFit: longitudeDelta,
+  //   lineCompleted: lineCompleted,
+  //   title: title,
+  //   verified: verified,
+  // };
+
   const input = {
-    parentId: "NOPARENTID",
-    complete3LevelPluscode: completePluscode,
-    lineDraftsStartingCoordinatesId: startingPointCoordinatesTypeID,
-    lineDraftsFinishCoordinatesId: endPointCoordinatesTypeID,
-    lineDraftsMidLineCoordinatesId: midPointCoordinatesTypeID,
-    creatorName: creatorName,
-    description: description,
-    difficultyLevel: difficultyLevel,
-    distance: distance,
-    elevationPoints: elevationPoints,
-    hashtags: hashtags,
-    latitudeDeltaFit: latitudeDelta,
-    longitudeDeltaFit: longitudeDelta,
-    lineCompleted: lineCompleted,
-    title: title,
-    verified: verified,
+    data: {
+      id: id,
+      parentId: "NOPARENTID",
+      complete3LevelPluscode: completePluscode,
+      startingCoordinates: { lat: startLatitude, lng: startLongitude },
+      finishCoordinates: { lat: endLatitude, lng: endLongitude },
+      midLineCoordinates: { lat: midLatitude, lng: midLongitude },
+      creatorName: creatorName,
+      description: description,
+      difficultyLevel: difficultyLevel,
+      distance: distance,
+      elevationPoints: elevationPoints,
+      hashtags: hashtags,
+      latitudeDeltaFit: latitudeDelta,
+      longitudeDeltaFit: longitudeDelta,
+      lineCompleted: lineCompleted,
+      title: title,
+      verified: verified,
+    },
   };
 
-  const line = await saveLineDraft(input);
+  // const line = await saveLineDraftToDB(input);
 
-  if (line.isNOTSaved) {
-    showAlert("Line draft didn't save, Lev sucks");
-    console.log(
-      "ERROR: Line draft didn't save, data back: " +
-        JSON.stringify(line.data) +
-        " source: create-line.js 184"
-    );
-    return;
-  }
+  // if (line.isNOTSaved) {
+  //   showAlert("Line draft didn't save, Lev sucks");
+  //   console.log(
+  //     "ERROR: Line draft didn't save, data back: " +
+  //       JSON.stringify(line.data) +
+  //       " source: create-line.js 184"
+  //   );
+  //   return;
+  // }
 
-  const lineDraft = await packLineData(line);
+  const lineDraft = await packLineData(input); //line
 
   store.dispatch(selectLineDraft(lineDraft));
 

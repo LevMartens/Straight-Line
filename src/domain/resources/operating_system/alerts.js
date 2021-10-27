@@ -22,7 +22,10 @@ export function showAddLineTitleAlert() {
   const buttons = [
     {
       text: "Add",
-      onPress: (userInput) => store.dispatch(addLineTitle(userInput)),
+      onPress: (userInput) => {
+        store.dispatch(addLineTitle(userInput));
+      },
+
       style: "default",
     },
   ];

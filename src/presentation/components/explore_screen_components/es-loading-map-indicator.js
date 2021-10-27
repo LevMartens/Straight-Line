@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { getTheme } from "../../theme/themes";
 import LottieView from "lottie-react-native";
 import loadingDots from "../../../../assets/loading-dots.json";
@@ -31,7 +31,7 @@ const styles = () => {
       ...StyleSheet.absoluteFillObject,
       fontSize: 17,
       color: theme.textColor,
-      textAlign: "left",
+      textAlign: "center",
       fontFamily: theme.fontThick,
     },
     lottieStyle: {

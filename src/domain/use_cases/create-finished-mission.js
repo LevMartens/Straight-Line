@@ -16,7 +16,7 @@ import {
 import { getDistanceBetween } from "../generators/distance-generator";
 import { mapElevationPoints, packLineData } from "../helpers/packers";
 import { showAlert } from "../resources/operating_system/alerts";
-import { saveLineDraft } from "../resources/aws/dynamo_db/save-line-draft";
+import { saveLineDraftToDB } from "../resources/aws/dynamo_db/save-line-draft";
 import { selectLineDraft } from "../../presentation/state_management/actions/actions";
 import Amplify, { Auth, Hub } from "aws-amplify";
 import { createGraphQLPathType } from "../resources/aws/dynamo_db/create-graphql-path";

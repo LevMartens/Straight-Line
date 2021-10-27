@@ -7,6 +7,8 @@ import { getTheme } from "../theme/themes";
 import MenuHeaderRightButton from "../components/buttons/menu-header-right-button";
 import BackHeaderButton from "../components/buttons/back-button";
 import SearchHeaderButton from "../components/buttons/search-header-button";
+import UndoSvgComponent from "../components/svg_components/toolbar-svg";
+import ToolbarHeaderButton from "../components/buttons/toolbar-header-button";
 
 const Stack = createStackNavigator();
 
@@ -18,12 +20,16 @@ export function CreateLineStack() {
         name="CreateLineScreen"
         component={CreateLineScreen}
         options={({ navigation }) => ({
+          title: "",
           headerRight: () => (
             <MenuHeaderRightButton
               navigation={navigation}
             ></MenuHeaderRightButton>
           ),
-          headerLeft: () => <SearchHeaderButton></SearchHeaderButton>,
+          headerLeft: () => (
+            <ToolbarHeaderButton></ToolbarHeaderButton>
+            //  <SearchHeaderButton forCreateLineScreen={true}></SearchHeaderButton>
+          ),
           headerStyle: headerStyle,
         })}
       />

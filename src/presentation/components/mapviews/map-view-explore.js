@@ -9,8 +9,9 @@ import { useSelector } from "react-redux";
 import {
   selectMarker,
   resetMarker,
-  mapViewRefUpdate,
   mapIsLoadedUpdate,
+  exploreMapViewRefUpdate,
+  exploreMapHeadingUpdate,
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
 import MarkerSvgComponent from "../svg_components/marker-svg";
@@ -23,7 +24,7 @@ export default function MapViewExplore() {
     getPositionOnce(); //TODO this function bypasses use_cases
   }, []);
 
-  const mapType = useSelector((state) => state.mapTypeHandler);
+  const mapType = useSelector((state) => state.exploreMapTypeHandler);
   const lineMarkers = useSelector((state) => state.lineMarkersHandler);
   const aSingleCurrentPosition = useSelector(
     (state) => state.aSingleCurrentPosition
@@ -40,7 +41,7 @@ export default function MapViewExplore() {
     zoom: 40,
   };
 
-  let mapView;
+  let mapViewRef;
 
   const positionHasChanged = async function (currentRegion) {
     getLineMarkers(currentRegion);
@@ -48,9 +49,13 @@ export default function MapViewExplore() {
 
   return aSingleCurrentPosition.isLoaded === true ? (
     <MapView
-      ref={(ref) => {
-        mapView = ref;
-        store.dispatch(mapViewRefUpdate(mapView));
+      ref={async (ref) => {
+        mapViewRef = ref;
+        store.dispatch(exploreMapViewRefUpdate(mapViewRef));
+      }}
+      onRegionChange={async () => {
+        const mapHeading = await mapViewRef.getCamera();
+        store.dispatch(exploreMapHeadingUpdate(mapHeading.heading));
       }}
       showsUserLocation={true}
       onMapReady={() => {
@@ -79,7 +84,7 @@ export default function MapViewExplore() {
                   : { x: 0, y: 0 }
               }
               onPress={() => {
-                mapView.animateToRegion(markerRegion, 1000);
+                mapViewRef.animateToRegion(markerRegion, 1000);
                 store.dispatch(selectMarker(marker));
               }}
             >

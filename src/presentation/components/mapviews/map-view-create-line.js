@@ -1,21 +1,24 @@
-import React from "react";
-import MapView, { Polyline, Marker, Circle } from "react-native-maps";
+import React, { useEffect } from "react";
+import MapView, { Polyline, Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { StyleSheet } from "react-native";
 import {
+  createLineMapViewRefUpdate,
   mapPressedForFirstPin,
   mapPressedForSecondPin,
+  createMapHeadingUpdate,
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
 import MarkerSvgComponent from "../svg_components/marker-svg";
 
-export default function MapViewCreateLine({ initialRegion, mapType }) {
+export default function MapViewCreateLine({ initialRegion }) {
   const { mapStyle, markerCenterOffset } = styles();
 
   const pinState = useSelector((state) => state.createLineStateHandler);
   const firstPinCoordinates = useSelector((state) => state.startMarkerHandler);
   const secondPinCoordinates = useSelector((state) => state.endMarkerHandler);
+  const mapType = useSelector((state) => state.createLineMapTypeHandler);
 
   const mapPressed = (coordinates) => {
     pinState == "Set starting point" &&
@@ -27,11 +30,38 @@ export default function MapViewCreateLine({ initialRegion, mapType }) {
   const startMarkerID = uuidv4();
   const finishMarkerID = uuidv4();
 
+  const aSingleCurrentPosition = useSelector(
+    (state) => state.aSingleCurrentPosition
+  );
+
+  const initialStartingPoint = aSingleCurrentPosition;
+
+  const initialEndPoint = {
+    latitude: aSingleCurrentPosition.latitude + 0.001,
+    longitude: aSingleCurrentPosition.longitude + 0.001,
+  };
+
+  const firstPinHistory = [initialStartingPoint];
+  const secondPinHistory = [initialEndPoint];
+
+  //const startingPoint =
+  let mapViewRef;
+
   return (
     <MapView
       onPress={(e) => mapPressed(e.nativeEvent.coordinate)}
       mapType={mapType}
+      ref={(ref) => {
+        mapViewRef = ref;
+
+        store.dispatch(createLineMapViewRefUpdate(mapViewRef));
+      }}
+      onRegionChange={async () => {
+        const mapHeading = await mapViewRef.getCamera();
+        store.dispatch(createMapHeadingUpdate(mapHeading.heading));
+      }}
       style={mapStyle}
+      showsCompass={false}
       initialRegion={initialRegion}
     >
       {/* <Circle
@@ -59,7 +89,7 @@ export default function MapViewCreateLine({ initialRegion, mapType }) {
         title={"Finish"}
         description={"The end point of your straight line"}
       >
-        <MarkerSvgComponent></MarkerSvgComponent>
+        <MarkerSvgComponent height={30} width={30}></MarkerSvgComponent>
       </Marker>
 
       <Marker
@@ -71,7 +101,7 @@ export default function MapViewCreateLine({ initialRegion, mapType }) {
         title={"Start"}
         description={"The starting point of your straight line"}
       >
-        <MarkerSvgComponent></MarkerSvgComponent>
+        <MarkerSvgComponent height={30} width={30}></MarkerSvgComponent>
       </Marker>
 
       <Polyline

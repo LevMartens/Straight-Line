@@ -20,7 +20,7 @@ import SearchSvgComponent from "../svg_components/search-svg";
 import EraseSvgComponent from "../svg_components/erase-svg";
 import { getSearchResults } from "../../../domain/use_cases/get-search-results";
 
-export default function SearchHeaderButton() {
+export default function SearchHeaderButton({ forCreateLineScreen }) {
   const { colorUnFocused } = getTheme();
   const { buttonStyle, textInputStyle, selection, eraseStyle } = styles();
 
@@ -105,7 +105,7 @@ export default function SearchHeaderButton() {
           style={textInputStyle}
           onChangeText={(text) => {
             onChangeSearchInput(text);
-            getSearchResults(text);
+            getSearchResults(text, forCreateLineScreen);
           }}
           value={textInputVisible ? searchInput : ""}
           onFocus={() => {
@@ -119,7 +119,11 @@ export default function SearchHeaderButton() {
             startDelay();
           }}
           placeholder={
-            textInputVisible && timeIsPassed ? "Enter location or trail" : ""
+            textInputVisible && timeIsPassed
+              ? "Enter location or trail"
+              : forCreateLineScreen
+              ? "Enter location"
+              : ""
           }
           selectionColor={selection.color}
         />

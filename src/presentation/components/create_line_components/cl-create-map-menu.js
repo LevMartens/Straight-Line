@@ -7,19 +7,20 @@ import CompassSvgComponent from "../svg_components/compass";
 import LayersSvgComponent from "../svg_components/layers-svg";
 import CurrentLocationSvgComponent from "../svg_components/current-location-svg";
 import {
-  exploreMapTypeUpdate,
-  exploreMapHeadingUpdate,
+  createLineMapTypeUpdate,
+  createMapHeadingUpdate,
 } from "../../state_management/actions/actions";
 
-export default function ExploreMapMenu() {
+export default function CreateLineMapMenu() {
   const { compassStyle, layersStyle, containerStyle } = styles();
 
-  const exploreMapViewRef = useSelector(
-    (state) => state.exploreMapViewRefHandler
+  const createLineMapViewRef = useSelector(
+    (state) => state.createLineMapViewRefHandler
   );
 
-  const mapType = useSelector((state) => state.exploreMapTypeHandler);
-  const mapHeading = useSelector((state) => state.exploreMapHeadingHandler);
+  const mapType = useSelector((state) => state.createLineMapTypeHandler);
+  const mapHeading = useSelector((state) => state.createMapHeadingHandler);
+
   const aSingleCurrentPosition = useSelector(
     (state) => state.aSingleCurrentPosition
   );
@@ -60,17 +61,17 @@ export default function ExploreMapMenu() {
 
       <TouchableOpacity
         onPress={async () => {
-          if (mapType === "standard") {
-            store.dispatch(exploreMapTypeUpdate("hybridFlyover"));
+          if (mapType === "satellite") {
+            store.dispatch(createLineMapTypeUpdate("hybridFlyover"));
           }
           if (mapType === "hybridFlyover" && !threeDOn) {
-            exploreMapViewRef.animateCamera(cameraPosition3D, 500);
+            createLineMapViewRef.animateCamera(cameraPosition3D, 500);
             setThreeDOn(true);
           }
           if (mapType === "hybridFlyover" && threeDOn) {
-            exploreMapViewRef.animateCamera(cameraPositionNormal, 500);
+            createLineMapViewRef.animateCamera(cameraPositionNormal, 500);
             setThreeDOn(false);
-            store.dispatch(exploreMapTypeUpdate("standard"));
+            store.dispatch(createLineMapTypeUpdate("satellite"));
           }
         }}
         style={layersStyle}
@@ -79,8 +80,8 @@ export default function ExploreMapMenu() {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          exploreMapViewRef.animateCamera(cameraPositionNormal, 500);
-          store.dispatch(exploreMapHeadingUpdate(0.0));
+          createLineMapViewRef.animateCamera(cameraPositionNormal, 500);
+          store.dispatch(createMapHeadingUpdate(0.0));
         }}
         style={layersStyle}
       >

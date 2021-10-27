@@ -10,11 +10,15 @@ import StatsIcon from "../components/icons/stats-tab-tab-icon";
 import ProfileIcon from "../components/icons/profile-tab-bar-icon";
 import { ExploreStack } from "./explore-stack";
 import { CreateLineStack } from "./create-line-stack";
+import { useSelector } from "react-redux";
+import { onScreenUpdate } from "../state_management/actions/actions";
+import store from "../state_management/store/store";
 
 const Tab = createBottomTabNavigator();
 
 export function BottomTab() {
   const { bottomTabBarStyle } = styles();
+
   return (
     <Tab.Navigator
       initialRouteName="Explore"
@@ -26,6 +30,12 @@ export function BottomTab() {
       <Tab.Screen
         name="ExploreStack"
         component={ExploreStack}
+        listeners={{
+          tabPress: (e) => {
+            console.log("Explore Tab press", e.target);
+            store.dispatch(onScreenUpdate("explore-screen"));
+          },
+        }}
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => {
@@ -36,6 +46,12 @@ export function BottomTab() {
       <Tab.Screen
         name="CreateLineStack"
         component={CreateLineStack}
+        listeners={{
+          tabPress: (e) => {
+            console.log("Create Tab press", e.target);
+            store.dispatch(onScreenUpdate("create-screen"));
+          },
+        }}
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ focused }) => {

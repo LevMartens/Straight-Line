@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MapViewCreateLine from "../../presentation/components/mapviews/map-view-create-line";
 import PinSetButton from "../components/buttons/pin-set-button";
 import { StyleSheet, View } from "react-native";
@@ -8,6 +8,12 @@ import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
 } from "../../domain/resources/operating_system/dimensions";
+import CreateLineToolbar from "../components/create_line_components/cl-toolbar-menu";
+import ExploreMapMenu from "../components/explore_screen_components/es-explore-map-menu";
+import { onScreenUpdate } from "../state_management/actions/actions";
+import store from "../state_management/store/store";
+import CreateLineMapMenu from "../components/create_line_components/cl-create-map-menu";
+import ActivityIndicatorOnTransparentView from "../components/activity-indicator-transparent-view.js";
 
 //TODO give aSingleCurrentPosition an "isLoaded" and render MapViewCreateLine conditionally
 
@@ -17,6 +23,13 @@ export default function CreateLineScreen({ navigation }) {
   const { latitude, longitude } = useSelector(
     (state) => state.aSingleCurrentPosition
   );
+  const toolbarVisible = useSelector((state) => state.toolbarVisibleHandler);
+  const menuVisible = useSelector((state) => state.menuVisibleHandler);
+  const loadingVisible = useSelector((state) => state.loadingVisibleHandler);
+
+  // const createMapViewRef = useSelector(
+  //   (state) => state.createMapViewRefHandler
+  // );
 
   const initialRegion = {
     latitude: latitude,
@@ -25,12 +38,18 @@ export default function CreateLineScreen({ navigation }) {
     longitudeDelta: LONGITUDE_DELTA,
   };
 
+  console.log("TEST: loading ", loadingVisible);
+
   return (
     <View style={containerStyle}>
-      <MapViewCreateLine initialRegion={initialRegion} mapType={"satellite"}>
-        {" "}
-      </MapViewCreateLine>
-      <PinSetButton navigation={navigation}> </PinSetButton>
+      {loadingVisible && (
+        <ActivityIndicatorOnTransparentView></ActivityIndicatorOnTransparentView>
+      )}
+      <MapViewCreateLine initialRegion={initialRegion}></MapViewCreateLine>
+      {toolbarVisible && <CreateLineToolbar></CreateLineToolbar>}
+      {menuVisible && <CreateLineMapMenu></CreateLineMapMenu>}
+
+      {/* <PinSetButton navigation={navigation}> </PinSetButton> */}
     </View>
   );
 }

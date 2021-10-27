@@ -170,10 +170,35 @@ export const searchResultsUpdate = (event) => {
   };
 };
 
-export const mapViewRefUpdate = (event) => {
+export const onScreenUpdate = (event) => {
   return {
     event: event,
-    type: "MAPREF",
+    type: "ONSCREEN",
+  };
+};
+
+export const exploreMapViewRefUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPREFEXPLORE",
+  };
+};
+export const createLineMapViewRefUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPREFCREATELINE",
+  };
+};
+export const gpsLiveMapViewRefUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPREFGPSLIVE",
+  };
+};
+export const lineReviewMapViewRefUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPREFLINEREVIEW",
   };
 };
 
@@ -184,10 +209,17 @@ export const recentSearchesUpdate = (event) => {
   };
 };
 
-export const mapTypeUpdate = (event) => {
+export const exploreMapTypeUpdate = (event) => {
   return {
     event: event,
-    type: "MAPTYPE",
+    type: "MAPTYPEEXPLORE",
+  };
+};
+
+export const createLineMapTypeUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPTYPECREATE",
   };
 };
 
@@ -216,5 +248,40 @@ export const imagesUpdate = (event) => {
   return {
     event: event,
     type: "IMAGES",
+  };
+};
+
+export const toolbarVisibleUpdate = (event) => {
+  return {
+    event: event,
+    type: "TOOLBAR",
+  };
+};
+
+export const mapViewRefUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPREF",
+  };
+};
+
+export const exploreMapHeadingUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPHEADINGEXPLORE",
+  };
+};
+
+export const createMapHeadingUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPHEADINGCREATE",
+  };
+};
+
+export const loadingVisibleUpdate = (event) => {
+  return {
+    event: event,
+    type: "LOADINGVISIBLE",
   };
 };

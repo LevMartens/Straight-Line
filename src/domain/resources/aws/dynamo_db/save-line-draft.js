@@ -1,7 +1,7 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { createLineDrafts } from "../../../../../graphql/mutations";
 
-export async function saveLineDraft(input) {
+export async function saveLineDraftToDB(input) {
   try {
     const response = await API.graphql(
       graphqlOperation(createLineDrafts, {

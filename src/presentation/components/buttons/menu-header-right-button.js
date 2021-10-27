@@ -13,32 +13,18 @@ import MenuSvgComponent from "../svg_components/menu-svg";
 import {
   menuVisibleUpdate,
   searchVisibleUpdate,
-  showHeadingOnUpdate,
   timeDelayUpdate,
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
 
-export default function MenuHeaderRightButton({ navigation }) {
+export default function MenuHeaderRightButton() {
   const { colorUnFocused } = getTheme();
   const { buttonStyle, textStyle1, cancelStyle, containerStyle } = styles();
 
   const searchVisible = useSelector((state) => state.searchVisibleHandler);
   const menuVisible = useSelector((state) => state.menuVisibleHandler);
-  const showHeadingOn = useSelector((state) => state.showHeadingOnHandler);
-  const mapViewRef = useSelector((state) => state.mapViewRefHandler);
-  const headingWatcher = useSelector((state) => state.headingWatcherHandler);
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
-  );
-  const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  const cameraPosition = {
-    center: aSingleCurrentPosition,
-    pitch: 2,
-    heading: 0.0,
-    altitude: 200000,
-    zoom: 40,
-  };
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -67,11 +53,6 @@ export default function MenuHeaderRightButton({ navigation }) {
         <TouchableOpacity
           style={buttonStyle}
           onPress={() => {
-            if (showHeadingOn) {
-              headingWatcher.remove();
-              mapViewRef.animateCamera(cameraPosition, 500);
-              store.dispatch(showHeadingOnUpdate(false));
-            }
             if (menuVisible) {
               store.dispatch(menuVisibleUpdate(false));
             }

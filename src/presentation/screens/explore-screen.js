@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import MapViewExplore from "../components/mapviews/map-view-explore";
 import { useSelector } from "react-redux";
@@ -18,6 +18,7 @@ export default function Explore({ navigation }) {
   const { visible, message } = useSelector((state) => state.bannerHandler);
   const searchVisible = useSelector((state) => state.searchVisibleHandler);
   const menuVisible = useSelector((state) => state.menuVisibleHandler);
+
   const { isLoaded: linesAreLoaded } = useSelector(
     (state) => state.selectedMarkerHandler
   );
@@ -31,8 +32,9 @@ export default function Explore({ navigation }) {
           <SwipeModalLoading></SwipeModalLoading>
         )}
       </SwipeModal>
-      {menuVisible && <ExploreMapMenu></ExploreMapMenu>}
       <MapViewExplore></MapViewExplore>
+      {menuVisible && <ExploreMapMenu></ExploreMapMenu>}
+
       {searchVisible && <SearchView searchVisible={searchVisible}></SearchView>}
       <Banner visible={visible} bannerText={message}></Banner>
     </View>
