@@ -8,11 +8,11 @@ import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
 } from "../../domain/resources/operating_system/dimensions";
-import CreateLineToolbar from "../components/create_line_components/cl-toolbar-menu";
+import CreateLineToolbar from "../components/create_line_screen_components/cl-toolbar-menu";
 import ExploreMapMenu from "../components/explore_screen_components/es-explore-map-menu";
 import { onScreenUpdate } from "../state_management/actions/actions";
 import store from "../state_management/store/store";
-import CreateLineMapMenu from "../components/create_line_components/cl-create-map-menu";
+import CreateLineMapMenu from "../components/create_line_screen_components/cl-create-map-menu";
 import ActivityIndicatorOnTransparentView from "../components/activity-indicator-transparent-view.js";
 
 //TODO give aSingleCurrentPosition an "isLoaded" and render MapViewCreateLine conditionally
@@ -37,8 +37,6 @@ export default function CreateLineScreen({ navigation }) {
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   };
-
-  console.log("TEST: loading ", loadingVisible);
 
   return (
     <View style={containerStyle}>

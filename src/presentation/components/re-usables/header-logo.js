@@ -8,7 +8,7 @@ export default function HeaderLogo() {
 
   return (
     <View style={logoStyle}>
-      <LogoSvgComponent></LogoSvgComponent>
+      <LogoSvgComponent width={120} height={120}></LogoSvgComponent>
     </View>
   );
 }

@@ -46,9 +46,11 @@ import {
   createLineMapTypeHandler,
   createMapHeadingHandler,
   loadingVisibleHandler,
+  weatherDataHandler,
 } from "./ui-handler";
 
 export default combineReducers({
+  weatherDataHandler,
   loadingVisibleHandler,
   createMapHeadingHandler,
   createLineMapTypeHandler,

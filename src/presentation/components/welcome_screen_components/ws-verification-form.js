@@ -38,7 +38,7 @@ export default function VerificationForm({ backToLogin, username }) {
 
       <View>
         <LogoSvgComponent
-          style={{ position: "absolute", left: SCREEN_WIDTH - 285, top: 10 }}
+          style={{ position: "absolute", left: SCREEN_WIDTH - 255, top: 10 }}
         ></LogoSvgComponent>
         <Text style={textStyle1}> {"Email"} </Text>
         <Text style={textStyle2}> {"Verification"} </Text>

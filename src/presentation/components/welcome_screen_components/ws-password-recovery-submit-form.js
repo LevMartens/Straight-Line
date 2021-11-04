@@ -43,7 +43,7 @@ export default function PasswordRecoverySubmitForm({ backToLogin }) {
 
       <View>
         <LogoSvgComponent
-          style={{ position: "absolute", left: SCREEN_WIDTH - 285, top: 10 }}
+          style={{ position: "absolute", left: SCREEN_WIDTH - 255, top: 10 }}
         ></LogoSvgComponent>
         <Text style={textStyle1}> {"Password"} </Text>
         <Text style={textStyle2}> {"Recovery"} </Text>

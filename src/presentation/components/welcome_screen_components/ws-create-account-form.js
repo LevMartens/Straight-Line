@@ -14,6 +14,7 @@ import VerificationForm from "./ws-verification-form";
 import LogoSvgComponent from "../svg_components/logo-white-svg";
 import ActivityIndicatorOnTransparentView from "../activity-indicator-transparent-view.js.js";
 import LoginButton from "./ws-login-button";
+import HeaderLogo from "../re-usables/header-logo";
 
 export default function CreateAccountForm({ setModalVisible, navigation }) {
   const {
@@ -56,7 +57,7 @@ export default function CreateAccountForm({ setModalVisible, navigation }) {
       ) : (
         <View>
           <LogoSvgComponent
-            style={{ position: "absolute", left: SCREEN_WIDTH - 285, top: 10 }}
+            style={{ position: "absolute", left: SCREEN_WIDTH - 255, top: 10 }}
           ></LogoSvgComponent>
           <Text style={textStyle1}> {"Create"} </Text>
           <Text style={textStyle2}> {"Account"} </Text>

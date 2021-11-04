@@ -14,7 +14,9 @@ export async function getPlace(textInput, myLocation) {
     {}
   );
 
-  console.log("TEST: place response ", JSON.stringify(response));
+  const data = await response.json();
+
+  console.log("TEST: place response ", data);
   // const {
   //   plus_code: { global_code },
   // } = await response.json();

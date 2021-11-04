@@ -37,11 +37,12 @@ export function CreateLineStack() {
         name="Detail"
         component={DetailScreen}
         options={({ navigation }) => ({
-          headerRight: () => (
-            <MenuHeaderRightButton
-              navigation={navigation}
-            ></MenuHeaderRightButton>
-          ),
+          // headerRight: () => (
+          //   // <NameButton></NameButton>
+          //   // <MenuHeaderRightButton
+          //   //   navigation={navigation}
+          //   // ></MenuHeaderRightButton>
+          // ),
           headerLeft: () => (
             <BackHeaderButton
               navigation={navigation}

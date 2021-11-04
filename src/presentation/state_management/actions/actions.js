@@ -285,3 +285,10 @@ export const loadingVisibleUpdate = (event) => {
     type: "LOADINGVISIBLE",
   };
 };
+
+export const weatherDataUpdate = (event) => {
+  return {
+    event: event,
+    type: "WEATHERDATA",
+  };
+};

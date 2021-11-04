@@ -209,3 +209,22 @@ export const loadingVisibleHandler = (state = false, action) => {
       return state;
   }
 };
+
+export const weatherDataHandler = (
+  state = {
+    weatherDataLoaded: false,
+    weatherDataError: false,
+    icon: null,
+    temprature: null,
+    percentageRain: null,
+    windSpeed: null,
+  },
+  action
+) => {
+  switch (action.type) {
+    case "WEATHERDATA":
+      return action.event;
+    default:
+      return state;
+  }
+};

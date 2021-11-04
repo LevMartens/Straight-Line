@@ -6,8 +6,8 @@ import StartButton from "../components/buttons/start-button";
 import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../theme/themes";
-import ElevationChart from "../components/elevation-chart";
-import WeatherWidget from "../components/weather-widget";
+import ElevationChart from "../components/re-usables/elevation-chart";
+import WeatherWidget from "../components/re-usables/weather-widget";
 import WalkAnotherTimeButton from "../components/buttons/walk-another-time-button";
 
 export default function DetailScreen({ navigation }) {
@@ -21,11 +21,14 @@ export default function DetailScreen({ navigation }) {
     widgetContainerStyle,
     mapViewStyle,
   } = styles();
+
   const { markerRegionZoomedIn, isLoaded, rawLineData } = useSelector(
     (state) => state.selectedLineDraftHandler
   );
 
   const { distance, elevationPoints, title } = rawLineData;
+
+  const distanceInKilometers = (distance / 1000).toFixed(1); //Math.round((distance / 1000) * 10) / 10; //
 
   return (
     <View style={containerStyle}>
@@ -40,7 +43,9 @@ export default function DetailScreen({ navigation }) {
         />
       )}
       <Text style={textStyle1}> {"Distance"} </Text>
-      <Text style={textStyle2}> {`${distance}m`} </Text>
+      <Text style={textStyle2}>
+        {distance >= 1000 ? `${distanceInKilometers}km` : `${distance}m`}
+      </Text>
       {isLoaded == true ? (
         <ElevationChart
           distance={distance}
@@ -133,7 +138,7 @@ const styles = () => {
 
     textStyle: {
       marginTop: 20,
-      marginLeft: 20,
+      marginLeft: 17,
       fontSize: 25,
       color: theme.textColor,
       textAlign: "left",
@@ -150,7 +155,7 @@ const styles = () => {
     textStyle2: {
       //marginTop: 20,
       marginBottom: 3, //10,
-      marginLeft: 15,
+      marginLeft: 22,
       fontSize: 40,
       color: theme.textColor,
       textAlign: "left",
@@ -159,7 +164,7 @@ const styles = () => {
     subTextStyle: {
       marginTop: 5,
       //marginBottom: 10,
-      marginLeft: 23,
+      marginLeft: 19,
       fontSize: 17,
       color: theme.textColor,
       textAlign: "left",
