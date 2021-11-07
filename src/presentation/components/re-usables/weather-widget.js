@@ -52,8 +52,8 @@ export default function WeatherWidget() {
           justifyContent: "center",
           flex: 2,
           marginTop: 7,
-          paddingLeft:
-            percentageRain === "100" ? 15 : percentageRain === "0" ? 10 : 10,
+
+          paddingLeft: 23,
         }}
       >
         <RainDropsSvgComponent></RainDropsSvgComponent>
@@ -66,7 +66,8 @@ export default function WeatherWidget() {
           justifyContent: "center",
           flex: 2,
           marginBottom: 5,
-          paddingLeft: 10,
+
+          paddingLeft: 15,
         }}
       >
         <WindSvgComponent></WindSvgComponent>
@@ -88,7 +89,9 @@ export default function WeatherWidget() {
     </View>
   );
 }
-
+// percentageRain === "100" ? 20 : percentageRain === "0" ? 10 : 10,
+//${windSpeed}
+//position={"absolute"} left={50}
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
@@ -118,6 +121,7 @@ const styles = () => {
       marginLeft: 5,
       marginTop: 3,
       fontSize: 13,
+      width: 60,
       color: theme.textColor,
 
       fontFamily: theme.fontFamily,
@@ -126,8 +130,8 @@ const styles = () => {
       marginLeft: 5, //3,
       marginTop: 3,
       fontSize: 13,
+      width: 60,
       color: theme.textColor,
-
       fontFamily: theme.fontFamily,
     },
     textStyleError: {

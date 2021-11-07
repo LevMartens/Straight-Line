@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import MapViewCreateLine from "../components/mapviews/map-view-create-line";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text } from "react-native";
-import StartButton from "../components/buttons/start-button";
+import StartButton from "../components/detail_screen_components/start-button";
 import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../theme/themes";
 import ElevationChart from "../components/re-usables/elevation-chart";
 import WeatherWidget from "../components/re-usables/weather-widget";
-import WalkAnotherTimeButton from "../components/buttons/walk-another-time-button";
+import WalkAnotherTimeButton from "../components/detail_screen_components/walk-another-time-button";
 
 export default function DetailScreen({ navigation }) {
   const {

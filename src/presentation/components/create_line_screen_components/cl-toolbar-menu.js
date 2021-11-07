@@ -6,6 +6,7 @@ import { getTheme } from "../../theme/themes";
 import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
 import CompassSvgComponent from "../svg_components/compass";
 import LayersSvgComponent from "../svg_components/layers-svg";
+import { Alert } from "react-native";
 import CurrentLocationSvgComponent from "../svg_components/current-location-svg";
 import {
   loadingVisibleUpdate,
@@ -124,11 +125,13 @@ export default function CreateLineToolbar() {
 
           if (doneButtonText === "Done") {
             store.dispatch(loadingVisibleUpdate(true));
+
             await createLineDraft(
               firstPinCoordinates,
               secondPinCoordinates,
               title
             );
+
             store.dispatch(loadingVisibleUpdate(false));
             navigation.navigate("Detail");
             setDoneButtonText("Add name");
@@ -207,6 +210,7 @@ const styles = () => {
       width: 60,
       justifyContent: "center",
       alignItems: "center",
+      borderRadius: 5,
     },
     doneStyle: {
       marginTop: 5,
@@ -216,6 +220,7 @@ const styles = () => {
       width: 60,
       justifyContent: "center",
       alignItems: "center",
+      borderRadius: 5,
     },
     containerStyle: {
       zIndex: 999999999999999,

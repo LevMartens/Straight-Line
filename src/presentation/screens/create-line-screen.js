@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MapViewCreateLine from "../../presentation/components/mapviews/map-view-create-line";
-import PinSetButton from "../components/buttons/pin-set-button";
+
 import { StyleSheet, View } from "react-native";
 import { getTheme } from "../theme/themes";
 import { useSelector } from "react-redux";
@@ -46,8 +46,6 @@ export default function CreateLineScreen({ navigation }) {
       <MapViewCreateLine initialRegion={initialRegion}></MapViewCreateLine>
       {toolbarVisible && <CreateLineToolbar></CreateLineToolbar>}
       {menuVisible && <CreateLineMapMenu></CreateLineMapMenu>}
-
-      {/* <PinSetButton navigation={navigation}> </PinSetButton> */}
     </View>
   );
 }

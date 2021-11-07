@@ -2,6 +2,8 @@ import { showAlert } from "../resources/operating_system/alerts";
 import { saveLineDraftToDB } from "../resources/aws/dynamo_db/save-line-draft";
 import { selectLineDraft } from "../../presentation/state_management/actions/actions";
 import store from "../../presentation/state_management/store/store";
+import { createGraphQLCoordinateType } from "../resources/aws/dynamo_db/create-graphql-coordinates-type";
+import { packLineData } from "../helpers/packers";
 
 export async function saveLineDraft(rawLineDraft) {
   const {
@@ -23,10 +25,9 @@ export async function saveLineDraft(rawLineDraft) {
     verified,
   } = rawLineDraft;
 
-  const { latitude: startLatitude, longitude: startLongitude } =
-    startingCoordinates;
-  const { latitude: endLatitude, longitude: endLongitude } = finishCoordinates;
-  const { latitude: midLatitude, longitude: midLongitude } = midLineCoordinates;
+  const { lat: startLatitude, lng: startLongitude } = startingCoordinates;
+  const { lat: endLatitude, lng: endLongitude } = finishCoordinates;
+  const { lat: midLatitude, lng: midLongitude } = midLineCoordinates;
 
   const startingPointCoordinatesTypeID = await createGraphQLCoordinateType(
     startLatitude,
@@ -73,6 +74,7 @@ export async function saveLineDraft(rawLineDraft) {
     );
     return;
   }
+
   const lineDraft = await packLineData(line); //line
 
   store.dispatch(selectLineDraft(lineDraft));

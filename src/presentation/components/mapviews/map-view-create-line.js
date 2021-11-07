@@ -11,6 +11,7 @@ import {
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
 import MarkerSvgComponent from "../svg_components/marker-svg";
+import MarkerEndSvgComponent from "../svg_components/marker-end-svg";
 
 export default function MapViewCreateLine({ initialRegion }) {
   const { mapStyle, markerCenterOffset } = styles();
@@ -81,7 +82,6 @@ export default function MapViewCreateLine({ initialRegion }) {
         radius={240}
       ></Circle> */}
       <Marker
-        draggable
         key={finishMarkerID}
         zIndex={1000}
         centerOffset={markerCenterOffset}
@@ -89,11 +89,10 @@ export default function MapViewCreateLine({ initialRegion }) {
         title={"Finish"}
         description={"The end point of your straight line"}
       >
-        <MarkerSvgComponent height={30} width={30}></MarkerSvgComponent>
+        <MarkerEndSvgComponent height={30} width={30}></MarkerEndSvgComponent>
       </Marker>
 
       <Marker
-        draggable
         key={startMarkerID}
         centerOffset={markerCenterOffset}
         zIndex={10000}

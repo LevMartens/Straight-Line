@@ -126,5 +126,5 @@ export async function createLineDraft(pointA, pointB, lineTitle) {
 
   store.dispatch(selectLineDraft(lineDraft));
 
-  return lineDraft; // Return for testing
+  return { distanceToLong: false, lineDraft: lineDraft }; // Return for testing
 }

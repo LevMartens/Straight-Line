@@ -15,6 +15,8 @@ import {
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
 import MarkerSvgComponent from "../svg_components/marker-svg";
+import { uniqueId } from "lodash";
+import MarkerEndSvgComponent from "../svg_components/marker-end-svg";
 
 export default function MapViewExplore() {
   const { mapView, activityIndicator, activityIndicatorView } = styles();
@@ -115,6 +117,19 @@ export default function MapViewExplore() {
             },
           ]}
         />
+      )}
+      {markerCurrentlySelected.isLoaded && (
+        <Marker
+          key={uniqueId()}
+          centerOffset={{ x: 0.2, y: -12 }}
+          coordinate={{
+            latitude: markerCurrentlySelected.rawLineData.finishCoordinates.lat,
+            longitude:
+              markerCurrentlySelected.rawLineData.finishCoordinates.lng,
+          }}
+        >
+          <MarkerEndSvgComponent height={30} width={30}></MarkerEndSvgComponent>
+        </Marker>
       )}
     </MapView>
   ) : (

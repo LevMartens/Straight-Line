@@ -1,19 +1,25 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { saveLineDraft } from "../../../domain/use_cases/save-line-draft";
 import { getTheme } from "../../theme/themes";
 
-export default function StartButton({ navigation }) {
+export default function WalkAnotherTimeButton({ navigation }) {
   const { containerStyle, buttonStyle, textStyle } = styles();
+  const { rawLineData } = useSelector(
+    (state) => state.selectedLineDraftHandler
+  );
   return (
     <View style={containerStyle}>
       <TouchableOpacity
         style={buttonStyle}
         onPress={() => {
-          navigation.navigate("GPSLive");
+          saveLineDraft(rawLineData);
+          navigation.navigate("CreateLineScreen");
         }}
       >
-        <Text style={textStyle}>{"Start"}</Text>
+        <Text style={textStyle}>{"Walk some other time"}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -23,23 +29,22 @@ const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
     containerStyle: {
-      //marginTop: 30,
-      //flex: 1,
-      marginBottom: 20,
-      justifyContent: "flex-start",
+      flex: 1,
+      //marginBottom: 20,
     },
     buttonStyle: {
-      paddingTop: 10,
+      paddingTop: 3,
       flexDirection: "row",
       justifyContent: "center",
       alignSelf: "center",
-      backgroundColor: theme.buttonColor,
+      backgroundColor: theme.secondaryColor,
       width: SCREEN_WIDTH - 55,
       height: 50,
       borderRadius: 16,
     },
     textStyle: {
-      fontSize: 20,
+      marginTop: 10,
+      fontSize: 17,
       color: theme.textColor,
       textAlign: "center",
       fontFamily: theme.fontFamily,
