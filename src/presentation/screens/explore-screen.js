@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import MapViewExplore from "../components/mapviews/map-view-explore";
+import MapViewExplore from "../components/explore_screen_components/es-map-view";
 import { useSelector } from "react-redux";
 import Banner from "../components/explore_screen_components/es-banner";
 import { getTheme } from "../theme/themes";

@@ -1,12 +1,12 @@
 import React from "react";
-import CloudySvgComponent from "../../presentation/components/svg_components/weather/cloudy-svg";
-import HeavyRainSvgComponent from "../../presentation/components/svg_components/weather/heavy-rain-svg";
-import LightRainSvgComponent from "../../presentation/components/svg_components/weather/light-rain-svg";
-import MistSvgComponent from "../../presentation/components/svg_components/weather/mist-svg";
-import PartlyCloudySvgComponent from "../../presentation/components/svg_components/weather/partly-cloudy-svg";
-import SnowSvgComponent from "../../presentation/components/svg_components/weather/snow-svg";
-import StormSvgComponent from "../../presentation/components/svg_components/weather/storm-svg";
-import SunnySvgComponent from "../../presentation/components/svg_components/weather/sunny-svg";
+import CloudySvgComponent from "../../presentation/components/_re-useables/svg_components/weather/cloudy-svg";
+import HeavyRainSvgComponent from "../../presentation/components/_re-useables/svg_components/weather/heavy-rain-svg";
+import LightRainSvgComponent from "../../presentation/components/_re-useables/svg_components/weather/light-rain-svg";
+import MistSvgComponent from "../../presentation/components/_re-useables/svg_components/weather/mist-svg";
+import PartlyCloudySvgComponent from "../../presentation/components/_re-useables/svg_components/weather/partly-cloudy-svg";
+import SnowSvgComponent from "../../presentation/components/_re-useables/svg_components/weather/snow-svg";
+import StormSvgComponent from "../../presentation/components/_re-useables/svg_components/weather/storm-svg";
+import SunnySvgComponent from "../../presentation/components/_re-useables/svg_components/weather/sunny-svg";
 
 export async function getZoomLevelRules(zoomLevel) {
   if (zoomLevel >= 11.5) {

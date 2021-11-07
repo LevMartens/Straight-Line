@@ -11,10 +11,10 @@ import { signUpUser } from "../../../domain/use_cases/user-sign-up";
 import { getTheme } from "../../theme/themes";
 import LoginForm from "./ws-log-in-form";
 import VerificationForm from "./ws-verification-form";
-import LogoSvgComponent from "../svg_components/logo-white-svg";
-import ActivityIndicatorOnTransparentView from "../activity-indicator-transparent-view.js.js";
+import LogoSvgComponent from "../_re-useables/svg_components/logo-white-svg";
+import ActivityIndicatorOnTransparentView from "../_re-useables/activity-indicator-transparent-view.js.js";
 import LoginButton from "./ws-login-button";
-import HeaderLogo from "../re-usables/header-logo";
+import HeaderLogo from "../_re-useables/header-logo";
 
 export default function CreateAccountForm({ setModalVisible, navigation }) {
   const {

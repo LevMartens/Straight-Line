@@ -4,11 +4,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DetailScreen from "../screens/detail-screen";
 import CreateLineScreen from "../screens/create-line-screen";
 import { getTheme } from "../theme/themes";
-import MenuHeaderRightButton from "../components/buttons/menu-header-right-button";
-import BackHeaderButton from "../components/buttons/back-button";
-import SearchHeaderButton from "../components/buttons/search-header-button";
-import UndoSvgComponent from "../components/svg_components/toolbar-svg";
-import ToolbarHeaderButton from "../components/buttons/toolbar-header-button";
+import MenuHeaderRightButton from "../components/_re-useables/buttons/menu-header-right-button";
+import BackHeaderButton from "../components/_re-useables/buttons/back-button";
+import SearchHeaderButton from "../components/_re-useables/buttons/search-header-button";
+import UndoSvgComponent from "../components/_re-useables/svg_components/toolbar-svg";
+import ToolbarHeaderButton from "../components/_re-useables/buttons/toolbar-header-button";
 
 const Stack = createStackNavigator();
 

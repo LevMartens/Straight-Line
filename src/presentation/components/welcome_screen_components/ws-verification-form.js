@@ -10,8 +10,8 @@ import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensi
 import { resendVerificationCode } from "../../../domain/use_cases/user-resend-verification";
 import { verifyUser } from "../../../domain/use_cases/user-verification";
 import { getTheme } from "../../theme/themes";
-import LogoSvgComponent from "../svg_components/logo-white-svg";
-import ActivityIndicatorOnTransparentView from "../activity-indicator-transparent-view.js.js";
+import LogoSvgComponent from "../_re-useables/svg_components/logo-white-svg";
+import ActivityIndicatorOnTransparentView from "../_re-useables/activity-indicator-transparent-view.js.js";
 
 export default function VerificationForm({ backToLogin, username }) {
   const {

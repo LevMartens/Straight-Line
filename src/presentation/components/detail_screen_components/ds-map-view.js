@@ -10,10 +10,10 @@ import {
   createMapHeadingUpdate,
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
-import MarkerSvgComponent from "../svg_components/marker-svg";
-import MarkerEndSvgComponent from "../svg_components/marker-end-svg";
+import MarkerSvgComponent from "../_re-useables/svg_components/marker-svg";
+import MarkerEndSvgComponent from "../_re-useables/svg_components/marker-end-svg";
 
-export default function MapViewCreateLine({ initialRegion }) {
+export default function MapViewDetailScreen({ initialRegion }) {
   const { mapStyle, markerCenterOffset } = styles();
 
   const pinState = useSelector((state) => state.createLineStateHandler);

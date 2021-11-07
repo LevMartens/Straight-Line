@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { getTheme } from "../../theme/themes";
-import BackSvgComponent from "../svg_components/back-svg";
+import { getTheme } from "../../../theme/themes";
+import BackSvgComponent from "../../_re-useables/svg_components/back-svg";
 
 export default function BackHeaderButton({ navigation, to }) {
   const { colorUnFocused } = getTheme();

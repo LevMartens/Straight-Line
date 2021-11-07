@@ -1,18 +1,18 @@
 import React from "react";
-import MapViewCreateLine from "../components/mapviews/map-view-create-line";
+import MapViewCreateLine from "../components/create_line_screen_components/cl-map-view";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import StartButton from "../components/detail_screen_components/start-button";
+import StartButton from "../components/detail_screen_components/ds-start-button";
 import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../theme/themes";
-import ElevationChart from "../components/re-usables/elevation-chart";
-import WeatherWidget from "../components/re-usables/weather-widget";
-import WalkAnotherTimeButton from "../components/detail_screen_components/walk-another-time-button";
-import MapViewLineReview from "../components/mapviews/map-view-line-review";
-import DeviationSvgComponent from "../components/svg_components/deviation";
-import TimeSvgComponent from "../components/svg_components/time";
-import DifficultySvgComponent from "../components/svg_components/difficulty";
+import ElevationChart from "../components/_re-useables/elevation-chart";
+import WeatherWidget from "../components/_re-useables/weather-widget";
+
+import MapViewLineReview from "../components/line_review_screen_components/lr-map-view";
+import DeviationSvgComponent from "../components/_re-useables/svg_components/deviation";
+import TimeSvgComponent from "../components/_re-useables/svg_components/time";
+import DifficultySvgComponent from "../components/_re-useables/svg_components/difficulty";
 import { createPublicLine } from "../../domain/use_cases/create-public-line";
 
 export default function LineReviewScreen({ navigation }) {

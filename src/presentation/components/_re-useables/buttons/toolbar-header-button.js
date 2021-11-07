@@ -8,17 +8,17 @@ import {
   Animated,
   Keyboard,
 } from "react-native";
-import { getTheme } from "../../theme/themes";
-import MenuSvgComponent from "../svg_components/menu-svg";
+import { getTheme } from "../../../theme/themes";
+import MenuSvgComponent from "../../_re-useables/svg_components/menu-svg";
 import {
   toolbarVisibleUpdate,
   searchVisibleUpdate,
   showHeadingOnUpdate,
   timeDelayUpdate,
-} from "../../state_management/actions/actions";
-import store from "../../state_management/store/store";
-import ToolbarSvgComponent from "../svg_components/toolbar-svg";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+} from "../../../state_management/actions/actions";
+import store from "../../../state_management/store/store";
+import ToolbarSvgComponent from "../../_re-useables/svg_components/toolbar-svg";
+import { SCREEN_WIDTH } from "../../../../domain/resources/operating_system/dimensions";
 
 export default function ToolbarHeaderButton() {
   const { buttonStyle, textInputStyle, selection, eraseStyle } = styles();

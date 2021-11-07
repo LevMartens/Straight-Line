@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { getTheme } from "../../theme/themes";
 import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
-import CompassSvgComponent from "../svg_components/compass";
-import LayersSvgComponent from "../svg_components/layers-svg";
+import CompassSvgComponent from "../_re-useables/svg_components/compass";
+import LayersSvgComponent from "../_re-useables/svg_components/layers-svg";
 import { Alert } from "react-native";
-import CurrentLocationSvgComponent from "../svg_components/current-location-svg";
+import CurrentLocationSvgComponent from "../_re-useables/svg_components/current-location-svg";
 import {
   loadingVisibleUpdate,
   mapTypeUpdate,
@@ -16,9 +16,9 @@ import {
   showHeadingOnUpdate,
 } from "../../state_management/actions/actions";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
-import UndoSvgComponent from "../svg_components/undo-svg";
-import HideMarkerSvgComponent from "../svg_components/hide-marker-svg";
-import MarkerButtonSvgComponent from "../svg_components/marker-button-svg";
+import UndoSvgComponent from "../_re-useables/svg_components/undo-svg";
+import HideMarkerSvgComponent from "../_re-useables/svg_components/hide-marker-svg";
+import MarkerButtonSvgComponent from "../_re-useables/svg_components/marker-button-svg";
 import { showAddLineTitleAlert } from "../../../domain/resources/operating_system/alerts";
 import { createLineDraft } from "../../../domain/use_cases/create-line-draft";
 import { useNavigation } from "@react-navigation/native";

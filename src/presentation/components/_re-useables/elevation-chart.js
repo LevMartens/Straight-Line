@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../../theme/themes";
-import SizedBox from "../../components/re-usables/sized-box";
+import SizedBox from "../../components/_re-useables/sized-box";
 
 export default function ElevationChart({ elevationPoints, distance }) {
   const _distance = distance;

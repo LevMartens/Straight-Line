@@ -3,9 +3,9 @@ import store from "../../state_management/store/store";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { getTheme } from "../../theme/themes";
-import CompassSvgComponent from "../svg_components/compass";
-import LayersSvgComponent from "../svg_components/layers-svg";
-import CurrentLocationSvgComponent from "../svg_components/current-location-svg";
+import CompassSvgComponent from "../_re-useables/svg_components/compass";
+import LayersSvgComponent from "../_re-useables/svg_components/layers-svg";
+import CurrentLocationSvgComponent from "../_re-useables/svg_components/current-location-svg";
 import {
   exploreMapTypeUpdate,
   exploreMapHeadingUpdate,

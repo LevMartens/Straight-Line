@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { getTheme } from "../../theme/themes";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { getTheme } from "../../../theme/themes";
+import { SCREEN_WIDTH } from "../../../../domain/resources/operating_system/dimensions";
 import { useSelector } from "react-redux";
-import { startProducingPath } from "../../../domain/use_cases/start-producing-path";
-import store from "../../state_management/store/store";
-import { liveTrackingUpdate } from "../../state_management/actions/actions";
+import { startProducingPath } from "../../../../domain/use_cases/start-producing-path";
+import store from "../../../state_management/store/store";
+import { liveTrackingUpdate } from "../../../state_management/actions/actions";
 
 export default function ReadyToStartModalComponent() {
   const { textStyle, buttonStyle, buttonTextStyle } = styles();

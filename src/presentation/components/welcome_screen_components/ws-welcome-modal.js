@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Modal, StyleSheet, TouchableOpacity } from "react-native";
 import { getTheme } from "../../theme/themes";
-import BackSvgComponent from "../../components/svg_components/back-svg";
+import BackSvgComponent from "../../components/_re-useables/svg_components/back-svg";
 import Disclamer from "./ws-disclamer";
-import PrivacyPolicy from "../privacy-policy";
-import TermsOfUse from "../terms-of-use";
+import PrivacyPolicy from "../_re-useables/privacy-policy";
+import TermsOfUse from "../_re-useables/terms-of-use";
 
 export default function WelcomeModal({ visible, backButtonOnPress, children }) {
   const { colorUnFocused } = getTheme();

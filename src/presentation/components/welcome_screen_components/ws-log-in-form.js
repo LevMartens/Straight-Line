@@ -11,9 +11,9 @@ import { signInUser } from "../../../domain/use_cases/user-login";
 import { resendVerificationCode } from "../../../domain/use_cases/user-resend-verification";
 import { getTheme } from "../../theme/themes";
 import PasswordRecoveryForm from "./ws-password-recovery-form";
-import LogoSvgComponent from "../svg_components/logo-white-svg";
+import LogoSvgComponent from "../_re-useables/svg_components/logo-white-svg";
 import VerificationForm from "./ws-verification-form";
-import ActivityIndicatorOnTransparentView from "../activity-indicator-transparent-view.js.js";
+import ActivityIndicatorOnTransparentView from "../_re-useables/activity-indicator-transparent-view.js.js";
 
 export default function LoginForm({ setModalVisible, navigation }) {
   const {

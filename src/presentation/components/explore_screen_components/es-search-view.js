@@ -12,13 +12,13 @@ import {
 } from "react-native";
 import { getTheme } from "../../theme/themes";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
-import NearbySvgComponent from "../svg_components/nearby-svg";
+import NearbySvgComponent from "../_re-useables/svg_components/nearby-svg";
 import {
   searchVisibleUpdate,
   selectMarker,
   timeDelayUpdate,
 } from "../../state_management/actions/actions";
-import MarkerSvgComponent from "../svg_components/marker-svg";
+import MarkerSvgComponent from "../_re-useables/svg_components/marker-svg";
 
 export default function SearchView({ searchVisible }) {
   const {

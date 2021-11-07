@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { getTheme } from "../../theme/themes";
-import CreateLineSvgComponent from "../svg_components/create-line-svg";
+import { getTheme } from "../../../theme/themes";
+import CreateLineSvgComponent from "../../_re-useables/svg_components/create-line-svg";
 
 export default function CreateLineIcon({ focused }) {
   const { colorFocused, colorUnFocused } = getTheme();

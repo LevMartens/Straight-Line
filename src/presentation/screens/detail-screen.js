@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import MapViewCreateLine from "../components/mapviews/map-view-create-line";
+import MapViewCreateLine from "../components/create_line_screen_components/cl-map-view";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text } from "react-native";
-import StartButton from "../components/detail_screen_components/start-button";
+import StartButton from "../components/detail_screen_components/ds-start-button";
 import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../theme/themes";
-import ElevationChart from "../components/re-usables/elevation-chart";
-import WeatherWidget from "../components/re-usables/weather-widget";
-import WalkAnotherTimeButton from "../components/detail_screen_components/walk-another-time-button";
+import ElevationChart from "../components/_re-useables/elevation-chart";
+import WeatherWidget from "../components/_re-useables/weather-widget";
+import WalkAnotherTimeButton from "../components/detail_screen_components/ds-walk-another-time-button";
+import MapViewDetailScreen from "../components/detail_screen_components/ds-map-view";
 
 export default function DetailScreen({ navigation }) {
   const {
@@ -62,12 +63,12 @@ export default function DetailScreen({ navigation }) {
       <View style={widgetContainerStyle}>
         <View style={mapViewStyle}>
           {isLoaded == true ? (
-            <MapViewCreateLine
+            <MapViewDetailScreen
               initialRegion={markerRegionZoomedIn}
               mapType={"satellite"}
             >
               {" "}
-            </MapViewCreateLine>
+            </MapViewDetailScreen>
           ) : (
             <ActivityIndicator
               animating={true}

@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { getTheme } from "../../theme/themes";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { getTheme } from "../../../theme/themes";
+import { SCREEN_WIDTH } from "../../../../domain/resources/operating_system/dimensions";
 import { useSelector } from "react-redux";
 import { LineChart } from "react-native-chart-kit";
-import MarkerSvgComponent from "../svg_components/marker-svg";
+//import MarkerSvgComponent from "../_re-useables/svg_components/marker-svg";
 
 export default function LiveDataModalComponent() {
   const {

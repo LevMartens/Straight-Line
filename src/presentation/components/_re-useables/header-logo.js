@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { getTheme } from "../../theme/themes";
-import LogoSvgComponent from "../../components/svg_components/logo-white-svg";
+import LogoSvgComponent from "../../components/_re-useables/svg_components/logo-white-svg";
 
 export default function HeaderLogo() {
   const { logoStyle } = styles();

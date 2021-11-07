@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import MapViewGPSLive from "../components/mapviews/map-view-gps-live";
+import MapViewGPSLive from "../components/gps_live_screen_components/gls-map-view";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { getTheme } from "../theme/themes";
 import { useSelector } from "react-redux";
-import SwipeModalNoBanner from "../components/swipe-modal-no-banner";
+import SwipeModalNoBanner from "../components/_re-useables/swipe-modal-no-banner";
 import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import LottieView from "lottie-react-native";
 import confetti from "../../../assets/confetti.json";
 import confetti1 from "../../../assets/confetti1.json";
 import dots from "../../../assets/dots.json";
-import FinishedLineAlert from "../components/finished-line-alert";
+import FinishedLineAlert from "../components/gps_live_screen_components/finished-line-alert";
 
 export default function GPSLiveScreen({ navigation }) {
   const {

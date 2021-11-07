@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, Animated, View, PanResponder } from "react-native";
 import { useSelector } from "react-redux";
-import { getTheme } from "../theme/themes";
+import { getTheme } from "../../theme/themes";
 import { ActivityIndicator } from "react-native-paper";
-import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
-import GetDirectionsModalComponent from "./modal_components/get-directions";
-import ReadyToStartModalComponent from "./modal_components/ready-to-start";
-import LiveDataModalComponent from "./modal_components/live-data";
+import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import GetDirectionsModalComponent from "../gps_live_screen_components/modal_components/get-directions";
+import ReadyToStartModalComponent from "../gps_live_screen_components/modal_components/ready-to-start";
+import LiveDataModalComponent from "../gps_live_screen_components/modal_components/live-data";
 
 export default function SwipeModalNoBanner() {
   const { boxStyle, horizontalLineStyle } = styles();

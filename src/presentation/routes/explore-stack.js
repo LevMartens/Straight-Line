@@ -3,8 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet } from "react-native";
 import ExploreScreen from "../screens/explore-screen";
 import { getTheme } from "../theme/themes";
-import MenuHeaderRightButton from "../components/buttons/menu-header-right-button";
-import SearchHeaderButton from "../components/buttons/search-header-button";
+import MenuHeaderRightButton from "../components/_re-useables/buttons/menu-header-right-button";
+import SearchHeaderButton from "../components/_re-useables/buttons/search-header-button";
 
 const Stack = createStackNavigator();
 

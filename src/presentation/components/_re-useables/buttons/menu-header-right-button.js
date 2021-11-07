@@ -8,14 +8,14 @@ import {
   Animated,
   Keyboard,
 } from "react-native";
-import { getTheme } from "../../theme/themes";
-import MenuSvgComponent from "../svg_components/menu-svg";
+import { getTheme } from "../../../theme/themes";
+import MenuSvgComponent from "../../_re-useables/svg_components/menu-svg";
 import {
   menuVisibleUpdate,
   searchVisibleUpdate,
   timeDelayUpdate,
-} from "../../state_management/actions/actions";
-import store from "../../state_management/store/store";
+} from "../../../state_management/actions/actions";
+import store from "../../../state_management/store/store";
 
 export default function MenuHeaderRightButton() {
   const { colorUnFocused } = getTheme();

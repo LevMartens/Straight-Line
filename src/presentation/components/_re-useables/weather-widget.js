@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import { getWeatherData } from "../../../domain/use_cases/get-weather-data";
 import { getTheme } from "../../theme/themes";
-import NothingFoundSvgComponent from "../svg_components/nothing-found-svg";
-import RainDropsSvgComponent from "../svg_components/weather/rain-drops-svg";
-import WindSvgComponent from "../svg_components/weather/wind-svg";
+import NothingFoundSvgComponent from "./svg_components/nothing-found-svg";
+import RainDropsSvgComponent from "./svg_components/weather/rain-drops-svg";
+import WindSvgComponent from "./svg_components/weather/wind-svg";
 import SizedBox from "./sized-box";
 
 export default function WeatherWidget() {

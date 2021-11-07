@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import store from "../../state_management/store/store";
+import store from "../../../state_management/store/store";
 import { useSelector } from "react-redux";
 import {
   StyleSheet,
@@ -8,17 +8,17 @@ import {
   View,
   Animated,
 } from "react-native";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../../domain/resources/operating_system/dimensions";
 import {
   searchVisibleUpdate,
   timeDelayUpdate,
   menuVisibleUpdate,
   showHeadingOnUpdate,
-} from "../../state_management/actions/actions";
-import { getTheme } from "../../theme/themes";
-import SearchSvgComponent from "../svg_components/search-svg";
-import EraseSvgComponent from "../svg_components/erase-svg";
-import { getSearchResults } from "../../../domain/use_cases/get-search-results";
+} from "../../../state_management/actions/actions";
+import { getTheme } from "../../../theme/themes";
+import SearchSvgComponent from "../../_re-useables/svg_components/search-svg";
+import EraseSvgComponent from "../../_re-useables/svg_components/erase-svg";
+import { getSearchResults } from "../../../../domain/use_cases/get-search-results";
 
 export default function SearchHeaderButton({ forCreateLineScreen }) {
   const { colorUnFocused } = getTheme();

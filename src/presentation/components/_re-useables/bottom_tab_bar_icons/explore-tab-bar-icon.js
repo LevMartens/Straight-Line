@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { getTheme } from "../../theme/themes";
-import ExploreSvgComponent from "../svg_components/explore-svg";
+import { getTheme } from "../../../theme/themes";
+import ExploreSvgComponent from "../../_re-useables/svg_components/explore-svg";
 
 export default function ExploreIcon({ focused }) {
   const { colorFocused, colorUnFocused } = getTheme();

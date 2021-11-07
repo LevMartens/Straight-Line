@@ -10,8 +10,8 @@ import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensi
 import { sendForgotPasswordCode } from "../../../domain/use_cases/user-forgot-password-code";
 import { getTheme } from "../../theme/themes";
 import PasswordRecoverySubmitForm from "./ws-password-recovery-submit-form";
-import LogoSvgComponent from "../svg_components/logo-white-svg";
-import ActivityIndicatorOnTransparentView from "../activity-indicator-transparent-view.js.js";
+import LogoSvgComponent from "../_re-useables/svg_components/logo-white-svg";
+import ActivityIndicatorOnTransparentView from "../_re-useables/activity-indicator-transparent-view.js.js";
 
 export default function PasswordRecoveryForm({ backToLogin }) {
   const {

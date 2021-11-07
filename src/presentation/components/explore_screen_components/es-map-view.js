@@ -14,9 +14,9 @@ import {
   exploreMapHeadingUpdate,
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
-import MarkerSvgComponent from "../svg_components/marker-svg";
+import MarkerSvgComponent from "../_re-useables/svg_components/marker-svg";
 import { uniqueId } from "lodash";
-import MarkerEndSvgComponent from "../svg_components/marker-end-svg";
+import MarkerEndSvgComponent from "../_re-useables/svg_components/marker-end-svg";
 
 export default function MapViewExplore() {
   const { mapView, activityIndicator, activityIndicatorView } = styles();

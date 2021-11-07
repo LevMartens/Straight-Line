@@ -7,8 +7,8 @@ import {
   Platform,
 } from "react-native";
 import * as Linking from "expo-linking";
-import { getTheme } from "../../theme/themes";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { getTheme } from "../../../theme/themes";
+import { SCREEN_WIDTH } from "../../../../domain/resources/operating_system/dimensions";
 import { useSelector } from "react-redux";
 
 export default function GetDirectionsModalComponent() {

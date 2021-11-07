@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MapViewCreateLine from "../../presentation/components/mapviews/map-view-create-line";
+import MapViewCreateLine from "../components/create_line_screen_components/cl-map-view";
 
 import { StyleSheet, View } from "react-native";
 import { getTheme } from "../theme/themes";
@@ -13,7 +13,7 @@ import ExploreMapMenu from "../components/explore_screen_components/es-explore-m
 import { onScreenUpdate } from "../state_management/actions/actions";
 import store from "../state_management/store/store";
 import CreateLineMapMenu from "../components/create_line_screen_components/cl-create-map-menu";
-import ActivityIndicatorOnTransparentView from "../components/activity-indicator-transparent-view.js";
+import ActivityIndicatorOnTransparentView from "../components/_re-useables/activity-indicator-transparent-view.js";
 
 //TODO give aSingleCurrentPosition an "isLoaded" and render MapViewCreateLine conditionally
 
