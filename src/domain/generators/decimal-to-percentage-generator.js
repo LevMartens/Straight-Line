@@ -9,7 +9,6 @@ export async function decimalToPercentage(decimal) {
   const stringDecimal = decimal.toString();
   const rawPercentage = stringDecimal.substring(2);
   const percentage = rawPercentage.startsWith("0") ? "0" : rawPercentage;
-  console.log("TEST: percentage", percentage);
 
   return percentage;
 }

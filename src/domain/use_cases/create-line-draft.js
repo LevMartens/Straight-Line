@@ -52,41 +52,8 @@ export async function createLineDraft(pointA, pointB, lineTitle) {
 
   const { latitude: endLatitude, longitude: endLongitude } = endPoint;
   const { latitude: midLatitude, longitude: midLongitude } = midPoint;
-  // const startingPointCoordinatesTypeID = await createGraphQLCoordinateType(
-  //   startLatitude,
-  //   startLongitude
-  // );
-  // const endPointCoordinatesTypeID = await createGraphQLCoordinateType(
-  //   endLatitude,
-  //   endLongitude
-  // );
-
-  // const midPointCoordinatesTypeID = await createGraphQLCoordinateType(
-  //   midLatitude,
-  //   midLongitude
-  // );
 
   const id = uuidv4();
-
-  // const input = {
-  //   id: id,
-  //   parentId: "NOPARENTID",
-  //   complete3LevelPluscode: completePluscode,
-  //   lineDraftsStartingCoordinatesId: startingPointCoordinatesTypeID,
-  //   lineDraftsFinishCoordinatesId: endPointCoordinatesTypeID,
-  //   lineDraftsMidLineCoordinatesId: midPointCoordinatesTypeID,
-  //   creatorName: creatorName,
-  //   description: description,
-  //   difficultyLevel: difficultyLevel,
-  //   distance: distance,
-  //   elevationPoints: elevationPoints,
-  //   hashtags: hashtags,
-  //   latitudeDeltaFit: latitudeDelta,
-  //   longitudeDeltaFit: longitudeDelta,
-  //   lineCompleted: lineCompleted,
-  //   title: title,
-  //   verified: verified,
-  // };
 
   const input = {
     data: {
@@ -110,19 +77,7 @@ export async function createLineDraft(pointA, pointB, lineTitle) {
     },
   };
 
-  // const line = await saveLineDraftToDB(input);
-
-  // if (line.isNOTSaved) {
-  //   showAlert("Line draft didn't save, Lev sucks");
-  //   console.log(
-  //     "ERROR: Line draft didn't save, data back: " +
-  //       JSON.stringify(line.data) +
-  //       " source: create-line.js 184"
-  //   );
-  //   return;
-  // }
-
-  const lineDraft = await packLineData(input); //line
+  const lineDraft = await packLineData(input);
 
   store.dispatch(selectLineDraft(lineDraft));
 

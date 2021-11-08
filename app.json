@@ -5,10 +5,10 @@
     "scheme": "straight-line-mission",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/wind.png",
+    "icon": "./assets/images/straight-line-logo-app-icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/sunny.png",
+      "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/wind.png",
+        "foregroundImage": "./assets/images/straight-line-logo-app-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/sunny.png"
+      "favicon": "./assets/images/straight-line-logo-app-icon.png"
     }
   }
 }

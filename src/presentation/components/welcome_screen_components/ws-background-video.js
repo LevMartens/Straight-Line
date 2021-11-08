@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import backgroundVideo from "../../../../assets/straight-line-mission-vid.mp4";
+import backgroundVideo from "../../../../assets/videos/straight-line-mission-vid.mp4";
 import { Video } from "expo-av";
 import { StyleSheet } from "react-native";
 import { getTheme } from "../../theme/themes";

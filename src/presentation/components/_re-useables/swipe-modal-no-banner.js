@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, Animated, View, PanResponder } from "react-native";
 import { useSelector } from "react-redux";
 import { getTheme } from "../../theme/themes";

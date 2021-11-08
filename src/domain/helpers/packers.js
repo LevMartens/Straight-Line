@@ -1,5 +1,3 @@
-import image from "../../../assets/lineMarker.png";
-import imageSelected from "../../../assets/lineMarkerSelected.png";
 import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
@@ -17,7 +15,6 @@ export async function mapElevationPoints(rawData) {
 }
 
 export async function packLineData(rawData) {
-  // TO REMOVE console.log("TEST: data.id error ", JSON.stringify(rawData));
   const { data } = rawData;
 
   const {
@@ -55,8 +52,6 @@ export async function packLineData(rawData) {
     id: id,
     isLoaded: true,
     rawLineData: data,
-    imageSelected: imageSelected,
-    image: image,
     markerCoordinates: markerCoordinates,
     markerRegion: markerRegion,
     markerRegionZoomedIn: markerRegionZoomedIn,
@@ -66,9 +61,6 @@ export async function packLineData(rawData) {
 }
 
 export async function packPublicLineData(rawData) {
-  //TO REMOVE console.log("TEST: data.id error ", JSON.stringify(rawData));
-  //const { data } = rawData;
-
   const {
     id,
     startingCoordinates,
@@ -78,7 +70,6 @@ export async function packPublicLineData(rawData) {
   } = rawData;
 
   const { lat: startingLatitude, lng: startingLongitude } = startingCoordinates;
-  //const { lat: midLineLatitude, lng: midLineLongitude } = midLineCoordinates;
 
   const markerCoordinates = {
     latitude: startingLatitude,
@@ -94,8 +85,8 @@ export async function packPublicLineData(rawData) {
   };
 
   const markerRegionZoomedIn = {
-    latitude: startingLatitude, //midLineLatitude,
-    longitude: startingLongitude, //midLineLongitude,
+    latitude: startingLatitude,
+    longitude: startingLongitude,
     latitudeDelta: latitudeDeltaFit,
     longitudeDelta: longitudeDeltaFit,
   };
@@ -103,9 +94,7 @@ export async function packPublicLineData(rawData) {
   const lineData = {
     id: id,
     isLoaded: true,
-    rawLineData: rawData, //data,
-    imageSelected: imageSelected,
-    image: image,
+    rawLineData: rawData,
     markerCoordinates: markerCoordinates,
     markerRegion: markerRegion,
     markerRegionZoomedIn: markerRegionZoomedIn,

@@ -75,7 +75,7 @@ export async function saveLineDraft(rawLineDraft) {
     return;
   }
 
-  const lineDraft = await packLineData(line); //line
+  const lineDraft = await packLineData(line);
 
   store.dispatch(selectLineDraft(lineDraft));
 

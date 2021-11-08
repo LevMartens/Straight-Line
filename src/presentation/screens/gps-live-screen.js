@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 import SwipeModalNoBanner from "../components/_re-useables/swipe-modal-no-banner";
 import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
 import LottieView from "lottie-react-native";
-import confetti from "../../../assets/confetti.json";
-import confetti1 from "../../../assets/confetti1.json";
-import dots from "../../../assets/dots.json";
+import confetti from "../../../assets/lotties/confetti.json";
+//import confetti1 from "../../../assets/lotties/confetti1.json";
+//import dots from "../../../assets/dots.json";
 import FinishedLineAlert from "../components/gps_live_screen_components/finished-line-alert";
 
 export default function GPSLiveScreen({ navigation }) {

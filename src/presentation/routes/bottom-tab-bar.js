@@ -10,7 +10,6 @@ import StatsIcon from "../components/_re-useables/bottom_tab_bar_icons/stats-tab
 import ProfileIcon from "../components/_re-useables/bottom_tab_bar_icons/profile-tab-bar-icon";
 import { ExploreStack } from "./explore-stack";
 import { CreateLineStack } from "./create-line-stack";
-import { useSelector } from "react-redux";
 import { onScreenUpdate } from "../state_management/actions/actions";
 import store from "../state_management/store/store";
 
@@ -32,7 +31,6 @@ export function BottomTab() {
         component={ExploreStack}
         listeners={{
           tabPress: (e) => {
-            console.log("Explore Tab press", e.target);
             store.dispatch(onScreenUpdate("explore-screen"));
           },
         }}
@@ -48,7 +46,6 @@ export function BottomTab() {
         component={CreateLineStack}
         listeners={{
           tabPress: (e) => {
-            console.log("Create Tab press", e.target);
             store.dispatch(onScreenUpdate("create-screen"));
           },
         }}

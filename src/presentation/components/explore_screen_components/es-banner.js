@@ -7,7 +7,7 @@ import { throttle } from "lodash";
 import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import LottieView from "lottie-react-native";
-import loadingLottie from "../../../../assets/loading-dots.json";
+import loadingLottie from "../../../../assets/lotties/loading-dots.json";
 
 let throttleTime = 3010;
 

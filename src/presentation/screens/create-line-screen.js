@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import MapViewCreateLine from "../components/create_line_screen_components/cl-map-view";
-
 import { StyleSheet, View } from "react-native";
 import { getTheme } from "../theme/themes";
 import { useSelector } from "react-redux";
@@ -9,13 +8,13 @@ import {
   LONGITUDE_DELTA,
 } from "../../domain/resources/operating_system/dimensions";
 import CreateLineToolbar from "../components/create_line_screen_components/cl-toolbar-menu";
-import ExploreMapMenu from "../components/explore_screen_components/es-explore-map-menu";
-import { onScreenUpdate } from "../state_management/actions/actions";
+import {
+  mapPressedForFirstPin,
+  mapPressedForSecondPin,
+} from "../state_management/actions/actions";
 import store from "../state_management/store/store";
 import CreateLineMapMenu from "../components/create_line_screen_components/cl-create-map-menu";
 import ActivityIndicatorOnTransparentView from "../components/_re-useables/activity-indicator-transparent-view.js";
-
-//TODO give aSingleCurrentPosition an "isLoaded" and render MapViewCreateLine conditionally
 
 export default function CreateLineScreen({ navigation }) {
   const { containerStyle } = styles();
@@ -27,9 +26,16 @@ export default function CreateLineScreen({ navigation }) {
   const menuVisible = useSelector((state) => state.menuVisibleHandler);
   const loadingVisible = useSelector((state) => state.loadingVisibleHandler);
 
-  // const createMapViewRef = useSelector(
-  //   (state) => state.createMapViewRefHandler
-  // );
+  const aSingleCurrentPosition = useSelector(
+    (state) => state.aSingleCurrentPosition
+  );
+
+  const initialStartingPoint = aSingleCurrentPosition;
+
+  const initialEndPoint = {
+    latitude: aSingleCurrentPosition.latitude + 0.111,
+    longitude: aSingleCurrentPosition.longitude + 0.111,
+  };
 
   const initialRegion = {
     latitude: latitude,
@@ -37,6 +43,11 @@ export default function CreateLineScreen({ navigation }) {
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   };
+
+  useEffect(() => {
+    store.dispatch(mapPressedForFirstPin(initialStartingPoint));
+    store.dispatch(mapPressedForSecondPin(initialEndPoint));
+  }, []);
 
   return (
     <View style={containerStyle}>

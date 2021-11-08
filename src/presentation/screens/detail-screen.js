@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import MapViewCreateLine from "../components/create_line_screen_components/cl-map-view";
+import React from "react";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text } from "react-native";
 import StartButton from "../components/detail_screen_components/ds-start-button";
@@ -29,7 +28,7 @@ export default function DetailScreen({ navigation }) {
 
   const { distance, elevationPoints, title } = rawLineData;
 
-  const distanceInKilometers = (distance / 1000).toFixed(1); //Math.round((distance / 1000) * 10) / 10; //
+  const distanceInKilometers = (distance / 1000).toFixed(1);
 
   return (
     <View style={containerStyle}>
@@ -79,21 +78,9 @@ export default function DetailScreen({ navigation }) {
         </View>
         <WeatherWidget></WeatherWidget>
       </View>
-      {/* <View
-        style={{
-          marginTop: 20,
-          alignSelf: "center",
-          backgroundColor: "#313131",
-          height: 2,
-          width: SCREEN_WIDTH - 50,
-          borderRadius: 16,
-        }}
-      ></View> */}
       <View
         style={{
-          //alignItems: "flex-start",
           flex: 1.5,
-          //backgroundColor: "purple",
         }}
       >
         <StartButton navigation={navigation}> </StartButton>
@@ -109,7 +96,6 @@ const styles = () => {
       color: theme.buttonColor,
     },
     mapViewStyle: {
-      //marginLeft: 13,
       flexDirection: "row",
       alignSelf: "center",
       width: SCREEN_WIDTH - 242,
@@ -126,13 +112,11 @@ const styles = () => {
       height: "100%",
     },
     widgetContainerStyle: {
-      //backgroundColor: "red",
-      //marginTop: 35,
       paddingBottom: 5,
       justifyContent: "space-evenly",
       alignSelf: "center",
       width: SCREEN_WIDTH,
-      flex: 2.0, //2.4
+      flex: 2.0,
       flexDirection: "row",
       height: 100,
     },
@@ -146,7 +130,7 @@ const styles = () => {
       fontFamily: theme.fontFamily,
     },
     textStyle1: {
-      marginTop: 30, //50,
+      marginTop: 30,
       marginLeft: 20,
       fontSize: 17,
       color: theme.textColor,
@@ -154,8 +138,7 @@ const styles = () => {
       fontFamily: theme.fontFamily,
     },
     textStyle2: {
-      //marginTop: 20,
-      marginBottom: 3, //10,
+      marginBottom: 3,
       marginLeft: 22,
       fontSize: 40,
       color: theme.textColor,
@@ -164,7 +147,6 @@ const styles = () => {
     },
     subTextStyle: {
       marginTop: 5,
-      //marginBottom: 10,
       marginLeft: 19,
       fontSize: 17,
       color: theme.textColor,

@@ -3,21 +3,11 @@ import store from "../../state_management/store/store";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { getTheme } from "../../theme/themes";
-import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
-import CompassSvgComponent from "../_re-useables/svg_components/compass";
-import LayersSvgComponent from "../_re-useables/svg_components/layers-svg";
-import { Alert } from "react-native";
-import CurrentLocationSvgComponent from "../_re-useables/svg_components/current-location-svg";
 import {
   loadingVisibleUpdate,
-  mapTypeUpdate,
   resetPin,
   setPinStartingPoint,
-  showHeadingOnUpdate,
 } from "../../state_management/actions/actions";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
-import UndoSvgComponent from "../_re-useables/svg_components/undo-svg";
-import HideMarkerSvgComponent from "../_re-useables/svg_components/hide-marker-svg";
 import MarkerButtonSvgComponent from "../_re-useables/svg_components/marker-button-svg";
 import { showAddLineTitleAlert } from "../../../domain/resources/operating_system/alerts";
 import { createLineDraft } from "../../../domain/use_cases/create-line-draft";
@@ -26,58 +16,20 @@ import { useNavigation } from "@react-navigation/native";
 export default function CreateLineToolbar() {
   const navigation = useNavigation();
   const { buttonColor } = getTheme();
-  const {
-    compassStyle,
-    doneStyle,
-    layersStyle,
-    containerStyle,
-    textStyle,
-    layersStyle1,
-  } = styles();
+  const { compassStyle, doneStyle, containerStyle, textStyle } = styles();
 
   const pinState = useSelector((state) => state.createLineStateHandler);
-  const showHeadingOn = useSelector((state) => state.showHeadingOnHandler);
-  const liveDirection = useSelector((state) => state.watchDirection);
-  const mapViewRef = useSelector((state) => state.mapViewRefHandler);
-  const headingWatcher = useSelector((state) => state.headingWatcherHandler);
-  const mapType = useSelector((state) => state.mapTypeHandler);
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
-  );
 
-  const [threeDOn, setThreeDOn] = useState(false);
-  const [doneButtonText, setDoneButtonText] = useState("Add name");
   const title = useSelector((state) => state.lineTitleHandler);
 
   const firstPinCoordinates = useSelector((state) => state.startMarkerHandler);
 
   const secondPinCoordinates = useSelector((state) => state.endMarkerHandler);
 
-  const cameraPositionNormal = {
-    center: aSingleCurrentPosition,
-    pitch: 2,
-    heading: 0.0,
-    altitude: 200000,
-    zoom: 40,
-  };
-
-  const cameraPosition3D = {
-    center: aSingleCurrentPosition,
-    pitch: 50,
-    heading: 0.0,
-    altitude: 200000,
-    zoom: 40,
-  };
+  const [doneButtonText, setDoneButtonText] = useState("Add name");
 
   return (
     <View style={containerStyle}>
-      {/* <View style={{ flexDirection: "row" }}> */}
-      {/* <TouchableOpacity
-        onPress={() => {}}
-        style={{ ...compassStyle, marginLeft: 0 }} //203 //7
-      >
-        <UndoSvgComponent></UndoSvgComponent>
-      </TouchableOpacity> */}
       <TouchableOpacity
         onPress={() => {
           store.dispatch(resetPin());
@@ -139,44 +91,10 @@ export default function CreateLineToolbar() {
         }}
         style={{ ...doneStyle, marginLeft: 0 }}
       >
-        {/* <MarkerButtonSvgComponent></MarkerButtonSvgComponent> */}
         <Text style={{ ...textStyle, marginTop: 1, color: "white" }}>
           {doneButtonText}
         </Text>
       </TouchableOpacity>
-      {/* </View> */}
-
-      {/* <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity
-          onPress={async () => {}}
-          style={{ ...layersStyle, marginLeft: 68 }}
-        >
-          <HideMarkerSvgComponent></HideMarkerSvgComponent>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={async () => {}}
-          style={{ ...layersStyle, marginLeft: 7 }}
-        >
-          <HideMarkerSvgComponent></HideMarkerSvgComponent>
-        </TouchableOpacity>
-      </View>
-
-      <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity
-          onPress={() => {}}
-          style={{ ...layersStyle1, marginLeft: 68 }}
-        >
-          <Text style={textStyle}>156.4</Text>
-          <Text style={textStyle}>km</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {}}
-          style={{ ...layersStyle1, marginLeft: 7 }}
-        >
-          <Text style={textStyle}>156.4</Text>
-          <Text style={textStyle}>km</Text>
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 }
@@ -187,7 +105,6 @@ const styles = () => {
     layersStyle: {
       marginTop: 5,
       backgroundColor: theme.primaryColor,
-      //borderRadius: 35,
       height: 60,
       width: 60,
       paddingLeft: 14.5,
@@ -196,16 +113,13 @@ const styles = () => {
     layersStyle1: {
       marginTop: 5,
       backgroundColor: theme.primaryColor,
-      //borderRadius: 35,
       height: 60,
       width: 60,
-      //paddingLeft: 15,
       paddingTop: 10,
     },
     compassStyle: {
       marginTop: 5,
       backgroundColor: theme.primaryColor,
-      //borderRadius: 35,
       height: 60,
       width: 60,
       justifyContent: "center",
@@ -215,7 +129,6 @@ const styles = () => {
     doneStyle: {
       marginTop: 5,
       backgroundColor: theme.buttonColor,
-      //borderRadius: 35,
       height: 60,
       width: 60,
       justifyContent: "center",

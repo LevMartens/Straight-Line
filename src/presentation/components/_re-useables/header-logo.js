@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { getTheme } from "../../theme/themes";
 import LogoSvgComponent from "../../components/_re-useables/svg_components/logo-white-svg";
 
 export default function HeaderLogo() {
@@ -14,7 +13,6 @@ export default function HeaderLogo() {
 }
 
 const styles = () => {
-  const theme = getTheme();
   return StyleSheet.create({
     logoStyle: {
       position: "absolute",

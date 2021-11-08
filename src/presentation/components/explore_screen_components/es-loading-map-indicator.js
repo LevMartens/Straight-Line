@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { getTheme } from "../../theme/themes";
 import LottieView from "lottie-react-native";
-import loadingDots from "../../../../assets/loading-dots.json";
+import loadingDots from "../../../../assets/lotties/loading-dots.json";
 
 export default function LoadingMapIndicator() {
   const { lottieStyle, textStyle } = styles();

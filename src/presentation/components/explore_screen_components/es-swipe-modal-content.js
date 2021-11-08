@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { getTheme } from "../../theme/themes";
-import defaultImage from "../../../../assets/modelphoto.jpg";
+import defaultImage from "../../../../assets/images/default-image.jpg";
 
 export default function SwipeModalContent() {
   const {

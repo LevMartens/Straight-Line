@@ -30,7 +30,6 @@ const styles = () => {
   return StyleSheet.create({
     containerStyle: {
       flex: 1,
-      //marginBottom: 20,
     },
     buttonStyle: {
       paddingTop: 3,

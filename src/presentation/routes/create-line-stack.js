@@ -6,8 +6,6 @@ import CreateLineScreen from "../screens/create-line-screen";
 import { getTheme } from "../theme/themes";
 import MenuHeaderRightButton from "../components/_re-useables/buttons/menu-header-right-button";
 import BackHeaderButton from "../components/_re-useables/buttons/back-button";
-import SearchHeaderButton from "../components/_re-useables/buttons/search-header-button";
-import UndoSvgComponent from "../components/_re-useables/svg_components/toolbar-svg";
 import ToolbarHeaderButton from "../components/_re-useables/buttons/toolbar-header-button";
 
 const Stack = createStackNavigator();
@@ -26,10 +24,7 @@ export function CreateLineStack() {
               navigation={navigation}
             ></MenuHeaderRightButton>
           ),
-          headerLeft: () => (
-            <ToolbarHeaderButton></ToolbarHeaderButton>
-            //  <SearchHeaderButton forCreateLineScreen={true}></SearchHeaderButton>
-          ),
+          headerLeft: () => <ToolbarHeaderButton></ToolbarHeaderButton>,
           headerStyle: headerStyle,
         })}
       />
@@ -37,12 +32,6 @@ export function CreateLineStack() {
         name="Detail"
         component={DetailScreen}
         options={({ navigation }) => ({
-          // headerRight: () => (
-          //   // <NameButton></NameButton>
-          //   // <MenuHeaderRightButton
-          //   //   navigation={navigation}
-          //   // ></MenuHeaderRightButton>
-          // ),
           headerLeft: () => (
             <BackHeaderButton
               navigation={navigation}

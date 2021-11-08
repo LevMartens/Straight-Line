@@ -9,7 +9,7 @@ import {
 import { getTheme } from "../../theme/themes";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import LottieView from "lottie-react-native";
-import confetti from "../../../../assets/confetti.json";
+import confetti from "../../../../assets/lotties/confetti.json";
 import DifficultySvgComponent from "./svg_components/difficulty";
 import HelpSvgComponent from "./svg_components/help-svg";
 

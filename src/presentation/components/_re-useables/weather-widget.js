@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import { getWeatherData } from "../../../domain/use_cases/get-weather-data";
@@ -10,8 +10,16 @@ import WindSvgComponent from "./svg_components/weather/wind-svg";
 import SizedBox from "./sized-box";
 
 export default function WeatherWidget() {
-  const { weatherStyle, text1Style, text2Style, text3Style, textStyleError } =
-    styles();
+  const {
+    weatherStyle,
+    text1Style,
+    text2Style,
+    text3Style,
+    textStyleError,
+    windStyle,
+    rainStyle,
+    tempratureStyle,
+  } = styles();
 
   const { markerCoordinates } = useSelector(
     (state) => state.selectedLineDraftHandler
@@ -32,44 +40,17 @@ export default function WeatherWidget() {
 
   return weatherDataLoaded ? (
     <View style={weatherStyle}>
-      <View
-        style={{
-          marginTop: 5,
-          //marginLeft: 7,
-
-          flexDirection: "row",
-
-          flex: 4,
-        }}
-      >
+      <View style={tempratureStyle}>
         <View style={{ flex: 1, marginLeft: 5 }}>{icon}</View>
         <SizedBox width={5} height={10}></SizedBox>
         <Text style={text1Style}>{`${temprature}°`}</Text>
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          flex: 2,
-          marginTop: 7,
-
-          paddingLeft: 23,
-        }}
-      >
+      <View style={rainStyle}>
         <RainDropsSvgComponent></RainDropsSvgComponent>
         <Text style={text2Style}> {`${percentageRain} %    `} </Text>
       </View>
 
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          flex: 2,
-          marginBottom: 5,
-
-          paddingLeft: 15,
-        }}
-      >
+      <View style={windStyle}>
         <WindSvgComponent></WindSvgComponent>
         <Text style={text3Style}> {`${windSpeed} km/h`} </Text>
       </View>
@@ -89,14 +70,30 @@ export default function WeatherWidget() {
     </View>
   );
 }
-// percentageRain === "100" ? 20 : percentageRain === "0" ? 10 : 10,
-//${windSpeed}
-//position={"absolute"} left={50}
+
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
+    windStyle: {
+      flexDirection: "row",
+      justifyContent: "center",
+      flex: 2,
+      marginBottom: 5,
+      paddingLeft: 15,
+    },
+    rainStyle: {
+      flexDirection: "row",
+      justifyContent: "center",
+      flex: 2,
+      marginBottom: 5,
+      paddingLeft: 15,
+    },
+    tempratureStyle: {
+      marginTop: 5,
+      flexDirection: "row",
+      flex: 4,
+    },
     weatherStyle: {
-      //marginRight: 13,
       justifyContent: "center",
       flexDirection: "column",
       alignSelf: "center",
@@ -109,9 +106,8 @@ const styles = () => {
     text1Style: {
       marginRight: 8,
       marginTop: 10,
-      fontSize: 40, //50,
+      fontSize: 40,
       color: theme.textColor,
-      //backgroundColor: "red",
       width: 80,
       textAlign: "center",
       fontFamily: theme.fontFamily,
@@ -123,11 +119,10 @@ const styles = () => {
       fontSize: 13,
       width: 60,
       color: theme.textColor,
-
       fontFamily: theme.fontFamily,
     },
     text3Style: {
-      marginLeft: 5, //3,
+      marginLeft: 5,
       marginTop: 3,
       fontSize: 13,
       width: 60,
