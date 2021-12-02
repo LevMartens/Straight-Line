@@ -83,10 +83,15 @@ export default function App() {
 
     getUser().then((userData) => {
       //owner = userData.username;
-      setUser(userData);
-      if (userData != "undefined") {
+
+      //setUser(userData);
+      // if (userData != "undefined") {
+      //   setUserLoggedIn(true);
+      // }
+      if (userData !== undefined) {
         setUserLoggedIn(true);
       }
+
       // console.log(
       //   "TEST: userlogged in " +
       //     userLoggedIn +

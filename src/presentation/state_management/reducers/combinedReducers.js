@@ -47,6 +47,8 @@ import {
   createMapHeadingHandler,
   loadingVisibleHandler,
   weatherDataHandler,
+  gpsLiveMapHeadingHandler,
+  gpsLiveMapTypeHandler,
 } from "./ui-handler";
 
 export default combineReducers({
@@ -58,6 +60,8 @@ export default combineReducers({
   mapViewRefHandler,
   exploreMapViewRefHandler,
   createLineMapViewRefHandler,
+  gpsLiveMapTypeHandler,
+  gpsLiveMapHeadingHandler,
   gpsLiveMapViewRefHandler,
   lineReviewMapViewRefHandler,
   toolbarVisibleHandler,

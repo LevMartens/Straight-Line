@@ -7,7 +7,7 @@ import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensi
 import GetDirectionsModalComponent from "../gps_live_screen_components/modal_components/get-directions";
 import ReadyToStartModalComponent from "../gps_live_screen_components/modal_components/ready-to-start";
 import LiveDataModalComponent from "../gps_live_screen_components/modal_components/live-data";
-
+//!depreciated remove with next cleanup
 export default function SwipeModalNoBanner() {
   const { boxStyle, horizontalLineStyle } = styles();
 

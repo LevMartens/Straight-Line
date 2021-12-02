@@ -10,6 +10,11 @@ import UserSvgComponent from "../_re-useables/svg_components/user-svg";
 import PinSvgComponent from "../_re-useables/svg_components/map-pin-svg";
 import { getTheme } from "../../theme/themes";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import store from "../../state_management/store/store";
+import {
+  gpsLiveMapHeadingUpdate,
+  gpsLiveMapViewRefUpdate,
+} from "../../state_management/actions/actions";
 
 //TODO create button to start directions
 //TODO screen doesn't follow curser
@@ -39,25 +44,42 @@ export default function MapViewGPSLive({ navigation }) {
     longitude: pointBLng,
   };
   const liveDirection = useSelector((state) => state.watchDirection);
+  const mapType = useSelector((state) => state.gpsLiveMapTypeHandler);
 
   const {
     latitude: aSingleCurrentPositionLatitude,
     longitude: aSingleCurrentPositionLongitude,
   } = useSelector((state) => state.aSingleCurrentPosition);
 
+  let mapViewRef;
+
   useEffect(() => {
-    followUserPosition(pointA);
     getPositionOnce(); //TODO this function bypasses use_cases
-    watchHeading(); //TODO this function bypasses use_cases
-  }, []);
+
+    if (mapViewRef) {
+      followUserPosition(pointA, mapViewRef);
+      //watchHeading(mapViewRef); //TODO this function bypasses use_cases
+    }
+  }, [mapViewRef]);
 
   return (
     <MapView
       onPress={(e) => {}}
+      ref={async (ref) => {
+        mapViewRef = ref;
+        //To control the map with the map menu component
+
+        store.dispatch(gpsLiveMapViewRefUpdate(mapViewRef));
+      }}
       style={mapStyle}
-      followsUserLocation={true}
-      mapType={"mutedStandard"}
-      liteMode={true}
+      //followsUserLocation={true}
+      mapType={mapType}
+      //liteMode={true}
+      onRegionChange={async () => {
+        //const mapHeading = await mapViewRef.getCamera();
+        //store.dispatch(gpsLiveMapHeadingUpdate(mapHeading.heading));
+      }}
+      showsCompass={false}
       initialRegion={{
         latitude: aSingleCurrentPositionLatitude,
         longitude: aSingleCurrentPositionLongitude,
@@ -65,14 +87,14 @@ export default function MapViewGPSLive({ navigation }) {
         longitudeDelta: 0.001,
       }}
     >
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={buttonStyle}
         onPress={() => {
           navigation.navigate("LINE_REVIEW");
         }}
       >
         <Text style={textStyleB}>Review line</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Marker
         key={90342}
         coordinate={pointB}
@@ -93,7 +115,7 @@ export default function MapViewGPSLive({ navigation }) {
           style={{
             transform: [
               {
-                rotate: `${liveDirection}deg`,
+                rotate: `${0.0}deg`, //liveDirection
               },
             ],
           }}

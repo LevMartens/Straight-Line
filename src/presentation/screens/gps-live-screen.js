@@ -10,6 +10,12 @@ import confetti from "../../../assets/lotties/confetti.json";
 //import confetti1 from "../../../assets/lotties/confetti1.json";
 //import dots from "../../../assets/dots.json";
 import FinishedLineAlert from "../components/gps_live_screen_components/finished-line-alert";
+import GpsLiveMapMenu from "../components/gps_live_screen_components/gls-map-menu";
+import GPSLiveSwipeModal from "../components/gps_live_screen_components/gls-swipe-modal";
+import ReadyToStartModalComponent from "../components/gps_live_screen_components/modal_components/ready-to-start";
+import GetDirectionsModalComponent from "../components/gps_live_screen_components/modal_components/get-directions";
+import LiveDataModalComponent from "../components/gps_live_screen_components/modal_components/live-data";
+import SwipeModalLoading from "../components/_re-useables/swipe-modal-loading";
 
 export default function GPSLiveScreen({ navigation }) {
   const {
@@ -26,9 +32,15 @@ export default function GPSLiveScreen({ navigation }) {
 
   const positionWatcher = useSelector((state) => state.positionWatcherHandler);
 
+  const userCloseEnoughToBegin = useSelector(
+    (state) => state.userCloseEnoughToStartHandler
+  );
+
+  const liveTrackingOn = useSelector((state) => state.liveTrackingOnHandler);
+
   useEffect(() => {
     if (userFinished) {
-      console.log("TEST: Line finished");
+      console.log("LOG: Line mission finished");
 
       positionWatcher.remove();
     }
@@ -39,8 +51,21 @@ export default function GPSLiveScreen({ navigation }) {
       {userFinished && (
         <FinishedLineAlert navigation={navigation}></FinishedLineAlert>
       )}
+      <GpsLiveMapMenu></GpsLiveMapMenu>
       <MapViewGPSLive navigation={navigation}></MapViewGPSLive>
-      <SwipeModalNoBanner></SwipeModalNoBanner>
+      <GPSLiveSwipeModal>
+        <LiveDataModalComponent></LiveDataModalComponent>
+        {/* {(userCloseEnoughToBegin === true) & (liveTrackingOn === false) ? (
+          <ReadyToStartModalComponent></ReadyToStartModalComponent>
+        ) : userCloseEnoughToBegin === false ? (
+          <GetDirectionsModalComponent></GetDirectionsModalComponent>
+        ) : liveTrackingOn ? (
+          <LiveDataModalComponent></LiveDataModalComponent>
+        ) : (
+          <SwipeModalLoading></SwipeModalLoading>
+        )} */}
+      </GPSLiveSwipeModal>
+      {/* <SwipeModalNoBanner></SwipeModalNoBanner> */}
     </View>
   );
 }

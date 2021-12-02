@@ -1,45 +1,52 @@
 import React, { useState } from "react";
 import store from "../../state_management/store/store";
 import { useSelector } from "react-redux";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { getTheme } from "../../theme/themes";
 import CompassSvgComponent from "../_re-useables/svg_components/compass";
 import LayersSvgComponent from "../_re-useables/svg_components/layers-svg";
 import CurrentLocationSvgComponent from "../_re-useables/svg_components/current-location-svg";
 import {
-  createLineMapTypeUpdate,
-  createMapHeadingUpdate,
+  gpsLiveMapTypeUpdate,
+  gpsLiveMapHeadingUpdate,
 } from "../../state_management/actions/actions";
+import RingSvgComponent from "../_re-useables/svg_components/ring-svg";
 
-export default function CreateLineMapMenu() {
-  const { compassStyle, layersStyle, containerStyle } = styles();
+export default function GpsLiveMapMenu() {
+  const {
+    compassStyle,
+    layersStyle,
+    containerStyle,
+    layersStyle1,
+    ringTextStyle,
+  } = styles();
 
-  const createLineMapViewRef = useSelector(
-    (state) => state.createLineMapViewRefHandler
+  const gpsLiveMapViewRef = useSelector(
+    (state) => state.gpsLiveMapViewRefHandler
   );
 
-  const mapType = useSelector((state) => state.createLineMapTypeHandler);
-  const mapHeading = useSelector((state) => state.createMapHeadingHandler);
+  const mapType = useSelector((state) => state.gpsLiveMapTypeHandler);
+  const mapHeading = useSelector((state) => state.gpsLiveMapHeadingHandler);
 
   const aSingleCurrentPosition = useSelector(
     (state) => state.aSingleCurrentPosition
   );
 
-  const [threeDOn, setThreeDOn] = useState(true);
+  const [threeDOn, setThreeDOn] = useState(false);
 
   const cameraPositionNormal = {
     center: aSingleCurrentPosition,
     pitch: 2,
     heading: 0.0,
-    altitude: 200000,
+    altitude: 500,
     zoom: 40,
   };
 
   const cameraPosition3D = {
     center: aSingleCurrentPosition,
-    pitch: 50,
+    pitch: 100,
     heading: 0.0,
-    altitude: 200000,
+    altitude: 500,
     zoom: 40,
   };
 
@@ -61,17 +68,18 @@ export default function CreateLineMapMenu() {
 
       <TouchableOpacity
         onPress={async () => {
-          if (mapType === "satellite") {
-            store.dispatch(createLineMapTypeUpdate("hybridFlyover"));
+          if (mapType === "standard") {
+            store.dispatch(gpsLiveMapTypeUpdate("hybridFlyover"));
           }
-          if (mapType === "hybridFlyover" && !threeDOn) {
-            createLineMapViewRef.animateCamera(cameraPosition3D, 500);
-            setThreeDOn(true);
+          if (mapType === "hybridFlyover") {
+            //gpsLiveMapViewRef.animateCamera(cameraPosition3D, 500);
+            store.dispatch(gpsLiveMapTypeUpdate("mutedStandard"));
+            //setThreeDOn(true);
           }
-          if (mapType === "hybridFlyover" && threeDOn) {
-            createLineMapViewRef.animateCamera(cameraPositionNormal, 500);
-            setThreeDOn(false);
-            store.dispatch(createLineMapTypeUpdate("satellite"));
+          if (mapType === "mutedStandard") {
+            //gpsLiveMapViewRef.animateCamera(cameraPositionNormal, 500);
+            //setThreeDOn(false);
+            store.dispatch(gpsLiveMapTypeUpdate("standard"));
           }
         }}
         style={layersStyle}
@@ -80,12 +88,13 @@ export default function CreateLineMapMenu() {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          createLineMapViewRef.animateCamera(cameraPositionNormal, 500);
-          store.dispatch(createMapHeadingUpdate(0.0));
+          //gpsLiveMapViewRef.animateCamera(cameraPositionNormal, 500);
+          //store.dispatch(gpsLiveMapHeadingUpdate(0.0));
         }}
-        style={layersStyle}
+        style={layersStyle1}
       >
-        <CurrentLocationSvgComponent></CurrentLocationSvgComponent>
+        <Text style={ringTextStyle}>25m</Text>
+        <RingSvgComponent></RingSvgComponent>
       </TouchableOpacity>
     </View>
   );
@@ -94,6 +103,23 @@ export default function CreateLineMapMenu() {
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
+    layersStyle1: {
+      marginTop: 5,
+      backgroundColor: theme.primaryColor,
+      borderRadius: 35,
+      height: 60,
+      width: 60,
+      //paddingLeft: 6.5,
+      //paddingTop: 6.5,
+    },
+    ringTextStyle: {
+      zIndex: 99,
+      position: "absolute",
+      left: 16.5,
+      top: 21,
+      color: "black",
+      fontFamily: theme.fontFamily,
+    },
     layersStyle: {
       marginTop: 5,
       backgroundColor: theme.primaryColor,
@@ -115,7 +141,7 @@ const styles = () => {
     containerStyle: {
       zIndex: 999999999999999,
       position: "absolute",
-      top: 0,
+      top: 50,
       right: 0,
       height: 200,
       width: 70,

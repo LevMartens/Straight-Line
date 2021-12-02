@@ -223,6 +223,12 @@ export const createLineMapTypeUpdate = (event) => {
   };
 };
 
+export const gpsLiveMapTypeUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPTYPEGPS",
+  };
+};
 export const menuVisibleUpdate = (event) => {
   return {
     event: event,
@@ -276,6 +282,13 @@ export const createMapHeadingUpdate = (event) => {
   return {
     event: event,
     type: "MAPHEADINGCREATE",
+  };
+};
+
+export const gpsLiveMapHeadingUpdate = (event) => {
+  return {
+    event: event,
+    type: "MAPHEADINGGPS",
   };
 };
 

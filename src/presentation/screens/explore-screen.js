@@ -4,12 +4,12 @@ import MapViewExplore from "../components/explore_screen_components/es-map-view"
 import { useSelector } from "react-redux";
 import Banner from "../components/explore_screen_components/es-banner";
 import { getTheme } from "../theme/themes";
-import SwipeModal from "../components/explore_screen_components/es-swipe-modal";
+import ExploreSwipeModal from "../components/explore_screen_components/es-swipe-modal";
 import SearchView from "../components/explore_screen_components/es-search-view";
 import ExploreMapMenu from "../components/explore_screen_components/es-explore-map-menu";
 import LoadingMapIndicator from "../components/explore_screen_components/es-loading-map-indicator";
 import SwipeModalContent from "../components/explore_screen_components/es-swipe-modal-content";
-import SwipeModalLoading from "../components/explore_screen_components/es-swipe-modal-loading";
+import SwipeModalLoading from "../components/_re-useables/swipe-modal-loading";
 
 export default function Explore({ navigation }) {
   const { containerStyle } = styles();
@@ -26,12 +26,12 @@ export default function Explore({ navigation }) {
   return (
     <View style={containerStyle}>
       {!mapIsLoaded && <LoadingMapIndicator></LoadingMapIndicator>}
-      <SwipeModal>
+      <ExploreSwipeModal>
         {linesAreLoaded && <SwipeModalContent></SwipeModalContent>}
         {mapIsLoaded && !linesAreLoaded && (
           <SwipeModalLoading></SwipeModalLoading>
         )}
-      </SwipeModal>
+      </ExploreSwipeModal>
       <MapViewExplore></MapViewExplore>
       {menuVisible && <ExploreMapMenu></ExploreMapMenu>}
 

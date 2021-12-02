@@ -41,7 +41,15 @@ export default function WeatherWidget() {
   return weatherDataLoaded ? (
     <View style={weatherStyle}>
       <View style={tempratureStyle}>
-        <View style={{ flex: 1, marginLeft: 5 }}>{icon}</View>
+        <View
+          style={{
+            flex: 1,
+            marginLeft: 5,
+            justifyContent: "center",
+          }}
+        >
+          {icon}
+        </View>
         <SizedBox width={5} height={10}></SizedBox>
         <Text style={text1Style}>{`${temprature}°`}</Text>
       </View>
@@ -86,7 +94,7 @@ const styles = () => {
       justifyContent: "center",
       flex: 2,
       marginBottom: 5,
-      paddingLeft: 15,
+      paddingLeft: 22,
     },
     tempratureStyle: {
       marginTop: 5,

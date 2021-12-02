@@ -150,10 +150,10 @@ export default function LiveDataModalComponent() {
         }}
       >
         <TouchableOpacity style={buttonStyle} onPress={() => {}}>
-          <Text style={buttonTextStyle}>{"Elevation map"}</Text>
+          <Text style={buttonTextStyle}>{"Stop recording"}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={buttonStyle1} onPress={() => {}}>
-          <Text style={buttonTextStyle}>{"Switch map"}</Text>
+          <Text style={buttonTextStyle}>{"Pause"}</Text>
         </TouchableOpacity>
       </View>
 
@@ -170,12 +170,12 @@ export default function LiveDataModalComponent() {
           justifyContent: "center",
         }}
       >
-        <TouchableOpacity style={buttonStyle} onPress={() => {}}>
+        {/* <TouchableOpacity style={buttonStyle} onPress={() => {}}>
           <Text style={buttonTextStyle}>{"Stop Recording"}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={buttonStyle1} onPress={() => {}}>
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity style={buttonStyle1} onPress={() => {}}>
           <Text style={buttonTextStyle}>{"Switch ring"}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

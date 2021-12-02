@@ -13,13 +13,16 @@ import store from "../../state_management/store/store";
 import MarkerSvgComponent from "../_re-useables/svg_components/marker-svg";
 import MarkerEndSvgComponent from "../_re-useables/svg_components/marker-end-svg";
 
-export default function MapViewCreateLine({ initialRegion }) {
+export default function MapViewCreateLine() {
   const { mapStyle, markerCenterOffset } = styles();
 
   const pinState = useSelector((state) => state.createLineStateHandler);
   const firstPinCoordinates = useSelector((state) => state.startMarkerHandler);
   const secondPinCoordinates = useSelector((state) => state.endMarkerHandler);
   const mapType = useSelector((state) => state.createLineMapTypeHandler);
+  const aSingleCurrentPosition = useSelector(
+    (state) => state.aSingleCurrentPosition
+  );
 
   const mapPressed = (coordinates) => {
     pinState == "Set starting point" &&
@@ -32,6 +35,14 @@ export default function MapViewCreateLine({ initialRegion }) {
   const finishMarkerID = uuidv4();
 
   let mapViewRef;
+
+  const initialCamera = {
+    center: aSingleCurrentPosition,
+    pitch: 50,
+    heading: 0.0,
+    altitude: 15000,
+    zoom: 40,
+  };
 
   return (
     <MapView
@@ -48,7 +59,7 @@ export default function MapViewCreateLine({ initialRegion }) {
       }}
       style={mapStyle}
       showsCompass={false}
-      initialRegion={initialRegion}
+      initialCamera={initialCamera}
     >
       <Marker
         key={finishMarkerID}

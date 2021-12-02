@@ -19,9 +19,6 @@ import ActivityIndicatorOnTransparentView from "../components/_re-useables/activ
 export default function CreateLineScreen({ navigation }) {
   const { containerStyle } = styles();
 
-  const { latitude, longitude } = useSelector(
-    (state) => state.aSingleCurrentPosition
-  );
   const toolbarVisible = useSelector((state) => state.toolbarVisibleHandler);
   const menuVisible = useSelector((state) => state.menuVisibleHandler);
   const loadingVisible = useSelector((state) => state.loadingVisibleHandler);
@@ -37,13 +34,6 @@ export default function CreateLineScreen({ navigation }) {
     longitude: aSingleCurrentPosition.longitude + 0.111,
   };
 
-  const initialRegion = {
-    latitude: latitude,
-    longitude: longitude,
-    latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA,
-  };
-
   useEffect(() => {
     store.dispatch(mapPressedForFirstPin(initialStartingPoint));
     store.dispatch(mapPressedForSecondPin(initialEndPoint));
@@ -54,7 +44,7 @@ export default function CreateLineScreen({ navigation }) {
       {loadingVisible && (
         <ActivityIndicatorOnTransparentView></ActivityIndicatorOnTransparentView>
       )}
-      <MapViewCreateLine initialRegion={initialRegion}></MapViewCreateLine>
+      <MapViewCreateLine></MapViewCreateLine>
       {toolbarVisible && <CreateLineToolbar></CreateLineToolbar>}
       {menuVisible && <CreateLineMapMenu></CreateLineMapMenu>}
     </View>

@@ -83,8 +83,12 @@ export default function DetailScreen({ navigation }) {
           flex: 1.5,
         }}
       >
-        <StartButton navigation={navigation}> </StartButton>
-        <WalkAnotherTimeButton navigation={navigation}></WalkAnotherTimeButton>
+        {isLoaded && <StartButton navigation={navigation}> </StartButton>}
+        {isLoaded && (
+          <WalkAnotherTimeButton
+            navigation={navigation}
+          ></WalkAnotherTimeButton>
+        )}
       </View>
     </View>
   );

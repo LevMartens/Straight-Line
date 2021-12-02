@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import { getTheme } from "../../theme/themes";
 import { useSelector } from "react-redux";
+import { saveLineDraft } from "../../../domain/use_cases/save-line-draft";
 
 export default function StartButton({ navigation }) {
   const { containerStyle, buttonStyle, textStyle } = styles();

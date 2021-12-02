@@ -130,7 +130,7 @@ export const exploreMapTypeHandler = (state = "standard", action) => {
       return state;
   }
 };
-export const createLineMapTypeHandler = (state = "satellite", action) => {
+export const createLineMapTypeHandler = (state = "hybridFlyover", action) => {
   switch (action.type) {
     case "MAPTYPECREATE":
       return action.event;
@@ -223,6 +223,23 @@ export const weatherDataHandler = (
 ) => {
   switch (action.type) {
     case "WEATHERDATA":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
+export const gpsLiveMapTypeHandler = (state = "hybridFlyover", action) => {
+  switch (action.type) {
+    case "MAPTYPEGPS":
+      return action.event;
+    default:
+      return state;
+  }
+};
+export const gpsLiveMapHeadingHandler = (state = 0.0, action) => {
+  switch (action.type) {
+    case "MAPHEADINGGPS":
       return action.event;
     default:
       return state;
