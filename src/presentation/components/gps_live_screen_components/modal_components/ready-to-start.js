@@ -19,6 +19,9 @@ export default function ReadyToStartModalComponent() {
   } = useSelector((state) => state.selectedLineDraftHandler);
 
   const positionWatcher = useSelector((state) => state.positionWatcherHandler);
+  const headingWatcher = useSelector((state) => state.headingWatcherHandler);
+
+  const ref = useSelector((state) => state.gpsLiveMapViewRefHandler);
 
   const pointA = {
     latitude: pointALat,
@@ -36,9 +39,10 @@ export default function ReadyToStartModalComponent() {
       <TouchableOpacity
         style={buttonStyle}
         onPress={() => {
+          headingWatcher.remove();
           positionWatcher.remove();
           store.dispatch(liveTrackingUpdate(true));
-          startProducingPath(pointA, pointB, distance);
+          startProducingPath(pointA, pointB, distance, ref);
         }}
       >
         <Text style={buttonTextStyle}>{"Start Recording"}</Text>

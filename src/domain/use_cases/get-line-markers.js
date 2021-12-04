@@ -126,7 +126,12 @@ export async function getLineMarkers(currentRegion) {
   );
 
   store.dispatch(sendLineMarkers(lineMarkers));
-  store.dispatch(selectMarker(lineMarkers[0]));
+
+  if (lineMarkers.length > 0) {
+    store.dispatch(selectMarker(lineMarkers[0]));
+  } else {
+    store.dispatch(selectMarker({ isLoaded: false, noLinesFound: true }));
+  }
 
   return lineMarkers; // Return for testing
 }

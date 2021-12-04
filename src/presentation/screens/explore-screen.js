@@ -10,6 +10,7 @@ import ExploreMapMenu from "../components/explore_screen_components/es-explore-m
 import LoadingMapIndicator from "../components/explore_screen_components/es-loading-map-indicator";
 import SwipeModalContent from "../components/explore_screen_components/es-swipe-modal-content";
 import SwipeModalLoading from "../components/_re-useables/swipe-modal-loading";
+import SwipeModalNoLines from "../components/_re-useables/swipe-modal-no-lines";
 
 export default function Explore({ navigation }) {
   const { containerStyle } = styles();
@@ -19,7 +20,7 @@ export default function Explore({ navigation }) {
   const searchVisible = useSelector((state) => state.searchVisibleHandler);
   const menuVisible = useSelector((state) => state.menuVisibleHandler);
 
-  const { isLoaded: linesAreLoaded } = useSelector(
+  const { isLoaded: linesAreLoaded, noLinesFound } = useSelector(
     (state) => state.selectedMarkerHandler
   );
 
@@ -28,9 +29,10 @@ export default function Explore({ navigation }) {
       {!mapIsLoaded && <LoadingMapIndicator></LoadingMapIndicator>}
       <ExploreSwipeModal>
         {linesAreLoaded && <SwipeModalContent></SwipeModalContent>}
-        {mapIsLoaded && !linesAreLoaded && (
+        {mapIsLoaded && !linesAreLoaded && !noLinesFound && (
           <SwipeModalLoading></SwipeModalLoading>
         )}
+        {noLinesFound && <SwipeModalNoLines></SwipeModalNoLines>}
       </ExploreSwipeModal>
       <MapViewExplore></MapViewExplore>
       {menuVisible && <ExploreMapMenu></ExploreMapMenu>}

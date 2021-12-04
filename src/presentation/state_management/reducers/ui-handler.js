@@ -245,3 +245,20 @@ export const gpsLiveMapHeadingHandler = (state = 0.0, action) => {
       return state;
   }
 };
+
+export const radiusForBoundsHandler = (
+  state = {
+    radiusForBounds: 25,
+    circleColor: "rgba(144, 202, 249, 0.3)",
+    circleColorIn: "#DDEFFD",
+    circleColorOut: "rgba(144, 202, 249, 1)",
+  },
+  action
+) => {
+  switch (action.type) {
+    case "RADIUSFORBOUNDS":
+      return action.event;
+    default:
+      return state;
+  }
+};

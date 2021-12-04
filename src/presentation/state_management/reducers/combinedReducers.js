@@ -49,9 +49,11 @@ import {
   weatherDataHandler,
   gpsLiveMapHeadingHandler,
   gpsLiveMapTypeHandler,
+  radiusForBoundsHandler,
 } from "./ui-handler";
 
 export default combineReducers({
+  radiusForBoundsHandler,
   weatherDataHandler,
   loadingVisibleHandler,
   createMapHeadingHandler,

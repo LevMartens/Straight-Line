@@ -305,3 +305,10 @@ export const weatherDataUpdate = (event) => {
     type: "WEATHERDATA",
   };
 };
+
+export const radiusForBoundsUpdate = (event) => {
+  return {
+    event: event,
+    type: "RADIUSFORBOUNDS",
+  };
+};

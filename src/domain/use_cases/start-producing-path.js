@@ -4,6 +4,8 @@ import store from "../../presentation/state_management/store/store";
 import {
   currentPositionUpdate,
   finishLineUpdate,
+  gpsLiveMapHeadingUpdate,
+  updateCurrentDirection,
   updatePath,
 } from "../../presentation/state_management/actions/actions";
 import { getDistanceBetween } from "../generators/distance-generator";
@@ -11,8 +13,14 @@ import { meterFractionGenerator } from "../generators/meter-fraction-generator";
 import { getCoordinatesBetween } from "../generators/coordinates-generator";
 import { millisecondsToTime } from "../generators/milliseconds-to-time-generator";
 import { calculateScore } from "../generators/score-generator";
+import { watchHeading } from "../resources/operating_system/watch-heading";
 
-export async function startProducingPath(startingPoint, endPoint, distance) {
+export async function startProducingPath(
+  startingPoint,
+  endPoint,
+  distance,
+  ref
+) {
   const startingTime = performance.now();
   let totalTime = 0;
   let allUserDistanceToLine = [];
@@ -21,8 +29,9 @@ export async function startProducingPath(startingPoint, endPoint, distance) {
   const totalDistance = distance;
   const aMeter = await meterFractionGenerator(distance); // The fraction of the distance that represends a meter
   let persistentPathArray = [];
+  let curr;
 
-  const callback = async (location) => {
+  const positionCallback = async (location) => {
     var xa = performance.now();
     const {
       coords: { latitude, longitude },
@@ -32,6 +41,19 @@ export async function startProducingPath(startingPoint, endPoint, distance) {
       latitude: latitude,
       longitude: longitude,
     };
+
+    curr = currentPosition;
+
+    // ref.animateCamera(
+    //   {
+    //     center: currentPosition,
+    //     pitch: 50, //2,
+    //     heading: head, //heading - 160,
+    //     altitude: 500, //200000
+    //     zoom: 250,
+    //   },
+    //   500
+    // );
 
     const distanceToEndPoint = await getDistanceBetween(
       currentPosition,
@@ -71,15 +93,15 @@ export async function startProducingPath(startingPoint, endPoint, distance) {
       array.push(distanceBetweenMeasurePointAndCursor);
     }
     var xd = performance.now();
-    console.log(`TIME: forloop took ${xd - xc} milliseconds`);
+    //console.log(`TIME: forloop took ${xd - xc} milliseconds`);
 
     const userDistanceToLine = Math.min(...array); //using the shortest distance between the user and the line
 
-    console.log("TEST: userdistanceToLine " + userDistanceToLine);
+    //console.log("TEST: userdistanceToLine " + userDistanceToLine);
 
     allUserDistanceToLine.push(userDistanceToLine);
 
-    console.log("TEST: ALLuserdistanceToLine " + allUserDistanceToLine);
+    //console.log("TEST: ALLuserdistanceToLine " + allUserDistanceToLine);
 
     let pathColor = "FFFFFF";
     let band = "Platinum";
@@ -174,8 +196,33 @@ export async function startProducingPath(startingPoint, endPoint, distance) {
     store.dispatch(updatePath(pathArray));
 
     var xb = performance.now();
-    console.log(`TIME: Total callback took ${xb - xa} milliseconds`);
+    //console.log(`TIME: Total callback took ${xb - xa} milliseconds`);
   };
 
-  watchPosition(callback);
+  const headingCallback = async (headObj) => {
+    const { trueHeading, magHeading } = headObj;
+    const heading = trueHeading != -1 ? trueHeading : magHeading;
+    // const melbourne = {
+    //   latitude: -37.840935,
+    //   longitude: 144.946457,
+    // };
+
+    ref.animateCamera(
+      {
+        center: curr,
+        pitch: 50, //2,
+        heading: heading, //heading - 160,
+        altitude: 500, //200000
+        zoom: 250,
+      },
+      500
+    );
+
+    store.dispatch(gpsLiveMapHeadingUpdate(heading));
+    store.dispatch(updateCurrentDirection(heading));
+  };
+
+  watchHeading(headingCallback);
+
+  watchPosition(positionCallback);
 }

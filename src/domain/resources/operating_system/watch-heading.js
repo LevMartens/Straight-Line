@@ -29,5 +29,6 @@ export const watchHeading = async (callback) => {
   //     store.dispatch(updateCurrentDirection(heading));
   //   }
   // );
+
   store.dispatch(setHeadingWatcher(headingWatcher)); // This is needed to unsubscribe ron
 };

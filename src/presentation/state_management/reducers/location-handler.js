@@ -42,7 +42,11 @@ export const watchDirection = (state = 0.0, action) => {
 };
 
 export const positionWatcherHandler = (
-  state = { remove: function () {} },
+  state = {
+    remove: function () {
+      console.log("ERROR: No position watcher attached");
+    },
+  },
   action
 ) => {
   switch (action.type) {
@@ -54,7 +58,11 @@ export const positionWatcherHandler = (
 };
 
 export const headingWatcherHandler = (
-  state = { remove: function () {} },
+  state = {
+    remove: function () {
+      console.log("ERROR: No heading watcher attached");
+    },
+  },
   action
 ) => {
   switch (action.type) {

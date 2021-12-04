@@ -9,6 +9,7 @@ import CurrentLocationSvgComponent from "../_re-useables/svg_components/current-
 import {
   gpsLiveMapTypeUpdate,
   gpsLiveMapHeadingUpdate,
+  radiusForBoundsUpdate,
 } from "../../state_management/actions/actions";
 import RingSvgComponent from "../_re-useables/svg_components/ring-svg";
 
@@ -32,6 +33,8 @@ export default function GpsLiveMapMenu() {
     (state) => state.aSingleCurrentPosition
   );
 
+  const { radiusForBounds, circleColor, circleColorOut, circleColorIn } =
+    useSelector((state) => state.radiusForBoundsHandler);
   const [threeDOn, setThreeDOn] = useState(false);
 
   const cameraPositionNormal = {
@@ -89,12 +92,58 @@ export default function GpsLiveMapMenu() {
       <TouchableOpacity
         onPress={() => {
           //gpsLiveMapViewRef.animateCamera(cameraPositionNormal, 500);
-          //store.dispatch(gpsLiveMapHeadingUpdate(0.0));
+          if (radiusForBounds === 25) {
+            store.dispatch(
+              radiusForBoundsUpdate({
+                radiusForBounds: 50,
+                circleColor: "rgba(252, 156, 4, 0.3)",
+                circleColorIn: "#FDCD81",
+                circleColorOut: "rgba(252, 156, 4, 1)",
+              })
+            );
+          }
+          if (radiusForBounds === 50) {
+            store.dispatch(
+              radiusForBoundsUpdate({
+                radiusForBounds: 75,
+                circleColor: "rgba(211, 211, 211, 0.3)",
+                circleColorIn: "#EDEDED",
+                circleColorOut: "rgba(211, 211, 211, 1)",
+              })
+            );
+          }
+          if (radiusForBounds === 75) {
+            store.dispatch(
+              radiusForBoundsUpdate({
+                radiusForBounds: 100,
+                circleColor: "rgba(205, 128, 50, 0.3)",
+                circleColorIn: "#EBCCAD",
+                circleColorOut: "rgba(205, 128, 50, 1)",
+              })
+            );
+          }
+          if (radiusForBounds === 100) {
+            store.dispatch(
+              radiusForBoundsUpdate({
+                radiusForBounds: 25,
+                circleColor: "rgba(144, 202, 249, 0.3)",
+                circleColorIn: "#DDEFFD",
+                circleColorOut: "rgba(144, 202, 249, 1)",
+              })
+            );
+          }
         }}
         style={layersStyle1}
       >
-        <Text style={ringTextStyle}>25m</Text>
-        <RingSvgComponent></RingSvgComponent>
+        <Text
+          style={[ringTextStyle, { left: radiusForBounds === 100 ? 14 : 16.5 }]}
+        >
+          {radiusForBounds}m
+        </Text>
+        <RingSvgComponent
+          colorIn={circleColorIn}
+          colorOut={circleColorOut}
+        ></RingSvgComponent>
       </TouchableOpacity>
     </View>
   );
@@ -109,6 +158,7 @@ const styles = () => {
       borderRadius: 35,
       height: 60,
       width: 60,
+
       //paddingLeft: 6.5,
       //paddingTop: 6.5,
     },

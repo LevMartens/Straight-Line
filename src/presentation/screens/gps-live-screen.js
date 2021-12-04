@@ -54,8 +54,8 @@ export default function GPSLiveScreen({ navigation }) {
       <GpsLiveMapMenu></GpsLiveMapMenu>
       <MapViewGPSLive navigation={navigation}></MapViewGPSLive>
       <GPSLiveSwipeModal>
-        <LiveDataModalComponent></LiveDataModalComponent>
-        {/* {(userCloseEnoughToBegin === true) & (liveTrackingOn === false) ? (
+        {/* <LiveDataModalComponent></LiveDataModalComponent> */}
+        {(userCloseEnoughToBegin === true) & (liveTrackingOn === false) ? (
           <ReadyToStartModalComponent></ReadyToStartModalComponent>
         ) : userCloseEnoughToBegin === false ? (
           <GetDirectionsModalComponent></GetDirectionsModalComponent>
@@ -63,7 +63,7 @@ export default function GPSLiveScreen({ navigation }) {
           <LiveDataModalComponent></LiveDataModalComponent>
         ) : (
           <SwipeModalLoading></SwipeModalLoading>
-        )} */}
+        )}
       </GPSLiveSwipeModal>
       {/* <SwipeModalNoBanner></SwipeModalNoBanner> */}
     </View>

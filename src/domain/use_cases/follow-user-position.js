@@ -10,6 +10,7 @@ import {
 import { getDistanceBetween } from "../generators/distance-generator";
 import { userCloseEnoughToBegin } from "../helpers/if_statements";
 import { watchHeadingAsync } from "expo-location";
+import { watchHeading } from "../resources/operating_system/watch-heading";
 
 export async function followUserPosition(start, ref) {
   const startingPoint = start;
@@ -27,6 +28,17 @@ export async function followUserPosition(start, ref) {
     };
 
     cur = currentPosition;
+
+    ref.animateCamera(
+      {
+        center: currentPosition,
+        // pitch: 50, //2,
+        // heading: heading, //heading - 160,
+        // altitude: 500, //200000
+        // zoom: 250,
+      },
+      500
+    );
 
     //TEST: await and async added recently see if works
     const distanceUserToStart = await getDistanceBetween(
@@ -51,7 +63,7 @@ export async function followUserPosition(start, ref) {
 
     ref.animateCamera(
       {
-        center: cur,
+        //center: cur,
         pitch: 50, //2,
         heading: heading, //heading - 160,
         altitude: 500, //200000
@@ -64,6 +76,7 @@ export async function followUserPosition(start, ref) {
     store.dispatch(updateCurrentDirection(heading));
   };
 
-  watchHeadingAsync(headingCallback);
+  //watchHeadingAsync(headingCallback);
+  watchHeading(headingCallback);
   watchPosition(callback);
 }

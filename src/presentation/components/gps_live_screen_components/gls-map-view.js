@@ -46,12 +46,28 @@ export default function MapViewGPSLive({ navigation }) {
   const liveDirection = useSelector((state) => state.watchDirection);
   const mapType = useSelector((state) => state.gpsLiveMapTypeHandler);
 
-  const {
-    latitude: aSingleCurrentPositionLatitude,
-    longitude: aSingleCurrentPositionLongitude,
-  } = useSelector((state) => state.aSingleCurrentPosition);
+  // const {
+  //   latitude: aSingleCurrentPositionLatitude,
+  //   longitude: aSingleCurrentPositionLongitude,
+  // } = useSelector((state) => state.aSingleCurrentPosition);
+
+  const aSingleCurrentPosition = useSelector(
+    (state) => state.aSingleCurrentPosition
+  );
+
+  const { radiusForBounds, circleColor } = useSelector(
+    (state) => state.radiusForBoundsHandler
+  );
 
   let mapViewRef;
+
+  const initialCamera = {
+    center: aSingleCurrentPosition,
+    pitch: 50,
+    heading: 0.0,
+    altitude: 5000,
+    zoom: 40,
+  };
 
   useEffect(() => {
     getPositionOnce(); //TODO this function bypasses use_cases
@@ -80,12 +96,13 @@ export default function MapViewGPSLive({ navigation }) {
         //store.dispatch(gpsLiveMapHeadingUpdate(mapHeading.heading));
       }}
       showsCompass={false}
-      initialRegion={{
-        latitude: aSingleCurrentPositionLatitude,
-        longitude: aSingleCurrentPositionLongitude,
-        latitudeDelta: 0.0002,
-        longitudeDelta: 0.001,
-      }}
+      initialCamera={initialCamera}
+      // initialRegion={{
+      //   latitude: aSingleCurrentPositionLatitude,
+      //   longitude: aSingleCurrentPositionLongitude,
+      //   latitudeDelta: 0.0002,
+      //   longitudeDelta: 0.001,
+      // }}
     >
       {/* <TouchableOpacity
         style={buttonStyle}
@@ -126,9 +143,9 @@ export default function MapViewGPSLive({ navigation }) {
       <Circle
         zIndex={3}
         strokeWidth={0.00001}
-        fillColor={"rgba(144, 202, 249, 0.2)"} //rgba(144, 202, 249, 0.2)rgba(252, 156, 4, 0.2)
+        fillColor={circleColor} //rgba(144, 202, 249, 0.2)rgba(252, 156, 4, 0.2)
         center={liveCurrentPosition}
-        radius={25}
+        radius={radiusForBounds}
       ></Circle>
       {/* <Circle
         zIndex={2}
