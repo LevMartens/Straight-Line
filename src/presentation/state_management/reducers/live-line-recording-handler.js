@@ -23,6 +23,8 @@ export const finishedLineHandler = (
     largestDeviation: 0,
     time: "No time",
     band: "No band",
+    // path: [],
+    // deviationPoint: [],
   },
   action
 ) => {

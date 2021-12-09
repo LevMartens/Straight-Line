@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MapViewCreateLine from "../components/create_line_screen_components/cl-map-view";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
@@ -14,6 +14,7 @@ import DeviationSvgComponent from "../components/_re-useables/svg_components/dev
 import TimeSvgComponent from "../components/_re-useables/svg_components/time";
 import DifficultySvgComponent from "../components/_re-useables/svg_components/difficulty";
 import { createPublicLine } from "../../domain/use_cases/create-public-line";
+import DescriptionSvgComponent from "../components/_re-useables/svg_components/description-svg";
 
 export default function LineReviewScreen({ navigation }) {
   const {
@@ -31,6 +32,8 @@ export default function LineReviewScreen({ navigation }) {
     activityIndicatorStyle,
     widgetContainerStyle,
     mapViewStyle,
+    text45,
+    textBox45,
   } = styles();
 
   const lineDraft = useSelector((state) => state.selectedLineDraftHandler);
@@ -47,6 +50,15 @@ export default function LineReviewScreen({ navigation }) {
 
   const { distance, elevationPoints, title } = rawLineData;
 
+  const [description, setDescription] = useState(
+    "It's here. The eagerly anticipated Test line 3, created by myself Lev the Dev, who was hungrier than ever for straight line success. However, with our longest, most dangerous and action packed line to date waiting patiently for us over the border, the nerves were real. Even with meticulous planning and logistics."
+  );
+
+  const truncatedDescription =
+    description.length > 190
+      ? description.substring(0, 190) + " (...)"
+      : description;
+
   return (
     <View style={containerStyle}>
       {userFinished && (
@@ -59,7 +71,16 @@ export default function LineReviewScreen({ navigation }) {
               style={{
                 position: "absolute",
                 right: 20,
-                backgroundColor: "#90caf9",
+                backgroundColor:
+                  band === "Platinum"
+                    ? "#90caf9"
+                    : band === "Gold"
+                    ? "#fc9c04"
+                    : band === "Silver"
+                    ? "#d3d3d3"
+                    : band === "Bronze"
+                    ? "#cd8032"
+                    : "#BE0000",
                 borderRadius: 16,
                 justifyContent: "center",
                 height: 30,
@@ -75,6 +96,32 @@ export default function LineReviewScreen({ navigation }) {
               initialRegion={markerRegionZoomedIn}
             ></MapViewLineReview>
           </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              //justifyContent: "center",
+              marginTop: 20,
+              alignSelf: "center",
+              backgroundColor: "#313131",
+              height: 150, //60,
+              width: 360,
+              borderRadius: 16,
+            }}
+          >
+            <View
+              style={{
+                position: "absolute",
+                left: 20,
+                top: 10,
+              }}
+            >
+              <DescriptionSvgComponent></DescriptionSvgComponent>
+            </View>
+
+            <Text style={text45}>Description</Text>
+            <Text style={textBox45}>{`${truncatedDescription}`}</Text>
+          </View>
 
           <View
             style={{
@@ -84,7 +131,7 @@ export default function LineReviewScreen({ navigation }) {
               marginTop: 20,
               alignSelf: "center",
               backgroundColor: "#313131",
-              height: 60,
+              height: 50, //60,
               width: 360,
               borderRadius: 16,
             }}
@@ -108,7 +155,7 @@ export default function LineReviewScreen({ navigation }) {
               marginTop: 20,
               alignSelf: "center",
               backgroundColor: "#313131",
-              height: 60,
+              height: 50, //60,
               width: 360,
               borderRadius: 16,
             }}
@@ -132,7 +179,7 @@ export default function LineReviewScreen({ navigation }) {
               marginTop: 20,
               alignSelf: "center",
               backgroundColor: "#313131",
-              height: 60,
+              height: 50, //60,
               width: 360,
               borderRadius: 16,
             }}
@@ -193,11 +240,12 @@ export default function LineReviewScreen({ navigation }) {
           <TouchableOpacity
             style={{
               marginTop: 20,
+
               alignSelf: "center",
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "#fc9c04",
-              height: 60,
+              height: 50, //60,
               width: 360,
               borderRadius: 16,
             }}
@@ -226,6 +274,17 @@ export default function LineReviewScreen({ navigation }) {
 const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
+    text45: {
+      // marginRight: 10,
+      // marginLeft: 20,
+      position: "absolute",
+      top: 25,
+      left: 80,
+      fontSize: 17,
+      color: theme.textColor,
+      textAlign: "left",
+      fontFamily: theme.fontFamily,
+    },
     activityIndicatorStyle: {
       color: theme.buttonColor,
     },
@@ -236,7 +295,7 @@ const styles = () => {
       flexDirection: "row",
       alignSelf: "center",
       width: SCREEN_WIDTH - 50,
-      height: 265,
+      height: 150, //265,
       borderRadius: 16,
       overflow: "hidden",
       backgroundColor: "#FF616D",
@@ -311,6 +370,20 @@ const styles = () => {
       fontSize: 17,
       color: theme.textColor,
       textAlign: "right",
+      fontFamily: theme.fontFamily,
+    },
+    textBox45: {
+      //alignSelf: "center",
+      //flex: 1,
+      position: "absolute",
+      left: 20,
+      top: 70,
+      //marginTop: 70,
+      //marginLeft: 60,
+      width: SCREEN_WIDTH - 100,
+      fontSize: 14,
+      color: theme.textColor,
+      textAlign: "left",
       fontFamily: theme.fontFamily,
     },
     textStyle6: {

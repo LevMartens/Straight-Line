@@ -105,25 +105,26 @@ export async function getLineMarkers(currentRegion) {
   });
 
   // Adding image
-  let lineObjectsWithImage = [];
+  // let lineObjectsWithImage = [];
 
-  await Promise.all(
-    lineObjects.map(async (line) => {
-      const uri = line.finishedMissions.items[0].images[0];
+  // await Promise.all(
+  //   lineObjects.map(async (line) => {
+  //     const uri = line.finishedMissions.items[0].images[0];
 
-      line.frontImage = uri ? await downloadImage(uri) : "";
+  //     line.frontImage = uri ? await downloadImage(uri) : "";
 
-      lineObjectsWithImage = lineObjectsWithImage.concat(line);
-    })
-  );
+  //     lineObjectsWithImage = lineObjectsWithImage.concat(line);
+  //   })
+  // );
 
   // Prepping line marker data to send to MapView
   const lineMarkers = await Promise.all(
-    lineObjectsWithImage.map(async (rawData) => {
+    lineObjects.map(async (rawData) => {
       const lineMarkerData = await packPublicLineData(rawData);
       return lineMarkerData;
     })
   );
+  //WithImage
 
   store.dispatch(sendLineMarkers(lineMarkers));
 

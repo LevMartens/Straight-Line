@@ -167,7 +167,7 @@ export async function createPublicLine(
     hashTags: hashTags,
     latitudeDeltaFit: latitudeDeltaFit,
     longitudeDeltaFit: longitudeDeltaFit,
-    lineCompleted: lineCompleted,
+    lineCompleted: true, //lineCompleted,
     title: title,
     verified: verified,
   };

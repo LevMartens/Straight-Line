@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { getTheme } from "../../theme/themes";
 import defaultImage from "../../../../assets/images/default-image.jpg";
+import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 
 export default function SwipeModalContent() {
   const {
@@ -22,19 +23,23 @@ export default function SwipeModalContent() {
       place,
       difficultyBand,
       distance,
+      description,
       finishedMissions: items,
     },
   } = useSelector((state) => state.selectedMarkerHandler);
 
   return (
-    <View>
-      <Image
+    <View style={{ marginBottom: 50, width: SCREEN_WIDTH - 50, height: 200 }}>
+      {/* <Image
         source={frontImage ? frontImage : defaultImage}
         style={swipeModalImageStyle}
         resizeMode="cover"
-      />
-      <Text style={textStyle}>{`${title}`}</Text>
-      <Text style={textStyle1}>{`${place}`}</Text>
+      /> */}
+      <Text style={{ ...textStyle2, marginBottom: 0 }}>{`${title}`}</Text>
+      <Text style={{ ...textStyle1, marginBottom: 10 }}>{`${place}`}</Text>
+      <Text
+        style={{ ...textStyle1, marginBottom: 10 }}
+      >{`Description: It's here. The eagerly anticipated Test line 3, created by myself Lev the Dev, who was hungrier than ever for straight line success. However, with our longest, most dangerous and action packed line to date waiting patiently for us over the border, the nerves were real. Even with meticulous planning and logistics. `}</Text>
 
       <View style={{ flexDirection: "row" }}>
         <Text

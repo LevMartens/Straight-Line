@@ -2,9 +2,12 @@ import { watchPosition } from "../resources/operating_system/watch-position";
 import { v4 as uuidv4 } from "uuid";
 import store from "../../presentation/state_management/store/store";
 import {
+  currentBandUpdate,
   currentPositionUpdate,
+  distanceToEndPointUpdate,
   finishLineUpdate,
   gpsLiveMapHeadingUpdate,
+  largestDeviationUpdate,
   updateCurrentDirection,
   updatePath,
 } from "../../presentation/state_management/actions/actions";
@@ -30,6 +33,7 @@ export async function startProducingPath(
   const aMeter = await meterFractionGenerator(distance); // The fraction of the distance that represends a meter
   let persistentPathArray = [];
   let curr;
+  let band = "Platinum";
 
   const positionCallback = async (location) => {
     var xa = performance.now();
@@ -104,7 +108,7 @@ export async function startProducingPath(
     //console.log("TEST: ALLuserdistanceToLine " + allUserDistanceToLine);
 
     let pathColor = "FFFFFF";
-    let band = "Platinum";
+    //let band = "Platinum";
 
     if (distanceToEndPoint <= 10) {
       const endTime = performance.now();
@@ -129,6 +133,8 @@ export async function startProducingPath(
         largestDeviation: largestDeviation,
         time: totalTime,
         band: band,
+        // path: persistentPathArray,
+        // deviationPoints: allUserDistanceToLine,
       };
       store.dispatch(finishLineUpdate(userFinishedData));
       pathColor = "#90caf9";
@@ -192,8 +198,13 @@ export async function startProducingPath(
 
     persistentPathArray = pathArray.slice();
 
+    const currentLargestDeviation = Math.max(...allUserDistanceToLine);
+
     store.dispatch(currentPositionUpdate(currentPosition));
     store.dispatch(updatePath(pathArray));
+    store.dispatch(distanceToEndPointUpdate(distanceToEndPoint));
+    store.dispatch(currentBandUpdate(band));
+    store.dispatch(largestDeviationUpdate(currentLargestDeviation));
 
     var xb = performance.now();
     //console.log(`TIME: Total callback took ${xb - xa} milliseconds`);

@@ -262,3 +262,30 @@ export const radiusForBoundsHandler = (
       return state;
   }
 };
+
+export const distanceToEndPointHandler = (state = 0, action) => {
+  switch (action.type) {
+    case "DISTANCETOENDPOINT":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
+export const currentBandHandler = (state = "Platinum", action) => {
+  switch (action.type) {
+    case "BAND":
+      return action.event;
+    default:
+      return state;
+  }
+};
+
+export const largestDeviationHandler = (state = 0, action) => {
+  switch (action.type) {
+    case "DEVIATION":
+      return action.event;
+    default:
+      return state;
+  }
+};

@@ -312,3 +312,24 @@ export const radiusForBoundsUpdate = (event) => {
     type: "RADIUSFORBOUNDS",
   };
 };
+
+export const distanceToEndPointUpdate = (event) => {
+  return {
+    event: event,
+    type: "DISTANCETOENDPOINT",
+  };
+};
+
+export const currentBandUpdate = (event) => {
+  return {
+    event: event,
+    type: "BAND",
+  };
+};
+
+export const largestDeviationUpdate = (event) => {
+  return {
+    event: event,
+    type: "DEVIATION",
+  };
+};

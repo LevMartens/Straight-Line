@@ -14,7 +14,7 @@ export function RootStack({ userLoggedIn }) {
       initialRouteName={userLoggedIn ? "Tab" : "Welcome"}
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="Practice" component={PracticeScreen} />
+      <Stack.Screen name="Practice" component={LineReviewScreen} />
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
       <Stack.Screen name="Tab" component={BottomTab} />
       <Stack.Screen name="GPSLive" component={GPSLiveScreen} />

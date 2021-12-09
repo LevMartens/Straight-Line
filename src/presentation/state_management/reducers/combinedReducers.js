@@ -50,9 +50,15 @@ import {
   gpsLiveMapHeadingHandler,
   gpsLiveMapTypeHandler,
   radiusForBoundsHandler,
+  distanceToEndPointHandler,
+  currentBandHandler,
+  largestDeviationHandler,
 } from "./ui-handler";
 
 export default combineReducers({
+  largestDeviationHandler,
+  currentBandHandler,
+  distanceToEndPointHandler,
   radiusForBoundsHandler,
   weatherDataHandler,
   loadingVisibleHandler,

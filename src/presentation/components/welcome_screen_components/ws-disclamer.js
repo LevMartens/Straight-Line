@@ -16,7 +16,7 @@ export default function Disclamer({ termsOnPress, policyOnPress }) {
   return (
     <View style={container}>
       <Text style={textStyle1}>
-        By continuing to use Straigth Line Mission, you agree to our{" "}
+        By continuing to use Straight Line Mission, you agree to our{" "}
       </Text>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity style={buttonStyle} onPress={termsOnPress}>

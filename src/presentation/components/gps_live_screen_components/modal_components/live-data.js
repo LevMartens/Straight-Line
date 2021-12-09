@@ -28,6 +28,15 @@ export default function LiveDataModalComponent() {
 
   const positionWatcher = useSelector((state) => state.positionWatcherHandler);
 
+  const distanceToEndPoint = useSelector(
+    (state) => state.distanceToEndPointHandler
+  );
+
+  const currentBand = useSelector((state) => state.currentBandHandler);
+  const largestDeviation = useSelector(
+    (state) => state.largestDeviationHandler
+  );
+
   const pointA = {
     latitude: pointALat,
     longitude: pointALng,
@@ -58,10 +67,12 @@ export default function LiveDataModalComponent() {
           flexDirection: "row",
         }}
       >
-        <Text style={textStyle2}>Distance travelled</Text>
-        <Text style={textStyle1}>2345m / 5000m</Text>
+        <Text style={textStyle2}>Distance to finish line</Text>
+        <Text style={textStyle1}>{`${
+          distance - distanceToEndPoint
+        }m / ${distance}m`}</Text>
       </View>
-      <View
+      {/* <View
         style={{
           marginLeft: 30,
           //width: SCREEN_WIDTH - 57,
@@ -71,7 +82,7 @@ export default function LiveDataModalComponent() {
       >
         <Text style={textStyle2}>Accuracy </Text>
         <Text style={textStyle1}>93%</Text>
-      </View>
+      </View> */}
       <View
         style={{
           marginLeft: 30,
@@ -81,7 +92,7 @@ export default function LiveDataModalComponent() {
         }}
       >
         <Text style={textStyle2}>Largest deviation </Text>
-        <Text style={textStyle1}>11m</Text>
+        <Text style={textStyle1}>{largestDeviation}m</Text>
       </View>
       <View
         style={{
@@ -92,7 +103,7 @@ export default function LiveDataModalComponent() {
         }}
       >
         <Text style={textStyle2}>Current band </Text>
-        <Text style={textStyle1}>Gold</Text>
+        <Text style={textStyle1}>{currentBand}</Text>
       </View>
       {/* <View style={chartContainerStyle}>
         <LineChart
@@ -152,9 +163,9 @@ export default function LiveDataModalComponent() {
         <TouchableOpacity style={buttonStyle} onPress={() => {}}>
           <Text style={buttonTextStyle}>{"Stop recording"}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={buttonStyle1} onPress={() => {}}>
+        {/* <TouchableOpacity style={buttonStyle1} onPress={() => {}}>
           <Text style={buttonTextStyle}>{"Pause"}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       <View
@@ -185,17 +196,19 @@ const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
     buttonStyle: {
-      position: "absolute",
-      top: 10,
-      left: 20,
-      //marginTop: 20,
-      paddingTop: 10,
+      // position: "absolute",
+      // top: 10,
+      // left: 20,
+      marginTop: 40,
+      paddingTop: 12, //10,
       flexDirection: "row",
       justifyContent: "center",
       alignSelf: "center",
       backgroundColor: theme.buttonColor,
-      width: SCREEN_WIDTH - 250,
-      height: 40,
+      width: SCREEN_WIDTH - 55,
+      height: 50,
+      // width: SCREEN_WIDTH - 250,
+      // height: 40,
       borderRadius: 16,
     },
     buttonStyle1: {
@@ -213,7 +226,7 @@ const styles = () => {
       borderRadius: 16,
     },
     buttonTextStyle: {
-      fontSize: 16,
+      fontSize: 20, //16,
       color: theme.textColor,
       textAlign: "center",
       fontFamily: theme.fontFamily,
