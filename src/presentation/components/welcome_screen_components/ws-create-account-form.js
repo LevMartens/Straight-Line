@@ -38,6 +38,11 @@ export default function CreateAccountForm({ setModalVisible, navigation }) {
   const [verificationVisible, setVerificationVisible] = useState(false);
   const [loadingVisible, setLoadingVisible] = useState(false);
 
+  function backToLogin() {
+    //setVerificationVisible(false);
+    setLoginVisible(true);
+  }
+
   return (
     <View style={container}>
       {loadingVisible && (
@@ -51,8 +56,9 @@ export default function CreateAccountForm({ setModalVisible, navigation }) {
       ) : verificationVisible ? (
         <VerificationForm
           username={username}
-          setModalVisible={setModalVisible}
-          navigation={navigation}
+          backToLogin={backToLogin}
+          // setModalVisible={setModalVisible}
+          // navigation={navigation}
         ></VerificationForm>
       ) : (
         <View>

@@ -94,6 +94,7 @@ export async function getLineMarkers(currentRegion) {
     console.log(
       "LOG: No lvl 3 objects (lines) found in dynamoDB. source: get-line-markers.js"
     );
+    store.dispatch(selectMarker({ isLoaded: false, noLinesFound: true }));
     return;
   }
 
@@ -128,11 +129,13 @@ export async function getLineMarkers(currentRegion) {
 
   store.dispatch(sendLineMarkers(lineMarkers));
 
-  if (lineMarkers.length > 0) {
-    store.dispatch(selectMarker(lineMarkers[0]));
-  } else {
-    store.dispatch(selectMarker({ isLoaded: false, noLinesFound: true }));
-  }
+  console.log("TEST: linemarkers", lineMarkers.length);
+
+  //if (lineMarkers.length > 0) {
+  store.dispatch(selectMarker(lineMarkers[0]));
+  //} else {
+
+  // }
 
   return lineMarkers; // Return for testing
 }

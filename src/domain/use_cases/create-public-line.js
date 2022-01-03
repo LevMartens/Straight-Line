@@ -28,7 +28,8 @@ export async function createPublicLine(
   difficulty,
   largestDeviation,
   score,
-  band
+  band,
+  description
 ) {
   const {
     rawLineData: {
@@ -36,7 +37,6 @@ export async function createPublicLine(
       startingCoordinates,
       finishCoordinates,
       creatorName,
-      description,
       difficultyLevel,
       distance,
       elevationPoints,

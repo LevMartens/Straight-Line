@@ -258,7 +258,8 @@ export default function LineReviewScreen({ navigation }) {
                 difficulty,
                 largestDeviation,
                 score,
-                band
+                band,
+                description
               );
               //Reset current line draft
               navigation.navigate("Explore");
