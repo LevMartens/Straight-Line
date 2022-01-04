@@ -1,7 +1,6 @@
 import { Auth } from "aws-amplify";
 
 export async function signUp(username, email, password) {
-  console.log("TEST: signup ", username + " " + email + " " + password);
   try {
     await Auth.signUp({
       username,
@@ -10,9 +9,8 @@ export async function signUp(username, email, password) {
         email,
       },
     });
-    return { error: false, message: "successful" };
+    return { error: false, message: "User successfully signed up" };
   } catch (error) {
-    console.log("ERROR: error signing up:", error);
     return { error: true, message: error.message };
   }
 }

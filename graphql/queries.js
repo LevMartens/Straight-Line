@@ -600,6 +600,7 @@ export const listLines = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        owner
         creatorName
         description
         title

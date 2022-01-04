@@ -333,3 +333,10 @@ export const largestDeviationUpdate = (event) => {
     type: "DEVIATION",
   };
 };
+
+export const userDataUpdate = (event) => {
+  return {
+    event: event,
+    type: "USERDATA",
+  };
+};

@@ -289,3 +289,15 @@ export const largestDeviationHandler = (state = 0, action) => {
       return state;
   }
 };
+
+export const userDataHandler = (
+  state = { userLoggedIn: false, userData: {} },
+  action
+) => {
+  switch (action.type) {
+    case "USERDATA":
+      return action.event;
+    default:
+      return state;
+  }
+};

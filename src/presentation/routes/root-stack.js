@@ -5,10 +5,13 @@ import { BottomTab } from "./bottom-tab-bar";
 import LineReviewScreen from "../screens/line-review-screen";
 import WelcomeScreen from "../screens/welcome-screen";
 import PracticeScreen from "../screens/animation-practice-screen";
-
+import { useSelector } from "react-redux";
 const Stack = createStackNavigator();
 
-export function RootStack({ userLoggedIn }) {
+export function RootStack() {
+  //{ userLoggedIn }
+  const { userLoggedIn } = useSelector((state) => state.userDataHandler);
+
   return (
     <Stack.Navigator
       initialRouteName={userLoggedIn ? "Tab" : "Welcome"}

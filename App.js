@@ -18,6 +18,8 @@ import * as Network from "expo-network";
 import * as AuthSession from "expo-auth-session";
 import { createLineDraft } from "./src/domain/use_cases/create-line-draft";
 import { createPublicLine } from "./src/domain/use_cases/create-public-line";
+import { userDataUpdate } from "./src/presentation/state_management/actions/actions";
+import { getUserData } from "./src/domain/use_cases/user-get-data";
 
 async function urlOpener(url, redirectUrl) {
   const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(
@@ -51,56 +53,35 @@ export default function App() {
     "Urbanist-Bold": require("./assets/fonts/Urbanist-Bold.ttf"),
     "Urbanist-Black": require("./assets/fonts/Urbanist-Black.ttf"),
   });
-  const [user, setUser] = useState(null);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  const [userDataLoading, setUserDataLoading] = useState(true);
 
   useEffect(() => {
+    getUserData().then(() => {
+      setUserDataLoading(false);
+    });
+
     Hub.listen("auth", ({ payload: { event, data } }) => {
       switch (event) {
         case "signUp":
-          console.log("LOG: User signed up");
-
+          getUserData().then(() => {
+            setUserDataLoading(false);
+          });
           break;
         case "signIn":
-          console.log("LOG: User signed in");
-          getUser().then((userData) => {
-            console.log("TEST: user: ", userData);
-            setUser(userData);
-            setUserLoggedIn(true);
+          getUserData().then(() => {
+            setUserDataLoading(false);
           });
           break;
         case "signOut":
-          setUser(null);
-          setUserLoggedIn(false);
           break;
         case "signIn_failure":
-          console.log("LOG: Sign in failure");
+          console.log("ERROR: Sign in failure");
         case "cognitoHostedUI_failure":
-          console.log("LOG: Sign in failure", data);
+          console.log("ERROR: Sign in failure", data);
           break;
       }
     });
-
-    getUser().then((userData) => {
-      //owner = userData.username;
-
-      //setUser(userData);
-      // if (userData != "undefined") {
-      //   setUserLoggedIn(true);
-      // }
-      if (userData !== undefined) {
-        setUserLoggedIn(true);
-      }
-
-      // console.log(
-      //   "TEST: userlogged in " +
-      //     userLoggedIn +
-      //     " userdata " +
-      //     JSON.stringify(userData)
-      // );
-    });
-    //saveProduct();
-    //createTestLine();
   }, []);
 
   async function createTestLine() {
@@ -120,29 +101,29 @@ export default function App() {
     );
   }
 
-  async function getUser() {
-    try {
-      const userData = await Auth.currentAuthenticatedUser();
-      return userData;
-    } catch (e) {
-      setUserLoggedIn(false);
-      return console.log("LOG: user not signed in");
-    }
-  }
-
   if (!fontsLoaded) {
     return (
       <View style={{ justifyContent: "center" }}>
         <ActivityIndicator animating={true} color={"#c84b31"} size={"large"} />
       </View>
     );
-  } else {
+  }
+
+  if (userDataLoading) {
+    return (
+      <View style={{ justifyContent: "center" }}>
+        <ActivityIndicator animating={true} color={"#c84b31"} size={"large"} />
+      </View>
+    );
+  }
+
+  if (fontsLoaded && !userDataLoading) {
     return (
       <Provider store={store}>
         <RootSiblingParent>
           <PaperProvider>
             <NavigationContainer>
-              <RootStack userLoggedIn={userLoggedIn}> </RootStack>
+              <RootStack> </RootStack>
             </NavigationContainer>
           </PaperProvider>
         </RootSiblingParent>
@@ -150,6 +131,9 @@ export default function App() {
     );
   }
 }
+
+//userLoggedIn={userLoggedIn}
+
 // async function confirmSignUp() {
 //   try {
 //     await Auth.confirmSignUp("Kalli-Morton", "796693");

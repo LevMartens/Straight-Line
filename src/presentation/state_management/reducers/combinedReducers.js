@@ -53,9 +53,11 @@ import {
   distanceToEndPointHandler,
   currentBandHandler,
   largestDeviationHandler,
+  userDataHandler,
 } from "./ui-handler";
 
 export default combineReducers({
+  userDataHandler,
   largestDeviationHandler,
   currentBandHandler,
   distanceToEndPointHandler,

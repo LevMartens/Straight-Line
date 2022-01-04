@@ -9,7 +9,7 @@ export async function getAllLvl2UnderLvl1(lvl1Digits) {
       })
     );
 
-    const {data: {pluscodeByDigits: {items: [{level2List:{items}}]}}}
+    const {data: {pluscodeByDigits: {items: [{level2List:{items}}]}}} //! ???????
 
     return items;
   } catch (err) {

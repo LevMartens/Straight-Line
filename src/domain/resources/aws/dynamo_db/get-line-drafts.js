@@ -1,7 +1,7 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { listLineDrafts } from "../../../../../graphql/queries";
 
-export async function getLineDraftsFor(owner) {
+export async function getLineDraftsFromDynamoFor(owner) {
   try {
     const response = await API.graphql(
       graphqlOperation(listLineDrafts, {
@@ -11,18 +11,20 @@ export async function getLineDraftsFor(owner) {
       })
     );
 
-    //const {data: {pluscodeByDigits: {items: [{level2List:{items}}]}}}
+    const {
+      data: {
+        listLineDrafts: { items },
+      },
+    } = response;
 
-    console.log("TEST: response linedrafts " + JSON.stringify(response));
-
-    //return items;
+    return items.length === 0
+      ? { error: true, message: "No items found in dynamodb", items: items }
+      : {
+          error: false,
+          message: "Line drafts successfully fetched",
+          items: items,
+        };
   } catch (err) {
-    console.log(
-      "WARNING: No lineDrafts found for " +
-        owner +
-        " Err: " +
-        JSON.stringify(err)
-    );
-    //return [];
+    return { error: true, message: err, items: [] };
   }
 }
