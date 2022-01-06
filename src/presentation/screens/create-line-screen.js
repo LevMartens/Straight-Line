@@ -3,14 +3,10 @@ import MapViewCreateLine from "../components/create_line_screen_components/cl-ma
 import { StyleSheet, View } from "react-native";
 import { getTheme } from "../theme/themes";
 import { useSelector } from "react-redux";
-import {
-  LATITUDE_DELTA,
-  LONGITUDE_DELTA,
-} from "../../domain/resources/operating_system/dimensions";
 import CreateLineToolbar from "../components/create_line_screen_components/cl-toolbar-menu";
 import {
-  mapPressedForFirstPin,
-  mapPressedForSecondPin,
+  setMarkerEndPoint,
+  setMarkerStartingPoint,
 } from "../state_management/actions/actions";
 import store from "../state_management/store/store";
 import CreateLineMapMenu from "../components/create_line_screen_components/cl-create-map-menu";
@@ -35,8 +31,9 @@ export default function CreateLineScreen({ navigation }) {
   };
 
   useEffect(() => {
-    store.dispatch(mapPressedForFirstPin(initialStartingPoint));
-    store.dispatch(mapPressedForSecondPin(initialEndPoint));
+    store.dispatch(setMarkerStartingPoint(initialStartingPoint));
+
+    store.dispatch(setMarkerEndPoint(initialEndPoint));
   }, []);
 
   return (

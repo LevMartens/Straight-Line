@@ -1,9 +1,5 @@
 import { combineReducers } from "redux";
-import {
-  startMarkerHandler,
-  endMarkerHandler,
-  createLineStateHandler,
-} from "./create-line-handler";
+import { markerPlacementHandler } from "./marker-placement-handler";
 import {
   watchCurrentPosition,
   watchDirection,
@@ -57,6 +53,7 @@ import {
 } from "./ui-handler";
 
 export default combineReducers({
+  markerPlacementHandler,
   userDataHandler,
   largestDeviationHandler,
   currentBandHandler,
@@ -97,9 +94,6 @@ export default combineReducers({
   selectedMarkerHandler,
   bannerHandler,
   lineMarkersHandler,
-  createLineStateHandler,
-  startMarkerHandler,
-  endMarkerHandler,
   watchCurrentPosition,
   watchDirection,
   aSingleCurrentPosition,

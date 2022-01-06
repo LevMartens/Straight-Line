@@ -5,8 +5,9 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { getTheme } from "../../theme/themes";
 import {
   loadingVisibleUpdate,
-  resetPin,
-  setPinStartingPoint,
+  readyToSetMarkerEndPoint,
+  readyToSetMarkerStartingPoint,
+  resetMarkers,
 } from "../../state_management/actions/actions";
 import MarkerButtonSvgComponent from "../_re-useables/svg_components/marker-button-svg";
 import { showAddLineTitleAlert } from "../../../domain/resources/operating_system/alerts";
@@ -18,13 +19,10 @@ export default function CreateLineToolbar() {
   const { buttonColor } = getTheme();
   const { compassStyle, doneStyle, containerStyle, textStyle } = styles();
 
-  const pinState = useSelector((state) => state.createLineStateHandler);
-
   const title = useSelector((state) => state.lineTitleHandler);
 
-  const firstPinCoordinates = useSelector((state) => state.startMarkerHandler);
-
-  const secondPinCoordinates = useSelector((state) => state.endMarkerHandler);
+  const { onSelected, coordinatesStartingPoint, coordinatesEndPoint } =
+    useSelector((state) => state.markerPlacementHandler);
 
   const [doneButtonText, setDoneButtonText] = useState("Add name");
 
@@ -32,18 +30,25 @@ export default function CreateLineToolbar() {
     <View style={containerStyle}>
       <TouchableOpacity
         onPress={() => {
-          store.dispatch(resetPin());
+          store.dispatch(readyToSetMarkerStartingPoint());
         }}
         style={{ ...compassStyle, marginLeft: 0 }}
       >
         <MarkerButtonSvgComponent
-          svgColor={pinState === "Set starting point" ? buttonColor : "white"}
+          svgColor={
+            onSelected === "READY_TO_SET_MARKER_STARTING_POINT"
+              ? buttonColor
+              : "white"
+          }
         ></MarkerButtonSvgComponent>
         <Text
           style={{
             ...textStyle,
             marginTop: 1,
-            color: pinState === "Set starting point" ? buttonColor : "white",
+            color:
+              onSelected === "READY_TO_SET_MARKER_STARTING_POINT"
+                ? buttonColor
+                : "white",
           }}
         >
           Starting point
@@ -51,18 +56,25 @@ export default function CreateLineToolbar() {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          store.dispatch(setPinStartingPoint());
+          store.dispatch(readyToSetMarkerEndPoint());
         }}
         style={{ ...compassStyle, marginLeft: 0 }}
       >
         <MarkerButtonSvgComponent
-          svgColor={pinState === "Set end point" ? buttonColor : "white"}
+          svgColor={
+            onSelected === "READY_TO_SET_MARKER_END_POINT"
+              ? buttonColor
+              : "white"
+          }
         ></MarkerButtonSvgComponent>
         <Text
           style={{
             ...textStyle,
             marginTop: 1,
-            color: pinState === "Set end point" ? buttonColor : "white",
+            color:
+              onSelected === "READY_TO_SET_MARKER_END_POINT"
+                ? buttonColor
+                : "white",
           }}
         >
           {"End   point"}
@@ -79,10 +91,11 @@ export default function CreateLineToolbar() {
             store.dispatch(loadingVisibleUpdate(true));
 
             await createLineDraft(
-              firstPinCoordinates,
-              secondPinCoordinates,
+              coordinatesStartingPoint,
+              coordinatesEndPoint,
               title
             );
+            store.dispatch(resetMarkers()); //! new
 
             store.dispatch(loadingVisibleUpdate(false));
             navigation.navigate("Detail");

@@ -1,34 +1,36 @@
-export const setPinStartingPoint = () => {
+export const setMarkerStartingPoint = (event) => {
   return {
-    type: "SETPINSTARTINGPOINT",
+    newCoordinates: event,
+    type: "SET_MARKER_STARTING_POINT",
   };
 };
 
-export const setPinEndPoint = () => {
+export const setMarkerEndPoint = (event) => {
   return {
-    type: "SETPINENDPOINT",
+    newCoordinates: event,
+    type: "SET_MARKER_END_POINT",
   };
 };
 
-export const resetPin = () => {
+export const readyToSetMarkerStartingPoint = () => {
+  return {
+    type: "READY_TO_SET_MARKER_STARTING_POINT",
+  };
+};
+
+export const readyToSetMarkerEndPoint = () => {
+  return {
+    type: "READY_TO_SET_MARKER_END_POINT",
+  };
+};
+
+export const resetMarkers = () => {
   return {
     type: "RESET",
   };
 };
 
-export const mapPressedForFirstPin = (event) => {
-  return {
-    newCoordinates: event,
-    type: "MAPPRESSFORFIRSTPIN",
-  };
-};
-
-export const mapPressedForSecondPin = (event) => {
-  return {
-    newCoordinates: event,
-    type: "MAPPRESSFORSECONDPIN",
-  };
-};
+//________________________________________________
 
 export const currentPositionUpdate = (event) => {
   return {

@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 import { StyleSheet } from "react-native";
 import {
   createLineMapViewRefUpdate,
-  mapPressedForFirstPin,
-  mapPressedForSecondPin,
   createMapHeadingUpdate,
+  setMarkerStartingPoint,
+  setMarkerEndPoint,
 } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
 import MarkerSvgComponent from "../_re-useables/svg_components/marker-svg";
@@ -16,19 +16,19 @@ import MarkerEndSvgComponent from "../_re-useables/svg_components/marker-end-svg
 export default function MapViewCreateLine() {
   const { mapStyle, markerCenterOffset } = styles();
 
-  const pinState = useSelector((state) => state.createLineStateHandler);
-  const firstPinCoordinates = useSelector((state) => state.startMarkerHandler);
-  const secondPinCoordinates = useSelector((state) => state.endMarkerHandler);
+  const { onSelected, coordinatesStartingPoint, coordinatesEndPoint } =
+    useSelector((state) => state.markerPlacementHandler);
+
   const mapType = useSelector((state) => state.createLineMapTypeHandler);
   const aSingleCurrentPosition = useSelector(
     (state) => state.aSingleCurrentPosition
   );
 
   const mapPressed = (coordinates) => {
-    pinState == "Set starting point" &&
-      store.dispatch(mapPressedForFirstPin(coordinates));
-    pinState == "Set end point" &&
-      store.dispatch(mapPressedForSecondPin(coordinates));
+    onSelected === "READY_TO_SET_MARKER_STARTING_POINT" &&
+      store.dispatch(setMarkerStartingPoint(coordinates));
+    onSelected === "READY_TO_SET_MARKER_END_POINT" &&
+      store.dispatch(setMarkerEndPoint(coordinates));
   };
 
   const startMarkerID = uuidv4();
@@ -65,7 +65,7 @@ export default function MapViewCreateLine() {
         key={finishMarkerID}
         zIndex={1000}
         centerOffset={markerCenterOffset}
-        coordinate={secondPinCoordinates}
+        coordinate={coordinatesEndPoint}
         title={"Finish"}
         description={"The end point of your straight line"}
       >
@@ -76,7 +76,7 @@ export default function MapViewCreateLine() {
         key={startMarkerID}
         centerOffset={markerCenterOffset}
         zIndex={10000}
-        coordinate={firstPinCoordinates}
+        coordinate={coordinatesStartingPoint}
         title={"Start"}
         description={"The starting point of your straight line"}
       >
@@ -86,7 +86,7 @@ export default function MapViewCreateLine() {
       <Polyline
         strokeColor={"white"}
         strokeWidth={2}
-        coordinates={[firstPinCoordinates, secondPinCoordinates]}
+        coordinates={[coordinatesStartingPoint, coordinatesEndPoint]}
       />
     </MapView>
   );
