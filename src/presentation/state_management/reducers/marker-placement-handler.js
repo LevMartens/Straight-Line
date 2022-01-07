@@ -44,6 +44,6 @@ export const markerPlacementHandler = (
 };
 
 function updateObject(oldObject, newValues) {
-  // Object.assign to ensure to correctly copy data instead of mutating
+  // Object.assign to ensure data is correctly copied instead of mutated
   return Object.assign({}, oldObject, newValues);
 }

@@ -19,10 +19,9 @@ export default function CreateLineScreen({ navigation }) {
   const menuVisible = useSelector((state) => state.menuVisibleHandler);
   const loadingVisible = useSelector((state) => state.loadingVisibleHandler);
 
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
+  const { aSingleCurrentPosition } = useSelector(
+    (state) => state.locationHandler
   );
-
   const initialStartingPoint = aSingleCurrentPosition;
 
   const initialEndPoint = {

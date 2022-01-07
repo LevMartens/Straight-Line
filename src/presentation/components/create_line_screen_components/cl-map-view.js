@@ -20,8 +20,9 @@ export default function MapViewCreateLine() {
     useSelector((state) => state.markerPlacementHandler);
 
   const mapType = useSelector((state) => state.createLineMapTypeHandler);
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
+
+  const { aSingleCurrentPosition } = useSelector(
+    (state) => state.locationHandler
   );
 
   const mapPressed = (coordinates) => {

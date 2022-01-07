@@ -20,8 +20,9 @@ export default function ExploreMapMenu() {
 
   const mapType = useSelector((state) => state.exploreMapTypeHandler);
   const mapHeading = useSelector((state) => state.exploreMapHeadingHandler);
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
+
+  const { aSingleCurrentPosition } = useSelector(
+    (state) => state.locationHandler
   );
 
   const [threeDOn, setThreeDOn] = useState(false);

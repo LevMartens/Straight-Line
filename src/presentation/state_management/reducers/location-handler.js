@@ -3,81 +3,76 @@ const Melbourne = {
   longitude: 144.946457,
 };
 
-const aSingleCarltonState = {
+const aSingleCarlton = {
   latitude: -37.794932,
   longitude: 144.973475,
   isLoaded: false,
 };
 
-export const watchCurrentPosition = (state = Melbourne, action) => {
-  switch (action.type) {
-    case "WATCHCURRENTPOSITION":
-      return action.newCoordinates;
-    default:
-      return state;
-  }
-};
-
-export const aSingleCurrentPosition = (state = aSingleCarltonState, action) => {
-  switch (action.type) {
-    case "GETCURRENTPOSITIONONCE":
-      return {
-        latitude: action.coordinates.latitude,
-        longitude: action.coordinates.longitude,
-        isLoaded: true,
-      };
-
-    default:
-      return state;
-  }
-};
-
-export const watchDirection = (state = 0.0, action) => {
-  switch (action.type) {
-    case "WATCHDIRECTION":
-      return action.newDirection;
-    default:
-      return state;
-  }
-};
-
-export const positionWatcherHandler = (
+export const locationHandler = (
   state = {
-    remove: function () {
-      console.log("ERROR: No position watcher attached");
+    showHeadingOn: false,
+    liveTrackingOn: false,
+    userCloseEnoughToStart: false,
+    aSingleCurrentPosition: aSingleCarlton,
+    watchCurrentPosition: Melbourne,
+    direction: 0.0,
+    headingWatcher: {
+      remove: function () {
+        console.log("ERROR: No heading watcher attached");
+      },
+    },
+    positionWatcher: {
+      remove: function () {
+        console.log("ERROR: No position watcher attached");
+      },
     },
   },
   action
 ) => {
   switch (action.type) {
-    case "SETWATCHER":
-      return action.event;
+    case "USER_CLOSE_ENOUGH_TO_START":
+      return updateObject(state, { userCloseEnoughToStart: action.event });
+
+    case "SET_POSITION_WATCHER":
+      return updateObject(state, { headingWatcher: action.event });
+
+    case "SET_HEADING_WATCHER":
+      return updateObject(state, { positionWatcher: action.event });
+
+    case "WATCH_DIRECTION":
+      return updateObject(state, { direction: action.newDirection });
+
+    case "GET_CURRENT_POSITION_ONCE":
+      return updateObject(state, {
+        aSingleCurrentPosition: {
+          latitude: action.coordinates.latitude,
+          longitude: action.coordinates.longitude,
+          isLoaded: true,
+        },
+      });
+
+    case "WATCH_CURRENT_POSITION":
+      return updateObject(state, {
+        watchCurrentPosition: action.newCoordinates,
+      });
+
+    case "LIVE_TRACKING_ON":
+      return updateObject(state, {
+        liveTrackingOn: action.event,
+      });
+
+    case "SHOW_HEADING_ON":
+      return updateObject(state, {
+        showHeadingOn: action.event,
+      });
+
     default:
       return state;
   }
 };
 
-export const headingWatcherHandler = (
-  state = {
-    remove: function () {
-      console.log("ERROR: No heading watcher attached");
-    },
-  },
-  action
-) => {
-  switch (action.type) {
-    case "SETHEADINGWATCHER":
-      return action.event;
-    default:
-      return state;
-  }
-};
-
-export const userCloseEnoughToStartHandler = (state = false, action) => {
-  switch (action.type) {
-    case "UPDATEUSERTOSTART":
-      return action.event;
-    default:
-      return state;
-  }
-};
+function updateObject(oldObject, newValues) {
+  // Object.assign to ensure data is correctly copied instead of mutated
+  return Object.assign({}, oldObject, newValues);
+}

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import store from "../../presentation/state_management/store/store";
 import {
   currentBandUpdate,
-  currentPositionUpdate,
+  updateCurrentPosition,
   distanceToEndPointUpdate,
   finishLineUpdate,
   gpsLiveMapHeadingUpdate,
@@ -200,7 +200,7 @@ export async function startProducingPath(
 
     const currentLargestDeviation = Math.max(...allUserDistanceToLine);
 
-    store.dispatch(currentPositionUpdate(currentPosition));
+    store.dispatch(updateCurrentPosition(currentPosition));
     store.dispatch(updatePath(pathArray));
     store.dispatch(distanceToEndPointUpdate(distanceToEndPoint));
     store.dispatch(currentBandUpdate(band));

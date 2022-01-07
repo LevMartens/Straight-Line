@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import MapView, { Polyline, Marker, Circle } from "react-native-maps";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
+import { StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
 import { followUserPosition } from "../../../domain/use_cases/follow-user-position";
 import { getPositionOnce } from "../../../domain/resources/operating_system/get-position-once";
 import UserSvgComponent from "../_re-useables/svg_components/user-svg";
@@ -11,17 +9,12 @@ import PinSvgComponent from "../_re-useables/svg_components/map-pin-svg";
 import { getTheme } from "../../theme/themes";
 import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
 import store from "../../state_management/store/store";
-import {
-  gpsLiveMapHeadingUpdate,
-  gpsLiveMapViewRefUpdate,
-} from "../../state_management/actions/actions";
+import { gpsLiveMapViewRefUpdate } from "../../state_management/actions/actions";
 
-//TODO create button to start directions
-//TODO screen doesn't follow curser
 //TODO show something that indicates recording is going on
 
-export default function MapViewGPSLive({ navigation }) {
-  const { mapStyle, buttonStyle, textStyleB } = styles();
+export default function MapViewGPSLive() {
+  const { mapStyle } = styles();
 
   const path = useSelector((state) => state.pathHandler);
 
@@ -31,9 +24,11 @@ export default function MapViewGPSLive({ navigation }) {
       finishCoordinates: { lat: pointBLat, lng: pointBLng },
     },
   } = useSelector((state) => state.selectedLineDraftHandler);
-  const liveCurrentPosition = useSelector(
-    (state) => state.watchCurrentPosition
+
+  const { watchCurrentPosition, aSingleCurrentPosition } = useSelector(
+    (state) => state.locationHandler
   );
+
   const pointA = {
     latitude: pointALat,
     longitude: pointALng,
@@ -43,17 +38,8 @@ export default function MapViewGPSLive({ navigation }) {
     latitude: pointBLat,
     longitude: pointBLng,
   };
-  const liveDirection = useSelector((state) => state.watchDirection);
+
   const mapType = useSelector((state) => state.gpsLiveMapTypeHandler);
-
-  // const {
-  //   latitude: aSingleCurrentPositionLatitude,
-  //   longitude: aSingleCurrentPositionLongitude,
-  // } = useSelector((state) => state.aSingleCurrentPosition);
-
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
-  );
 
   const { radiusForBounds, circleColor } = useSelector(
     (state) => state.radiusForBoundsHandler
@@ -74,7 +60,6 @@ export default function MapViewGPSLive({ navigation }) {
 
     if (mapViewRef) {
       followUserPosition(pointA, mapViewRef);
-      //watchHeading(mapViewRef); //TODO this function bypasses use_cases
     }
   }, [mapViewRef]);
 
@@ -84,34 +69,13 @@ export default function MapViewGPSLive({ navigation }) {
       ref={async (ref) => {
         mapViewRef = ref;
         //To control the map with the map menu component
-
         store.dispatch(gpsLiveMapViewRefUpdate(mapViewRef));
       }}
       style={mapStyle}
-      //followsUserLocation={true}
       mapType={mapType}
-      //liteMode={true}
-      onRegionChange={async () => {
-        //const mapHeading = await mapViewRef.getCamera();
-        //store.dispatch(gpsLiveMapHeadingUpdate(mapHeading.heading));
-      }}
       showsCompass={false}
       initialCamera={initialCamera}
-      // initialRegion={{
-      //   latitude: aSingleCurrentPositionLatitude,
-      //   longitude: aSingleCurrentPositionLongitude,
-      //   latitudeDelta: 0.0002,
-      //   longitudeDelta: 0.001,
-      // }}
     >
-      {/* <TouchableOpacity
-        style={buttonStyle}
-        onPress={() => {
-          navigation.navigate("LINE_REVIEW");
-        }}
-      >
-        <Text style={textStyleB}>Review line</Text>
-      </TouchableOpacity> */}
       <Marker
         key={90342}
         coordinate={pointB}
@@ -125,14 +89,14 @@ export default function MapViewGPSLive({ navigation }) {
         flat={true}
         tracksViewChanges={false}
         tracksInfoWindowChanges={false}
-        coordinate={liveCurrentPosition}
+        coordinate={watchCurrentPosition}
         title={"You"}
       >
         <View
           style={{
             transform: [
               {
-                rotate: `${0.0}deg`, //liveDirection
+                rotate: `${0.0}deg`,
               },
             ],
           }}
@@ -143,31 +107,10 @@ export default function MapViewGPSLive({ navigation }) {
       <Circle
         zIndex={3}
         strokeWidth={0.00001}
-        fillColor={circleColor} //rgba(144, 202, 249, 0.2)rgba(252, 156, 4, 0.2)
-        center={liveCurrentPosition}
+        fillColor={circleColor}
+        center={watchCurrentPosition}
         radius={radiusForBounds}
       ></Circle>
-      {/* <Circle
-        zIndex={2}
-        strokeWidth={0.00001}
-        fillColor={"rgba(252, 156, 4, 0.2)"} //rgba(144, 202, 249, 0.2)
-        center={liveCurrentPosition}
-        radius={50}
-      ></Circle>
-      <Circle
-        zIndex={1}
-        strokeWidth={0.00001}
-        fillColor={"rgba(211, 211, 211, 0.2)"} //rgba(144, 202, 249, 0.2)
-        center={liveCurrentPosition}
-        radius={75}
-      ></Circle>
-      <Circle
-        zIndex={0}
-        strokeWidth={0.00001}
-        fillColor={"rgba(205, 127, 50, 0.2)"} //rgba(144, 202, 249, 0.2)
-        center={liveCurrentPosition}
-        radius={100}
-      ></Circle> */}
       <Polyline
         style={{
           elevation: 5,

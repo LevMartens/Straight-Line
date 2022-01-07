@@ -1,13 +1,6 @@
 import { combineReducers } from "redux";
 import { markerPlacementHandler } from "./marker-placement-handler";
-import {
-  watchCurrentPosition,
-  watchDirection,
-  aSingleCurrentPosition,
-  positionWatcherHandler,
-  headingWatcherHandler,
-  userCloseEnoughToStartHandler,
-} from "./location-handler";
+import { locationHandler } from "./location-handler";
 import {
   lineMarkersHandler,
   bannerHandler,
@@ -18,7 +11,6 @@ import {
 import {
   difficultyHandler,
   finishedLineHandler,
-  liveTrackingOnHandler,
   pathHandler,
 } from "./live-line-recording-handler";
 import {
@@ -30,7 +22,6 @@ import {
   recentSearchesHandler,
   searchResultsHandler,
   searchVisibleHandler,
-  showHeadingOnHandler,
   timeDelayHandler,
   toolbarVisibleHandler,
   exploreMapViewRefHandler,
@@ -53,6 +44,7 @@ import {
 } from "./ui-handler";
 
 export default combineReducers({
+  locationHandler,
   markerPlacementHandler,
   userDataHandler,
   largestDeviationHandler,
@@ -74,7 +66,6 @@ export default combineReducers({
   toolbarVisibleHandler,
   imagesHandler,
   mapIsLoadedHandler,
-  showHeadingOnHandler,
   menuVisibleHandler,
   exploreMapTypeHandler,
   recentSearchesHandler,
@@ -84,17 +75,10 @@ export default combineReducers({
   searchVisibleHandler,
   difficultyHandler,
   finishedLineHandler,
-  liveTrackingOnHandler,
-  userCloseEnoughToStartHandler,
-  headingWatcherHandler,
-  positionWatcherHandler,
   pathHandler,
   lineTitleHandler,
   selectedLineDraftHandler,
   selectedMarkerHandler,
   bannerHandler,
   lineMarkersHandler,
-  watchCurrentPosition,
-  watchDirection,
-  aSingleCurrentPosition,
 });

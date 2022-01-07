@@ -148,15 +148,6 @@ export const menuVisibleHandler = (state = true, action) => {
   }
 };
 
-export const showHeadingOnHandler = (state = false, action) => {
-  switch (action.type) {
-    case "SHOWHEADINGON":
-      return action.event;
-    default:
-      return state;
-  }
-};
-
 export const mapIsLoadedHandler = (state = false, action) => {
   switch (action.type) {
     case "MAPISLOADED":

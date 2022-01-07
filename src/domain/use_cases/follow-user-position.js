@@ -1,7 +1,7 @@
 import { watchPosition } from "../resources/operating_system/watch-position";
 import store from "../../presentation/state_management/store/store";
 import {
-  currentPositionUpdate,
+  updateCurrentPosition,
   userCloseEnoughToStartUpdate,
   updateCurrentDirection,
   getWatcherReference,
@@ -50,7 +50,7 @@ export async function followUserPosition(start, ref) {
     );
 
     store.dispatch(userCloseEnoughToStartUpdate(userCloseEnoughBool));
-    store.dispatch(currentPositionUpdate(currentPosition));
+    store.dispatch(updateCurrentPosition(currentPosition));
   };
 
   const headingCallback = async (headObj) => {

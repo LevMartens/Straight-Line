@@ -33,8 +33,9 @@ export default function SearchView({ searchVisible }) {
 
   const mapViewRef = useSelector((state) => state.mapViewRefHandler);
   const recentSearches = useSelector((state) => state.recentSearchesHandler);
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
+
+  const { aSingleCurrentPosition } = useSelector(
+    (state) => state.locationHandler
   );
   const { noTextInput, resultsFound, noResult, data } = useSelector(
     (state) => state.searchResultsHandler

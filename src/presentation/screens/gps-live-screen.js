@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MapViewGPSLive from "../components/gps_live_screen_components/gls-map-view";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { getTheme } from "../theme/themes";
 import { useSelector } from "react-redux";
-import SwipeModalNoBanner from "../components/_re-useables/swipe-modal-no-banner";
 import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
-import LottieView from "lottie-react-native";
-import confetti from "../../../assets/lotties/confetti.json";
-//import confetti1 from "../../../assets/lotties/confetti1.json";
-//import dots from "../../../assets/dots.json";
 import FinishedLineAlert from "../components/gps_live_screen_components/finished-line-alert";
 import GpsLiveMapMenu from "../components/gps_live_screen_components/gls-map-menu";
 import GPSLiveSwipeModal from "../components/gps_live_screen_components/gls-swipe-modal";
@@ -18,25 +13,12 @@ import LiveDataModalComponent from "../components/gps_live_screen_components/mod
 import SwipeModalLoading from "../components/_re-useables/swipe-modal-loading";
 
 export default function GPSLiveScreen({ navigation }) {
-  const {
-    containerStyle,
-    textStyle,
-    textStyle1,
-    lottieStyle,
-    lottieStyle1,
-    textStyleB,
-    buttonStyleB,
-  } = styles();
+  const { containerStyle } = styles();
 
   const { userFinished } = useSelector((state) => state.finishedLineHandler);
 
-  const positionWatcher = useSelector((state) => state.positionWatcherHandler);
-
-  const userCloseEnoughToBegin = useSelector(
-    (state) => state.userCloseEnoughToStartHandler
-  );
-
-  const liveTrackingOn = useSelector((state) => state.liveTrackingOnHandler);
+  const { userCloseEnoughToStart, liveTrackingOn, positionWatcher } =
+    useSelector((state) => state.locationHandler);
 
   useEffect(() => {
     if (userFinished) {
@@ -52,12 +34,11 @@ export default function GPSLiveScreen({ navigation }) {
         <FinishedLineAlert navigation={navigation}></FinishedLineAlert>
       )}
       <GpsLiveMapMenu></GpsLiveMapMenu>
-      <MapViewGPSLive navigation={navigation}></MapViewGPSLive>
+      <MapViewGPSLive></MapViewGPSLive>
       <GPSLiveSwipeModal>
-        {/* <LiveDataModalComponent></LiveDataModalComponent> */}
-        {(userCloseEnoughToBegin === true) & (liveTrackingOn === false) ? (
+        {(userCloseEnoughToStart === true) & (liveTrackingOn === false) ? (
           <ReadyToStartModalComponent></ReadyToStartModalComponent>
-        ) : userCloseEnoughToBegin === false ? (
+        ) : userCloseEnoughToStart === false ? (
           <GetDirectionsModalComponent></GetDirectionsModalComponent>
         ) : liveTrackingOn ? (
           <LiveDataModalComponent></LiveDataModalComponent>
@@ -65,7 +46,6 @@ export default function GPSLiveScreen({ navigation }) {
           <SwipeModalLoading></SwipeModalLoading>
         )}
       </GPSLiveSwipeModal>
-      {/* <SwipeModalNoBanner></SwipeModalNoBanner> */}
     </View>
   );
 }
@@ -75,7 +55,6 @@ const styles = () => {
     buttonStyleB: {
       paddingTop: 12,
       position: "relative",
-      // top: 40,
       marginTop: 20,
       flexDirection: "row",
       justifyContent: "center",
@@ -94,14 +73,8 @@ const styles = () => {
     lottieStyle: {
       zIndex: 88,
       ...StyleSheet.absoluteFillObject,
-      //marginTop: 237,
-      //width: 300,
-      //height: 300,
     },
     lottieStyle1: {
-      //zIndex: 88,
-      //...StyleSheet.absoluteFillObject,
-      //marginTop: 237,
       width: 50,
       height: 50,
     },

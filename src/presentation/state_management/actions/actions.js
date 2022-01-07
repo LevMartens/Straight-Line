@@ -32,26 +32,63 @@ export const resetMarkers = () => {
 
 //________________________________________________
 
-export const currentPositionUpdate = (event) => {
+export const setPositionWatcher = (event) => {
+  return {
+    event: event,
+    type: "SET_POSITION_WATCHER",
+  };
+};
+
+export const setHeadingWatcher = (event) => {
+  return {
+    event: event,
+    type: "SET_HEADING_WATCHER",
+  };
+};
+
+export const updateCurrentPosition = (event) => {
   return {
     newCoordinates: event,
-    type: "WATCHCURRENTPOSITION",
+    type: "WATCH_CURRENT_POSITION",
   };
 };
 
 export const updateCurrentPositionOnce = (coordinates) => {
   return {
     coordinates: coordinates,
-    type: "GETCURRENTPOSITIONONCE",
+    type: "GET_CURRENT_POSITION_ONCE",
   };
 };
 
 export const updateCurrentDirection = (event) => {
   return {
     newDirection: event,
-    type: "WATCHDIRECTION",
+    type: "WATCH_DIRECTION",
   };
 };
+
+export const userCloseEnoughToStartUpdate = (event) => {
+  return {
+    event: event,
+    type: "USER_CLOSE_ENOUGH_TO_START",
+  };
+};
+
+export const liveTrackingUpdate = (event) => {
+  return {
+    event: event,
+    type: "LIVE_TRACKING_ON",
+  };
+};
+
+export const showHeadingOnUpdate = (event) => {
+  return {
+    event: event,
+    type: "SHOW_HEADING_ON",
+  };
+};
+
+//________________________________
 
 export const updatePath = (event) => {
   return {
@@ -106,34 +143,6 @@ export const addLineTitle = (event) => {
   return {
     event: event,
     type: "ADDLINETITLE",
-  };
-};
-
-export const setPositionWatcher = (event) => {
-  return {
-    event: event,
-    type: "SETWATCHER",
-  };
-};
-
-export const setHeadingWatcher = (event) => {
-  return {
-    event: event,
-    type: "SETHEADINGWATCHER",
-  };
-};
-
-export const userCloseEnoughToStartUpdate = (event) => {
-  return {
-    event: event,
-    type: "UPDATEUSERTOSTART",
-  };
-};
-
-export const liveTrackingUpdate = (event) => {
-  return {
-    event: event,
-    type: "LIVEON",
   };
 };
 
@@ -235,13 +244,6 @@ export const menuVisibleUpdate = (event) => {
   return {
     event: event,
     type: "MENUVISIBLE",
-  };
-};
-
-export const showHeadingOnUpdate = (event) => {
-  return {
-    event: event,
-    type: "SHOWHEADINGON",
   };
 };
 

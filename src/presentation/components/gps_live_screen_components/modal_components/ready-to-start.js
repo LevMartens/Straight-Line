@@ -18,8 +18,9 @@ export default function ReadyToStartModalComponent() {
     },
   } = useSelector((state) => state.selectedLineDraftHandler);
 
-  const positionWatcher = useSelector((state) => state.positionWatcherHandler);
-  const headingWatcher = useSelector((state) => state.headingWatcherHandler);
+  const { headingWatcher, positionWatcher } = useSelector(
+    (state) => state.locationHandler
+  );
 
   const ref = useSelector((state) => state.gpsLiveMapViewRefHandler);
 

@@ -26,11 +26,10 @@ export default function SearchHeaderButton({ forCreateLineScreen }) {
 
   const textInputVisible = useSelector((state) => state.searchVisibleHandler);
   const timeIsPassed = useSelector((state) => state.timeDelayHandler);
-  const showHeadingOn = useSelector((state) => state.showHeadingOnHandler);
   const mapViewRef = useSelector((state) => state.mapViewRefHandler);
-  const headingWatcher = useSelector((state) => state.headingWatcherHandler);
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
+
+  const { headingWatcher, aSingleCurrentPosition, showHeadingOn } = useSelector(
+    (state) => state.locationHandler
   );
 
   const [searchInput, onChangeSearchInput] = useState();

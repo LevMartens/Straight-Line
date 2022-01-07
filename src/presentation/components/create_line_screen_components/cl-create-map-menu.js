@@ -21,10 +21,9 @@ export default function CreateLineMapMenu() {
   const mapType = useSelector((state) => state.createLineMapTypeHandler);
   const mapHeading = useSelector((state) => state.createMapHeadingHandler);
 
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
+  const { aSingleCurrentPosition } = useSelector(
+    (state) => state.locationHandler
   );
-
   const [threeDOn, setThreeDOn] = useState(true);
 
   const cameraPositionNormal = {

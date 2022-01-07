@@ -28,8 +28,9 @@ export default function MapViewExplore() {
 
   const mapType = useSelector((state) => state.exploreMapTypeHandler);
   const lineMarkers = useSelector((state) => state.lineMarkersHandler);
-  const aSingleCurrentPosition = useSelector(
-    (state) => state.aSingleCurrentPosition
+
+  const { aSingleCurrentPosition } = useSelector(
+    (state) => state.locationHandler
   );
   const markerCurrentlySelected = useSelector(
     (state) => state.selectedMarkerHandler
