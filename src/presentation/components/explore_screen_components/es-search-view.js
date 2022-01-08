@@ -15,7 +15,7 @@ import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensi
 import NearbySvgComponent from "../_re-useables/svg_components/nearby-svg";
 import {
   searchVisibleUpdate,
-  selectMarker,
+  selectPublicLine,
   timeDelayUpdate,
 } from "../../state_management/actions/actions";
 import MarkerSvgComponent from "../_re-useables/svg_components/marker-svg";
@@ -90,7 +90,7 @@ export default function SearchView({ searchVisible }) {
                       store.dispatch(timeDelayUpdate(false));
                       Keyboard.dismiss();
                       mapViewRef.animateToRegion(markerRegion, 1000);
-                      store.dispatch(selectMarker(result));
+                      store.dispatch(selectPublicLine(result));
                     }}
                     style={markerRegionStyle}
                   >
@@ -154,7 +154,7 @@ export default function SearchView({ searchVisible }) {
                   store.dispatch(timeDelayUpdate(false));
                   Keyboard.dismiss();
                   mapViewRef.animateToRegion(markerRegion, 1000);
-                  store.dispatch(selectMarker(result));
+                  store.dispatch(selectPublicLine(result));
                 }}
                 style={markerRegionStyle}
               >

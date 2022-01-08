@@ -3,12 +3,12 @@ import MapView, { Marker, Polyline } from "react-native-maps";
 import { getTheme } from "../../theme/themes";
 import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
-import { getPositionOnce } from "../../../domain/resources/operating_system/get-position-once";
+import { getPositionOnce } from "../../../resources/operating_system/get-position-once";
 import { getLineMarkers } from "../../../domain/use_cases/get-line-markers";
 import { useSelector } from "react-redux";
 import {
-  selectMarker,
-  resetMarker,
+  selectPublicLine,
+  resetSelectedPublicLine,
   mapIsLoadedUpdate,
   exploreMapViewRefUpdate,
   exploreMapHeadingUpdate,
@@ -22,19 +22,23 @@ export default function MapViewExplore() {
   const { mapView, activityIndicator, activityIndicatorView } = styles();
 
   useEffect(() => {
-    store.dispatch(resetMarker());
+    store.dispatch(resetSelectedPublicLine());
     getPositionOnce(); //TODO this function bypasses use_cases
   }, []);
 
   const mapType = useSelector((state) => state.exploreMapTypeHandler);
-  const lineMarkers = useSelector((state) => state.lineMarkersHandler);
+  // const lineMarkers = useSelector((state) => state.lineMarkersHandler);
+
+  const { publicLines, selectedPublicLine } = useSelector(
+    (state) => state.lineDataHandler
+  );
 
   const { aSingleCurrentPosition } = useSelector(
     (state) => state.locationHandler
   );
-  const markerCurrentlySelected = useSelector(
-    (state) => state.selectedMarkerHandler
-  );
+  // const markerCurrentlySelected = useSelector(
+  //   (state) => state.selectedMarkerHandler
+  // );
 
   const initialCamera = {
     center: aSingleCurrentPosition,
@@ -73,7 +77,7 @@ export default function MapViewExplore() {
       }}
       initialCamera={initialCamera}
     >
-      {lineMarkers.map((marker) => {
+      {publicLines.map((marker) => {
         const { id, isLoaded, markerCoordinates, markerRegion } = marker;
 
         if (isLoaded === true) {
@@ -88,45 +92,40 @@ export default function MapViewExplore() {
               }
               onPress={() => {
                 mapViewRef.animateToRegion(markerRegion, 1000);
-                store.dispatch(selectMarker(marker));
+                store.dispatch(selectPublicLine(marker));
               }}
             >
               <MarkerSvgComponent
-                height={id === markerCurrentlySelected.id ? 40 : 30}
-                width={id === markerCurrentlySelected.id ? 40 : 30}
+                height={id === selectedPublicLine.id ? 40 : 30}
+                width={id === selectedPublicLine.id ? 40 : 30}
               ></MarkerSvgComponent>
             </Marker>
           );
         }
       })}
-      {markerCurrentlySelected.isLoaded && (
+      {selectedPublicLine.isLoaded && (
         <Polyline
           strokeColor={"white"}
           strokeWidth={4}
           coordinates={[
             {
-              latitude:
-                markerCurrentlySelected.rawLineData.startingCoordinates.lat,
-              longitude:
-                markerCurrentlySelected.rawLineData.startingCoordinates.lng,
+              latitude: selectedPublicLine.rawLineData.startingCoordinates.lat,
+              longitude: selectedPublicLine.rawLineData.startingCoordinates.lng,
             },
             {
-              latitude:
-                markerCurrentlySelected.rawLineData.finishCoordinates.lat,
-              longitude:
-                markerCurrentlySelected.rawLineData.finishCoordinates.lng,
+              latitude: selectedPublicLine.rawLineData.finishCoordinates.lat,
+              longitude: selectedPublicLine.rawLineData.finishCoordinates.lng,
             },
           ]}
         />
       )}
-      {markerCurrentlySelected.isLoaded && (
+      {selectedPublicLine.isLoaded && (
         <Marker
           key={uniqueId()}
           centerOffset={{ x: 0.2, y: -12 }}
           coordinate={{
-            latitude: markerCurrentlySelected.rawLineData.finishCoordinates.lat,
-            longitude:
-              markerCurrentlySelected.rawLineData.finishCoordinates.lng,
+            latitude: selectedPublicLine.rawLineData.finishCoordinates.lat,
+            longitude: selectedPublicLine.rawLineData.finishCoordinates.lng,
           }}
         >
           <MarkerEndSvgComponent height={30} width={30}></MarkerEndSvgComponent>

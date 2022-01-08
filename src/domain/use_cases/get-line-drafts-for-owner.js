@@ -1,4 +1,4 @@
-import { getLineDraftsFromDynamoFor } from "../resources/aws/dynamo_db/get-line-drafts";
+import { getLineDraftsFromDynamoFor } from "../../resources/aws/dynamo_db/get-line-drafts";
 
 export async function getLineDraftsFor(owner) {
   const { error, message, items } = await getLineDraftsFromDynamoFor(owner);

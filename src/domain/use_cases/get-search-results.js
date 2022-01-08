@@ -4,8 +4,8 @@ import {
 } from "../../presentation/state_management/actions/actions";
 import store from "../../presentation/state_management/store/store";
 import { packPublicLineData } from "../helpers/packers";
-import { getSearchResultsGraphql } from "../resources/aws/dynamo_db/get-search-results-graphql";
-import { getPlace } from "../resources/rest_api/get-place";
+import { getSearchResultsGraphql } from "../../resources/aws/dynamo_db/get-search-results-graphql";
+import { getPlace } from "../../resources/rest_api/get-place";
 
 export async function getSearchResults(text, locationOnly = false) {
   if (text === "") {

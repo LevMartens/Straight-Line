@@ -10,7 +10,7 @@ import {
   resetMarkers,
 } from "../../state_management/actions/actions";
 import MarkerButtonSvgComponent from "../_re-useables/svg_components/marker-button-svg";
-import { showAddLineTitleAlert } from "../../../domain/resources/operating_system/alerts";
+import { showAddLineTitleAlert } from "../../../resources/operating_system/alerts";
 import { createLineDraft } from "../../../domain/use_cases/create-line-draft";
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,7 +19,8 @@ export default function CreateLineToolbar() {
   const { buttonColor } = getTheme();
   const { compassStyle, doneStyle, containerStyle, textStyle } = styles();
 
-  const title = useSelector((state) => state.lineTitleHandler);
+  // const title = useSelector((state) => state.lineTitleHandler);
+  const { lineTitle } = useSelector((state) => state.lineDataHandler);
 
   const { onSelected, coordinatesStartingPoint, coordinatesEndPoint } =
     useSelector((state) => state.markerPlacementHandler);
@@ -83,7 +84,7 @@ export default function CreateLineToolbar() {
       <TouchableOpacity
         onPress={async () => {
           if (doneButtonText === "Add name") {
-            showAddLineTitleAlert(); //!bypasses usecases
+            showAddLineTitleAlert(); //!ses usecases
             setDoneButtonText("Done");
           }
 
@@ -93,7 +94,7 @@ export default function CreateLineToolbar() {
             await createLineDraft(
               coordinatesStartingPoint,
               coordinatesEndPoint,
-              title
+              lineTitle
             );
             store.dispatch(resetMarkers()); //! new
 

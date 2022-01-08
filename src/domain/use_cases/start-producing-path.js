@@ -1,4 +1,4 @@
-import { watchPosition } from "../resources/operating_system/watch-position";
+import { watchPosition } from "../../resources/operating_system/watch-position";
 import { v4 as uuidv4 } from "uuid";
 import store from "../../presentation/state_management/store/store";
 import {
@@ -16,7 +16,7 @@ import { meterFractionGenerator } from "../generators/meter-fraction-generator";
 import { getCoordinatesBetween } from "../generators/coordinates-generator";
 import { millisecondsToTime } from "../generators/milliseconds-to-time-generator";
 import { calculateScore } from "../generators/score-generator";
-import { watchHeading } from "../resources/operating_system/watch-heading";
+import { watchHeading } from "../../resources/operating_system/watch-heading";
 
 export async function startProducingPath(
   startingPoint,

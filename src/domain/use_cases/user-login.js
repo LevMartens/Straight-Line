@@ -1,4 +1,4 @@
-import { signIn } from "../resources/aws/auth/sign-in";
+import { signIn } from "../../resources/aws/auth/sign-in";
 
 export async function signInUser(username, password) {
   const { error, successful, message, code } = await signIn(username, password);

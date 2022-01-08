@@ -36,9 +36,12 @@ export default function LineReviewScreen({ navigation }) {
     textBox45,
   } = styles();
 
-  const lineDraft = useSelector((state) => state.selectedLineDraftHandler);
+  // const lineDraft = useSelector((state) => state.selectedLineDraftHandler);
+  const { selectedLineDraft } = useSelector(
+    (state) => state.selectedLineDraftHandler
+  );
 
-  const { markerRegionZoomedIn, isLoaded, rawLineData } = lineDraft;
+  const { markerRegionZoomedIn, isLoaded, rawLineData } = selectedLineDraft;
   const path = useSelector((state) => state.pathHandler);
   const { userFinished, score, largestDeviation, time, band } = useSelector(
     (state) => state.finishedLineHandler

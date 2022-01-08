@@ -14,11 +14,19 @@ import { useSelector } from "react-redux";
 export default function GetDirectionsModalComponent() {
   const { textStyle, buttonStyle, buttonTextStyle } = styles();
 
+  // const {
+  //   rawLineData: {
+  //     startingCoordinates: { lat: pointALat, lng: pointALng },
+  //   },
+  // } = useSelector((state) => state.selectedLineDraftHandler);
+
   const {
-    rawLineData: {
-      startingCoordinates: { lat: pointALat, lng: pointALng },
+    selectedLineDraft: {
+      rawLineData: {
+        startingCoordinates: { lat: pointALat, lng: pointALng },
+      },
     },
-  } = useSelector((state) => state.selectedLineDraftHandler);
+  } = useSelector((state) => state.lineDataHandler);
 
   const scheme = Platform.select({ ios: "maps:0,0?q=", android: "geo:0,0?q=" });
   const latLng = `${pointALat},${pointALng}`;

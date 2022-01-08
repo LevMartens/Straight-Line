@@ -10,13 +10,23 @@ import { liveTrackingUpdate } from "../../../state_management/actions/actions";
 export default function ReadyToStartModalComponent() {
   const { textStyle, buttonStyle, buttonTextStyle } = styles();
 
+  // const {
+  //   rawLineData: {
+  //     distance,
+  //     startingCoordinates: { lat: pointALat, lng: pointALng },
+  //     finishCoordinates: { lat: pointBLat, lng: pointBLng },
+  //   },
+  // } = useSelector((state) => state.selectedLineDraftHandler);
+
   const {
-    rawLineData: {
-      distance,
-      startingCoordinates: { lat: pointALat, lng: pointALng },
-      finishCoordinates: { lat: pointBLat, lng: pointBLng },
+    selectedLineDraft: {
+      rawLineData: {
+        distance,
+        startingCoordinates: { lat: pointALat, lng: pointALng },
+        finishCoordinates: { lat: pointBLat, lng: pointBLng },
+      },
     },
-  } = useSelector((state) => state.selectedLineDraftHandler);
+  } = useSelector((state) => state.lineDataHandler);
 
   const { headingWatcher, positionWatcher } = useSelector(
     (state) => state.locationHandler

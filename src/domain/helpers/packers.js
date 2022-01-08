@@ -1,7 +1,7 @@
 import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
-} from "../resources/operating_system/dimensions";
+} from "../../resources/operating_system/dimensions";
 
 //* Functions in packers.js unpack data (objects) and put them back together in a way the presentation layer can use it
 

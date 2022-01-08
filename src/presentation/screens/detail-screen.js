@@ -22,9 +22,13 @@ export default function DetailScreen({ navigation }) {
     mapViewStyle,
   } = styles();
 
-  const { markerRegionZoomedIn, isLoaded, rawLineData } = useSelector(
-    (state) => state.selectedLineDraftHandler
-  );
+  // const { markerRegionZoomedIn, isLoaded, rawLineData } = useSelector(
+  //   (state) => state.selectedLineDraftHandler
+  // );
+
+  const {
+    selectedLineDraft: { markerRegionZoomedIn, isLoaded, rawLineData },
+  } = useSelector((state) => state.lineDataHandler);
 
   const { distance, elevationPoints, title } = rawLineData;
 

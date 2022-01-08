@@ -1,4 +1,4 @@
-import { watchPosition } from "../resources/operating_system/watch-position";
+import { watchPosition } from "../../resources/operating_system/watch-position";
 import store from "../../presentation/state_management/store/store";
 import {
   updateCurrentPosition,
@@ -10,7 +10,7 @@ import {
 import { getDistanceBetween } from "../generators/distance-generator";
 import { userCloseEnoughToBegin } from "../helpers/if_statements";
 import { watchHeadingAsync } from "expo-location";
-import { watchHeading } from "../resources/operating_system/watch-heading";
+import { watchHeading } from "../../resources/operating_system/watch-heading";
 
 export async function followUserPosition(start, ref) {
   const startingPoint = start;

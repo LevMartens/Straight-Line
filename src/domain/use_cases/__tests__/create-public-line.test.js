@@ -6,7 +6,7 @@ import awsconfig from "../../../../aws-exports";
 import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
-} from "../../resources/environment/dimensions";
+} from "../../../resources/environment/dimensions";
 import { deleteLines } from "../../../../graphql/mutations";
 import { Auth } from "aws-amplify";
 import { createPublicLine } from "../create-public-line";

@@ -7,9 +7,12 @@ import { saveLineDraft } from "../../../domain/use_cases/save-line-draft";
 
 export default function StartButton({ navigation }) {
   const { containerStyle, buttonStyle, textStyle } = styles();
-  const { rawLineData } = useSelector(
-    (state) => state.selectedLineDraftHandler
-  );
+  // const { rawLineData } = useSelector(
+  //   (state) => state.selectedLineDraftHandler
+  // );
+  const {
+    selectedLineDraft: { rawLineData },
+  } = useSelector((state) => state.lineDataHandler);
   return (
     <View style={containerStyle}>
       <TouchableOpacity

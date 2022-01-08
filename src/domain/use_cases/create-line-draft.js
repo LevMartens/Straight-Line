@@ -1,12 +1,12 @@
-import { createGraphQLCoordinateType } from "../resources/aws/dynamo_db/create-graphql-coordinates-type";
-import { getPluscodeFromCoordinates } from "../resources/rest_api/get-pluscode";
+import { createGraphQLCoordinateType } from "../../resources/aws/dynamo_db/create-graphql-coordinates-type";
+import { getPluscodeFromCoordinates } from "../../resources/rest_api/get-pluscode";
 import { getDistanceBetween } from "../generators/distance-generator";
 import { mapElevationPoints, packLineData } from "../helpers/packers";
-import { showAlert } from "../resources/operating_system/alerts";
-import { saveLineDraftToDB } from "../resources/aws/dynamo_db/save-line-draft";
+import { showAlert } from "../../resources/operating_system/alerts";
+import { saveLineDraftToDB } from "../../resources/aws/dynamo_db/save-line-draft";
 import { selectLineDraft } from "../../presentation/state_management/actions/actions";
 import { getLatLongDeltaBasedOn } from "../generators/lat-long-delta-generator";
-import { getElevation } from "../resources/rest_api/get-elevation";
+import { getElevation } from "../../resources/rest_api/get-elevation";
 import store from "../../presentation/state_management/store/store";
 import { getCoordinatesBetween } from "../generators/coordinates-generator";
 import { v4 as uuidv4 } from "uuid";

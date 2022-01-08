@@ -90,6 +90,50 @@ export const showHeadingOnUpdate = (event) => {
 
 //________________________________
 
+export const publicLinesEnvelope = (event) => {
+  return {
+    publicLines: event,
+    type: "PUBLIC_LINES",
+  };
+};
+
+export const selectPublicLine = (event) => {
+  return {
+    event: event,
+    type: "SELECT_PUBLIC_LINE",
+  };
+};
+
+export const resetSelectedPublicLine = (event) => {
+  return {
+    event: event,
+    type: "RESET_SELECTED_PUBLIC_LINE",
+  };
+};
+
+export const selectLineDraft = (event) => {
+  return {
+    event: event,
+    type: "SELECT_LINE_DRAFT",
+  };
+};
+
+export const resetLineDraft = (event) => {
+  return {
+    event: event,
+    type: "RESET_SELECTED_LINE_DRAFT",
+  };
+};
+
+export const addLineTitle = (event) => {
+  return {
+    event: event,
+    type: "LINE_TITLE",
+  };
+};
+
+//________________________________
+
 export const updatePath = (event) => {
   return {
     event: event,
@@ -97,12 +141,12 @@ export const updatePath = (event) => {
   };
 };
 
-export const sendLineMarkers = (event) => {
-  return {
-    lineMarkers: event,
-    type: "GETLINEMARKERS",
-  };
-};
+// export const publicLinesEnvelope = (event) => {
+//   return {
+//     lineMarkers: event,
+//     type: "GETLINEMARKERS",
+//   };
+// };
 
 export const openBanner = (event) => {
   return {
@@ -111,40 +155,40 @@ export const openBanner = (event) => {
   };
 };
 
-export const selectMarker = (event) => {
-  return {
-    event: event,
-    type: "SELECTMARKER",
-  };
-};
+// export const selectPublicLine = (event) => {
+//   return {
+//     event: event,
+//     type: "SELECTMARKER",
+//   };
+// };
 
-export const resetMarker = (event) => {
-  return {
-    event: event,
-    type: "RESETMARKER",
-  };
-};
+// export const resetMarker = (event) => {
+//   return {
+//     event: event,
+//     type: "RESETMARKER",
+//   };
+// };
 
-export const selectLineDraft = (event) => {
-  return {
-    event: event,
-    type: "SELECTLINEDRAFT",
-  };
-};
+// export const selectLineDraft = (event) => {
+//   return {
+//     event: event,
+//     type: "SELECTLINEDRAFT",
+//   };
+// };
 
-export const resetLineDraft = (event) => {
-  return {
-    event: event,
-    type: "RESETLINEDRAFT",
-  };
-};
+// export const resetLineDraft = (event) => {
+//   return {
+//     event: event,
+//     type: "RESETLINEDRAFT",
+//   };
+// };
 
-export const addLineTitle = (event) => {
-  return {
-    event: event,
-    type: "ADDLINETITLE",
-  };
-};
+// export const addLineTitle = (event) => {
+//   return {
+//     event: event,
+//     type: "ADDLINETITLE",
+//   };
+// };
 
 export const finishLineUpdate = (event) => {
   return {

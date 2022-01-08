@@ -3,7 +3,6 @@ import { markerPlacementHandler } from "./marker-placement-handler";
 import { locationHandler } from "./location-handler";
 import {
   lineMarkersHandler,
-  bannerHandler,
   selectedMarkerHandler,
   selectedLineDraftHandler,
   lineTitleHandler,
@@ -41,6 +40,7 @@ import {
   currentBandHandler,
   largestDeviationHandler,
   userDataHandler,
+  bannerHandler,
 } from "./ui-handler";
 
 export default combineReducers({

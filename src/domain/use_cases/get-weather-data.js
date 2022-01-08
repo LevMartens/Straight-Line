@@ -2,7 +2,7 @@ import { decimalToPercentage } from "../generators/decimal-to-percentage-generat
 import { kelvinToCelsius } from "../generators/kelvin-to-celsius-generator";
 import { msToKmh } from "../generators/ms-to-kmh-generator";
 import { getWeatherIcon } from "../helpers/if_statements";
-import { getRawWeatherData } from "../resources/rest_api/get-weather";
+import { getRawWeatherData } from "../../resources/rest_api/get-weather";
 import store from "../../presentation/state_management/store/store";
 import { weatherDataUpdate } from "../../presentation/state_management/actions/actions";
 

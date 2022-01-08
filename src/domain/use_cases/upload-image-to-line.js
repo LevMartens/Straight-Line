@@ -1,4 +1,4 @@
-import { uploadImage } from "../resources/aws/s3_bucket/upload-image";
+import { uploadImage } from "../../resources/aws/s3_bucket/upload-image";
 import store from "../../presentation/state_management/store/store";
 import { imagesUpdate } from "../../presentation/state_management/actions/actions";
 

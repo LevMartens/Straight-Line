@@ -7,7 +7,7 @@ import { getPositionOnce } from "../../../domain/resources/operating_system/get-
 import UserSvgComponent from "../_re-useables/svg_components/user-svg";
 import PinSvgComponent from "../_re-useables/svg_components/map-pin-svg";
 import { getTheme } from "../../theme/themes";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import store from "../../state_management/store/store";
 import { gpsLiveMapViewRefUpdate } from "../../state_management/actions/actions";
 
@@ -18,12 +18,21 @@ export default function MapViewGPSLive() {
 
   const path = useSelector((state) => state.pathHandler);
 
+  // const {
+  //   rawLineData: {
+  //     startingCoordinates: { lat: pointALat, lng: pointALng },
+  //     finishCoordinates: { lat: pointBLat, lng: pointBLng },
+  //   },
+  // } = useSelector((state) => state.selectedLineDraftHandler);
+
   const {
-    rawLineData: {
-      startingCoordinates: { lat: pointALat, lng: pointALng },
-      finishCoordinates: { lat: pointBLat, lng: pointBLng },
+    selectedLineDraft: {
+      rawLineData: {
+        startingCoordinates: { lat: pointALat, lng: pointALng },
+        finishCoordinates: { lat: pointBLat, lng: pointBLng },
+      },
     },
-  } = useSelector((state) => state.selectedLineDraftHandler);
+  } = useSelector((state) => state.lineDataHandler);
 
   const { watchCurrentPosition, aSingleCurrentPosition } = useSelector(
     (state) => state.locationHandler

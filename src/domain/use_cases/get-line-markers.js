@@ -1,17 +1,17 @@
 import { getZoomLevel } from "../generators/zoom-level-generator";
 import { pluscodeGeneratorLevel3 } from "../generators/pluscode-lvl-3-generator";
-import { getPluscodeFromCoordinates } from "../resources/rest_api/get-pluscode";
+import { getPluscodeFromCoordinates } from "../../resources/rest_api/get-pluscode";
 import store from "../../presentation/state_management/store/store";
 import {
-  sendLineMarkers,
-  selectMarker,
+  publicLinesEnvelope,
+  selectPublicLine,
 } from "../../presentation/state_management/actions/actions";
-import { getAllLvl3UnderLvl2 } from "../resources/aws/dynamo_db/get-all-lvl-3-under-lvl-2";
+import { getAllLvl3UnderLvl2 } from "../../resources/aws/dynamo_db/get-all-lvl-3-under-lvl-2";
 import { getZoomLevelRules } from "../helpers/if_statements";
 import { showBanner } from "../../presentation/components/explore_screen_components/es-banner";
 import { packLineData, packPublicLineData } from "../helpers/packers";
 
-import { downloadImage } from "../resources/aws/s3_bucket/download-image";
+import { downloadImage } from "../../resources/aws/s3_bucket/download-image";
 
 //TODO:
 /**
@@ -94,7 +94,7 @@ export async function getLineMarkers(currentRegion) {
     console.log(
       "LOG: No lvl 3 objects (lines) found in dynamoDB. source: get-line-markers.js"
     );
-    store.dispatch(selectMarker({ isLoaded: false, noLinesFound: true }));
+    store.dispatch(selectPublicLine({ isLoaded: false, noLinesFound: true }));
     return;
   }
 
@@ -127,12 +127,12 @@ export async function getLineMarkers(currentRegion) {
   );
   //WithImage
 
-  store.dispatch(sendLineMarkers(lineMarkers));
+  store.dispatch(publicLinesEnvelope(lineMarkers));
 
   console.log("TEST: linemarkers", lineMarkers.length);
 
   //if (lineMarkers.length > 0) {
-  store.dispatch(selectMarker(lineMarkers[0]));
+  store.dispatch(selectPublicLine(lineMarkers[0]));
   //} else {
 
   // }

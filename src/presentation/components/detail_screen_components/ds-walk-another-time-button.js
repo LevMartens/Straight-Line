@@ -7,9 +7,12 @@ import { getTheme } from "../../theme/themes";
 
 export default function WalkAnotherTimeButton({ navigation }) {
   const { containerStyle, buttonStyle, textStyle } = styles();
-  const { rawLineData } = useSelector(
-    (state) => state.selectedLineDraftHandler
-  );
+  // const { rawLineData } = useSelector(
+  //   (state) => state.selectedLineDraftHandler
+  // );
+  const {
+    selectedLineDraft: { rawLineData },
+  } = useSelector((state) => state.lineDataHandler);
   return (
     <View style={containerStyle}>
       <TouchableOpacity

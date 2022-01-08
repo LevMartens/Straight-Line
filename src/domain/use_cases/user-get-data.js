@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { userDataUpdate } from "../../presentation/state_management/actions/actions";
-import { getUserDataFromAWS } from "../resources/aws/auth/get-user-data";
+import { getUserDataFromAWS } from "../../resources/aws/auth/get-user-data";
 import store from "../../presentation/state_management/store/store";
 
 export async function getUserData() {

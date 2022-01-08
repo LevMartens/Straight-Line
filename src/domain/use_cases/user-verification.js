@@ -1,4 +1,4 @@
-import { confirmSignUp } from "../resources/aws/auth/confirm-sign-up";
+import { confirmSignUp } from "../../resources/aws/auth/confirm-sign-up";
 
 export async function verifyUser(username, code) {
   const { error, message } = await confirmSignUp(username, code);

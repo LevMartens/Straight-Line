@@ -21,9 +21,13 @@ export default function WeatherWidget() {
     tempratureStyle,
   } = styles();
 
-  const { markerCoordinates } = useSelector(
-    (state) => state.selectedLineDraftHandler
-  );
+  // const { markerCoordinates } = useSelector(
+  //   (state) => state.selectedLineDraftHandler
+  // );
+
+  const {
+    selectedLineDraft: { markerCoordinates },
+  } = useSelector((state) => state.lineDataHandler);
 
   const {
     weatherDataError,

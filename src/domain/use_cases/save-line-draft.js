@@ -1,8 +1,8 @@
-import { showAlert } from "../resources/operating_system/alerts";
-import { saveLineDraftToDB } from "../resources/aws/dynamo_db/save-line-draft";
+import { showAlert } from "../../resources/operating_system/alerts";
+import { saveLineDraftToDB } from "../../resources/aws/dynamo_db/save-line-draft";
 import { selectLineDraft } from "../../presentation/state_management/actions/actions";
 import store from "../../presentation/state_management/store/store";
-import { createGraphQLCoordinateType } from "../resources/aws/dynamo_db/create-graphql-coordinates-type";
+import { createGraphQLCoordinateType } from "../../resources/aws/dynamo_db/create-graphql-coordinates-type";
 import { packLineData } from "../helpers/packers";
 
 export async function saveLineDraft(rawLineDraft) {

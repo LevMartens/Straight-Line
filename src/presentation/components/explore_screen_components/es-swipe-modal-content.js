@@ -15,20 +15,37 @@ export default function SwipeModalContent() {
     textStyle,
   } = styles();
 
+  // const {
+  //   rawLineData: {
+  //     frontImage,
+  //     title,
+  //     difficultyLevel,
+  //     place,
+  //     difficultyBand,
+  //     distance,
+  //     description,
+  //     finishedMissions: items,
+  //   },
+  // } = useSelector((state) => state.selectedMarkerHandler);
+
   const {
-    rawLineData: {
-      frontImage,
-      title,
-      difficultyLevel,
-      place,
-      difficultyBand,
-      distance,
-      description,
-      finishedMissions: items,
+    selectedPublicLine: {
+      isLoaded,
+      rawLineData: {
+        frontImage,
+        title,
+        difficultyLevel,
+        place,
+        difficultyBand,
+        distance,
+        description,
+        finishedMissions: items,
+      },
     },
-  } = useSelector((state) => state.selectedMarkerHandler);
+  } = useSelector((state) => state.lineDataHandler);
 
   return (
+    //TODO isLoaded &&
     <View style={{ marginBottom: 50, width: SCREEN_WIDTH - 50, height: 200 }}>
       {/* <Image
         source={frontImage ? frontImage : defaultImage}

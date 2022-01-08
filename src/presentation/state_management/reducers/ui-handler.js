@@ -292,3 +292,19 @@ export const userDataHandler = (
       return state;
   }
 };
+
+export const bannerHandler = (
+  state = {
+    visible: false,
+    message: "Bonjorno",
+  },
+
+  action
+) => {
+  switch (action.type) {
+    case "OPENBANNER":
+      return action.event;
+    default:
+      return state;
+  }
+};

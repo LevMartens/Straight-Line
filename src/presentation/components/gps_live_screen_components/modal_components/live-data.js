@@ -7,9 +7,15 @@ import { useSelector } from "react-redux";
 export default function LiveDataModalComponent() {
   const { textStyle2, textStyle1, buttonStyle, buttonTextStyle } = styles();
 
+  // const {
+  //   rawLineData: { distance },
+  // } = useSelector((state) => state.selectedLineDraftHandler);
+
   const {
-    rawLineData: { distance },
-  } = useSelector((state) => state.selectedLineDraftHandler);
+    selectedLineDraft: {
+      rawLineData: { distance },
+    },
+  } = useSelector((state) => state.lineDataHandler);
 
   const distanceToEndPoint = useSelector(
     (state) => state.distanceToEndPointHandler
