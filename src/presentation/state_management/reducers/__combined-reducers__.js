@@ -6,6 +6,7 @@ import {
   selectedMarkerHandler,
   selectedLineDraftHandler,
   lineTitleHandler,
+  lineDataHandler,
 } from "./line-data-handlers";
 import {
   difficultyHandler,
@@ -44,6 +45,7 @@ import {
 } from "./ui-handler";
 
 export default combineReducers({
+  lineDataHandler,
   locationHandler,
   markerPlacementHandler,
   userDataHandler,
@@ -76,9 +78,9 @@ export default combineReducers({
   difficultyHandler,
   finishedLineHandler,
   pathHandler,
-  lineTitleHandler,
-  selectedLineDraftHandler,
-  selectedMarkerHandler,
+  // lineTitleHandler,
+  // selectedLineDraftHandler,
+  // selectedMarkerHandler,
   bannerHandler,
-  lineMarkersHandler,
+  // lineMarkersHandler,
 });

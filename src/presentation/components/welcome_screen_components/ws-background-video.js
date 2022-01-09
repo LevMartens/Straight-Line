@@ -3,7 +3,7 @@ import backgroundVideo from "../../../../assets/videos/straight-line-mission-vid
 import { Video } from "expo-av";
 import { StyleSheet } from "react-native";
 import { getTheme } from "../../theme/themes";
-import { SCREEN_HEIGHT } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_HEIGHT } from "../../../resources/operating_system/dimensions";
 
 export default function BackgroundVideo() {
   const { backgroundVideoStyle } = styles();

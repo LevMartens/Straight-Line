@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { createCoordinates } from "../../../../../graphql/mutations";
+import { createCoordinates } from "../../../../graphql/mutations";
 
 export async function createGraphQLCoordinateType(lat, lng) {
   try {

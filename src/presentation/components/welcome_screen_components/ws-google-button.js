@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { getTheme } from "../../theme/themes";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import GoogleSvgComponent from "../_re-useables/svg_components/google-svg";
 
 export default function GoogleButton({ onPress }) {

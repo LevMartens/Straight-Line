@@ -1,4 +1,4 @@
-import { openWeatherAPIKey } from "../../../../api-key";
+import { openWeatherAPIKey } from "../../../api-key";
 
 export async function getRawWeatherData(lat, lon) {
   const response = await fetch(

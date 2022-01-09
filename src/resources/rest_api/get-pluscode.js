@@ -1,4 +1,4 @@
-import { apiKey } from "../../../../api-key";
+import { apiKey } from "../../../api-key";
 
 export async function getPluscodeFromCoordinates(coordinates) {
   const response = await fetch(

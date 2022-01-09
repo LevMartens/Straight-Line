@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import { sendForgotPasswordCode } from "../../../domain/use_cases/user-forgot-password-code";
 import { getTheme } from "../../theme/themes";
 import PasswordRecoverySubmitForm from "./ws-password-recovery-submit-form";

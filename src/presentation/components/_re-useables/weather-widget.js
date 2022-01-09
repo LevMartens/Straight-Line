@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useSelector } from "react-redux";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import { getWeatherData } from "../../../domain/use_cases/get-weather-data";
 import { getTheme } from "../../theme/themes";
 import NothingFoundSvgComponent from "./svg_components/nothing-found-svg";

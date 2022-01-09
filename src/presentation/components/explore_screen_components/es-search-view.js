@@ -11,7 +11,7 @@ import {
   Keyboard,
 } from "react-native";
 import { getTheme } from "../../theme/themes";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import NearbySvgComponent from "../_re-useables/svg_components/nearby-svg";
 import {
   searchVisibleUpdate,

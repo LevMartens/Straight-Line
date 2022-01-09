@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { listLineDrafts } from "../../../../../graphql/queries";
+import { listLineDrafts } from "../../../../graphql/queries";
 
 export async function getLineDraftsFromDynamoFor(owner) {
   try {

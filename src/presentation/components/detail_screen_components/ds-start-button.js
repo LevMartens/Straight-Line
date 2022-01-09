@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import { getTheme } from "../../theme/themes";
 import { useSelector } from "react-redux";
 import { saveLineDraft } from "../../../domain/use_cases/save-line-draft";

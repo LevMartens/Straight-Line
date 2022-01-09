@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import { submitNewPassword } from "../../../domain/use_cases/user-forgot-password-submit";
 import { getTheme } from "../../theme/themes";
 import LogoSvgComponent from "../_re-useables/svg_components/logo-white-svg";

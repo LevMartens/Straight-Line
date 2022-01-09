@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { getTheme } from "../../../theme/themes";
-import { SCREEN_WIDTH } from "../../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../../resources/operating_system/dimensions";
 import { useSelector } from "react-redux";
 
 export default function LiveDataModalComponent() {

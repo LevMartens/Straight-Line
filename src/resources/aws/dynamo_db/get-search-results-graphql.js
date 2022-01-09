@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { searchLines } from "../../../../../graphql/queries";
+import { searchLines } from "../../../../graphql/queries";
 
 export async function getSearchResultsGraphql(text) {
   try {

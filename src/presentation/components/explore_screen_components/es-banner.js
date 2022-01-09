@@ -5,7 +5,7 @@ import { openBanner } from "../../state_management/actions/actions";
 import store from "../../state_management/store/store";
 import { throttle } from "lodash";
 import { useSelector } from "react-redux";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import LottieView from "lottie-react-native";
 import loadingLottie from "../../../../assets/lotties/loading-dots.json";
 

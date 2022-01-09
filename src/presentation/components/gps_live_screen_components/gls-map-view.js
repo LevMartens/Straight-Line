@@ -3,7 +3,7 @@ import MapView, { Polyline, Marker, Circle } from "react-native-maps";
 import { StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import { followUserPosition } from "../../../domain/use_cases/follow-user-position";
-import { getPositionOnce } from "../../../domain/resources/operating_system/get-position-once";
+import { getPositionOnce } from "../../../resources/operating_system/get-position-once";
 import UserSvgComponent from "../_re-useables/svg_components/user-svg";
 import PinSvgComponent from "../_re-useables/svg_components/map-pin-svg";
 import { getTheme } from "../../theme/themes";

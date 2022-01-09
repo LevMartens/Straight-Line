@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { createFinishedMission } from "../../../../../graphql/mutations";
+import { createFinishedMission } from "../../../../graphql/mutations";
 
 export async function saveFinishedMission(input) {
   try {

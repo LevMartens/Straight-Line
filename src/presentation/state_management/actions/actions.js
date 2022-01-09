@@ -127,7 +127,7 @@ export const resetLineDraft = (event) => {
 
 export const addLineTitle = (event) => {
   return {
-    event: event,
+    lineTitle: event,
     type: "LINE_TITLE",
   };
 };

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { getTheme } from "../../theme/themes";
 import defaultImage from "../../../../assets/images/default-image.jpg";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 
 export default function SwipeModalContent() {
   const {

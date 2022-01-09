@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MapView, { Polyline, Marker, Circle } from "react-native-maps";
 import { StyleSheet, View } from "react-native";
-import { watchHeading } from "../../../domain/resources/operating_system/watch-heading";
+import { watchHeading } from "../../../resources/operating_system/watch-heading";
 import { useSelector } from "react-redux";
 
 export default function MapViewLineReview({ initialRegion }) {
@@ -9,12 +9,12 @@ export default function MapViewLineReview({ initialRegion }) {
 
   const path = useSelector((state) => state.pathHandler);
 
-  const {
-    rawLineData: {
-      startingCoordinates: { lat: pointALat, lng: pointALng },
-      finishCoordinates: { lat: pointBLat, lng: pointBLng },
-    },
-  } = useSelector((state) => state.selectedLineDraftHandler);
+  // const {
+  //   rawLineData: {
+  //     startingCoordinates: { lat: pointALat, lng: pointALng },
+  //     finishCoordinates: { lat: pointBLat, lng: pointBLng },
+  //   },
+  // } = useSelector((state) => state.selectedLineDraftHandler);
 
   //   const liveCurrentPosition = useSelector(
   //     (state) => state.watchCurrentPosition

@@ -3,7 +3,7 @@ import MapViewGPSLive from "../components/gps_live_screen_components/gls-map-vie
 import { StyleSheet, View } from "react-native";
 import { getTheme } from "../theme/themes";
 import { useSelector } from "react-redux";
-import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../resources/operating_system/dimensions";
 import FinishedLineAlert from "../components/gps_live_screen_components/finished-line-alert";
 import GpsLiveMapMenu from "../components/gps_live_screen_components/gls-map-menu";
 import GPSLiveSwipeModal from "../components/gps_live_screen_components/gls-swipe-modal";

@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { pluscode3ByDigitsAndParent } from "../../../../../graphql/queries";
+import { pluscode3ByDigitsAndParent } from "../../../../graphql/queries";
 
 export async function checkIfLevel3ExistsUnderlvl2(pluscodeLvl2ID, digits) {
   try {

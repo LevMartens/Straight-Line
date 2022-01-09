@@ -1,6 +1,6 @@
-import { setPositionWatcher } from "../../../presentation/state_management/actions/actions";
+import { setPositionWatcher } from "../../presentation/state_management/actions/actions";
 import * as Location from "expo-location";
-import store from "../../../presentation/state_management/store/store";
+import store from "../../presentation/state_management/store/store";
 
 export const watchPosition = async (callback) => {
   let { status } = await Location.requestForegroundPermissionsAsync();

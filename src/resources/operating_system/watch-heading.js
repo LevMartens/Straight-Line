@@ -1,9 +1,9 @@
 import {
   updateCurrentDirection,
   setHeadingWatcher,
-} from "../../../presentation/state_management/actions/actions";
+} from "../../presentation/state_management/actions/actions";
 import * as Location from "expo-location";
-import store from "../../../presentation/state_management/store/store";
+import store from "../../presentation/state_management/store/store";
 
 export const watchHeading = async (callback) => {
   const headingWatcher = await Location.watchHeadingAsync((headObj) =>

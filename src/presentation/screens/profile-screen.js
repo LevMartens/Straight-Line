@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { getTheme } from "../theme/themes";
 import Amplify, { Auth, Hub } from "aws-amplify";
-import { SCREEN_WIDTH } from "../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../resources/operating_system/dimensions";
 import FacebookSvgComponent from "../components/_re-useables/svg_components/facebook-svg";
 import GoogleSvgComponent from "../components/_re-useables/svg_components/google-svg";
 

@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { updatePlusCodeLevel2 } from "../../../../../graphql/mutations";
+import { updatePlusCodeLevel2 } from "../../../../graphql/mutations";
 
 export async function increaseNumberOfLinesInPluscodeLvl2By(
   count,

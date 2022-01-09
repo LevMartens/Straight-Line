@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { createPath } from "../../../../../graphql/mutations";
+import { createPath } from "../../../../graphql/mutations";
 
 export async function createGraphQLPathType(pointAID, pointBID, pathColor) {
   try {

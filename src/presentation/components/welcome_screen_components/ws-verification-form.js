@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import { resendVerificationCode } from "../../../domain/use_cases/user-resend-verification";
 import { verifyUser } from "../../../domain/use_cases/user-verification";
 import { getTheme } from "../../theme/themes";

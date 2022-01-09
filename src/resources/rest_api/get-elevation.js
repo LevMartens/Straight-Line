@@ -1,4 +1,4 @@
-import { apiKey } from "../../../../api-key";
+import { apiKey } from "../../../api-key";
 
 export async function getElevation(startingPoint, endPoint) {
   const { latitude: startLat, longitude: startLng } = startingPoint;

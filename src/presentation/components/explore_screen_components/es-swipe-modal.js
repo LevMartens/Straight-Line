@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, Animated, View, PanResponder } from "react-native";
 import { getTheme } from "../../theme/themes";
-import { SCREEN_WIDTH } from "../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 
 export default function ExploreSwipeModal({ children }) {
   const { box, horizontalLine } = styles();

@@ -8,7 +8,7 @@ import {
   View,
   Animated,
 } from "react-native";
-import { SCREEN_WIDTH } from "../../../../domain/resources/operating_system/dimensions";
+import { SCREEN_WIDTH } from "../../../../resources/operating_system/dimensions";
 import {
   searchVisibleUpdate,
   timeDelayUpdate,

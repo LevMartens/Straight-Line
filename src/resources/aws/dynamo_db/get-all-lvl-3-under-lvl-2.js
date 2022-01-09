@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { pluscode2ByCompletePluscode } from "../../../../../graphql/queries";
+import { pluscode2ByCompletePluscode } from "../../../../graphql/queries";
 
 //TODO: destructering test paused, waiting for lines to fetch
 

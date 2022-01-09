@@ -1,6 +1,6 @@
 import { Alert } from "react-native";
-import { addLineTitle } from "../../../presentation/state_management/actions/actions";
-import store from "../../../presentation/state_management/store/store";
+import { addLineTitle } from "../../presentation/state_management/actions/actions";
+import store from "../../presentation/state_management/store/store";
 
 export function showAlert(message) {
   Alert.alert(

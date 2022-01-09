@@ -137,7 +137,7 @@ export const lineDataHandler = (
 
     case "LINE_TITLE":
       return updateObject(state, {
-        lineTitle: state.lineTitle,
+        lineTitle: action.lineTitle,
       });
 
     default:

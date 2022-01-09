@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { pluscodeByDigits } from "../../../../../graphql/queries";
+import { pluscodeByDigits } from "../../../../graphql/queries";
 
 export async function checkIfLevel1Exists(digits) {
   try {
