@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import MapViewCreateLine from "../components/create_line_screen_components/cl-map-view";
-import { ActivityIndicator } from "react-native-paper";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import StartButton from "../components/detail_screen_components/ds-start-button";
 import { useSelector } from "react-redux";
 import { SCREEN_WIDTH } from "../../resources/operating_system/dimensions";
 import { getTheme } from "../theme/themes";
-import ElevationChart from "../components/_re-useables/elevation-chart";
-import WeatherWidget from "../components/_re-useables/weather-widget";
-
 import MapViewLineReview from "../components/line_review_screen_components/lr-map-view";
 import DeviationSvgComponent from "../components/_re-useables/svg_components/deviation";
 import TimeSvgComponent from "../components/_re-useables/svg_components/time";
@@ -26,17 +20,12 @@ export default function LineReviewScreen({ navigation }) {
     textStyle5,
     textStyle6,
     textStyle7,
-    textStyle8,
-    subTextStyle,
     containerStyle,
-    activityIndicatorStyle,
-    widgetContainerStyle,
     mapViewStyle,
     text45,
     textBox45,
   } = styles();
 
-  // const lineDraft = useSelector((state) => state.selectedLineDraftHandler);
   const { selectedLineDraft } = useSelector(
     (state) => state.selectedLineDraftHandler
   );
@@ -103,7 +92,6 @@ export default function LineReviewScreen({ navigation }) {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              //justifyContent: "center",
               marginTop: 20,
               alignSelf: "center",
               backgroundColor: "#313131",
@@ -130,7 +118,6 @@ export default function LineReviewScreen({ navigation }) {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              //justifyContent: "center",
               marginTop: 20,
               alignSelf: "center",
               backgroundColor: "#313131",
@@ -154,7 +141,6 @@ export default function LineReviewScreen({ navigation }) {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              //justifyContent: "center",
               marginTop: 20,
               alignSelf: "center",
               backgroundColor: "#313131",
@@ -178,7 +164,6 @@ export default function LineReviewScreen({ navigation }) {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              //justifyContent: "center",
               marginTop: 20,
               alignSelf: "center",
               backgroundColor: "#313131",
@@ -201,16 +186,11 @@ export default function LineReviewScreen({ navigation }) {
               <View>
                 <TouchableOpacity
                   style={{
-                    //   position: "relative",
-                    //   bottom: 0,
-                    //flex: 1,
-                    //marginTop: 40,
                     alignSelf: "center",
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: "#1f1f1f", //"#fc9c04",
                     height: 20,
-                    //textAlign: "center",
                     width: 50,
                     borderRadius: 16,
                   }}
@@ -222,16 +202,11 @@ export default function LineReviewScreen({ navigation }) {
             ) : (
               <TouchableOpacity
                 style={{
-                  //   position: "relative",
-                  //   bottom: 0,
-                  //flex: 1,
-                  //marginTop: 40,
                   alignSelf: "center",
                   justifyContent: "center",
                   alignItems: "center",
                   backgroundColor: "#1f1f1f", //"#fc9c04",
                   height: 20,
-                  //textAlign: "center",
                   width: 50,
                   borderRadius: 16,
                 }}
@@ -279,8 +254,6 @@ const styles = () => {
   const theme = getTheme();
   return StyleSheet.create({
     text45: {
-      // marginRight: 10,
-      // marginLeft: 20,
       position: "absolute",
       top: 25,
       left: 80,
@@ -295,7 +268,6 @@ const styles = () => {
 
     mapViewStyle: {
       marginTop: 20,
-      //marginLeft: 13,
       flexDirection: "row",
       alignSelf: "center",
       width: SCREEN_WIDTH - 50,
@@ -307,7 +279,6 @@ const styles = () => {
     containerStyle: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: theme.primaryColor,
-      //justifyContent: "center",
       flex: 1,
       flexDirection: "column",
       height: "100%",

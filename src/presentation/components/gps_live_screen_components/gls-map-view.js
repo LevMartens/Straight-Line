@@ -11,19 +11,12 @@ import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 import store from "../../state_management/store/store";
 import { gpsLiveMapViewRefUpdate } from "../../state_management/actions/actions";
 
-//TODO show something that indicates recording is going on
+//TODO show something that indicates recording is on
 
 export default function MapViewGPSLive() {
   const { mapStyle } = styles();
 
   const path = useSelector((state) => state.pathHandler);
-
-  // const {
-  //   rawLineData: {
-  //     startingCoordinates: { lat: pointALat, lng: pointALng },
-  //     finishCoordinates: { lat: pointBLat, lng: pointBLng },
-  //   },
-  // } = useSelector((state) => state.selectedLineDraftHandler);
 
   const {
     selectedLineDraft: {

@@ -2,37 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { getTheme } from "../../theme/themes";
-import defaultImage from "../../../../assets/images/default-image.jpg";
 import { SCREEN_WIDTH } from "../../../resources/operating_system/dimensions";
 
 export default function SwipeModalContent() {
-  const {
-    textStyle1,
-    textStyle2,
-    textStyle3,
-    difficultyBandStyle,
-    swipeModalImageStyle,
-    textStyle,
-  } = styles();
-
-  // const {
-  //   rawLineData: {
-  //     frontImage,
-  //     title,
-  //     difficultyLevel,
-  //     place,
-  //     difficultyBand,
-  //     distance,
-  //     description,
-  //     finishedMissions: items,
-  //   },
-  // } = useSelector((state) => state.selectedMarkerHandler);
+  const { textStyle1, textStyle2, textStyle3, difficultyBandStyle } = styles();
 
   const {
     selectedPublicLine: {
       isLoaded,
       rawLineData: {
-        frontImage,
         title,
         difficultyLevel,
         place,
@@ -47,11 +25,6 @@ export default function SwipeModalContent() {
   return (
     //TODO isLoaded &&
     <View style={{ marginBottom: 50, width: SCREEN_WIDTH - 50, height: 200 }}>
-      {/* <Image
-        source={frontImage ? frontImage : defaultImage}
-        style={swipeModalImageStyle}
-        resizeMode="cover"
-      /> */}
       <Text style={{ ...textStyle2, marginBottom: 0 }}>{`${title}`}</Text>
       <Text style={{ ...textStyle1, marginBottom: 10 }}>{`${place}`}</Text>
       <Text

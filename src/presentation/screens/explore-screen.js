@@ -20,10 +20,6 @@ export default function Explore({ navigation }) {
   const searchVisible = useSelector((state) => state.searchVisibleHandler);
   const menuVisible = useSelector((state) => state.menuVisibleHandler);
 
-  // const { isLoaded: linesAreLoaded, noLinesFound } = useSelector(
-  //   (state) => state.selectedMarkerHandler
-  // );
-
   const {
     selectedPublicLine: { isLoaded: linesAreLoaded, noLinesFound },
   } = useSelector((state) => state.lineDataHandler);

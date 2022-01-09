@@ -10,14 +10,6 @@ import { liveTrackingUpdate } from "../../../state_management/actions/actions";
 export default function ReadyToStartModalComponent() {
   const { textStyle, buttonStyle, buttonTextStyle } = styles();
 
-  // const {
-  //   rawLineData: {
-  //     distance,
-  //     startingCoordinates: { lat: pointALat, lng: pointALng },
-  //     finishCoordinates: { lat: pointBLat, lng: pointBLng },
-  //   },
-  // } = useSelector((state) => state.selectedLineDraftHandler);
-
   const {
     selectedLineDraft: {
       rawLineData: {

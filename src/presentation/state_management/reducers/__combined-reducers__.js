@@ -1,13 +1,7 @@
 import { combineReducers } from "redux";
 import { markerPlacementHandler } from "./marker-placement-handler";
 import { locationHandler } from "./location-handler";
-import {
-  lineMarkersHandler,
-  selectedMarkerHandler,
-  selectedLineDraftHandler,
-  lineTitleHandler,
-  lineDataHandler,
-} from "./line-data-handlers";
+import { lineDataHandler } from "./line-data-handlers";
 import {
   difficultyHandler,
   finishedLineHandler,
@@ -78,9 +72,5 @@ export default combineReducers({
   difficultyHandler,
   finishedLineHandler,
   pathHandler,
-  // lineTitleHandler,
-  // selectedLineDraftHandler,
-  // selectedMarkerHandler,
   bannerHandler,
-  // lineMarkersHandler,
 });

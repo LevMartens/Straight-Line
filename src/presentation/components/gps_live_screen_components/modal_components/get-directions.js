@@ -14,12 +14,6 @@ import { useSelector } from "react-redux";
 export default function GetDirectionsModalComponent() {
   const { textStyle, buttonStyle, buttonTextStyle } = styles();
 
-  // const {
-  //   rawLineData: {
-  //     startingCoordinates: { lat: pointALat, lng: pointALng },
-  //   },
-  // } = useSelector((state) => state.selectedLineDraftHandler);
-
   const {
     selectedLineDraft: {
       rawLineData: {

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-//import { getLineDraftsFor } from "../../resources/aws/dynamo_db/get-line-drafts";
 import { getTheme } from "../theme/themes";
-//import { owner } from "./profile-screen";
-import Amplify, { Auth, Hub } from "aws-amplify";
 import { getLineDraftsFor } from "../../domain/use_cases/get-line-drafts-for-owner";
 import { useSelector } from "react-redux";
 

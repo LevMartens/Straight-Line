@@ -7,10 +7,6 @@ import { useSelector } from "react-redux";
 export default function LiveDataModalComponent() {
   const { textStyle2, textStyle1, buttonStyle, buttonTextStyle } = styles();
 
-  // const {
-  //   rawLineData: { distance },
-  // } = useSelector((state) => state.selectedLineDraftHandler);
-
   const {
     selectedLineDraft: {
       rawLineData: { distance },

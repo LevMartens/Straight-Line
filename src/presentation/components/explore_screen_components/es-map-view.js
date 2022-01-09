@@ -27,7 +27,6 @@ export default function MapViewExplore() {
   }, []);
 
   const mapType = useSelector((state) => state.exploreMapTypeHandler);
-  // const lineMarkers = useSelector((state) => state.lineMarkersHandler);
 
   const { publicLines, selectedPublicLine } = useSelector(
     (state) => state.lineDataHandler
@@ -36,9 +35,6 @@ export default function MapViewExplore() {
   const { aSingleCurrentPosition } = useSelector(
     (state) => state.locationHandler
   );
-  // const markerCurrentlySelected = useSelector(
-  //   (state) => state.selectedMarkerHandler
-  // );
 
   const initialCamera = {
     center: aSingleCurrentPosition,

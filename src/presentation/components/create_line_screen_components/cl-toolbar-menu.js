@@ -19,7 +19,6 @@ export default function CreateLineToolbar() {
   const { buttonColor } = getTheme();
   const { compassStyle, doneStyle, containerStyle, textStyle } = styles();
 
-  // const title = useSelector((state) => state.lineTitleHandler);
   const { lineTitle } = useSelector((state) => state.lineDataHandler);
 
   const { onSelected, coordinatesStartingPoint, coordinatesEndPoint } =

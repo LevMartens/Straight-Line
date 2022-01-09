@@ -141,54 +141,12 @@ export const updatePath = (event) => {
   };
 };
 
-// export const publicLinesEnvelope = (event) => {
-//   return {
-//     lineMarkers: event,
-//     type: "GETLINEMARKERS",
-//   };
-// };
-
 export const openBanner = (event) => {
   return {
     event: event,
     type: "OPENBANNER",
   };
 };
-
-// export const selectPublicLine = (event) => {
-//   return {
-//     event: event,
-//     type: "SELECTMARKER",
-//   };
-// };
-
-// export const resetMarker = (event) => {
-//   return {
-//     event: event,
-//     type: "RESETMARKER",
-//   };
-// };
-
-// export const selectLineDraft = (event) => {
-//   return {
-//     event: event,
-//     type: "SELECTLINEDRAFT",
-//   };
-// };
-
-// export const resetLineDraft = (event) => {
-//   return {
-//     event: event,
-//     type: "RESETLINEDRAFT",
-//   };
-// };
-
-// export const addLineTitle = (event) => {
-//   return {
-//     event: event,
-//     type: "ADDLINETITLE",
-//   };
-// };
 
 export const finishLineUpdate = (event) => {
   return {
