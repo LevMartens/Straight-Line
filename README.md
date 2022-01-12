@@ -5,9 +5,9 @@
 Straight Line is a game where the objective is to walk a line through a rough terrain as straight as possible. 
 The gps will track how much you deviate from the set line and will give you a score in the end. 
 
-#### Technical Stuff
+### Technical Stuff
 
-### Build With
+#### Build With
 
 * React Native
 * Expo
@@ -20,7 +20,7 @@ The gps will track how much you deviate from the set line and will give you a sc
 * react-native-paper
 * lodash
 
-### Architecture
+#### Architecture
 
 <img width="417" alt="Screen Shot 2022-01-12 at 12 08 04 pm" src="https://user-images.githubusercontent.com/73681740/149047481-5242e107-b043-4bf4-843c-e3f7dba210e4.png">
 
@@ -49,7 +49,7 @@ Example:
 
 <img width="528" alt="Screen Shot 2022-01-12 at 2 13 58 pm" src="https://user-images.githubusercontent.com/73681740/149057789-0c50701b-21f9-4c02-a59b-da733d6df7b1.png">
 
-#### The App
+### The App
 
 
 
