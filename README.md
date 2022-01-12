@@ -5,14 +5,14 @@
 Straight Line is a game where the objective is to walk a line through a rough terrain as straight as possible. 
 The gps will track how much you deviate from the set line and will give you a score in the end. 
 
-### Technical Stuff
+#### Technical Stuff
 
 ### Build With
 
 * React Native
 * Expo
 * Graphql
-* AWS cloud services
+* AWS cloud services 
 * Redux
 * Codemagic CI/CD
 * Material UI
@@ -43,7 +43,19 @@ Example:
 
 #### Resources
 
-#####
+##### The Resource layer handles the actual data fetching. From local sources we get screen dimensions and gps data with the help of expo libraries, from remote sources we get weather data or geographical data (elevation) or data from the AWS backend with GraphQl. 
+
+Example: 
+
+<img width="528" alt="Screen Shot 2022-01-12 at 2 13 58 pm" src="https://user-images.githubusercontent.com/73681740/149057789-0c50701b-21f9-4c02-a59b-da733d6df7b1.png">
+
+#### The App
+
+
+
+
+
+
 
 
 
