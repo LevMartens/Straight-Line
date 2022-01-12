@@ -24,7 +24,6 @@ The gps will track how much you deviate from the set line and will give you a sc
 
 <img width="417" alt="Screen Shot 2022-01-12 at 12 08 04 pm" src="https://user-images.githubusercontent.com/73681740/149047481-5242e107-b043-4bf4-843c-e3f7dba210e4.png">
 
-The Single Responsibility Principle
 #### Presentation
 
 ##### The presentation layer handles only user input and data display, there will be no other logic in the presentation layer. User input and useEffect functions will always call a use case function wereby the use case function handles the data.
@@ -50,6 +49,10 @@ Example:
 <img width="528" alt="Screen Shot 2022-01-12 at 2 13 58 pm" src="https://user-images.githubusercontent.com/73681740/149057789-0c50701b-21f9-4c02-a59b-da733d6df7b1.png">
 
 ### The App
+
+Welcome screen
+
+![IMG_4790](https://user-images.githubusercontent.com/73681740/149059098-90c5d033-d2b2-4cb7-b81e-4156be3d8582.PNG)
 
 
 
