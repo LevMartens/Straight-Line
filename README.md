@@ -33,7 +33,7 @@ Example:
 
 #### Domain
 
-##### Use case functions do 3 main things: Error handling, modifying data so it's compatible with the UI components and fetching data. the use case functions use generator and helper function to modify the data this keep the use cases concise and easy to read. 
+##### Use case functions do 3 main things: Fetching data, error handling and modifying data so it's compatible with the UI components. The use case functions use generator and helper function to modify the data this keep the use cases concise and easy to read. 
 
 Example:
 
