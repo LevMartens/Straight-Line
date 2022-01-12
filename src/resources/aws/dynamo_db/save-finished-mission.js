@@ -14,10 +14,10 @@ export async function saveFinishedMission(input) {
         createFinishedMission: { id },
       },
     } = response;
-
-    console.log("TEST: Finished Mission id: ", id);
+    
 
     return { isNOTSaved: false, id: id };
+    
   } catch (err) {
     console.log("ERROR: Error creating Finished Mission:", err);
     return { isNOTSaved: true };
