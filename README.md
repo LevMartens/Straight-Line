@@ -52,7 +52,7 @@ Example:
 
 Welcome screen
 
-<img width="357" alt="Screen Shot 2022-01-12 at 2 39 43 pm" src="https://user-images.githubusercontent.com/73681740/149059809-a3fb60eb-fc95-4477-9162-bb0bae286c15.png">
+<img width="357" alt="Screen Shot 2022-01-12 at 2 39 43 pm" src="https://user-images.githubusercontent.com/73681740/149059809-a3fb60eb-fc95-4477-9162-bb0bae286c15.png"> | <img width="358" alt="Screen Shot 2022-01-12 at 2 43 19 pm" src="https://user-images.githubusercontent.com/73681740/149060113-14706a30-c3a7-4f47-a970-9a9f73470f35.png">
 
 
 
