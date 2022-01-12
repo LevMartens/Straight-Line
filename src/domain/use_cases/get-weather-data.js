@@ -9,8 +9,10 @@ import { weatherDataUpdate } from "../../presentation/state_management/actions/a
 export async function getWeatherData(location) {
   const { latitude, longitude } = location;
 
+  // Fetching data from resources
   const rawWeatherData = await getRawWeatherData(latitude, longitude);
 
+  // Error handling
   if (rawWeatherData.hasError) {
     const weatherData = {
       weatherDataLoaded: false,
@@ -36,6 +38,7 @@ export async function getWeatherData(location) {
 
   const { id } = weather[0];
 
+  // Using Generators and Helper function to make compatible for Components
   const icon = await getWeatherIcon(id);
   const temprature = await kelvinToCelsius(day);
   const percentageRain = await decimalToPercentage(pop);
@@ -50,5 +53,6 @@ export async function getWeatherData(location) {
     windSpeed: windSpeed,
   };
 
+  // Dispatch data
   store.dispatch(weatherDataUpdate(weatherData));
 }
