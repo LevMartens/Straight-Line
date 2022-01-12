@@ -52,7 +52,7 @@ Example:
 
 Welcome Screen | Explore Screen | Create Line Screen
 
-<img width="334" alt="Screen Shot 2022-01-12 at 2 48 08 pm" src="https://user-images.githubusercontent.com/73681740/149060589-9d4354c8-6ebb-47dc-b936-2bc89186ea8b.png"> | <img width="328" alt="Screen Shot 2022-01-12 at 2 50 19 pm" src="https://user-images.githubusercontent.com/73681740/149060790-dc96902a-ffe0-469a-a252-8256b80a9972.png"> | <img width="357" alt="Screen Shot 2022-01-12 at 2 45 46 pm" src="https://user-images.githubusercontent.com/73681740/149060392-53923ae4-91a9-41a4-a6ff-6ab9973159ba.png">
+<img width="334" alt="Screen Shot 2022-01-12 at 2 48 08 pm" src="https://user-images.githubusercontent.com/73681740/149060589-9d4354c8-6ebb-47dc-b936-2bc89186ea8b.png"> | <img width="328" alt="Screen Shot 2022-01-12 at 2 50 19 pm" src="https://user-images.githubusercontent.com/73681740/149060790-dc96902a-ffe0-469a-a252-8256b80a9972.png"> | <img width="331" alt="Screen Shot 2022-01-12 at 2 54 21 pm" src="https://user-images.githubusercontent.com/73681740/149061175-a98b7f99-e137-47aa-9b34-43e90483cd57.png">
 
 
 
