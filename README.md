@@ -50,9 +50,13 @@ Example:
 
 ### The App
 
-Welcome Screen | Explore Screen | Create Line Screen
+Welcome Screen | Explore Screen 
 
-<img width="334" alt="Screen Shot 2022-01-12 at 2 48 08 pm" src="https://user-images.githubusercontent.com/73681740/149060589-9d4354c8-6ebb-47dc-b936-2bc89186ea8b.png"> | <img width="328" alt="Screen Shot 2022-01-12 at 2 50 19 pm" src="https://user-images.githubusercontent.com/73681740/149060790-dc96902a-ffe0-469a-a252-8256b80a9972.png"> | <img width="331" alt="Screen Shot 2022-01-12 at 2 54 21 pm" src="https://user-images.githubusercontent.com/73681740/149061175-a98b7f99-e137-47aa-9b34-43e90483cd57.png">
+<img width="334" alt="Screen Shot 2022-01-12 at 2 48 08 pm" src="https://user-images.githubusercontent.com/73681740/149060589-9d4354c8-6ebb-47dc-b936-2bc89186ea8b.png"> | <img width="328" alt="Screen Shot 2022-01-12 at 2 50 19 pm" src="https://user-images.githubusercontent.com/73681740/149060790-dc96902a-ffe0-469a-a252-8256b80a9972.png"> 
+
+Create Line Screen | Detail Screen
+
+<img width="331" alt="Screen Shot 2022-01-12 at 2 54 21 pm" src="https://user-images.githubusercontent.com/73681740/149061175-a98b7f99-e137-47aa-9b34-43e90483cd57.png"> | <img width="325" alt="Screen Shot 2022-01-12 at 2 56 53 pm" src="https://user-images.githubusercontent.com/73681740/149061423-856ceb87-a227-41cb-ab74-3e806b890b4b.png">
 
 
 
