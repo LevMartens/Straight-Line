@@ -58,6 +58,10 @@ Create Line Screen | Detail Screen
 
 <img width="331" alt="Screen Shot 2022-01-12 at 2 54 21 pm" src="https://user-images.githubusercontent.com/73681740/149061175-a98b7f99-e137-47aa-9b34-43e90483cd57.png"> | <img width="325" alt="Screen Shot 2022-01-12 at 2 56 53 pm" src="https://user-images.githubusercontent.com/73681740/149061423-856ceb87-a227-41cb-ab74-3e806b890b4b.png">
 
+Live Screen | Review Screen
+
+<img width="336" alt="Screen Shot 2022-01-12 at 3 00 04 pm" src="https://user-images.githubusercontent.com/73681740/149061712-eec874d3-6efd-4ba5-bdec-cc90ca822fed.png"> | <img width="331" alt="Screen Shot 2022-01-12 at 3 00 28 pm" src="https://user-images.githubusercontent.com/73681740/149061726-f6935ff0-6615-4c11-820b-d06123b7b34e.png">
+
 
 
 
