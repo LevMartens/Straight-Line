@@ -52,7 +52,7 @@ Example:
 
 Welcome screen
 
-![IMG_4790](https://user-images.githubusercontent.com/73681740/149059098-90c5d033-d2b2-4cb7-b81e-4156be3d8582.PNG =200x600)
+![IMG_4790](https://user-images.githubusercontent.com/73681740/149059098-90c5d033-d2b2-4cb7-b81e-4156be3d8582.PNG | width=100)
 
 
 
