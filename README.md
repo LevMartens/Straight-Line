@@ -12,7 +12,7 @@ The gps will track how much you deviate from the set line and will give you a sc
 * React Native
 * Expo
 * Graphql
-* AWS cloud services 
+* AWS Amplify 
 * Redux
 * Codemagic CI/CD
 * Material UI
